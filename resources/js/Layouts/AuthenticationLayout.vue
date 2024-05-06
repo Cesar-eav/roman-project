@@ -5,8 +5,8 @@
         <div class="flex-1 flex flex-col items-center justify-center gap-6">
             <div>
                 <Link :href="'/'">
-                    <ApplicationLogo aria-hidden="true" class="w-16 h-16" />
-                    <span class="sr-only">Home page</span>
+                    <img src="imagenes/logo.png" class="w-28" ></img>
+
                 </Link>
             </div>
 
@@ -46,7 +46,7 @@ import { Link, Head } from '@inertiajs/inertia-vue3'
 import { MoonIcon, SunIcon } from '@heroicons/vue/outline'
 import { toggleDarkMode, isDark } from '@/Composables'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
-import PageFooter from '@/Components/PageFooter.vue'
+// import PageFooter from '@/Components/PageFooter.vue'
 import Button from '@/Components/Button.vue'
 
 defineProps({

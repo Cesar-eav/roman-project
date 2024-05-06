@@ -9,7 +9,7 @@
         <form @submit.prevent="submit">
             <div class="grid gap-6">
                 <div class="space-y-2">
-                    <Label for="email" value="Email" />
+                    <Label for="email" value="Rut (POR IMPLEMENTAR)" />
                     <InputIconWrapper>
                         <template #icon>
                             <MailIcon aria-hidden="true" class="w-6 h-6" />
@@ -31,25 +31,25 @@
                 <div class="flex items-center justify-between">
                     <label class="flex items-center">
                         <Checkbox name="remember" v-model:checked="form.remember" />
-                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                        <span class="ml-2 text-sm text-gray-600">Recordarme</span>
                     </label>
 
                     <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-blue-500 hover:underline">
-                        Forgot your password?
+                        ¿Olvidaste tu contraseña?
                     </Link>
                 </div>
 
                 <div>
                     <Button class="w-full justify-center gap-2" :disabled="form.processing" v-slot="{ iconSizeClasses }">
                         <LoginIcon aria-hidden="true" :class="iconSizeClasses" />
-                        <span>Log in</span>
+                        <span>Iniciar sesión</span>
                     </Button>
                 </div>
 
                 <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Don't have an account?
+                    ¿No tienes una cuenta?
                     <Link :href="route('register')" class="text-blue-500 hover:underline">
-                        Register
+                        Registrarse
                     </Link>
                 </p>
             </div>
