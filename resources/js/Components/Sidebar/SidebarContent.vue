@@ -5,7 +5,7 @@
         class="relative flex flex-col flex-1 max-h-full gap-4 px-3"
     >
         <SidebarLink
-            title="Dashboard"
+            title="Roman Seguros"
             :href="route('dashboard')"
             :active="route().current('dashboard')"
         >
