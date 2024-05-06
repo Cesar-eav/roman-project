@@ -28,8 +28,6 @@
                     !sidebarState.isOpen && !sidebarState.isHovered,
             },
         ]"
-        @mouseenter="sidebarState.handleHover(true)"
-        @mouseleave="sidebarState.handleHover(false)"
     >
         <SidebarHeader />
         <SidebarContent />
