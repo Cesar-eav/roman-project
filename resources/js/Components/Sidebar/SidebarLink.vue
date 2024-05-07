@@ -7,18 +7,18 @@
             {
                 'text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2':
                     !active,
-                'text-white bg-purple-500 shadow-lg hover:bg-purple-600':
+                'text-white bg-orange-500 shadow-lg hover:bg-orange-600':
                     active,
             },
         ]"
         :href="href"
     >
-        <slot name="icon">
+        <!-- <slot name="icon">
             <EmptyCircleIcon aria-hidden="true" class="flex-shrink-0 w-6 h-6" />
-        </slot>
+        </slot> -->
 
         <span
-            class="text-base font-medium"
+            class="text-base font-small"
             v-show="sidebarState.isOpen || sidebarState.isHovered"
         >
             {{ title }}
@@ -33,14 +33,14 @@
             {
                 'text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2':
                     !active,
-                'text-white bg-purple-500 shadow-lg hover:bg-purple-600':
+                'text-white bg-orange-500 shadow-lg hover:bg-orange-600':
                     active,
             },
         ]"
     >
-        <slot name="icon">
+        <!-- <slot name="icon">
             <EmptyCircleIcon aria-hidden="true" class="flex-shrink-0 w-6 h-6" />
-        </slot>
+        </slot> -->
 
         <span
             class="text-base font-medium"

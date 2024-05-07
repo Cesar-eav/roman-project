@@ -1,5 +1,6 @@
 <template>
     <PerfrectScrollbar tagname="nav" aria-label="main" class="relative flex flex-col flex-1 max-h-full gap-4 px-3">
+
         <SidebarLink title="Roman Seguros" :href="route('dashboard')" :active="route().current('dashboard')">
             <template #icon>
                 <DashboardIcon class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
@@ -7,38 +8,41 @@
         </SidebarLink>
 
 
-        <SidebarCollapsible title="Clientes">
-            <a :href="route('crearusuario')">-Crear Usuario</a>
-            <li>-Internos</li>
-            <li>-Externos</li>
+        <SidebarCollapsible title="Clientes" :href="route('crearusuario')"
+            :active="route().current('crearusuario') || route().current('dashboard') || route().current('cliente')">
+            <SidebarCollapsibleItem title="Crear Usuario" :href="route('crearusuario')"
+                :active="route().current('crearusuario')" />
 
+            <SidebarCollapsibleItem title="Clientes Internos" :href="route('dashboard')"
+                :active="route().current('dashboard')" />
+            <SidebarCollapsibleItem title="Cliente Externo" :href="route('cliente')"
+                :active="route().current('cliente')" />
         </SidebarCollapsible>
 
-
-        <SidebarCollapsible title="Polizas" :href="route('dashboard')">
-            <li>-Listado de Polizas</li>
-            <li>-Crear Poliza</li>
-            <li>-Habilitar/Inhabilitar Polizas</li>
-            <li>-Polizas por renovar</li>
-            <li>-Calendario de Vencimiento</li>
+        <SidebarCollapsible title="Polizas">
+            <li class="text-sm">-Crear Poliza</li>
+            <li class="text-sm">-Listado de Polizas</li>
+            <li class="text-sm">-Habilitar/Inhabilitar Polizas</li>
+            <li class="text-sm">-Polizas por renovar</li>
+            <li class="text-sm">-Calendario de Vencimiento</li>
         </SidebarCollapsible>
 
-        <SidebarCollapsible title="Propuestas" :href="route('dashboard')">
+        <SidebarCollapsible title="Propuestas">
             <li>-Listado de Propuestas</li>
             <li>-Crear Propuestas</li>
         </SidebarCollapsible>
 
-        <SidebarCollapsible title="Cobranza" :href="route('dashboard')">
+        <SidebarCollapsible title="Cobranza">
             <li>-Listado de Polizas</li>
 
         </SidebarCollapsible>
 
-        <SidebarCollapsible title="Siniestros" :href="route('dashboard')">
+        <SidebarCollapsible title="Siniestros">
             <li>-Crear Siniestros</li>
             <li>-Listado de Siniestros</li>
         </SidebarCollapsible>
 
-        <SidebarCollapsible title="Reportes" :href="route('dashboard')">
+        <SidebarCollapsible title="Reportes">
 
             <p>-Producción</p>
             <p>-Asignacion de Ventas</p>

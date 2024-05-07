@@ -2,12 +2,12 @@
     <div class="relative">
         <SidebarLink @click="isOpen = !isOpen" :title="title">
             <template #icon>
-                <slot name="icon">
+                <!-- <slot name="icon">
                     <EmptyCircleIcon
                         aria-hidden="true"
                         class="flex-shrink-0 w-6 h-6"
                     />
-                </slot>
+                </slot> -->
             </template>
 
             <template #arrow>
@@ -43,17 +43,12 @@
             </template>
         </SidebarLink>
 
-        <transition
-            @before-enter="beforeEnter"
-            @enter="enter"
-            @before-leave="beforeLeave"
-            @leave="leave"
-        >
+
             <div
                 v-show="
                     isOpen && (sidebarState.isOpen || sidebarState.isHovered)
                 "
-                class="overflow-hidden transition-all duration-200 max-h-0"
+                class="overflow-hidden transition-all duration-200 max-h-24"
             >
                 <ul
                     class="relative px-0 pt-2 pb-0 ml-5  before:w-0 before:block before:absolute before:inset-y-0 before:left-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
@@ -61,15 +56,12 @@
                     <slot />
                 </ul>
 
-                <ul
+                <!-- <ul
                     class="relative px-0 pt-2 pb-0 ml-5  before:w-0 before:block before:absolute before:inset-y-0 before:left-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
                 >
-            
-                </ul>
-
-
+                </ul> -->
             </div>
-        </transition>
+
     </div>
 </template>
 
