@@ -32,7 +32,7 @@ const props = defineProps({
     title: String,
     active: {
         type: Boolean,
-        default: false,
+        default: true,
     },
     external: {
         type: Boolean,

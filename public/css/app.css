@@ -1347,8 +1347,8 @@ select {
 .h-auto {
   height: auto;
 }
-.max-h-0 {
-  max-height: 0px;
+.max-h-8 {
+  max-height: 2rem;
 }
 .max-h-full {
   max-height: 100%;

@@ -16,10 +16,23 @@
                 />
             </template>
         </SidebarLink>
+        <SidebarCollapsible
+            title="Dashboard"
+            :href="route('dashboard2')"
+            :active="route().current('dashboard2')"
+        >
+            <SidebarCollapsibleItem
+                title="Dahboard 2"
+                :href="route('dashboard2')"
+                :active="route().current('dashboard2')"
+            />
+        </SidebarCollapsible>
     </PerfrectScrollbar>
 </template>
 
 <script setup>
+import SidebarCollapsible from '@/Components/Sidebar/SidebarCollapsible.vue'
+import SidebarCollapsibleItem from '@/Components/Sidebar/SidebarCollapsibleItem.vue'
 import PerfrectScrollbar from '@/Components/PerfectScrollbar'
 import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
 import { DashboardIcon } from '@/Components/Icons/Outline'
