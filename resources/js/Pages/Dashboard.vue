@@ -6,25 +6,13 @@
                     Dashboard
                 </h2>
 
-                <Button external variant="black" target="_blank" class="items-center gap-2 max-w-xs" v-slot="{ iconSizeClasses }" href="https://github.com/kamona-wd/kui-laravel-jetstream">
-                    <GithubIcon aria-hidden="true" :class="iconSizeClasses" />
-                    <span>Star on Github</span>
-                </Button>
             </div>
         </template>
 
         <div class="p-6 flex flex-col gap-6 overflow-hidden bg-white rounded-md shadow-md lg:flex-row md:justify-between dark:bg-dark-eval-1">
-            <div>You're logged in!</div>
+            <div class="flex justify-center text-4xl">CONTENIDO</div>
 
-            <div>
-                <a 
-                    href="https://jetstream.laravel.com/2.x/introduction.html"
-                    class="text-blue-600 hover:underline"
-                    target="_blank"
-                >
-                    Jetstream Documentation
-                </a>
-            </div>
+
         </div>
     </AppLayout>
 </template>

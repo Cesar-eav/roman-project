@@ -24,6 +24,7 @@
             {{ title }}
         </span>
     </component>
+    
     <button
         v-else
         type="button"
@@ -49,12 +50,15 @@
         </span>
         <slot name="arrow" />
     </button>
+
+   
 </template>
 
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
 import { sidebarState } from '@/Composables'
 import { EmptyCircleIcon } from '@/Components/Icons/Outline'
+
 
 const props = defineProps({
         href: {
@@ -80,4 +84,9 @@ const props = defineProps({
 const { href, active, title, icon: Icon } = props
 
 const Tag = !href ? 'button' : Link
+
+
+</script>
+<script>
+
 </script>
