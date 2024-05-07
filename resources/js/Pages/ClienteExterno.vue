@@ -4,7 +4,7 @@
 
 
 
-        <div class="flex justify-center text-4xl pb-4">Listado de Clientes</div>
+        <div class="flex justify-center text-4xl pb-4">Listado de Externo</div>
 
 
 

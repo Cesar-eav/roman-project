@@ -1,71 +1,89 @@
 <template>
     <AppLayout title="Dashboard">
         <template #header>
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <h2 class="text-xl font-semibold leading-tight">
-                    Dashboard
+            <div class="flex flex-col  gap-4 md:flex-row md:items-center md:justify-between">
+                <h2 class="text-xl font-semibold text-center leading-tight">
+                    Crear Usuario
                 </h2>
 
             </div>
         </template>
-        <div class="flex p-2 justify-center items-center h-screen text-gray-900">
- 
-            <form class="w-3/4  bg-white p-8 rounded-lg shadow-md">
 
-                <div class="mb-4">
-                    <label for="rol" class="block text-sm font-medium text-gray-700">Tipo de Usuario:</label>
-                    <select id="rol" v-model="formData.rol" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <option value="">Interno / Externo </option>
-                        <option value="interno">Interno</option>
-                        <option value="externo">Externo</option>
+<div >
+
+        <div class="p-4 text-gray-900 w-3/4 justify-center">
+            <div class="flex">
+                <label class="block text-sm font-medium w-1/4 text-white mt-4">Tipo de Cliente:</label>
+                <select v-model="selectedType"
+                    class="mt-1 block border-gray-300 w-3/4 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <option value="externo">Cliente Externo</option>
+                    <option value="interno">Cliente Interno</option>
                     </select>
                 </div>
-                <div class="mb-4">
-                    <label for="rut" class="block text-sm font-medium text-gray-700">Rut:</label>
-                    <input type="text" id="rut" v-model="formData.nombre" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
-                    <input type="text" id="name" v-model="formData.nombre" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Correo:</label>
-                    <input type="text" id="email" v-model="formData.apellido" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div class="mb-4">
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono:</label>
-                    <input type="text" id="email" v-model="formData.phone" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="flex">
+                <label class="block text-sm w-1/4 font-medium text-white mt-4">Nombre:</label>
+                <input type="text" v-model="nombre"
+                    class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
-                <div class="mb-4">
-                    <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección:</label>
-                    <input type="text" id="direccion" v-model="formData.direccion" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="flex">
+                <label class="block text-sm w-1/4 font-medium text-white mt-4">Correo:</label>
+                <input type="text" v-model="correo"
+                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
-                <div class="mb-4">
-                    <label for="pass" class="block text-sm font-medium text-gray-700">Contraseña:</label>
-                    <input type="text" id="pass" v-model="formData.apellido" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="flex">
+                <label class="block w-1/4 text-sm font-medium text-white mt-4">Telefono:</label>
+                <input type="text" v-model="telefono"
+                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
-                <div class="mb-4">
-                    <label for="passconfirm" class="block text-sm font-medium text-gray-700">Confirmar
-                        Contraseña:</label>
-                    <input type="text" id="passconfirm" v-model="formData.apellido" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="flex">
+                <label class="block w-1/4 text-sm font-medium text-white mt-4">Dirección:</label>
+                <input type="text" v-model="direccion"
+                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
-                <button type="submit"
-                    class="w-full bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50">Crear
-                    Usuario</button>
-            </form>
+            <div class="flex">
+                <label class="block w-1/4 text-sm font-medium text-white mt-4">Comuna:</label>
+                <input type="text" v-model="comuna"
+                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                </div>
+
+            <div class="flex">
+                <label class="block w-1/4 text-sm font-medium text-white mt-4">Ciudad:</label>
+                <input type="text" v-model="ciudad"
+                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
+            <div class="flex">
+
+                <label class="block w-1/4 text-sm font-medium text-white mt-4">Contraseña:</label>
+                <input type="text" v-model="pass"
+                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
+            <div class="flex">
+                <label class="block w-1/4 text-sm font-medium text-white mt-4">Confirmar Contraseña:</label>
+                <input type="text" v-model="passconfirm"
+                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                </div>
+
+
+            <div v-if="selectedType === 'interno'">
+                <div class="flex">
+                    <label for="cargo" class="block w-1/4 text-sm font-medium text-white">Cargo:</label>
+                    <select v-model="selectedCargo" id="cargo" name="cargo"
+                        class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="">Seleccionar Cargo</option>
+                        <option value="cobranza">Cobranza</option>
+                        <option value="contador">Contador</option>
+                        <option value="ejecutivo_comercial">Ejecutivo Comercial</option>
+                        <option value="vendedor">Vendedor</option>
+                    </select>
+                </div>
+            </div>
         </div>
+    </div>
+
     </AppLayout>
 </template>
 
@@ -76,14 +94,17 @@ import { GithubIcon } from "@/Components/Icons/Brands"
 
 import { ref } from 'vue';
 
-// Datos del formulario
-const formData = ref({
-    nombre: '',
-    apellido: '',
-    email: '',
-    edad: '',
-    rol: '',
-});
+const selectedType = ref('externo');
+const nombre = ref('');
+const correo = ref('');
+const direccion = ref('');
+const selectedCargo = ref('');
+const comuna = ref('');
+const ciudad = ref('');
+const pass = ref('');
+const passconfirm = ref('');
+
+
 
 // Función para enviar el formulario
 const submitForm = () => {

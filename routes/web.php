@@ -36,4 +36,8 @@ Route::middleware([
     Route::get('/crearusuario', function () {
         return Inertia::render('CrearUsuario');
     })->name('crearusuario');
+
+    Route::get('/cliente', function () {
+        return Inertia::render('ClienteExterno');
+    })->name('cliente');
 });
