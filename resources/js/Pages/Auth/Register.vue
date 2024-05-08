@@ -5,25 +5,105 @@
 
         <form @submit.prevent="submit">
             <div class="grid gap-4">
+
+
+                <div class="flex ">
+                    <label class="block text-sm font-medium w-1/4  mt-4">Tipo de Cliente:</label>
+                    <select v-model="selectedType"
+                        class="mt-1 block text-black border-gray-300 w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="externo">Cliente Externo</option>
+                        <option value="interno">Cliente Interno</option>
+                    </select>
+                </div>
+
+
+                <div v-if="selectedType === 'interno'">
+                    <div class="flex text-gray-800">
+                        <label for="cargo" class="block w-1/4 text-sm font-medium text-white">Cargo:</label>
+                        <select v-model="form.cargo" id="cargo" name="cargo"
+                            class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option value="">Seleccionar Cargo</option>
+                            <option value="cobranza">Cobranza</option>
+                            <option value="contador">Contador</option>
+                            <option value="ejecutivo_comercial">Ejecutivo Comercial</option>
+                            <option value="vendedor">Vendedor</option>
+                        </select>
+                    </div>
+                </div>
+                
                 <div class="space-y-2">
-                    <Label for="name" value="Name" />
+                    <Label for="name" value="Nombre" />
                     <InputIconWrapper>
-                        <template #icon>
+                        <!-- <template #icon>
                             <UserIcon aria-hidden="true" class="w-6 h-6" />
-                        </template>
-                        <Input with-icon id="name" type="text" class="block w-full" placeholder="Name" v-model="form.name" required autofocus autocomplete="name" />
+                        </template> -->
+                        <Input  id="name" type="text" class="block w-full" placeholder="Nombre" v-model="form.name" required autofocus autocomplete="name" />
+                    </InputIconWrapper>
+                </div>
+
+
+                
+                <div class="space-y-2">
+                    <Label for="email" value="Email" />
+                    <InputIconWrapper>
+                        <!-- <template #icon>
+                            <MailIcon aria-hidden="true" class="w-6 h-6" />
+                        </template> -->
+                        <Input with-icon id="email" type="email" class="block w-full" placeholder="Email" v-model="form.email" required />
+                    </InputIconWrapper>
+                </div>
+
+                <!-- NUEVOS -->
+                <div class="space-y-2">
+                    <Label for="rut" value="RUT" />
+                    <InputIconWrapper>
+                        <!-- <template #icon>
+                            <PhoneIcon aria-hidden="true" class="w-6 h-6" />
+                        </template> -->
+                        <Input with-icon id="rut" type="text" class="block w-full" placeholder="Rut" v-model="form.rut" required />
+                    </InputIconWrapper>
+                </div>
+            
+                <div class="space-y-2">
+                    <Label for="telefono" value="Telefono" />
+                    <InputIconWrapper>
+                        <!-- <template #icon>
+                            <PhoneIcon aria-hidden="true" class="w-6 h-6" />
+                        </template> -->
+                        <Input with-icon id="phone" type="text" class="block w-full" placeholder="Telefono" v-model="form.telefono" required />
                     </InputIconWrapper>
                 </div>
 
                 <div class="space-y-2">
-                    <Label for="email" value="Email" />
+                    <Label for="address" value="Dirección" />
                     <InputIconWrapper>
-                        <template #icon>
-                            <MailIcon aria-hidden="true" class="w-6 h-6" />
-                        </template>
-                        <Input with-icon id="email" type="email" class="block w-full" placeholder="Email" v-model="form.email" required />
+                        <!-- <template #icon>
+                            <PhoneIcon aria-hidden="true" class="w-6 h-6" />
+                        </template> -->
+                        <Input with-icon id="address" type="text" class="block w-full" placeholder="Dirección" v-model="form.address" required />
                     </InputIconWrapper>
                 </div>
+
+                <div class="space-y-2">
+                    <Label for="ciudad" value="Ciudad" />
+                    <InputIconWrapper>
+                        <!-- <template #icon>
+                            <PhoneIcon aria-hidden="true" class="w-6 h-6" />
+                        </template> -->
+                        <Input with-icon id="ciudad" type="text" class="block w-full" placeholder="Ciudad" v-model="form.ciudad" required />
+                    </InputIconWrapper>
+                </div>
+
+                <div class="space-y-2">
+                    <Label for="region" value="Región" />
+                    <InputIconWrapper>
+                        <!-- <template #icon>
+                            <PhoneIcon aria-hidden="true" class="w-6 h-6" />
+                        </template> -->
+                        <Input with-icon id="region" type="text" class="block w-full" placeholder="Región" v-model="form.region" required />
+                    </InputIconWrapper>
+                </div>
+       <!-- FINNUEVOS -->
 
                 <div class="space-y-2">
                     <Label for="password" value="Password" />
@@ -60,12 +140,14 @@
                 <div>
                     <Button class="w-full justify-center gap-2" :disabled="form.processing" v-slot="{ iconSizeClasses }">
                         <UserAddIcon aria-hidden="true" :class="iconSizeClasses" />
-                        <span>Register</span>
+                        <span>Registrarse</span>
                     </Button>
                 </div>
 
+                
+
                 <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Already have an account?
+                    ¿Ya estás registrado?
                     <Link :href="route('login')" class="text-blue-500 hover:underline">
                         Login
                     </Link>
@@ -84,15 +166,28 @@ import Input from '@/Components/Input.vue'
 import Checkbox from '@/Components/Checkbox.vue'
 import Label from '@/Components/Label.vue'
 import ValidationErrors from '@/Components/ValidationErrors.vue'
-import { UserIcon, MailIcon, LockClosedIcon, UserAddIcon } from '@heroicons/vue/outline'
+import { UserIcon, MailIcon, LockClosedIcon, UserAddIcon, PhoneIcon } from '@heroicons/vue/outline'
+
+
+import { ref } from 'vue';
+
+const selectedType = ref('externo');
 
 const form = useForm({
+    cargo: '',
     name: '',
     email: '',
+    rut: '',
+    telefono: '',
+    address: '',
+    ciudad: '',
+    region: '',
     password: '',
     password_confirmation: '',
     terms: false,
 })
+
+console.log("AAAAAAAAAAAAAAa",useForm);
 
 const submit = () => {
     form.post(route('register'), {
