@@ -8,15 +8,20 @@
         </SidebarLink>
 
 
-        <SidebarCollapsible title="Clientes" :href="route('crearusuario')"
+        <SidebarCollapsible title="Clientes" :href="route('crearusuario')" class="text-xs"
             :active="route().current('crearusuario') || route().current('dashboard') || route().current('cliente')">
-            <SidebarCollapsibleItem title="Crear Usuario" :href="route('crearusuario')"
+            <SidebarCollapsibleItem title="Crear Usuario Interno" :href="route('crearusuario')"
                 :active="route().current('crearusuario')" />
-
-            <SidebarCollapsibleItem title="Clientes Internos" :href="route('dashboard')"
+            <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
                 :active="route().current('dashboard')" />
-            <SidebarCollapsibleItem title="Cliente Externo" :href="route('cliente')"
+            <SidebarCollapsibleItem title="Asignación de Atribuciones" :href="route('cliente')"
                 :active="route().current('cliente')" />
+            <SidebarCollapsibleItem title="Agregar Cía. Seguros" :href="route('cliente')"
+            :active="route().current('cliente')" />
+            <SidebarCollapsibleItem title="Listar Cía. Seguros" :href="route('cliente')"
+            :active="route().current('cliente')" />
+            <SidebarCollapsibleItem title="Crear mensaje de Avisos" :href="route('cliente')"
+            :active="route().current('cliente')" />
         </SidebarCollapsible>
 
         <SidebarCollapsible title="Polizas">
