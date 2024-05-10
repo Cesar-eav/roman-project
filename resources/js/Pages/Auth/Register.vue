@@ -70,7 +70,7 @@
                         <!-- <template #icon>
                             <PhoneIcon aria-hidden="true" class="w-6 h-6" />
                         </template> -->
-                        <Input with-icon id="phone" type="text" class="block w-full" placeholder="Telefono" v-model="form.telefono" required />
+                        <Input with-icon id="telefono" type="text" class="block w-full" placeholder="Telefono" v-model="form.telefono" required />
                     </InputIconWrapper>
                 </div>
 
@@ -187,7 +187,6 @@ const form = useForm({
     terms: false,
 })
 
-console.log("AAAAAAAAAAAAAAa",useForm);
 
 const submit = () => {
     form.post(route('register'), {

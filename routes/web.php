@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,20 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/crearusuario', function () {
+    Route::post('/crear-usuario-interno',[App\Http\Controllers\UsoInternoController::class, 'usuarioCrear'])->name('crear-usuario-interno');
+
+    Route::get('/registrarusuario', function () {
         return Inertia::render('CrearUsuario');
     })->name('crearusuario');
+
+
+    Route::get('/add-compania', function () {
+        return Inertia::render('CrearCompania');
+    })->name('add-compania');
+
+
+
+
 
     Route::get('/cliente', function () {
         return Inertia::render('ClienteExterno');
