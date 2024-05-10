@@ -29,10 +29,9 @@
                         <select v-model="form.selectedCargo" id="cargo" name="cargo"
                             class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <option value="">Seleccionar Nivel Ejecutivo</option>
-                            <option value="cobranza">Cobranza</option>
-                            <option value="contador">Contador</option>
-                            <option value="ejecutivo_comercial">Ejecutivo Comercial</option>
-                            <option value="vendedor">Vendedor</option>
+                            <option value="cobranza">Comercial</option>
+                            <option value="contador">Cobranza</option>
+                            <option value="gestor_siniestro">Gestor de Siniestros</option>                            
                         </select>
                 </div>  
 
@@ -108,7 +107,7 @@
                 </div>
                 <div class="flex">
                     <label class="block w-1/4 text-sm font-medium text-white mt-4">Confirmar Contraseña:</label>
-                    <input type="password" v-model="form.password_confirmation"
+                    <input type="password_confirmation" v-model="form.password_confirmation"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
