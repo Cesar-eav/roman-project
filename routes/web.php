@@ -40,6 +40,8 @@ Route::middleware([
         return Inertia::render('CrearUsuario');
     })->name('crearusuario');
 
+    Route::post('/crear-cia',[App\Http\Controllers\UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
+
 
     Route::get('/add-compania', function () {
         return Inertia::render('CrearCompania');
