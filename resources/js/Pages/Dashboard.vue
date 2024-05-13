@@ -39,8 +39,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Button from "@/Components/Button.vue"
-import { ref } from 'vue';
-
 
 const props = defineProps({
     clientes: {

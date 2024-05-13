@@ -30,10 +30,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return Inertia::render('Dashboard');
-    // })->name('dashboard');
-
+    
     Route::get('/dashboard', [UsoInternoController::class, 'listarUsuarios'])->name('dashboard');
     Route::post('/crear-usuario-interno',[UsoInternoController::class, 'usuarioCrear'])->name('crear-usuario-interno');
 
@@ -48,11 +45,5 @@ Route::middleware([
         return Inertia::render('CrearCompania');
     })->name('add-compania');
 
-
-
-
-
-    Route::get('/cliente', function () {
-        return Inertia::render('ClienteExterno');
-    })->name('cliente');
+    Route::get('/cliente',[UsoInternoController::class, 'listarCia'])->name('cliente');
 });
