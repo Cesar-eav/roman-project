@@ -13,6 +13,19 @@ use Inertia\Inertia;
 class UsoInternoController extends Controller
 {
 
+    public function listarUsuarios()
+{
+    // Recuperar todos los usuarios
+    $clientes = User::all();
+
+    // Pasar los datos a la vista Dashboard usando Inertia
+    return Inertia::render('Dashboard', [
+        'clientes' => $clientes,
+     
+    ]);
+}
+
+
     public function usuarioCrear(Request $request)
     {
      

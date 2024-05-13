@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers;
+use App\Http\Controllers\UsoInternoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,17 +30,18 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return Inertia::render('Dashboard');
+    // })->name('dashboard');
 
-    Route::post('/crear-usuario-interno',[App\Http\Controllers\UsoInternoController::class, 'usuarioCrear'])->name('crear-usuario-interno');
+    Route::get('/dashboard', [UsoInternoController::class, 'listarUsuarios'])->name('dashboard');
+    Route::post('/crear-usuario-interno',[UsoInternoController::class, 'usuarioCrear'])->name('crear-usuario-interno');
 
     Route::get('/registrarusuario', function () {
         return Inertia::render('CrearUsuario');
     })->name('crearusuario');
 
-    Route::post('/crear-cia',[App\Http\Controllers\UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
+    Route::post('/crear-cia',[UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
 
 
     Route::get('/add-compania', function () {
