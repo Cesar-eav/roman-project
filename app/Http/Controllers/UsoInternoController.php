@@ -15,15 +15,26 @@ class UsoInternoController extends Controller
 
     public function listarUsuarios()
 {
-    // Recuperar todos los usuarios
-    $clientes = User::all();
 
+    $clientes = User::all();
     // Pasar los datos a la vista Dashboard usando Inertia
     return Inertia::render('Dashboard', [
         'clientes' => $clientes,
      
     ]);
 }
+
+public function listarCia()
+{
+
+    $companies = CiaAseguradora::all();
+    // Pasar los datos a la vista Dashboard usando Inertia
+    return Inertia::render('ClienteExterno', [
+        'companies' => $companies,
+     
+    ]);
+}
+
 
 
     public function usuarioCrear(Request $request)
