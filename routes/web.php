@@ -38,12 +38,13 @@ Route::middleware([
         return Inertia::render('CrearUsuario');
     })->name('crearusuario');
 
+    Route::get('/add-compania', function () {return Inertia::render('CrearCompania'); })->name('add-compania');
     Route::post('/crear-cia',[UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
 
-
-    Route::get('/add-compania', function () {
-        return Inertia::render('CrearCompania');
-    })->name('add-compania');
+    #POLIZA
+    Route::get('/add-poliza', function () {return Inertia::render('CrearPoliza');})->name('add-poliza');
+    Route::post('/crear-poliza',[UsoInternoController::class, 'polizaCrear'])->name('crear-poliza');
+    
 
     Route::get('/cliente',[UsoInternoController::class, 'listarCia'])->name('cliente');
 });

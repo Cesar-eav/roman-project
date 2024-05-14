@@ -14,22 +14,28 @@
                 :active="route().current('crearusuario')" />
             <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
                 :active="route().current('dashboard')" />
-            <SidebarCollapsibleItem title="Asignación de Atribuciones" :href="route('cliente')"
-                :active="route().current('cliente')" />
+            <SidebarCollapsibleItem title="Asignación de Atribuciones" 
+                />
             <SidebarCollapsibleItem title="Agregar Cía. Seguros" :href="route('add-compania')"
                 :active="route().current('add-compania')" />
             <SidebarCollapsibleItem title="Listar Cía. Seguros" :href="route('cliente')"
                 :active="route().current('cliente')" />
-            <SidebarCollapsibleItem title="Crear mensaje de Avisos" :href="route('cliente')"
-                :active="route().current('cliente')" />
+            <SidebarCollapsibleItem title="Crear mensaje de Avisos" 
+                />
         </SidebarCollapsible>
 
-        <SidebarCollapsible title="Polizas">
-            <li class="text-sm">-Crear Poliza</li>
-            <li class="text-sm">-Listado de Polizas</li>
-            <li class="text-sm">-Habilitar/Inhabilitar Polizas</li>
-            <li class="text-sm">-Polizas por renovar</li>
-            <li class="text-sm">-Calendario de Vencimiento</li>
+        <SidebarCollapsible title="Polizas" class="text-xs">
+            <SidebarCollapsibleItem title="Crear Poliza" :href="route('add-poliza')"
+                :active="route().current('add-poliza')" />
+            <SidebarCollapsibleItem title="Listado de Polizas" :href="route('dashboard')"
+                :active="route().current('dashboard')" />
+            <SidebarCollapsibleItem title="Habilitar/Inhabilitar Polizas" 
+                />
+            <SidebarCollapsibleItem title="Polizas por renovar" :href="route('add-compania')"
+                :active="route().current('add-compania')" />
+            <SidebarCollapsibleItem title="Calendario de Vencimiento" :href="route('cliente')"
+                :active="route().current('cliente')" />
+
         </SidebarCollapsible>
 
         <SidebarCollapsible title="Propuestas">
