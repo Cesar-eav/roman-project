@@ -44,6 +44,8 @@ Route::middleware([
     #POLIZA
     Route::get('/add-poliza', function () {return Inertia::render('CrearPoliza');})->name('add-poliza');
     Route::post('/crear-poliza',[UsoInternoController::class, 'polizaCrear'])->name('crear-poliza');
+    Route::get('/show-polizas', [UsoInternoController::class, 'showPolizas'])->name('show-polizas');
+
     
 
     Route::get('/cliente',[UsoInternoController::class, 'listarCia'])->name('cliente');

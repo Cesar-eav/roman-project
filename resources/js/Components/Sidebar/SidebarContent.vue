@@ -24,11 +24,13 @@
                 />
         </SidebarCollapsible>
 
-        <SidebarCollapsible title="Polizas" class="text-xs">
+        <SidebarCollapsible title="Polizas" class="text-xs"
+        :active="route().current('add-poliza') || route().current('show-polizas')">
+
             <SidebarCollapsibleItem title="Crear Poliza" :href="route('add-poliza')"
                 :active="route().current('add-poliza')" />
-            <SidebarCollapsibleItem title="Listado de Polizas" :href="route('dashboard')"
-                :active="route().current('dashboard')" />
+            <SidebarCollapsibleItem title="Listado de Polizas" :href="route('show-polizas')"
+                :active="route().current('show-polizas')" />
             <SidebarCollapsibleItem title="Habilitar/Inhabilitar Polizas" 
                 />
             <SidebarCollapsibleItem title="Polizas por renovar" :href="route('add-compania')"
