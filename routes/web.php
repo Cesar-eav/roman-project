@@ -42,11 +42,14 @@ Route::middleware([
     Route::post('/crear-cia',[UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
 
     #POLIZA
-    Route::get('/add-poliza', function () {return Inertia::render('CrearPoliza');})->name('add-poliza');
+    Route::get('/view-add-poliza', [UsoInternoController::class, 'ViewAddPoliza'])->name('view-add-poliza');
     Route::post('/crear-poliza',[UsoInternoController::class, 'polizaCrear'])->name('crear-poliza');
     Route::get('/show-polizas', [UsoInternoController::class, 'showPolizas'])->name('show-polizas');
 
-    
-
     Route::get('/cliente',[UsoInternoController::class, 'listarCia'])->name('cliente');
+
+    // APIS
+    Route::get('/api/clientes', [UsoInternoController::class, 'search']);
+
+
 });

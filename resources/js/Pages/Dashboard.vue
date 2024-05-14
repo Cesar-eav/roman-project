@@ -5,10 +5,10 @@
 
 
             <!-- Campo de búsqueda personalizado -->
-          <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
-                class="border rounded-lg" /> 
+            <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
+                class="border rounded-lg" />
 
-                <button
+            <button
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold p-2  rounded-lg transition-colors duration-300">
                 Generar Excel
             </button>
@@ -18,8 +18,6 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-100  justify-start">
-                        <!-- <DataTable :data="clientes" :columns="columns" class="text-gray-900 ">
-                        </DataTable> -->
                         <table id="clientesTable" class="display text-gray-900">
                             <thead>
                                 <tr>
@@ -64,14 +62,6 @@ const props = defineProps({
     }
 });
 
-// const columns = [
-//     { data: 'id' },
-//     { data: 'rut' },
-//     { data: 'name' },
-//     { data: 'email' },
-//     { data: 'telefono' },
-// ];
-
 const searchQuery = ref('');
 
 const searchTable = () => {
@@ -81,7 +71,7 @@ const searchTable = () => {
 
 onMounted(() => {
     $('#clientesTable').DataTable({
-        dom: 'rtip' // Remueve el campo de búsqueda por defecto
+        // dom: 'rtip'  Remueve el campo de búsqueda por defecto
 
     });
 });

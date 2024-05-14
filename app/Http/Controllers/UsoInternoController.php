@@ -36,8 +36,8 @@ class UsoInternoController extends Controller
 
     public function showPolizas()
     {
+     
         $polizas = Poliza::all();
-
         // Pasar los datos a la vista Dashboard usando Inertia
         return Inertia::render('ShowPolizas', [
             'polizas' => $polizas,
@@ -45,6 +45,14 @@ class UsoInternoController extends Controller
     }
 
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $clientes = User::where('name', 'LIKE', "%{$query}%")
+                           ->orWhere('rut', 'LIKE', "%{$query}%")
+                           ->get();
+        return response()->json($clientes);
+    }
 
     public function usuarioCrear(Request $request)
     {
@@ -65,6 +73,17 @@ class UsoInternoController extends Controller
         return Inertia::render('Dashboard');
     }
 
+    public function ViewAddPoliza()
+    {
+     
+        $clientes = User::all();
+        // Pasar los datos a la vista Dashboard usando Inertia
+        return Inertia::render('CrearPoliza', [
+            'clientes' => $clientes
+
+        ]);
+    }
+
  
     public function polizaCrear(Request $request)
     {
@@ -82,6 +101,7 @@ class UsoInternoController extends Controller
             'metodo_pago' => 'required',
             'aseguradora' => 'required',
             'vendedor' => 'required',
+            'cliente_id' => 'required'
             // No necesitas validar los archivos seleccionados ya que Laravel maneja la subida de archivos automáticamente
         ]);
 
@@ -99,7 +119,8 @@ class UsoInternoController extends Controller
         $poliza->metodo_pago = $validatedData['metodo_pago'];
         $poliza->aseguradora = $validatedData['aseguradora'];
         $poliza->vendedor = $validatedData['vendedor'];
-    
+        $poliza->cliente_id = $validatedData['cliente_id'];
+
         // Guarda la instancia de Poliza en la base de datos
         $poliza->save();
 

@@ -7,17 +7,41 @@
                 </h2>
             </div>
         </template>
+        <div class="flex justify-start py-2 px-8  text-gray-900">
+            <!-- Campo de búsqueda personalizado -->
+            <label for="numero_poliza" class="block w-1/4 text-sm font-medium text-white mt-4">Buscar cliente: </label>
+            <input v-model="searchQuery" @input="searchClientes" type="text" placeholder="Rut, N° Poliza, Nombre..." 
+                class="border rounded-lg block w-2/4 " />
+        </div>
 
+        <div class="py-4">
+            <div v-if="clientes.length > 0" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg block w-3/4">
+                    <div class="p-6 text-gray-100">
+                        <ul>
+                            <li v-for="cliente in clientes" :key="cliente.id" @click="selectCliente(cliente)"
+                                :class="{ 'bg-gray-300': cliente.id === form.cliente_id, 'cursor-pointer': true, 'hover:bg-gray-200': true, 'p-2': true, 'text-gray-900': true }">
+                                <input type="checkbox" :checked="cliente.id === form.cliente_id"
+                                    @change="selectCliente(cliente)" />
+                                {{ cliente.name }} ({{ cliente.rut }}) ({{ cliente.email }})
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <ValidationErrors class="mb-4" />
         <form @submit.prevent="submit">
+            <!-- <input type="hidden" v-model="form.cliente_id" /> -->
+
             <div class="p-4 text-gray-900 w-3/4 justify-center">
                 <div class="flex">
                     <label for="tipo_poliza" class="block w-1/4 text-sm font-medium text-white">Tipo Póliza:</label>
                     <select v-model="form.tipo_poliza"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <option value="">Tipo de Poliza</option>
-                        
+
                         <option value="1">VEHICULOS MOTORIZADOS LIVIANOS</option>
                         <option value="2">VEHICULOS MOTORIZADOS PESADOS</option>
                         <option value="3">MAQUINARIA Y EQUIPO MÓVIL</option>
@@ -30,7 +54,9 @@
                         <option value="10">INCENDIO</option>
                         <option value="11">GARANTÍA</option>
                         <option value="12">SOAP (Seguro Obligatorio Accidentes Personales)</option>
-                        <option value="13">SOAPEX (Seguro Obligatorio Accidentes Personales Vehiculos Motorizados con Matricula Extranjera)</option>
+                        <option value="13">SOAPEX (Seguro Obligatorio Accidentes Personales Vehiculos Motorizados con
+                            Matricula
+                            Extranjera)</option>
                         <option value="14">SEGURO DE CARGA TRANSPORTE TERRESTRE</option>
                         <option value="15">RESPONSABILIDAD CIVIL VEHICULAR</option>
                         <option value="16">GUARDIA</option>
@@ -41,7 +67,7 @@
                     </select>
                 </div>
 
-                
+
 
                 <div class="flex">
                     <label for="numero_poliza" class="block w-1/4 text-sm font-medium text-white mt-4">N°
@@ -150,9 +176,22 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import Button from "@/Components/Button.vue"
 import { Link, useForm } from '@inertiajs/inertia-vue3'
 import ValidationErrors from '@/Components/ValidationErrors.vue'
+import axios from 'axios'
+import { ref } from 'vue'
 
+
+
+const props = defineProps({
+    clientes: {
+        type: Array
+    }
+});
+
+const searchQuery = ref('');
+const clientes = ref([]);
 
 const form = useForm({
+    cliente_id: '',
     tipo_poliza: '',
     numero_poliza: '',
     monto_asegurado: '',
@@ -170,6 +209,27 @@ const form = useForm({
 
 
 })
+
+
+const searchClientes = async () => {
+    if (searchQuery.value.trim() === '') {
+        clientes.value = [];
+        return;
+    }
+
+    try {
+        const response = await axios.get('/api/clientes', { params: { query: searchQuery.value } });
+        clientes.value = response.data;
+    } catch (error) {
+        console.error("Error al buscar clientes:", error);
+    }
+};
+
+const selectCliente = (cliente) => {
+    form.cliente_id = cliente.id;
+    console.log("Cliente seleccionado:", cliente.id);
+};
+
 
 const handleFileChange = (event) => {
     const files = event.target.files;

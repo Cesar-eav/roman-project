@@ -25,7 +25,7 @@
         </SidebarCollapsible>
 
         <SidebarCollapsible title="Polizas" class="text-xs"
-        :active="route().current('add-poliza') || route().current('show-polizas')">
+        :active="route().current('view-add-poliza') || route().current('show-polizas')">
 
                 <SidebarCollapsibleItem title="Crear Cotizaciones"  />
 
@@ -35,15 +35,12 @@
 
                 <SidebarCollapsibleItem title="Listado de Propuestas"  />
 
-            <SidebarCollapsibleItem title="Crear Poliza" :href="route('add-poliza')"
-                :active="route().current('add-poliza')" />
+            <SidebarCollapsibleItem title="Crear Poliza" :href="route('view-add-poliza')"
+                :active="route().current('view-add-poliza')" />
 
             <SidebarCollapsibleItem title="Listado Polizas General" :href="route('show-polizas')"
                 :active="route().current('show-polizas')" />
 
-            <SidebarCollapsibleItem title="Listado Polizas General" />
-
-            <!-- NO SE VE -->
             <SidebarCollapsibleItem title="Envío de Cotizaciones" 
                 />
   

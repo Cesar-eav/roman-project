@@ -68,13 +68,6 @@ const props = defineProps({
     }
 });
 
-// const columns = [
-//     { data: 'id' },
-//     { data: 'rut' },
-//     { data: 'name' },
-//     { data: 'email' },
-//     { data: 'telefono' },
-// ];
 
 const searchQuery = ref('');
 
