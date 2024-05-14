@@ -14,7 +14,7 @@
             <div class="p-4 text-gray-900 w-3/4 justify-center">
                 <div class="flex">
                     <label for="tipo_poliza" class="block w-1/4 text-sm font-medium text-white">Tipo Póliza:</label>
-                    <select v-model="form.metodo_pago"
+                    <select v-model="form.tipo_poliza"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <option value="">Tipo de Poliza</option>
                         
