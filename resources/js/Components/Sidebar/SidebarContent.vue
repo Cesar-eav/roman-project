@@ -27,40 +27,65 @@
         <SidebarCollapsible title="Polizas" class="text-xs"
         :active="route().current('add-poliza') || route().current('show-polizas')">
 
+                <SidebarCollapsibleItem title="Crear Cotizaciones"  />
+
+                <SidebarCollapsibleItem title="Listado de Cotizaciones" />
+
+                <SidebarCollapsibleItem title="Crear Propuestas"  />
+
+                <SidebarCollapsibleItem title="Listado de Propuestas"  />
+
             <SidebarCollapsibleItem title="Crear Poliza" :href="route('add-poliza')"
                 :active="route().current('add-poliza')" />
-            <SidebarCollapsibleItem title="Listado de Polizas" :href="route('show-polizas')"
+
+            <SidebarCollapsibleItem title="Listado Polizas General" :href="route('show-polizas')"
                 :active="route().current('show-polizas')" />
-            <SidebarCollapsibleItem title="Habilitar/Inhabilitar Polizas" 
+
+            <SidebarCollapsibleItem title="Listado Polizas General" />
+
+            <!-- NO SE VE -->
+            <SidebarCollapsibleItem title="Envío de Cotizaciones" 
                 />
-            <SidebarCollapsibleItem title="Polizas por renovar" :href="route('add-compania')"
-                :active="route().current('add-compania')" />
-            <SidebarCollapsibleItem title="Calendario de Vencimiento" :href="route('cliente')"
-                :active="route().current('cliente')" />
+  
 
         </SidebarCollapsible>
 
-        <SidebarCollapsible title="Propuestas">
-            <li>-Listado de Propuestas</li>
-            <li>-Crear Propuestas</li>
-        </SidebarCollapsible>
 
-        <SidebarCollapsible title="Cobranza">
+
+        <SidebarCollapsible title="Cobranza por Cliente">
+            <li>-Listado de Cuotas</li>
             <li>-Listado de Polizas</li>
+            <li>-Listado de Avisos</li>
 
         </SidebarCollapsible>
 
         <SidebarCollapsible title="Siniestros">
             <li>-Crear Siniestros</li>
             <li>-Listado de Siniestros</li>
+            <li>-Estatus Gestión de Siniestros</li>
         </SidebarCollapsible>
 
         <SidebarCollapsible title="Reportes">
 
-            <p>-Producción</p>
-            <p>-Asignacion de Ventas</p>
+            <p>-Reporte mensual x Compañía</p>
+            <p>-Reporte comportamiento acumulado anual</p>
             <p>-Comisiones</p>
             <p>-Siniestros</p>
+
+            <p>-Listado de Pólizas para asignación de Vendedor</p>
+            <p>-Reporte mensual x Ejecutivo</p>
+
+            <p>-Listado de Siniestros x Cliente Mensual</p>
+            <p>-Listado de Siniestros x Cliente Anual</p>
+            <p>-Listado de Siniestros x Cliente y siniestralidad efectiva</p>
+
+            <p>-Asignación y Carga de Liquidaciones de Sueldo x Ejecutivo</p>
+            <p>-Asignación y Carga de Permisos x Ejecutivo</p>
+            <p>-Asignación y Carga de Licencias Médicas x Ejecutivo</p>
+
+
+
+
 
         </SidebarCollapsible>
 
