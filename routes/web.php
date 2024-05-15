@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteExternoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,6 +41,11 @@ Route::middleware([
 
     Route::get('/add-compania', function () {return Inertia::render('CrearCompania'); })->name('add-compania');
     Route::post('/crear-cia',[UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
+
+// CLIENTES EXTERNOS
+    Route::get('/crear-empresa', function () {return Inertia::render('CrearEmpresa'); })->name('crear-empresa');
+    Route::post('/guardar-empresa',[ClienteExternoController::class, 'guardarEmpresa'])->name('guardar-empresa');
+
 
     #POLIZA
     Route::get('/view-add-poliza', [UsoInternoController::class, 'ViewAddPoliza'])->name('view-add-poliza');
