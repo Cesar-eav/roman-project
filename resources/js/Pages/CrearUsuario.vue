@@ -3,7 +3,7 @@
         <template #header>
             <div class="flex flex-col  gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold text-center leading-tight">
-                    Crear Usuario Interno
+                    Crear Usuario Interno 2
                 </h2>
 
             </div>
@@ -13,17 +13,6 @@
         <ValidationErrors class="mb-4" />
         <form @submit.prevent="submit">
             <div class="p-4 text-gray-900 w-3/4 justify-center">
-               <!--   <div class="flex">
-                   <label class="block text-sm font-medium w-1/4 text-white mt-4">Tipo de Cliente:</label>
-                    <select v-model="selectedType"
-                        class="mt-1 block border-gray-300 w-3/4 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <option value="externo">Cliente Externo</option>
-                        <option value="interno">Cliente Interno</option>
-                    </select>
-                </div> -->
-
-
-                           
                 <div class="flex">
                         <label for="cargo" class="block w-1/4 text-sm font-medium text-white">Nivel ejecutivo:</label>
                         <select v-model="form.selectedCargo" id="cargo" name="cargo"
@@ -42,7 +31,7 @@
                 </div>
                 <div class="flex">
                     <label class="block text-sm w-1/4 font-medium text-white mt-4">Apellidos:</label>
-                    <input type="text" v-model="form.apellidos"
+                    <input type="text" v-model="form.last_name"
                         class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
@@ -107,7 +96,7 @@
                 </div>
                 <div class="flex">
                     <label class="block w-1/4 text-sm font-medium text-white mt-4">Confirmar Contraseña:</label>
-                    <input type="password_confirmation" v-model="form.password_confirmation"
+                    <input type="password" v-model="form.password_confirmation"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
@@ -136,7 +125,7 @@ import { ref } from 'vue';
 const form = useForm({
     selectedCargo:'',
     name: '',
-    apellidos:'',
+    last_name:'',
     rut: '',
     fecha_nacimiento:'',
     telefono: '',
@@ -145,8 +134,8 @@ const form = useForm({
     ciudad: '',
     region: '',
     rol_id:2,
-    password: '',
-    password_confirmation: '',
+    password: 'qwedsar1ASD',
+    password_confirmation: 'qwedsar1ASD',
 
 
 })
@@ -157,8 +146,9 @@ const submit = () => {
     form.post(route('crear-usuario-interno'), {
         onSuccess: () => {
             // Redireccionar al usuario a la misma página después del registro
-            const currentPageUrl = route().url()
-            window.location.href = currentPageUrl
+            // Inertia.visit('/dashboard')
+            alert('¡Registrado con éxito!');
+
         },
 
         onFinish: () => form.reset('password', 'password_confirmation'),
