@@ -21,7 +21,6 @@
                         <table id="clientesTable" class="display text-gray-900">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Rut</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
@@ -30,7 +29,6 @@
                             </thead>
                             <tbody>
                                 <tr v-for="cliente in clientes" :key="cliente.id">
-                                    <td>{{ cliente.id }}</td>
                                     <td>{{ cliente.rut }}</td>
                                     <td>{{ cliente.name }}</td>
                                     <td>{{ cliente.email }}</td>
@@ -71,7 +69,7 @@ const searchTable = () => {
 
 onMounted(() => {
     $('#clientesTable').DataTable({
-        // dom: 'rtip'  Remueve el campo de búsqueda por defecto
+         dom: 'rtip'  //Remueve el campo de búsqueda por defecto
 
     });
 });
