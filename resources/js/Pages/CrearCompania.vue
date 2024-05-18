@@ -5,15 +5,15 @@
                 <h2 class="text-xl font-semibold text-center leading-tight">
                     Crear Cía. Aseguradora
                 </h2>
-
+                text-white
             </div>
         </template>
-        <ValidationErrors class="mb-4" />
+        <ValidationErrors class="mb-4 text-gray-900" />
         <form @submit.prevent="submit">
-            <div class="p-4 text-gray-900 w-3/4 justify-center">
+            <div class="p-4 text-gray-900 w-3/4 justify-center bg-slate-800 rounded-md">
                 <div class="flex">
                     <label class="block text-sm w-1/4 font-medium text-white mt-4">Razón Social:</label>
-                    <input type="text" v-model="form.razon_social" required
+                    <input type="text" v-model="form.razon_social" 
                         class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <div class="flex">
@@ -42,7 +42,7 @@
 
                 <div class="flex">
                     <label class="block text-sm w-1/4 font-medium text-white mt-4">Región:</label>
-                    <input type="text" v-model="form.region" required
+                    <input type="text" v-model="form.region" 
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 

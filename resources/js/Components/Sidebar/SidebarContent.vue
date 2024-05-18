@@ -44,13 +44,14 @@
             :active="route().current('view-add-poliza') || route().current('show-polizas')">
             <SidebarCollapsibleItem title="Crear Cotizaciones" />
             <SidebarCollapsibleItem title="Listado de Cotizaciones" />
+            <SidebarCollapsibleItem title="Envío de Cotizaciones" />
             <SidebarCollapsibleItem title="Crear Propuestas" />
             <SidebarCollapsibleItem title="Listado de Propuestas" />
             <SidebarCollapsibleItem title="Crear Poliza" :href="route('view-add-poliza')"
                 :active="route().current('view-add-poliza')" />
             <SidebarCollapsibleItem title="Listado Polizas General" :href="route('show-polizas')"
                 :active="route().current('show-polizas')" />
-            <SidebarCollapsibleItem title="Envío de Cotizaciones" />
+
         </SidebarCollapsible>
 
         <SidebarCollapsible title="Cobranza por Cliente">

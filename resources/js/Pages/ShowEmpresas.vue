@@ -5,10 +5,11 @@
 
 
             <!-- Campo de búsqueda personalizado -->
-          <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
-                class="border rounded-lg" /> 
+            <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
+                class="border rounded-lg" />
+            <button1 @click="openModal">Crear Cia Seguros</button1>
 
-                <button
+            <button
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold p-2  rounded-lg transition-colors duration-300">
                 Generar Excel
             </button>
@@ -49,12 +50,24 @@
                 </div>
             </div>
         </div>
+        <DialogModal v-if="showModal" :show="showModal" @close="close">
 
+            <template #content>
+                <component :is="CrearUsuario" />
+
+            </template>
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </DialogModal>
     </AppLayout>
 </template>
 
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
+import DialogModal from '@/Components/DialogModal.vue'
+import CrearUsuario from '@/Pages/CrearUsuarioForm.vue'
+
 import Button from "@/Components/Button.vue"
 import { ref, onMounted } from 'vue'
 import $ from 'jquery'
@@ -67,6 +80,17 @@ const props = defineProps({
         type: Array
     }
 });
+
+const showModal = ref(false) // Define a reactive property to track modal visibility
+
+const openModal = () => {
+
+    showModal.value = true // Show the modal
+}
+
+const close = () => {
+    showModal.value = false // Hide the modal
+}
 
 
 const searchQuery = ref('');

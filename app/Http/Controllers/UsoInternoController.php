@@ -66,10 +66,10 @@ class UsoInternoController extends Controller
         $user->region =      $request->region;
         $user->rol_id =      $request->rol_id;
         $user->cargo =       $request->selectedCargo;
-        $user->password =    Hash::make($request['password']);
+        $user->password =    Hash::make($request->password);
         $user->save();
 
-        return Inertia::render('Dashboard');
+        return response()->json('Ok');
     }
 
     public function ViewAddPoliza()

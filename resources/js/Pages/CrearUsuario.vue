@@ -3,7 +3,7 @@
         <template #header>
             <div class="flex flex-col  gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold text-center leading-tight">
-                    Crear Usuario Interno 2
+                    Crear Usuario Interno
                 </h2>
 
             </div>
@@ -145,10 +145,7 @@ const form = useForm({
 const submit = () => {
     form.post(route('crear-usuario-interno'), {
         onSuccess: () => {
-            // Redireccionar al usuario a la misma página después del registro
-            // Inertia.visit('/dashboard')
-            alert('¡Registrado con éxito!');
-
+   
         },
 
         onFinish: () => form.reset('password', 'password_confirmation'),
