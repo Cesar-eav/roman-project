@@ -17,8 +17,8 @@
             <SidebarCollapsibleItem title="Asignación de Atribuciones" />
             <SidebarCollapsibleItem title="Agregar Cía. Seguros" :href="route('add-compania')"
                 :active="route().current('add-compania')" />
-            <SidebarCollapsibleItem title="Listar Cía. Seguros" :href="route('cliente')"
-                :active="route().current('cliente')" />
+            <SidebarCollapsibleItem title="Listar Cía. Seguros" :href="route('show-cias')"
+                :active="route().current('show-cias')" />
             <SidebarCollapsibleItem title="Crear mensaje de Avisos" />
         </SidebarCollapsible>
 

@@ -24,11 +24,11 @@ class UsoInternoController extends Controller
         ]);
     }
 
-    public function listarCia()
+    public function showCias()
     {
         $companies = CiaAseguradora::all();
         // Pasar los datos a la vista Dashboard usando Inertia
-        return Inertia::render('ClienteExterno', [
+        return Inertia::render('ShowCias', [
             'companies' => $companies,
         ]);
     }

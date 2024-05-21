@@ -48,7 +48,7 @@ Route::middleware([
 
     Route::get('/add-compania', function () {return Inertia::render('CrearCompania'); })->name('add-compania');
     Route::post('/crear-cia',[UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
-    Route::get('/cliente',[UsoInternoController::class, 'listarCia'])->name('cliente');
+    Route::get('/show-cias',[UsoInternoController::class, 'showCias'])->name('show-cias');
 // CLIENTES EXTERNOS
     Route::get('/crear-empresa', function () {return Inertia::render('CrearEmpresa'); })->name('crear-empresa');
     Route::post('/guardar-empresa',[ClienteExternoController::class, 'guardarEmpresa'])->name('guardar-empresa');

@@ -10,17 +10,21 @@
         </template>
         <ValidationErrors class="mb-4 text-gray-900" />
         <form @submit.prevent="submit">
+
+            
             <div class="p-4 text-gray-900 w-3/4 justify-center bg-slate-800 rounded-md">
+
+
                 <div class="flex">
-                    <label class="block text-sm w-1/4 font-medium text-white mt-4">Razón Social:</label>
-                    <input type="text" v-model="form.razon_social" 
-                        class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <input type="text" v-model="form.razon_social" placeholder="Razón Social"
+                        class="mt-1 block border-gray-300  w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <input type="text" v-model="form.nombre_fantasia" placeholder="Nombre de Fantasía"
+                        class="mt-1 block border-gray-300  w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
-                <div class="flex">
-                    <label class="block text-sm w-1/4 font-medium text-white mt-4">Nombre Fantasía:</label>
-                    <input type="text" v-model="form.nombre_fantasia"
-                        class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
+
+
+
+
 
                 <div class="flex">
                     <label class="block text-sm w-1/4 font-medium text-white mt-4">Rut Empresa:</label>
@@ -290,7 +294,7 @@ const form = useForm({
 
 // Función para enviar el formulario
 const submit = () => {
-    form.post(route('crear-cia'), {
+    form.post(route('/crear-cia'), {
         onSuccess: () => {
             // Redireccionar al usuario a la misma página después del registro
             const currentPageUrl = route().url()
