@@ -17,20 +17,18 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-100  justify-start">
-                        <!-- <DataTable :data="polizas" :columns="columns" class="text-gray-900 ">
-                        </DataTable> -->
-                        <table id="polizasTable" class="display text-gray-900">
-                            <thead>
+                <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-300  justify-start">
+                        <table id="clientesTable" class="display">
+                            <thead class="bg-gray-900">
                                 <tr>
-                                    <th>ID</th>
+                                    <th class="rounded-l-full">ID</th>
                                     <th>Razón Social</th>
                                     <th>Nombre Fantasía</th>
                                     <th>Nombre Persona Natural</th>
                                     <th>Apellido </th>
                                     <th>Rut Empresa</th>
-                                    <th>Comuna</th>
+                                    <th class="rounded-r-full">Comuna</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,7 +72,7 @@ export default {
         CreateEmpresaModal
     },
     props: {
-        clientes: {
+        empresas: {
             type: Array,
             required: true
         }
