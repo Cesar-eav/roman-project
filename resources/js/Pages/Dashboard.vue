@@ -19,13 +19,13 @@
                 <div class="bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-300  justify-start">
                         <table id="clientesTable" class="display">
-                            <thead>
+                            <thead class="bg-gray-500 rounded-xl">
                                 <tr>
                                     <th>Id</th>
                                     <th>Rut</th>
                                     <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th>Telefono</th>
+                                    <!-- <th>Email</th>
+                                    <th>Telefono</th> -->
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -34,9 +34,9 @@
                                     <td>{{ cliente.id }}</td>
                                     <td>{{ cliente.rut }}</td>
                                     <td>{{ cliente.name }}</td>
-                                    <td>{{ cliente.email }}</td>
-                                    <td>{{ cliente.telefono }}</td>
-                                    <th>
+                                    <!-- <td>{{ cliente.email }}</td>
+                                    <td>{{ cliente.telefono }}</td> -->
+                                    <th class="flex justify-start">
                                         <button class="btn btn-ver" @click="verCliente(cliente.id)">Ver</button>
                                         <button class="btn btn-editar"
                                             @click="editarCliente(cliente.id)">Editar</button>
