@@ -1,6 +1,6 @@
 <template>
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
-        <div class="px-6 py-4">
+        <div class="px-6 py-4 bg-gray-100">
             <div class="text-lg">
                 <slot name="title"> </slot>
             </div>
@@ -11,9 +11,9 @@
                     Crear Compañia de Seguros
                 </h2>
             </div>
-            <form @submit.prevent="submit">
-                <div v-if="mostrarModal1">
-                    <div class="p-4 text-gray-900 ustify-center rounded-md">
+            <form @submit.prevent="submit" class="text-gray-900">
+                <div v-if="mostrarModal">
+                    <div class="p-4  ustify-center rounded-md">
 
                         <div class="flex">
                             <input type="text" v-model="form.razon_social" placeholder="Razón Social"
@@ -99,77 +99,85 @@
 
                 </div>
                 <div v-if="showModalEjecutiva1">
-EJECUTIVA 1
-                        <div class="bg-orange-900 p-2 border border-spacing-2">
-                            <div class="flex">
-                                <label class="block w-1/4 text-sm font-medium text-white mt-4">Nombre Ejecutiva
-                                    1:</label>
-                                <input type="text" v-model="form.ejecutiva_1"
-                                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div class="flex">
-                                <label class="block w-1/4 text-sm font-medium text-white mt-4">Fono:</label>
-                                <input type="text" v-model="form.fono_ejecutiva_1"
-                                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div class="flex">
-                                <label class="block w-1/4 text-sm font-medium text-white mt-4">Email:</label>
-                                <input type="email" v-model="form.mail_ejecutiva_1"
-                                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
+                    Agregar ejecutiva 1
+                    <div class="p-2 border border-spacing-2">
+                        <div class="flex">
+                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva
+                                1:</label>
+                            <input type="text" v-model="form.ejecutiva_1"
+                                class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div class="flex">
+                            <label class="block w-1/4 text-sm font-medium  mt-4">Fono:</label>
+                            <input type="text" v-model="form.fono_ejecutiva_1"
+                                class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div class="flex">
+                            <label class="block w-1/4 text-sm font-medium  mt-4">Email:</label>
+                            <input type="email" v-model="form.mail_ejecutiva_1"
+                                class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
 
-                            <div class="flex">
-                                <label class="block w-1/4 text-sm font-medium text-white mt-4">Fecha de
-                                    Nacimiento:</label>
-                                <input type="date" v-model="form.mail_ejecutiva_1"
-                                    class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-
+                        <div class="flex">
+                            <label class="block w-1/4 text-sm font-medium  mt-4">Fecha de
+                                Nacimiento:</label>
+                            <input type="date" v-model="form.mail_ejecutiva_1"
+                                class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                     </div>
 
+                </div>
+
                 <div v-if="showModalEjecutiva2">
-                    <div class="bg-orange-900 p-2 border border-spacing-2">
+                    <p class="">Agregar ejecutiva 2</p>
+                    <div class="p-2 border border-spacing-2">
                         <div class="flex">
-                            <label class="block w-1/4 text-sm font-medium text-white mt-4">Nombre Ejecutiva 2:</label>
+                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva 2:</label>
                             <input type="text" v-model="form.ejecutiva_2"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
                         <div class="flex">
-                            <label class="block w-1/4 text-sm font-medium text-white mt-4">Fono:</label>
+                            <label class="block w-1/4 text-sm font-medium mt-4">Fono:</label>
                             <input type="text" v-model="form.fono_ejecutiva_2"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
                         <div class="flex">
-                            <label class="block w-1/4 text-sm font-medium text-white mt-4">Email:</label>
+                            <label class="block w-1/4 text-sm font-medium mt-4">Email:</label>
                             <input type="email" v-model="form.mail_ejecutiva_2"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
-                            <label class="block w-1/4 text-sm font-medium text-white mt-4">Fecha de Nacimiento:</label>
+                            <label class="block w-1/4 text-sm font-medium mt-4">Fecha de Nacimiento:</label>
                             <input type="date" v-model="form.mail_ejecutiva_2"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                     </div>
                 </div>
+
                 <div class="py-4 w-60 justify-items-end">
                     <Button type="submit" class="w-full justify-center gap-2">
                         <span>Registrar Compañia</span>
                     </Button>
                 </div>
+
             </form>
-            <button @click="siguiente" v-if="mostrarModal12">Siguiente</button>
-            <button @click="siguiente2" v-if="mostrarModal2">Siguiente</button>
 
-
-            <div class="px-6 py-4 text-right bg-gray-100 dark:bg-dark-eval-3">
-                <slot name="footer"> </slot>
+            <div class="flex flex-col">
+                <button @click="volver1" v-if="ejecutiva2 || ejecutiva1">Volver </button>
+                <button @click="volverEjecutiva1" v-if="showModalEjecutiva2">Volver a Ejecutiva 1</button>
+                <button @click="siguiente" v-if="ejecutiva1  || mostrarModal">Agregar Ejecutiva 1</button>
+                <button @click="siguiente2" v-if="ejecutiva2">Agregar Ejecutiva 2</button>
             </div>
 
+
+
         </div>
+        <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
+                <slot name="footer"> </slot>
+            </div>
     </Modal>
 
 </template>
@@ -201,9 +209,9 @@ export default {
     },
     data() {
         return {
-            mostrarModal1: true,
-            mostrarModal12: true,
-            mostrarModal2: false,
+            mostrarModal: true,
+            ejecutiva1: false,
+            volverEjecutiva: false,
             showModalEjecutiva1: false,
             showModalEjecutiva2: false,
             form: this.$inertia.form({
@@ -246,21 +254,33 @@ export default {
     methods: {
 
         siguiente() {
-            alert("S1");
-            this.showModalEjecutiva1 = true;
+            this.mostrarModal = false,
+                this.showModalEjecutiva1 = true;
             this.showModalEjecutiva2 = false;
-            this.mostrarModal1 = false;
-            this.mostrarModal12 = true;
-            this.mostrarModal2 = true;
+            this.ejecutiva1 = false;
+            this.ejecutiva2 = true;
         },
-
         siguiente2() {
-            alert("S2");
+            this.mostrarModal = false;
             this.showModalEjecutiva1 = false;
             this.showModalEjecutiva2 = true;
-            this.mostrarModal1 = false;
-            this.mostrarModal2 = false;
-
+            this.ejecutiva1 = false;
+            this.ejecutiva2 = false;
+        },
+        volver1() {
+            this.mostrarModal = true;
+            this.ejecutiva1 = true;
+            this.ejecutiva2 = false;
+            this.showModalEjecutiva1 = false;
+            this.showModalEjecutiva2 = false;
+        },
+        volverEjecutiva1() {
+            this.mostrarModal = false;
+            this.volverEjecutiva = false;
+            this.ejecutiva1 = true;
+            this.ejecutiva2 = false;
+            this.showModalEjecutiva1 = true;
+            this.showModalEjecutiva2 = false;
         },
 
         submit() {
