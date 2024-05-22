@@ -31,8 +31,8 @@
             <SidebarCollapsibleItem title="Listado Empresas" :href="route('show-empresas')"
                 :active="route().current('show-empresas')" /> 
             <SidebarCollapsibleItem title="Crear Usuarios Exeternos" />
-            <SidebarCollapsibleItem title="Listado Clientes Externos" :href="route('view-add-poliza')"
-                :active="route().current('view-add-poliza')" />
+            <SidebarCollapsibleItem title="Listado Clientes Externos" :href="route('show-cliente-externo')"
+                :active="route().current('show-cliente-externo')" />
             <SidebarCollapsibleItem title="Listado Activos Asegurados" />
             <SidebarCollapsibleItem title="Envío de Cotizaciones" />
         </SidebarCollapsible>
