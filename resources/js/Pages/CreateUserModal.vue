@@ -1,11 +1,11 @@
 <template>
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
-        <div class="px-6 py-4">
+        <div class="px-6 py-4 bg-gray-100">
             <div class="text-lg">
                 <slot name="title"> </slot>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 ">
                 <!-- <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> -->
                 <h2 class="text-xl font-semibold text-center leading-tight">
                     Crear Usuario Interno
@@ -94,7 +94,7 @@
             
         </div>
 
-        <div class="px-6 py-4 text-right bg-gray-100 dark:bg-dark-eval-3">
+        <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
             <slot name="footer"> </slot>
         </div>
     </Modal>
