@@ -16,17 +16,17 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-300  justify-start">
                         <table id="clientesTable" class="display">
-                            <thead class="bg-gray-500 rounded-xl">
+                            <thead class="bg-gray-900">
                                 <tr>
-                                    <th>Id</th>
+                                    <th class="rounded-l-full">Id</th>
                                     <th>Rut</th>
                                     <th>Nombre</th>
                                     <!-- <th>Email</th>
                                     <th>Telefono</th> -->
-                                    <th>Acciones</th>
+                                    <th class="rounded-r-full">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>

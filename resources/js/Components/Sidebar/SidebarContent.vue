@@ -24,11 +24,12 @@
 
         <!-- CLIENTES EXTERNOS -->
         <SidebarCollapsible title="Clientes Externos" class="text-xs"
-            :active="route().current('crear-empresa') || route().current('show-polizas')">
+            :active="route().current('crear-empresa') || route().current('show-polizas') || route().current('show-empresas')">
             <SidebarCollapsibleItem title="Crear Empresa Nueva" :href="route('crear-empresa')"
                 :active="route().current('crear-empresa')" />
             <SidebarCollapsibleItem title="Aprobación de Solicitud" />
-            <SidebarCollapsibleItem title="Listado Empresas" />
+            <SidebarCollapsibleItem title="Listado Empresas" :href="route('show-empresas')"
+                :active="route().current('show-empresas')" /> 
             <SidebarCollapsibleItem title="Crear Usuarios Exeternos" />
             <SidebarCollapsibleItem title="Listado Clientes Externos" :href="route('view-add-poliza')"
                 :active="route().current('view-add-poliza')" />

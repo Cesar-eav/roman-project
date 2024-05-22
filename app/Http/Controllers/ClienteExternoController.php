@@ -8,6 +8,18 @@ use Inertia\Inertia;
 
 class ClienteExternoController extends Controller
 {
+
+    public function showEmpresas()
+    {
+        $empresas = Empresa::all();
+        // Pasar los datos a la vista Dashboard usando Inertia
+        return Inertia::render('ShowEmpresas', [
+            'empresas' => $empresas,
+
+        ]);
+    }
+
+
     public function guardarEmpresa(Request $request)
     {
 

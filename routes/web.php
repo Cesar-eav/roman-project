@@ -33,7 +33,7 @@ Route::middleware([
 ])->group(function () {
     
 
-    //CONFIGURACION INTERNA
+//CONFIGURACION INTERNA
 
     Route::get('/dashboard', [UsoInternoController::class, 'listarUsuarios'])->name('dashboard');
     Route::post('/crear-usuario-interno',[UsoInternoController::class, 'usuarioCrear'])->name('crear-usuario-interno');
@@ -49,19 +49,21 @@ Route::middleware([
     Route::get('/add-compania', function () {return Inertia::render('CrearCompania'); })->name('add-compania');
     Route::post('/crear-cia',[UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
     Route::get('/show-cias',[UsoInternoController::class, 'showCias'])->name('show-cias');
+
 // CLIENTES EXTERNOS
     Route::get('/crear-empresa', function () {return Inertia::render('CrearEmpresa'); })->name('crear-empresa');
     Route::post('/guardar-empresa',[ClienteExternoController::class, 'guardarEmpresa'])->name('guardar-empresa');
+    Route::get('/show-empresas',[ClienteExternoController::class, 'showEmpresas'])->name('show-empresas');
 
 
-    #POLIZA
+#POLIZA
     Route::get('/view-add-poliza', [UsoInternoController::class, 'ViewAddPoliza'])->name('view-add-poliza');
     Route::post('/crear-poliza',[UsoInternoController::class, 'polizaCrear'])->name('crear-poliza');
     Route::get('/show-polizas', [UsoInternoController::class, 'showPolizas'])->name('show-polizas');
 
 
 
-    // APIS
+// APIS
     Route::get('/api/clientes', [UsoInternoController::class, 'search']);
 
 

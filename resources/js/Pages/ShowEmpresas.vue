@@ -7,7 +7,7 @@
             <!-- Campo de búsqueda personalizado -->
             <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
                 class="border rounded-lg" />
-            <button1 @click="openModal">Crear Cia Seguros</button1>
+            <button1 @click="openModal">Crear Empresa</button1>
 
             <button
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold p-2  rounded-lg transition-colors duration-300">
@@ -25,23 +25,23 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tipo Poliza</th>
-                                    <th>N° </th>
-                                    <th>Monto Aegurado</th>
-                                    <th>Prima</th>
-                                    <th>Valor Neto</th>
-                                    <th>Fecha Inicio</th>
+                                    <th>Razón Social</th>
+                                    <th>Nombre Fantasía</th>
+                                    <th>Nombre Persona Natural</th>
+                                    <th>Apellido </th>
+                                    <th>Rut Empresa</th>
+                                    <th>Comuna</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="cliente in polizas" :key="cliente.id">
-                                    <td>{{ cliente.id }}</td>
-                                    <td>{{ cliente.tipo_poliza }}</td>
-                                    <td>{{ cliente.numero_poliza }}</td>
-                                    <td>{{ cliente.monto_asegurado }}</td>
-                                    <td>{{ cliente.prima }}</td>
-                                    <td>{{ cliente.valor_neto }}</td>
-                                    <td>{{ cliente.fecha_inicio }}</td>
+                                <tr v-for="empresa in empresas" :key="empresa.id">
+                                    <td>{{ empresa.id }}</td>
+                                    <td>{{ empresa.razon_social }}</td>
+                                    <td>{{ empresa.nombre_fantasia }}</td>
+                                    <td>{{ empresa.nombres_persona_natural }}</td>
+                                    <td>{{ empresa.apellido_paterno_persona_natural }}</td>
+                                    <td>{{ empresa.rut_empresa_persona }}</td>
+                                    <td>{{ empresa.comuna }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,61 +50,64 @@
                 </div>
             </div>
         </div>
-        <DialogModal v-if="showModal" :show="showModal" @close="close">
-
-            <template #content>
-                <component :is="CrearUsuario" />
-
-            </template>
+        <CreateEmpresaModal v-if="showModal" :show="showModal" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
-        </DialogModal>
+        </CreateEmpresaModal>
     </AppLayout>
 </template>
 
-<script setup>
+<script>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import DialogModal from '@/Components/DialogModal.vue'
-import CrearUsuario from '@/Pages/CrearUsuarioForm.vue'
-
-import Button from "@/Components/Button.vue"
-import { ref, onMounted } from 'vue'
+import Button1 from '@/Components/Button.vue'
+import CreateEmpresaModal from '@/Pages/CreateEmpresaModal.vue'
 import $ from 'jquery'
-// import 'datatables.net-dt/css/jquery.dataTables.css'
 import 'datatables.net'
 
-
-const props = defineProps({
-    empresas: {
-        type: Array
+export default {
+    components: {
+        AppLayout,
+        DialogModal,
+        Button1,
+        CreateEmpresaModal
+    },
+    props: {
+        clientes: {
+            type: Array,
+            required: true
+        }
+    },
+    data() {
+        return {
+            showModal: false,
+            mostrarModal: false,
+            searchQuery: ''
+        };
+    },
+    methods: {
+        openModal() {
+            this.showModal = true;
+        },
+        close() {
+            this.showModal = false;
+        },
+        confirmarEliminar() {
+            this.mostrarModal = true;
+        },
+        cerrarModal() {
+            this.mostrarModal = false;
+        },
+        searchTable() {
+            const table = $('#clientesTable').DataTable();
+            table.search(this.searchQuery).draw();
+        }
+    },
+    mounted() {
+        $('#clientesTable').DataTable({
+            dom: 'rtip'  // Remueve el campo de búsqueda por defecto
+        });
     }
-});
-
-const showModal = ref(false) // Define a reactive property to track modal visibility
-
-const openModal = () => {
-
-    showModal.value = true // Show the modal
-}
-
-const close = () => {
-    showModal.value = false // Hide the modal
-}
-
-
-const searchQuery = ref('');
-
-const searchTable = () => {
-    const table = $('#polizasTable').DataTable();
-    table.search(searchQuery.value).draw();
 };
-
-onMounted(() => {
-    $('#polizasTable').DataTable({
-        dom: 'rtip' // Remueve el campo de búsqueda por defecto
-
-    });
-});
-
 </script>

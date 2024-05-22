@@ -91,7 +91,7 @@
                 </div>
             </form>
 
-            
+
         </div>
 
         <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
@@ -107,70 +107,67 @@ import axios from 'axios';
 
 
 export default {
-  components: {
-    Modal,
-    Button
-  },
-  props: {
-    show: {
-      type: Boolean,
-      default: true,
+    components: {
+        Modal,
+        Button
     },
-    maxWidth: {
-      type: String,
-      default: '2xl',
+    props: {
+        show: {
+            type: Boolean,
+            default: true,
+        },
+        maxWidth: {
+            type: String,
+            default: '2xl',
+        },
+        closeable: {
+            type: Boolean,
+            default: true,
+        },
     },
-    closeable: {
-      type: Boolean,
-      default: true,
+    data() {
+        return {
+            form: this.$inertia.form({
+                selectedCargo: '',
+                name: 'cesar',
+                last_name: '',
+                rut: '',
+                fecha_nacimiento: '',
+                telefono: '',
+                email: '1@2.cl',
+                address: '',
+                ciudad: '',
+                region: '',
+                rol_id: 2,
+                password: 'qwedsar1ASD',
+                password_confirmation: 'qwedsar1ASD',
+            })
+        };
     },
-  },
-  data() {
-    return {
-      form: this.$inertia.form({
-        selectedCargo: '',
-        name: 'cesar',
-        last_name: '',
-        rut: '',
-        fecha_nacimiento: '',
-        telefono: '',
-        email: '1@2.cl',
-        address: '',
-        ciudad: '',
-        region: '',
-        rol_id: 2,
-        password: 'qwedsar1ASD',
-        password_confirmation: 'qwedsar1ASD',
-      })
-    };
-  },
-  methods: {
-    submit() {
-    //   this.form.post('/crear-usuario-interno')
-
-axios.post('/crear-usuario-interno',{
-'selectedCargo': this.form.selectedCargo,
-  'name': this.form.name || '', // Ejemplo
-  'last_name': this.form.last_name || '', // Ejemplo
-  'rut': this.form.rut || '', // Ejemplo
-  'fecha_nacimiento': this.form.fecha_nacimiento || '', // Ejemplo
-  'telefono': this.form.telefono || '', // Ejemplo
-  'email': this.form.email,
-  'address': this.form.address || '', // Ejemplo
-  'ciudad': this.form.ciudad || '', // Ejemplo
-  'region': this.form.region || '', // Ejemplo
-  'rol_id': 2,
-  'password': 'qwedsar1ASD',
-  'password_confirmation': 'qwedsar1ASD',
-}).then(response=>{
-    console.log(response.data);
-    this.close()
-}) ;
-    },
-    close() {
-      this.$emit('close');
+    methods: {
+        submit() {
+            axios.post('/crear-usuario-interno', {
+                'selectedCargo': this.form.selectedCargo,
+                'name': this.form.name || '', // Ejemplo
+                'last_name': this.form.last_name || '', // Ejemplo
+                'rut': this.form.rut || '', // Ejemplo
+                'fecha_nacimiento': this.form.fecha_nacimiento || '', // Ejemplo
+                'telefono': this.form.telefono || '', // Ejemplo
+                'email': this.form.email,
+                'address': this.form.address || '', // Ejemplo
+                'ciudad': this.form.ciudad || '', // Ejemplo
+                'region': this.form.region || '', // Ejemplo
+                'rol_id': 2,
+                'password': 'qwedsar1ASD',
+                'password_confirmation': 'qwedsar1ASD',
+            }).then(response => {
+                console.log(response.data);
+                this.close()
+            });
+        },
+        close() {
+            this.$emit('close');
+        }
     }
-  }
 };
 </script>
-
