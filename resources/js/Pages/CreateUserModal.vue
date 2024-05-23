@@ -14,8 +14,6 @@
 
             <form @submit.prevent="submit">
                 <div class="p-4 justify-center text-slate-900">
-
-
                     <div class="flex text-slate-900">
 
                         <input type="text" v-model="form.name" required placeholder="Nombres"
@@ -136,6 +134,8 @@ export default {
                 telefono: '',
                 email: '1@2.cl',
                 address: '',
+                isapre: '',
+                afp: '',
                 ciudad: '',
                 region: '',
                 rol_id: 2,
@@ -157,6 +157,8 @@ export default {
                 'address': this.form.address || '', // Ejemplo
                 'ciudad': this.form.ciudad || '', // Ejemplo
                 'region': this.form.region || '', // Ejemplo
+                'isapre': this.form.isapre || '', // Ejemplo
+                'afp': this.form.afp || '', // Ejemplo
                 'rol_id': 2,
                 'password': 'qwedsar1ASD',
                 'password_confirmation': 'qwedsar1ASD',
