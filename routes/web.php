@@ -43,8 +43,8 @@ Route::middleware([
     })->name('crearusuario');
 
     Route::get('/modal', function () {
-        return Inertia::render('CrearUsuarioForm');
-    })->name('crear-usuario-form');
+        return Inertia::render('ClientesInternos/EditModal');
+    });
 
     Route::get('/add-compania', function () {return Inertia::render('CrearCompania'); })->name('add-compania');
     Route::post('/crear-cia',[UsoInternoController::class, 'ciaCrear'])->name('crear-cia');
@@ -55,6 +55,8 @@ Route::middleware([
 
 
     Route::get('/show-cliente/{id}',[UsoInternoController::class, 'showCliente'])->name('show-cliente');
+    Route::get('/edit-show-cliente/{id}',[UsoInternoController::class, 'editShowCliente'])->name('show-cliente-id');
+    Route::get('/edit-cliente/{id}',[UsoInternoController::class, 'editCliente'])->name('show-cliente-id');
 
 
 // CLIENTES EXTERNOS

@@ -65,8 +65,13 @@
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
-        
         </ShowClientModal>
+
+        <EditModal v-if="showModalEditClient" :show="showModalEditClient" :cliente="clienteSeleccionado" @close="close" >
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </EditModal>
             
 
         <CreateUserModal v-if="showModal" :show="showModal" @close="close">
@@ -85,6 +90,7 @@ import Button1 from '@/Components/Button.vue'
 import CrearUsuario from '@/Pages/CrearUsuarioForm.vue'
 import CreateUserModal from '@/Pages/CreateUserModal.vue'
 import ShowClientModal from '@/Pages/ClientesInternos/ShowModal.vue'
+import EditModal from './ClientesInternos/EditModal.vue'
 import { ref, onMounted } from 'vue'
 import Button from "@/Components/Button.vue"
 import $ from 'jquery'
@@ -100,6 +106,7 @@ export default {
         CrearUsuario,
         CreateUserModal,
         ShowClientModal,
+        EditModal
         
     },
     props: {
@@ -116,7 +123,9 @@ export default {
             clienteIdSeleccionado: null,
             showVerClienteModal: false,
             clienteSeleccionado: {},
-            showModalClientModal: false
+            showModalClientModal: false,
+            showModalEditClient: false
+
         };
     },
     methods: {
@@ -126,6 +135,7 @@ export default {
         close() {
             this.showModal = false;
             this.showModalClientModal = false;
+            this.showModalEditClient = false;
         },
         confirmarEliminar() {
             this.mostrarModal = true;
@@ -143,6 +153,17 @@ export default {
                     this.clienteSeleccionado = res.data;
                     console.log("Res Cliente", this.clienteSeleccionado);
                     this.showModalClientModal = true;
+                    
+                }).catch(error=>{
+                    console.log("Error Ver Cliente", error)
+                })
+        },
+        editarCliente(id){
+            axios.get('/show-cliente/'+id).
+                then(res=> {
+                    this.clienteSeleccionado = res.data;
+                    console.log("Res Cliente", this.clienteSeleccionado);
+                    this.showModalEditClient = true;
                     
                 }).catch(error=>{
                     console.log("Error Ver Cliente", error)

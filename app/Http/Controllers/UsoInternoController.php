@@ -29,6 +29,16 @@ class UsoInternoController extends Controller
        return $cliente;
     }
 
+    public function editShowCliente ($id){
+        $cliente = User::where('id', $id)->first();
+        return $cliente;
+     }
+
+     public function editCliente ($id){
+        $cliente = User::where('id', $id)->first();
+        return $cliente;
+     }
+
     public function showCias()
     {
         $companies = CiaAseguradora::all();
