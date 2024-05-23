@@ -24,6 +24,11 @@ class UsoInternoController extends Controller
         ]);
     }
 
+    public function showCliente ($id){
+       $cliente = User::where('id', $id)->first();
+       return $cliente;
+    }
+
     public function showCias()
     {
         $companies = CiaAseguradora::all();
@@ -55,9 +60,10 @@ class UsoInternoController extends Controller
 
     public function usuarioCrear(Request $request)
     {
-
         $user = new User();
         $user->name =        $request->name;
+        $user->cargo =        $request->selectedCargo;
+        $user->last_name =   $request->last_name;
         $user->email =       $request->email;
         $user->rut =         $request->rut;
         $user->telefono =    $request->telefono;
@@ -65,6 +71,9 @@ class UsoInternoController extends Controller
         $user->ciudad =      $request->ciudad;
         $user->region =      $request->region;
         $user->rol_id =      $request->rol_id;
+        $user->fecha_nacimiento =      $request->fecha_nacimiento;
+        $user->afp =         $request->afp;
+        $user->isapre =         $request->isapre;
         $user->cargo =       $request->selectedCargo;
         $user->password =    Hash::make($request->password);
         $user->save();
