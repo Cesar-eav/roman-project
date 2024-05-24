@@ -3,9 +3,7 @@
         <div class="flex justify-center text-4xl pb-4">Listado Compañias de Seguros</div>
 
         <div class="flex py-2 justify-start text-gray-900">
-
             <button1 @click="openModal">Crear Cía de Seguros</button1>
-
             <button
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
                 Generar Excel
@@ -14,7 +12,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-300  justify-start">
+                    <div class="p-6 text-gray-300 justify-start">
                         <table id="clientesTable" class="display">
                             <thead>
                                 <tr>
@@ -34,10 +32,9 @@
                                     <td>{{ company.direccion }}</td>
                                     <td>{{ company.comuna }}</td>
                                     <th>
-                                        <button class="btn btn-ver" @click="verCliente(company.id)">Ver</button>
-                                        <button class="btn btn-editar"
-                                            @click="editarCliente(company.id)">Editar</button>
-                                        <button class="btn btn-eliminar" @click="mostrarModal = true">Eliminar</button>
+                                        <button class="btn btn-ver" @click="verCia(company.id)">Ver</button>
+                                        <button class="btn btn-editar" @click="editarCia(company.id)">Editar</button>
+                                        <button class="btn btn-eliminar" @click="confirmarEliminar(company.id)">Eliminar</button>
                                     </th>
                                 </tr>
                             </tbody>
@@ -49,17 +46,25 @@
 
         <div v-if="mostrarModal" class="modal">
             <div class="modal-content">
-                <span class="close" @click="mostrarModal = false">&times;</span>
-                <p>¿Estás seguro que deseas eliminar este cliente?</p>
-                <button class="btn btn-confirmar" @click="mostrarModal = false">Confirmar</button>
-                <button class="btn btn-cancelar" @click="mostrarModal = false">Cancelar</button>
+                <span class="close" @click="cerrarModal">&times;</span>
+                <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                <button class="btn btn-confirmar" @click="deleteCliente">Confirmar</button>
+                <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
             </div>
         </div>
-        <CreateCiaModal v-if="showModal" :show="showModal" @close="close">
+        <ShowCiaModal v-if="ShowCiaModal" :show="ShowCiaModal" @close="close" :companies="ciaIdSeleccionado">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
-        </CreateCiaModal>
+        </ShowCiaModal>
+
+        <EditCiaModal v-if="showModalEditCia" :show="showModalEditCia" :companies="ciaIdSeleccionado" @close="close" >
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </EditCiaModal>
+
+
 
     </AppLayout>
 </template>
@@ -70,19 +75,22 @@ import Button from "@/Components/Button.vue"
 import Button1 from '@/Components/Button.vue'
 import CreateCiaModal from '@/Pages/CreateCiaModal.vue'
 import DialogModal from '@/Components/DialogModal.vue'
-import CrearUsuario from '@/Pages/CrearUsuarioForm.vue'
-import { ref, onMounted } from 'vue'
+import ShowCiaModal from '@/Pages/ClientesInternos/ShowCiaModal.vue'
+import EditCiaModal from '@/Pages/ClientesInternos/EditCiaModal.vue'
+
 import $ from 'jquery'
 import 'datatables.net'
+import axios from 'axios'
 
 export default {
     components: {
         AppLayout,
         DialogModal,
         Button1,
-        CrearUsuario,
         CreateCiaModal,
-        Button
+        Button,
+        ShowCiaModal,
+        EditCiaModal
     },
     props: {
         companies: {
@@ -94,7 +102,10 @@ export default {
         return {
             showModal: false,
             mostrarModal: false,
-            searchQuery: ''
+            ciaIdSeleccionado: {},
+            ShowCiaModal: false,
+            searchQuery: '',
+            showModalEditCia: false
         };
     },
     methods: {
@@ -102,13 +113,52 @@ export default {
             this.showModal = true;
         },
         close() {
-            this.showModal = false;
+            this.ShowCiaModal = false;
+            this.showModalEditCia = false;
+            
         },
-        confirmarEliminar() {
+        confirmarEliminar(id) {
+            this.clienteIdSeleccionado = id;
             this.mostrarModal = true;
         },
         cerrarModal() {
             this.mostrarModal = false;
+        },
+        verCia(id) {
+            axios.get('/show-cia/' + id)
+                .then(res => {
+                    console.log("Res Cliente", res.data);
+                    this.ciaIdSeleccionado = res.data;
+                    // Aquí se puede abrir un modal para mostrar la información del cliente
+                    this.ShowCiaModal = true;
+
+                })
+                .catch(error => {
+                    console.log("Error Ver Cliente", error);
+                });
+        },
+        editarCia(id) {
+            axios.get('/show-cia/' + id)
+                .then(res => {
+                    console.log("Res Cliente", res.data);
+                    this.ciaIdSeleccionado = res.data;
+                    this.showModalEditCia = true;
+                    // Aquí se puede abrir un modal para editar la información del cliente
+                })
+                .catch(error => {
+                    console.log("Error Editar Cliente", error);
+                });
+        },
+        deleteCliente() {
+            axios.delete("/crud/delete-cliente/" + this.clienteIdSeleccionado)
+                .then(response => {
+                    console.log("Eliminado", response.data);
+                    this.mostrarModal = false;
+                    // Aquí se puede actualizar la lista de compañías
+                })
+                .catch(error => {
+                    console.log("Error Eliminar Cliente", error);
+                });
         },
         searchTable() {
             const table = $('#clientesTable').DataTable();
@@ -117,12 +167,12 @@ export default {
     },
     mounted() {
         $('#clientesTable').DataTable({
-            dom: 'rtip'  // Remueve el campo de búsqueda por defecto
+            dom: 'rtip' // Remueve el campo de búsqueda por defecto
         });
     }
 };
-
 </script>
+
 <style>
 .btn {
     padding: 0.5rem 0.5rem;
@@ -148,7 +198,6 @@ export default {
     background-color: #f97316;
     /* Amarillo */
     color: white;
-
 }
 
 .btn-editar:hover {
