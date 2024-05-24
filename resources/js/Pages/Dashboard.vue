@@ -42,6 +42,15 @@
                                             @click="editarCliente(cliente.id)">Editar</button>
                                         <button class="btn btn-eliminar" @click="mostrarModal = true">Eliminar</button>
                                     </th>
+
+                                    <div v-if="mostrarModal" class="modal">
+            <div class="modal-content">
+                <span class="close" @click="mostrarModal = false">&times;</span>
+                <p>¿Estás seguro que deseas eliminar este cliente?</p>
+                <button class="btn btn-confirmar" @click="deleteCliente(cliente.id) ">Confirmar</button>
+                <button class="btn btn-cancelar" @click="mostrarModal = false">Cancelar</button>
+            </div>
+        </div>
                                 </tr>
                             </tbody>
                         </table>
@@ -52,14 +61,7 @@
         </div>
         
 
-        <div v-if="mostrarModal" class="modal">
-            <div class="modal-content">
-                <span class="close" @click="mostrarModal = false">&times;</span>
-                <p>¿Estás seguro que deseas eliminar este cliente?</p>
-                <button class="btn btn-confirmar" @click="mostrarModal = false">Confirmar</button>
-                <button class="btn btn-cancelar" @click="mostrarModal = false">Cancelar</button>
-            </div>
-        </div>
+
 
         <ShowClientModal v-if="showModalClientModal" :show="showModalClientModal" :cliente="clienteSeleccionado" @close="close" >
             <template #footer>
@@ -167,6 +169,13 @@ export default {
                     
                 }).catch(error=>{
                     console.log("Error Ver Cliente", error)
+                })
+        },
+        deleteCliente(id){
+            axios.delete("/crud/delete-cliente/"+id).
+                then((response)=>{
+                    console.log("ELiminado", response.data);
+                    this.mostrarModal = false;
                 })
         }
     },

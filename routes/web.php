@@ -57,6 +57,7 @@ Route::middleware([
     Route::get('/show-cliente/{id}',[UsoInternoController::class, 'showCliente'])->name('show-cliente');
     Route::get('/edit-show-cliente/{id}',[UsoInternoController::class, 'editShowCliente'])->name('show-cliente-id');
     Route::post('/crud/edit-cliente-back',[UsoInternoController::class, 'editCliente']);
+    ROute::delete('/crud/delete-cliente/{id}', [UsoInternoController::class, 'deleteCliente']);
 
 
 // CLIENTES EXTERNOS

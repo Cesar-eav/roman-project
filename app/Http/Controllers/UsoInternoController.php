@@ -34,16 +34,26 @@ class UsoInternoController extends Controller
         return $cliente;
      }
 
+     public function deleteCliente ($id){
+        $cliente = User::find($id);
+        $response = $cliente->delete();
+        return $response;
+     }
+
      public function editCliente (Request $request){
-
-
         $cliente = User::find($request->id);
         $cliente->cargo=                 $request->cargo;
-        // $cliente->description=          $request->description;
-        // $cliente->instagram_address=    $request->instagram_address;
-        // $cliente->email=                $request->email;
-        // $cliente->mobile=               $request->mobile;
-        // $cliente->web_direction=        $request->web_direction;
+        $cliente->name = $request->name;
+        $cliente->last_name = $request->last_name;
+        $cliente->rut = $request->rut;
+        $cliente->fecha_nacimiento = $request->fecha_nacimiento;
+        $cliente->telefono = $request->telefono;
+        $cliente->email = $request->email;
+        $cliente->address = $request->address;
+        $cliente->ciudad = $request->ciudad;
+        $cliente->region = $request->region;
+        $cliente->isapre = $request->isapre;
+        $cliente->afp = $request->afp;
 
 
         $response = $cliente->save();
