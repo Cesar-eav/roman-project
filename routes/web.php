@@ -51,12 +51,12 @@ Route::middleware([
     Route::get('/show-cias',[UsoInternoController::class, 'showCias'])->name('show-cias');
 
 
-    Route::get('crud/');
+
 
 
     Route::get('/show-cliente/{id}',[UsoInternoController::class, 'showCliente'])->name('show-cliente');
     Route::get('/edit-show-cliente/{id}',[UsoInternoController::class, 'editShowCliente'])->name('show-cliente-id');
-    Route::get('/edit-cliente/{id}',[UsoInternoController::class, 'editCliente'])->name('show-cliente-id');
+    Route::post('/crud/edit-cliente-back',[UsoInternoController::class, 'editCliente']);
 
 
 // CLIENTES EXTERNOS

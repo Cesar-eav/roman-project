@@ -34,9 +34,23 @@ class UsoInternoController extends Controller
         return $cliente;
      }
 
-     public function editCliente ($id){
-        $cliente = User::where('id', $id)->first();
-        return $cliente;
+     public function editCliente (Request $request){
+
+
+        $cliente = User::find($request->id);
+        $cliente->cargo=                 $request->cargo;
+        // $cliente->description=          $request->description;
+        // $cliente->instagram_address=    $request->instagram_address;
+        // $cliente->email=                $request->email;
+        // $cliente->mobile=               $request->mobile;
+        // $cliente->web_direction=        $request->web_direction;
+
+
+        $response = $cliente->save();
+        return $response;
+
+        // $cliente = User::where('id', $id)->first();
+        //return $cliente;
      }
 
     public function showCias()
