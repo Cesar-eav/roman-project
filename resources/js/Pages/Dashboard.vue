@@ -44,13 +44,15 @@
                                     </th>
 
                                     <div v-if="mostrarModal" class="modal">
-            <div class="modal-content">
-                <span class="close" @click="mostrarModal = false">&times;</span>
-                <p>¿Estás seguro que deseas eliminar este cliente?</p>
-                <button class="btn btn-confirmar" @click="deleteCliente(cliente.id) ">Confirmar</button>
-                <button class="btn btn-cancelar" @click="mostrarModal = false">Cancelar</button>
-            </div>
-        </div>
+                                        <div class="modal-content">
+                                            <span class="close" @click="mostrarModal = false">&times;</span>
+                                            <p>¿Estás seguro que deseas eliminar este cliente?</p>
+                                            <button class="btn btn-confirmar"
+                                                @click="deleteCliente(cliente.id)">Confirmar</button>
+                                            <button class="btn btn-cancelar"
+                                                @click="mostrarModal = false">Cancelar</button>
+                                        </div>
+                                    </div>
                                 </tr>
                             </tbody>
                         </table>
@@ -59,22 +61,23 @@
                 </div>
             </div>
         </div>
-        
 
 
 
-        <ShowClientModal v-if="showModalClientModal" :show="showModalClientModal" :cliente="clienteSeleccionado" @close="close" >
+
+        <ShowClientModal v-if="showModalClientModal" :show="showModalClientModal" :cliente="clienteSeleccionado"
+            @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </ShowClientModal>
 
-        <EditModal v-if="showModalEditClient" :show="showModalEditClient" :cliente="clienteSeleccionado" @close="close" >
+        <EditModal v-if="showModalEditClient" :show="showModalEditClient" :cliente="clienteSeleccionado" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </EditModal>
-            
+
 
         <CreateUserModal v-if="showModal" :show="showModal" @close="close">
             <template #footer>
@@ -109,7 +112,7 @@ export default {
         CreateUserModal,
         ShowClientModal,
         EditModal
-        
+
     },
     props: {
         clientes: {
@@ -149,31 +152,31 @@ export default {
             const table = $('#clientesTable').DataTable();
             table.search(this.searchQuery).draw();
         },
-        verCliente(id){
-            axios.get('/show-cliente/'+id).
-                then(res=> {
+        verCliente(id) {
+            axios.get('/show-cliente/' + id).
+                then(res => {
                     this.clienteSeleccionado = res.data;
                     console.log("Res Cliente", this.clienteSeleccionado);
                     this.showModalClientModal = true;
-                    
-                }).catch(error=>{
+
+                }).catch(error => {
                     console.log("Error Ver Cliente", error)
                 })
         },
-        editarCliente(id){
-            axios.get('/show-cliente/'+id).
-                then(res=> {
+        editarCliente(id) {
+            axios.get('/show-cliente/' + id).
+                then(res => {
                     this.clienteSeleccionado = res.data;
                     console.log("Res Cliente", this.clienteSeleccionado);
                     this.showModalEditClient = true;
-                    
-                }).catch(error=>{
+
+                }).catch(error => {
                     console.log("Error Ver Cliente", error)
                 })
         },
-        deleteCliente(id){
-            axios.delete("/crud/delete-cliente/"+id).
-                then((response)=>{
+        deleteCliente(id) {
+            axios.delete("/crud/delete-cliente/" + id).
+                then((response) => {
                     console.log("ELiminado", response.data);
                     this.mostrarModal = false;
                 })

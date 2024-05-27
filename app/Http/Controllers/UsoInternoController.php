@@ -45,6 +45,13 @@ class UsoInternoController extends Controller
         return $response;
      }
 
+     public function deleteCia ($id){
+        $cia = CiaAseguradora::find($id);
+        $response = $cia->delete();
+        return $response;
+     }
+
+
      public function editCliente (Request $request){
         $cliente = User::find($request->id);
         $cliente->cargo=                 $request->cargo;

@@ -34,8 +34,18 @@
                                     <th>
                                         <button class="btn btn-ver" @click="verCia(company.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editarCia(company.id)">Editar</button>
-                                        <button class="btn btn-eliminar" @click="confirmarEliminar(company.id)">Eliminar</button>
+                                        <button class="btn btn-eliminar"
+                                            @click="confirmarEliminar(company.id)">Eliminar</button>
                                     </th>
+                                    <div v-if="mostrarModal" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close" @click="cerrarModal">&times;</span>
+                                            <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                                            <button class="btn btn-confirmar"
+                                                @click="deleteCia(company.id)">Confirmar</button>
+                                            <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
+                                        </div>
+                                    </div>
                                 </tr>
                             </tbody>
                         </table>
@@ -44,16 +54,9 @@
             </div>
         </div>
 
-        <div v-if="mostrarModal" class="modal">
-            <div class="modal-content">
-                <span class="close" @click="cerrarModal">&times;</span>
-                <p>¿Estás seguro que deseas eliminar esta compañía?</p>
-                <button class="btn btn-confirmar" @click="deleteCliente">Confirmar</button>
-                <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
-            </div>
-        </div>
 
-        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close" >
+
+        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -65,7 +68,7 @@
             </template>
         </ShowCiaModal>
 
-        <EditCiaModal v-if="showModalEditCia" :show="showModalEditCia" :companies="ciaIdSeleccionado" @close="close" >
+        <EditCiaModal v-if="showModalEditCia" :show="showModalEditCia" :companies="ciaIdSeleccionado" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -124,10 +127,9 @@ export default {
             this.ShowCiaModal = false;
             this.showModalEditCia = false;
             this.CreateCiaModal = false;
-            
+
         },
-        confirmarEliminar(id) {
-            this.clienteIdSeleccionado = id;
+        confirmarEliminar() {
             this.mostrarModal = true;
         },
         cerrarModal() {
@@ -158,8 +160,8 @@ export default {
                     console.log("Error Editar Cliente", error);
                 });
         },
-        deleteCliente() {
-            axios.delete("/crud/delete-cliente/" + this.clienteIdSeleccionado)
+        deleteCia(id) {
+            axios.delete("/crud/delete-cia/" + id)
                 .then(response => {
                     console.log("Eliminado", response.data);
                     this.mostrarModal = false;

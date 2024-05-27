@@ -59,6 +59,8 @@ Route::middleware([
     Route::get('/show-cia/{id}',[UsoInternoController::class, 'showCia']);
     Route::get('/edit-cia/{id}',[UsoInternoController::class, 'editCia']);
     Route::post('/crud/edit-cia-back',[UsoInternoController::class, 'editCia']);
+    ROute::delete('/crud/delete-cia/{id}', [UsoInternoController::class, 'deleteCia']);
+
 
     
 
