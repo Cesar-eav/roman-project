@@ -69,6 +69,9 @@ Route::middleware([
     Route::post('/guardar-empresa',[ClienteExternoController::class, 'guardarEmpresa'])->name('guardar-empresa');
     Route::get('/show-empresas',[ClienteExternoController::class, 'showEmpresas'])->name('show-empresas');
     Route::get('/crud/show-empresa/{id}',[ClienteExternoController::class, 'showEmpresa']);
+    Route::get('/crud/edit-show-cia/{id}',[ClienteExternoController::class, 'editShowEmpresa']);
+
+
     
     Route::post('/crear-usuario-externo',[ClienteExternoController::class, 'guardarClienteExterno'])->name('crear-usuario-externo');
     Route::get('/show-cliente-externo',[ClienteExternoController::class, 'showClienteExterno'])->name('show-cliente-externo');

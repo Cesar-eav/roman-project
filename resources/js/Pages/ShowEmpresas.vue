@@ -36,7 +36,7 @@
                                     <td>{{ empresa.nombre_fantasia }}</td>
                                     <td>{{ empresa.rut_empresa_persona }}</td>
                                     <td>                                        <button class="btn btn-ver" @click="verEmpresa(empresa.id)">Ver</button>
-                                        <button class="btn btn-editar" @click="editarCia(empresa.id)">Editar</button>
+                                        <button class="btn btn-editar" @click="editar(empresa.id)">Editar</button>
                                         <button class="btn btn-eliminar"
                                             @click="confirmarEliminar(empresa.id)">Eliminar</button></td>
                                 </tr>
@@ -59,6 +59,15 @@
             </template>
         </ShowEmpresaModal>
 
+        <EditEmpresaModal v-if="editEmpresaModal" :show="EditEmpresaModal" :empresa="empresaIdSeleccionado" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </EditEmpresaModal>
+
+
+        
+
     </AppLayout>
 </template>
 
@@ -68,6 +77,7 @@ import DialogModal from '@/Components/DialogModal.vue'
 import Button1 from '@/Components/Button.vue'
 import CreateEmpresaModal from '@/Pages/CreateEmpresaModal.vue'
 import ShowEmpresaModal from '@/Pages/ClientesExternos/ShowEmpresaModal.vue'
+import EditEmpresaModal from '@/Pages/ClientesExternos/EditEmpresaModal.vue'
 import $ from 'jquery'
 import 'datatables.net'
 
@@ -77,7 +87,8 @@ export default {
         DialogModal,
         Button1,
         CreateEmpresaModal,
-        ShowEmpresaModal
+        ShowEmpresaModal,
+        EditEmpresaModal
     },
     props: {
         empresas: {
@@ -91,7 +102,8 @@ export default {
             mostrarModal: false,
             searchQuery: '',
             ShowEmpresaModal: false,
-            empresaIdSeleccionado: {}
+            empresaIdSeleccionado: {},
+            editEmpresaModal: false
         };
     },
     methods: {
@@ -101,6 +113,7 @@ export default {
         close() {
             this.showModal = false;
             this.ShowEmpresaModal = false;
+            this.editEmpresaModal = false;
 
         },
         confirmarEliminar() {
@@ -125,6 +138,16 @@ export default {
                     console.log("Error Ver Cliente", error);
                 });
         },
+        editar(id){
+            axios.get('/crud/edit-show-cia/'+id)
+            .then(res => {
+                console.log("Respuesta", res.data);
+                this.editEmpresaModal = true;
+            })
+            .catch(error =>{
+                console.log("Error", error)
+            });
+        }
     },
     mounted() {
         $('#clientesTable').DataTable({

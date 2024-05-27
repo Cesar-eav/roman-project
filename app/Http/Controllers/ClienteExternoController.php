@@ -25,9 +25,13 @@ class ClienteExternoController extends Controller
     {
         $empresa = Empresa::where('id',$id)->first();
         return $empresa;
-
     }
 
+    public function editShowEmpresa ($id){
+        
+        $empresa = Empresa::where('id', $id)->first();
+        return $empresa;
+     }
 
     public function guardarEmpresa(Request $request)
     {
@@ -80,6 +84,14 @@ class ClienteExternoController extends Controller
         // Redireccionar o devolver una respuesta
         return redirect()->route('crear-empresa')->with('success', 'Empresa creada exitosamente.');
     }
+
+
+
+
+
+
+
+
 
 
     public function showClienteExterno()
