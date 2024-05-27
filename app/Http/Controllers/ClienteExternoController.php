@@ -21,6 +21,13 @@ class ClienteExternoController extends Controller
         ]);
     }
 
+    public function showEmpresa($id)
+    {
+        $empresa = Empresa::where('id',$id)->first();
+        return $empresa;
+
+    }
+
 
     public function guardarEmpresa(Request $request)
     {

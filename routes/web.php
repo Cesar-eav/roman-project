@@ -56,14 +56,11 @@ Route::middleware([
     Route::post('/crud/edit-cliente-back',[UsoInternoController::class, 'editCliente']);
     ROute::delete('/crud/delete-cliente/{id}', [UsoInternoController::class, 'deleteCliente']);
 
+    //CIAS SEGUROS
     Route::get('/show-cia/{id}',[UsoInternoController::class, 'showCia']);
     Route::get('/edit-cia/{id}',[UsoInternoController::class, 'editCia']);
     Route::post('/crud/edit-cia-back',[UsoInternoController::class, 'editCia']);
     ROute::delete('/crud/delete-cia/{id}', [UsoInternoController::class, 'deleteCia']);
-
-
-    
-
 
 
 
@@ -71,6 +68,7 @@ Route::middleware([
     Route::get('/crear-empresa', function () {return Inertia::render('CrearEmpresa'); })->name('crear-empresa');
     Route::post('/guardar-empresa',[ClienteExternoController::class, 'guardarEmpresa'])->name('guardar-empresa');
     Route::get('/show-empresas',[ClienteExternoController::class, 'showEmpresas'])->name('show-empresas');
+    Route::get('/crud/show-empresa/{id}',[ClienteExternoController::class, 'showEmpresa']);
     
     Route::post('/crear-usuario-externo',[ClienteExternoController::class, 'guardarClienteExterno'])->name('crear-usuario-externo');
     Route::get('/show-cliente-externo',[ClienteExternoController::class, 'showClienteExterno'])->name('show-cliente-externo');
