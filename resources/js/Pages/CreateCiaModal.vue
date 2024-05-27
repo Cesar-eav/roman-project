@@ -215,7 +215,7 @@ export default {
             showModalEjecutiva1: false,
             showModalEjecutiva2: false,
             form: this.$inertia.form({
-                razon_social: 'SuperMan',
+                razon_social: '',
                 nombre_fantasia: '',
                 rut_empresa: '',
                 direccion: '',

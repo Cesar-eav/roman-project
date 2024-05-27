@@ -71,6 +71,7 @@ class UsoInternoController extends Controller
      
      public function editCia (Request $request){
 
+       
         $cia = CiaAseguradora::find($request->id);
         $cia->razon_social = $request->razon_social;
         $cia->nombre_fantasia = $request->nombre_fantasia;

@@ -3,7 +3,7 @@
         <div class="flex justify-center text-4xl pb-4">Listado Compañias de Seguros</div>
 
         <div class="flex py-2 justify-start text-gray-900">
-            <button1 @click="openModal">Crear Cía de Seguros</button1>
+            <button1 @click="openCreateModal">Crear Cía de Seguros</button1>
             <button
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
                 Generar Excel
@@ -27,7 +27,7 @@
                             <tbody>
                                 <tr v-for="company in companies" :key="company.id">
                                     <td>{{ company.id }}</td>
-                                    <td>{{ company.nombre_fantasia }}</td>
+                                    <td>{{ company.razon_social }}</td>
                                     <td>{{ company.rut_empresa }}</td>
                                     <td>{{ company.direccion }}</td>
                                     <td>{{ company.comuna }}</td>
@@ -52,6 +52,13 @@
                 <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
             </div>
         </div>
+
+        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close" >
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreateCiaModal>
+
         <ShowCiaModal v-if="ShowCiaModal" :show="ShowCiaModal" @close="close" :companies="ciaIdSeleccionado">
             <template #footer>
                 <button @click="close">Cerrar</button>
@@ -105,16 +112,18 @@ export default {
             ciaIdSeleccionado: {},
             ShowCiaModal: false,
             searchQuery: '',
-            showModalEditCia: false
+            showModalEditCia: false,
+            CreateCiaModal: false
         };
     },
     methods: {
-        openModal() {
-            this.showModal = true;
+        openCreateModal() {
+            this.CreateCiaModal = true;
         },
         close() {
             this.ShowCiaModal = false;
             this.showModalEditCia = false;
+            this.CreateCiaModal = false;
             
         },
         confirmarEliminar(id) {

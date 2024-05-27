@@ -222,19 +222,6 @@
 
                 </div>
 
-                <!-- <div class="flex">
-
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Contraseña:</label>
-                    <input type="password" v-model="form.password"
-                        class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Confirmar Contraseña:</label>
-                    <input type="password" v-model="form.password_confirmation"
-                        class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div> -->
-
-
                 <div class="py-4 w-60 justify-items-end">
                     <Button type="submit" class="w-full justify-center gap-2">
                         <span>Registrar Compañia</span>
