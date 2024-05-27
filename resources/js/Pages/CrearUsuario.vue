@@ -10,11 +10,11 @@
         </template>
 
 
-        <ValidationErrors class="mb-4" />
+        <ValidationErrors class="mb-4 " />
         <form @submit.prevent="submit">
-            <div class="p-4 text-gray-900 w-3/4 justify-center">
+            <div class="p-4 text-white w-3/4 justify-center bg-slate-900">
                 <div class="flex">
-                        <label for="cargo" class="block w-1/4 text-sm font-medium text-white">Nivel ejecutivo:</label>
+                        <label for="cargo" class="block w-1/4 text-sm font-medium ">Nivel ejecutivo:</label>
                         <select v-model="form.selectedCargo" id="cargo" name="cargo"
                             class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <option value="">Seleccionar Nivel Ejecutivo</option>
@@ -25,77 +25,77 @@
                 </div>  
 
                 <div class="flex">
-                    <label class="block text-sm w-1/4 font-medium text-white mt-4">Nombre:</label>
+                    <label class="block text-sm w-1/4 font-medium  mt-4">Nombre:</label>
                     <input type="text" v-model="form.name" required
                         class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <div class="flex">
-                    <label class="block text-sm w-1/4 font-medium text-white mt-4">Apellidos:</label>
+                    <label class="block text-sm w-1/4 font-medium  mt-4">Apellidos:</label>
                     <input type="text" v-model="form.last_name"
                         class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block text-sm w-1/4 font-medium text-white mt-4">Rut:</label>
+                    <label class="block text-sm w-1/4 font-medium  mt-4">Rut:</label>
                     <input type="text" v-model="form.rut"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block text-sm w-1/4 font-medium text-white mt-4">Fecha Nacimiento:</label>
+                    <label class="block text-sm w-1/4 font-medium  mt-4">Fecha Nacimiento:</label>
                     <input type="date" v-model="form.fecha_nacimiento"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Telefono:</label>
+                    <label class="block w-1/4 text-sm font-medium  mt-4">Telefono:</label>
                     <input type="text" v-model="form.telefono"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block text-sm w-1/4 font-medium text-white mt-4">Correo:</label>
+                    <label class="block text-sm w-1/4 font-medium  mt-4">Correo:</label>
                     <input type="email" v-model="form.email" required
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Dirección:</label>
+                    <label class="block w-1/4 text-sm font-medium  mt-4">Dirección:</label>
                     <input type="text" v-model="form.address"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Comuna:</label>
+                    <label class="block w-1/4 text-sm font-medium  mt-4">Comuna:</label>
                     <input type="text" v-model="form.ciudad"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Región:</label>
+                    <label class="block w-1/4 text-sm font-medium  mt-4">Región:</label>
                     <input type="text" v-model="form.region" 
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Isapre:</label>
+                    <label class="block w-1/4 text-sm font-medium  mt-4">Isapre:</label>
                     <input type="text" v-model="form.isapre"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">AFP:</label>
+                    <label class="block w-1/4 text-sm font-medium  mt-4">AFP:</label>
                     <input type="text" v-model="form.afp"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                   <div class="flex">
 
-                  <label class="block w-1/4 text-sm font-medium text-white mt-4">Contraseña:</label>
+                  <label class="block w-1/4 text-sm font-medium  mt-4">Contraseña:</label>
                     <input type="password" v-model="form.password"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium text-white mt-4">Confirmar Contraseña:</label>
+                    <label class="block w-1/4 text-sm font-medium  mt-4">Confirmar Contraseña:</label>
                     <input type="password" v-model="form.password_confirmation"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
