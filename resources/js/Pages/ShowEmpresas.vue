@@ -35,11 +35,23 @@
                                     <td>{{ empresa.razon_social }}</td>
                                     <td>{{ empresa.nombre_fantasia }}</td>
                                     <td>{{ empresa.rut_empresa_persona }}</td>
-                                    <td>                                        <button class="btn btn-ver" @click="verEmpresa(empresa.id)">Ver</button>
+                                    <th>
+                                        <button class="btn btn-ver" @click="verEmpresa(empresa.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editar(empresa.id)">Editar</button>
                                         <button class="btn btn-eliminar"
-                                            @click="confirmarEliminar(empresa.id)">Eliminar</button></td>
+                                            @click="confirmarEliminar(empresa.id)">Eliminar</button>
+                                    </th>
+                                    <div v-if="mostrarModal" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close" @click="cerrarModal">&times;</span>
+                                            <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                                            <button class="btn btn-confirmar"
+                                                @click="deleteEmpresa(empresa.id)">Confirmar</button>
+                                            <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
+                                        </div>
+                                    </div>
                                 </tr>
+
                             </tbody>
                         </table>
 
@@ -47,26 +59,28 @@
                 </div>
             </div>
         </div>
-        <CreateEmpresaModal v-if="showModal" :show="showModal" @close="close">
+        <CreateEmpresaModal v-if="CreateEmpresaModal" :show="CreateEmpresaModal" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </CreateEmpresaModal>
 
-        <ShowEmpresaModal v-if="ShowEmpresaModal" :show="ShowEmpresaModal" @close="close" :empresas="empresaIdSeleccionado">
+        <ShowEmpresaModal v-if="ShowEmpresaModal" :show="ShowEmpresaModal" @close="close"
+            :empresas="empresaIdSeleccionado">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </ShowEmpresaModal>
 
-        <EditEmpresaModal v-if="editEmpresaModal" :show="EditEmpresaModal" :empresa="empresaIdSeleccionado" @close="close">
+        <EditEmpresaModal v-if="editEmpresaModal" :show="EditEmpresaModal" :empresa="empresaIdSeleccionado"
+            @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </EditEmpresaModal>
 
 
-        
+
 
     </AppLayout>
 </template>
@@ -103,17 +117,19 @@ export default {
             searchQuery: '',
             ShowEmpresaModal: false,
             empresaIdSeleccionado: {},
-            editEmpresaModal: false
+            editEmpresaModal: false,
+            CreateEmpresaModal: false
         };
     },
     methods: {
         openModal() {
-            this.showModal = true;
+            this.CreateEmpresaModal = true;
         },
         close() {
             this.showModal = false;
             this.ShowEmpresaModal = false;
             this.editEmpresaModal = false;
+            this.CreateEmpresaModal = false;
 
         },
         confirmarEliminar() {
@@ -138,16 +154,30 @@ export default {
                     console.log("Error Ver Cliente", error);
                 });
         },
-        editar(id){
-            axios.get('/crud/edit-show-cia/'+id)
-            .then(res => {
-                console.log("Respuesta", res.data);
-                this.editEmpresaModal = true;
-            })
-            .catch(error =>{
-                console.log("Error", error)
-            });
-        }
+        editar(id) {
+            axios.get('/crud/show-empresa/' + id)
+                .then(res => {
+                    console.log("Respuesta", res.data);
+                    this.empresaIdSeleccionado = res.data;
+                    this.editEmpresaModal = true;
+                })
+                .catch(error => {
+                    console.log("Error", error)
+                });
+        },
+        deleteEmpresa(id) {
+            axios.delete("/crud/delete-empresa/" + id)
+                .then(response => {
+                    console.log("Eliminado", response.data);
+                    this.mostrarModal = false;
+                    // Aquí se puede actualizar la lista de compañías
+                })
+                .catch(error => {
+                    console.log("Error Eliminar Cliente", error);
+                });
+        },
+
+
     },
     mounted() {
         $('#clientesTable').DataTable({

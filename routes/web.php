@@ -70,6 +70,10 @@ Route::middleware([
     Route::get('/show-empresas',[ClienteExternoController::class, 'showEmpresas'])->name('show-empresas');
     Route::get('/crud/show-empresa/{id}',[ClienteExternoController::class, 'showEmpresa']);
     Route::get('/crud/edit-show-cia/{id}',[ClienteExternoController::class, 'editShowEmpresa']);
+    Route::post('/crud/edit-empresa-back',[ClienteExternoController::class, 'editEmpresa']);
+    ROute::delete('/crud/delete-empresa/{id}', [ClienteExternoController::class, 'deleteEmpresa']);
+
+
 
 
     

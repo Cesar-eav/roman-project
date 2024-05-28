@@ -22,7 +22,7 @@
                 </div>
                 <div>
                     <label for="rut_empresa">RUT Empresa:</label>
-                    <input type="text" v-model="formCliente.rut_empresa" :placeholder="empresa.rut_empresa"
+                    <input type="text" v-model="formCliente.rut_empresa_persona" :placeholder="empresa.rut_empresa_persona"
                         class="custom-input" />
                 </div>
                 <div>
@@ -131,7 +131,7 @@
                 <div>
                     <label for="fecha_nacimiento_ejecutiva_1">Fecha de Nacimiento de Ejecutiva 1:</label>
                     <input type="date" v-model="formCliente.fecha_nacimiento_ejecutiva_1"
-                        :placeholder="formCliente.fecha_nacimiento_ejecutiva_1" class="custom-input" />
+                        :placeholder="empresa.fecha_nacimiento_ejecutiva_1" class="custom-input" />
                 </div>
                 <div>
                     <label for="ejecutiva_2">Ejecutiva 2:</label>
@@ -223,7 +223,7 @@ export default {
                 id: this.empresa.id,
                 razon_social: this.empresa.razon_social,
                 nombre_fantasia: this.empresa.nombre_fantasia,
-                rut_empresa: this.empresa.rut_empresa,
+                rut_empresa_persona: this.empresa.rut_empresa_persona,
                 direccion: this.empresa.direccion,
                 comuna: this.empresa.comuna,
                 region: this.empresa.region,
@@ -264,11 +264,11 @@ export default {
         },
         editUser() {
             axios
-                .post("/crud/edit-cia-back", {
+                .post("/crud/edit-empresa-back", {
                     id: this.formCliente.id,
                     razon_social: this.formCliente.razon_social,
                     nombre_fantasia: this.formCliente.nombre_fantasia,
-                    rut_empresa: this.formCliente.rut_empresa,
+                    rut_empresa_persona: this.formCliente.rut_empresa_persona,
                     direccion: this.formCliente.direccion,
                     comuna: this.formCliente.comuna,
                     region: this.formCliente.region,
