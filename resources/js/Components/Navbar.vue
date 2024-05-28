@@ -10,48 +10,10 @@
         ]"
     >
         <div class="flex items-center gap-2">
-            <Button
-                iconOnly
-                variant="secondary"
-                type="button"
-                @click="toggleDarkMode"
-                v-slot="{ iconSizeClasses }"
-                class="md:hidden"
-                srText="Toggle dark mode"
-            >
-                <MoonIcon
-                    v-show="!isDark"
-                    aria-hidden="true"
-                    :class="iconSizeClasses"
-                />
-                <SunIcon
-                    v-show="isDark"
-                    aria-hidden="true"
-                    :class="iconSizeClasses"
-                />
-            </Button>
+
         </div>
         <div class="flex items-center gap-2">
-            <Button
-                iconOnly
-                variant="secondary"
-                type="button"
-                @click="toggleDarkMode"
-                v-slot="{ iconSizeClasses }"
-                class="hidden md:inline-flex"
-                srText="Toggle dark mode"
-            >
-                <MoonIcon
-                    v-show="!isDark"
-                    aria-hidden="true"
-                    :class="iconSizeClasses"
-                />
-                <SunIcon
-                    v-show="isDark"
-                    aria-hidden="true"
-                    :class="iconSizeClasses"
-                />
-            </Button>
+           
 
             <Button
                 iconOnly
@@ -237,9 +199,7 @@ import {
 import { ArrowsInnerIcon } from '@/Components/Icons/Outline'
 import {
     handleScroll,
-    isDark,
     scrolling,
-    toggleDarkMode,
     sidebarState,
 } from '@/Composables'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
