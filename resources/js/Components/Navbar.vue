@@ -1,8 +1,13 @@
 <template>
     <nav 
         aria-label="secondary"
+
+        style="
+
+            background-color: #343A40;
+        "
         :class="[
-            'sticky top-0 z-10 px-4 py-2 sm:px-6 sm:py-4 bg-white flex items-center justify-between transition-transform duration-500 dark:bg-dark-eval-1',
+            'sticky top-0 z-10 px-4 py-2 sm:px-6 sm:py-4 flex items-center justify-between transition-transform duration-500 dark:bg-dark-eval-1',
             {
                 '-translate-y-full': scrolling.down,
                 'translate-y-0': scrolling.up,
@@ -13,8 +18,7 @@
 
         </div>
         <div class="flex items-center gap-2">
-           
-
+        
             <Button
                 iconOnly
                 variant="secondary"

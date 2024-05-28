@@ -18,9 +18,10 @@
         style="
             transition-property: width, transform;
             transition-duration: 150ms;
+            background-color: #343A40;
         "
         :class="[
-            'fixed inset-y-0 z-20 py-4 flex flex-col space-y-6 bg-white shadow-lg dark:bg-dark-eval-1',
+            'fixed inset-y-0 z-20 py-4 flex flex-col space-y-6 shadow-lg dark:bg-dark-eval-1',
             {
                 'translate-x-0 w-64':
                     sidebarState.isOpen || sidebarState.isHovered,

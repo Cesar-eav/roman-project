@@ -9,7 +9,11 @@
 
         <!-- CONFIGURACION INTERNA -->
         <SidebarCollapsible title="Configuración Interna" :href="route('crearusuario')" class="text-xs"
-            :active="route().current('crearusuario') || route().current('dashboard') || route().current('cliente') || route().current('add-compania')">
+            :active="route().current('crearusuario') || 
+            route().current('dashboard') || 
+            route().current('cliente') || 
+            route().current('show-cias') || 
+            route().current('add-compania')">
             <SidebarCollapsibleItem title="Crear Usuario Interno" :href="route('crearusuario')"
                 :active="route().current('crearusuario')" />
             <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
@@ -24,7 +28,9 @@
 
         <!-- CLIENTES EXTERNOS -->
         <SidebarCollapsible title="Clientes Externos" class="text-xs"
-            :active="route().current('crear-empresa') || route().current('show-polizas') || route().current('show-empresas')">
+            :active="route().current('crear-empresa') || 
+            route().current('show-empresas') || 
+            route().current('show-cliente-externo') ">
             <SidebarCollapsibleItem title="Crear Empresa Nueva" :href="route('crear-empresa')"
                 :active="route().current('crear-empresa')" />
             <SidebarCollapsibleItem title="Aprobación de Solicitud" />

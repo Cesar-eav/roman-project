@@ -4,7 +4,7 @@
             <span class="sr-only">K-UI</span>
             <!-- <ApplicationLogo aria-hidden="true" class="w-10 h-auto" /> -->
 
-            <img src="imagenes/logo.png" class="w-10"  @click="sidebarState.isOpen = !sidebarState.isOpen" ></img>
+            <img src="imagenes/logo_roman_seguros.png" class="w-28 ml-8"  @click="sidebarState.isOpen = !sidebarState.isOpen" ></img>
 
         </Link>
 
