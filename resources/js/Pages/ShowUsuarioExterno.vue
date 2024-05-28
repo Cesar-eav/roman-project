@@ -7,7 +7,7 @@
             <!-- Campo de búsqueda personalizado -->
             <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
                 class="border rounded-lg" />
-            <button1 @click="openModal">Crear Usuario Externo</button1>
+            <button1 @click="openCreateUsuarioModal">Crear Usuario Externo</button1>
             <button
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold p-2  rounded-lg transition-colors duration-300">
                 Generar Excel
@@ -33,11 +33,20 @@
                                     <td>{{ cliente.nivel_ejecutivo }}</td>
                                     <td>{{ cliente.nombres }}</td>
                                     <th class="flex justify-start">
-                                        <button class="btn btn-ver" @click="verCliente(cliente.id)">Ver</button>
-                                        <button class="btn btn-editar"
-                                            @click="editarCliente(cliente.id)">Editar</button>
+                                        <button class="btn btn-ver" @click="verUsuario(cliente.id)">Ver</button>
+                                        <button class="btn btn-editar" @click="editarUsuario(cliente.id)">Editar</button>
                                         <button class="btn btn-eliminar" @click="mostrarModal = true">Eliminar</button>
                                     </th>
+
+                                    <div v-if="mostrarModal" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close" @click="cerrarModal">&times;</span>
+                                            <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                                            <button class="btn btn-confirmar"
+                                                @click="deleteCia(company.id)">Confirmar</button>
+                                            <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
+                                        </div>
+                                    </div>
                                 </tr>
                             </tbody>
                         </table>
@@ -56,11 +65,23 @@
             </div>
         </div>
 
-        <CreateUsuarioExternoModal v-if="showModal" :show="showModal" @close="close">
+        <CreateUsuarioExternoModal v-if="showModalUsuarioExterno" :show="showModalUsuarioExterno" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </CreateUsuarioExternoModal>
+
+        <ShowUsuarioExternoModal v-if="showUsuarioExternoModal" :show="showUsuarioExternoModal" @close="close" :usuario_externo="usuarioIdSeleccionado">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </ShowUsuarioExternoModal>
+
+        <EditUsuarioExternoModal v-if="showUsuarioExternoEditModal" :show="showUsuarioExternoEditModal" :usuario_externo="usuarioIdSeleccionado" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </EditUsuarioExternoModal>
 
     </AppLayout>
 </template>
@@ -68,7 +89,10 @@
 <script>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Button1 from '@/Components/Button.vue'
-import CreateUsuarioExternoModal from '@/Pages/CreateUsuarioExternoModal.vue'
+import CreateUsuarioExternoModal from '@/Pages/ClientesExternos/CreateUsuarioExternoModal.vue'
+import ShowUsuarioExternoModal from '@/Pages/ClientesExternos/ShowUsuarioExternoModal.vue'
+import EditUsuarioExternoModal from '@/Pages/ClientesExternos/EditUsuarioExternoModal.vue'
+
 import $ from 'jquery'
 import 'datatables.net'
 
@@ -76,7 +100,9 @@ export default {
     components: {
         AppLayout,
         Button1,
-        CreateUsuarioExternoModal
+        CreateUsuarioExternoModal,
+        ShowUsuarioExternoModal,
+        EditUsuarioExternoModal
     },
     props: {
         usuarios_externos: {
@@ -86,23 +112,66 @@ export default {
     },
     data() {
         return {
-            showModal: false,
+            showModalUsuarioExterno: false,
+            showUsuarioExternoModal: false,
+            showUsuarioExternoEditModal: false,
             mostrarModal: false,
-            searchQuery: ''
+            searchQuery: '',
+            usuarioIdSeleccionado: {},
+            showEmpresaModal: false
+
         };
     },
     methods: {
-        openModal() {
-            this.showModal = true;
+        openCreateUsuarioModal() {
+            this.showModalUsuarioExterno = true;
         },
         close() {
-            this.showModal = false;
+            this.showUsuarioExternoModal = false;
+            this.showModalUsuarioExterno = false;
+            this.showUsuarioExternoEditModal = false;
         },
         confirmarEliminar() {
             this.mostrarModal = true;
         },
         cerrarModal() {
             this.mostrarModal = false;
+        },
+        verUsuario(id) {
+            axios.get('/show-cliente-externo/' + id)
+                .then(res => {
+                    console.log("Res Cliente", res.data);
+                    this.usuarioIdSeleccionado = res.data;
+                    // Aquí se puede abrir un modal para mostrar la información del cliente
+                    this.showUsuarioExternoModal = true;
+
+                })
+                .catch(error => {
+                    console.log("Error Ver Cliente", error);
+                });
+        },
+        editarUsuario(id) {
+            axios.get('/show-cliente-externo/' + id)
+                .then(res => {
+                    console.log("SE LLENA : -->", res.data);
+                    this.usuarioIdSeleccionado = res.data;
+                    this.showUsuarioExternoEditModal = true;
+                    // Aquí se puede abrir un modal para editar la información del cliente
+                })
+                .catch(error => {
+                    console.log("Error Editar Cliente", error);
+                });
+        },
+        deleteCia(id) {
+            axios.delete("/crud/delete-cia/" + id)
+                .then(response => {
+                    console.log("Eliminado", response.data);
+                    this.mostrarModal = false;
+                    // Aquí se puede actualizar la lista de compañías
+                })
+                .catch(error => {
+                    console.log("Error Eliminar Cliente", error);
+                });
         },
         searchTable() {
             const table = $('#clientesTable').DataTable();

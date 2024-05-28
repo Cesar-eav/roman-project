@@ -63,7 +63,33 @@ class ClienteExternoController extends Controller
         return $response;
     }
 
-    public function showClienteExterno()
+
+    public function editUsuarioExterno(Request $request)
+    {
+
+        $usuarioExterno = UsuarioExterno::find($request->id);
+        $usuarioExterno->id = $request->id;
+        $usuarioExterno->nivel_ejecutivo = $request->nivel_ejecutivo;
+        $usuarioExterno->nombres = $request->nombres;
+        $usuarioExterno->apellido_paterno = $request->apellido_paterno;
+        $usuarioExterno->apellido_materno = $request->apellido_materno;
+        $usuarioExterno->rut = $request->rut;
+        $usuarioExterno->fecha_nacimiento = $request->fecha_nacimiento;
+        $usuarioExterno->fono = $request->fono;
+        $usuarioExterno->mail = $request->mail;
+        $usuarioExterno->direccion = $request->direccion;
+        $usuarioExterno->comuna = $request->comuna;
+        $usuarioExterno->region = $request->region;
+        $usuarioExterno->isapre = $request->isapre;
+        $usuarioExterno->afp = $request->afp;
+
+        // Guardar la empresa en la base de datos
+        $response = $usuarioExterno->save();
+        // Redireccionar o devolver una respuesta
+        return $response;
+    }
+
+    public function showClientesExternos()
     {
         $usuarios_externos = UsuarioExterno::all();
         // Pasar los datos a la vista Dashboard usando Inertia
@@ -71,6 +97,12 @@ class ClienteExternoController extends Controller
             'usuarios_externos' => $usuarios_externos,
 
         ]);
+    }
+
+    public function showClienteExterno($id)
+    {
+        $cliente = UsuarioExterno::where('id',$id)->first();
+        return $cliente;
     }
 
     public function deleteEmpresa ($id){
