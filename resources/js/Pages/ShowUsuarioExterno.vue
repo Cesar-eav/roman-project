@@ -43,7 +43,7 @@
                                             <span class="close" @click="cerrarModal">&times;</span>
                                             <p>¿Estás seguro que deseas eliminar esta compañía?</p>
                                             <button class="btn btn-confirmar"
-                                                @click="deleteCia(company.id)">Confirmar</button>
+                                                @click="deleteUsuario(cliente.id)">Confirmar</button>
                                             <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
                                         </div>
                                     </div>
@@ -56,14 +56,6 @@
             </div>
         </div>
 
-        <div v-if="mostrarModal" class="modal">
-            <div class="modal-content">
-                <span class="close" @click="mostrarModal = false">&times;</span>
-                <p>¿Estás seguro que deseas eliminar este cliente?</p>
-                <button class="btn btn-confirmar" @click="mostrarModal = false">Confirmar</button>
-                <button class="btn btn-cancelar" @click="mostrarModal = false">Cancelar</button>
-            </div>
-        </div>
 
         <CreateUsuarioExternoModal v-if="showModalUsuarioExterno" :show="showModalUsuarioExterno" @close="close">
             <template #footer>
@@ -162,8 +154,9 @@ export default {
                     console.log("Error Editar Cliente", error);
                 });
         },
-        deleteCia(id) {
-            axios.delete("/crud/delete-cia/" + id)
+        deleteUsuario(id) {
+
+            axios.delete("/crud/delete-usuario-externo/" + id)
                 .then(response => {
                     console.log("Eliminado", response.data);
                     this.mostrarModal = false;

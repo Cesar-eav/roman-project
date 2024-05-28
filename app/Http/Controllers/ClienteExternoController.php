@@ -110,6 +110,12 @@ class ClienteExternoController extends Controller
         $response = $empresa->delete();
         return $response;
      }
+
+     public function deleteUsuarioExterno ($id){
+        $usuario_externo = UsuarioExterno::find($id);
+        $response = $usuario_externo->delete();
+        return $response;
+     }
     
     public function guardarClienteExterno(Request $request)
     {

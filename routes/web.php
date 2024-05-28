@@ -80,6 +80,7 @@ Route::middleware([
     Route::get('/show-cliente-externo',[ClienteExternoController::class, 'showClientesExternos'])->name('show-cliente-externo');
     Route::get('/show-cliente-externo/{id}',[ClienteExternoController::class, 'showClienteExterno']);
     Route::post('/crud/edit-usuario-externo',[ClienteExternoController::class, 'editUsuarioExterno']);
+    Route::delete('/crud/delete-usuario-externo/{id}',[ClienteExternoController::class, 'deleteUsuarioExterno']);
 
 
 
