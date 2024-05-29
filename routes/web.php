@@ -43,7 +43,7 @@ Route::middleware([
     })->name('crearusuario');
 
     Route::get('/modal', function () {
-        return Inertia::render('ClientesInternos/EditModal');
+        return Inertia::render('ClientesExternos/CreatePolizaModal');
     });
 
     Route::get('/add-compania', function () {return Inertia::render('CrearCompania'); })->name('add-compania');
@@ -81,11 +81,6 @@ Route::middleware([
     Route::get('/show-cliente-externo/{id}',[ClienteExternoController::class, 'showClienteExterno']);
     Route::post('/crud/edit-usuario-externo',[ClienteExternoController::class, 'editUsuarioExterno']);
     Route::delete('/crud/delete-usuario-externo/{id}',[ClienteExternoController::class, 'deleteUsuarioExterno']);
-
-
-
-
-
 
 #POLIZA
     Route::get('/view-add-poliza', [UsoInternoController::class, 'ViewAddPoliza'])->name('view-add-poliza');

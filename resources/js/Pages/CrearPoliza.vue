@@ -9,7 +9,7 @@
         </template>
         <div class="flex justify-start py-2 px-8  text-gray-900">
             <!-- Campo de búsqueda personalizado -->
-            <label for="numero_poliza" class="block w-1/4 text-sm font-medium text-white mt-4">Buscar cliente: </label>
+            <label for="numero_poliza" class="block w-1/4 text-sm font-medium  mt-4">Buscar cliente: </label>
             <input v-model="searchQuery" @input="searchClientes" type="text" placeholder="Rut, N° Poliza, Nombre..." 
                 class="border rounded-lg block w-2/4 " />
         </div>
@@ -37,7 +37,7 @@
 
             <div class="p-4 text-gray-900 w-3/4 justify-center">
                 <div class="flex">
-                    <label for="tipo_poliza" class="block w-1/4 text-sm font-medium text-white">Tipo Póliza:</label>
+                    <label for="tipo_poliza" class="block w-1/4 text-sm font-medium ">Tipo Póliza:</label>
                     <select v-model="form.tipo_poliza"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <option value="">Tipo de Poliza</option>
@@ -69,67 +69,67 @@
 
 
 
-                <div class="flex">
-                    <label for="numero_poliza" class="block w-1/4 text-sm font-medium text-white mt-4">N°
+                <div class="flex text-gray-900">
+                    <label for="numero_poliza" class="block w-1/4 text-sm font-medium  mt-4">N°
                         Póliza:</label>
                     <input type="text" v-model="form.numero_poliza" id="numero_poliza" name="numero_poliza"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label for="monto_asegurado" class="block w-1/4 text-sm font-medium text-white mt-4">Monto
+                    <label for="monto_asegurado" class="block w-1/4 text-sm font-medium  mt-4">Monto
                         Asegurado:</label>
                     <input type="text" v-model="form.monto_asegurado" id="monto_asegurado" name="monto_asegurado"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
-                    <label for="prima" class="block w-1/4 text-sm font-medium text-white mt-4">Prima:</label>
+                    <label for="prima" class="block w-1/4 text-sm font-medium  mt-4">Prima:</label>
                     <input type="text" v-model="form.prima" id="prima" name="prima"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Valor Neto -->
                 <div class="flex">
-                    <label for="valor_neto" class="block w-1/4 mt-4 text-sm font-medium text-white">Valor Neto:</label>
+                    <label for="valor_neto" class="block w-1/4 mt-4 text-sm font-medium ">Valor Neto:</label>
                     <input type="text" id="valor_neto" v-model="form.valor_neto"
                         class="mt-1 block w-3/4  border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Fecha de Inicio -->
                 <div class="flex">
-                    <label for="fecha_inicio" class="block w-1/4 text-sm font-medium text-white">Fecha de
+                    <label for="fecha_inicio" class="block w-1/4 text-sm font-medium ">Fecha de
                         Inicio:</label>
                     <input type="date" id="fecha_inicio" v-model="form.fecha_inicio"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Fecha de Vencimiento -->
                 <div class="flex">
-                    <label for="fecha_vencimiento" class="block w-1/4 text-sm font-medium text-white">Fecha de
+                    <label for="fecha_vencimiento" class="block w-1/4 text-sm font-medium ">Fecha de
                         Vencimiento:</label>
                     <input type="date" id="fecha_vencimiento" v-model="form.fecha_vencimiento"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Deducible -->
                 <div class="flex">
-                    <label for="deducible" class="block w-1/4 text-sm font-medium text-white">Deducible:</label>
+                    <label for="deducible" class="block w-1/4 text-sm font-medium ">Deducible:</label>
                     <input type="text" id="deducible" v-model="form.deducible"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Cantidad de Cuotas -->
                 <div class="flex">
-                    <label for="cantidad_cuotas" class="block w-1/4 text-sm font-medium text-white">Cantidad de
+                    <label for="cantidad_cuotas" class="block w-1/4 text-sm font-medium ">Cantidad de
                         Cuotas:</label>
                     <input type="number" id="cantidad_cuotas" v-model="form.cantidad_cuotas"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Día de Pago -->
                 <div class="flex">
-                    <label for="dia_pago" class="block w-1/4 text-sm font-medium text-white">Día de Pago:</label>
+                    <label for="dia_pago" class="block w-1/4 text-sm font-medium ">Día de Pago:</label>
                     <input type="number" id="dia_pago" v-model="form.dia_pago"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Método de Pago -->
                 <div class="flex">
-                    <label for="metodo_pago" class="block w-1/4 text-sm font-medium text-white">Método de Pago:</label>
+                    <label for="metodo_pago" class="block w-1/4 text-sm font-medium ">Método de Pago:</label>
                     <select v-model="form.metodo_pago"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <option value="">Seleccionar Método de Pago</option>
@@ -141,19 +141,19 @@
                 </div>
                 <!-- Aseguradora -->
                 <div class="flex">
-                    <label for="aseguradora" class="block w-1/4 text-sm font-medium text-white">Aseguradora:</label>
+                    <label for="aseguradora" class="block w-1/4 text-sm font-medium ">Aseguradora:</label>
                     <input type="text" id="aseguradora" v-model="form.aseguradora"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Vendedor -->
                 <div class="flex">
-                    <label for="vendedor" class="block w-1/4 text-sm font-medium text-white">Vendedor:</label>
+                    <label for="vendedor" class="block w-1/4 text-sm font-medium ">Vendedor:</label>
                     <input type="text" id="vendedor" v-model="form.vendedor"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <!-- Selección de Archivos -->
                 <div class="flex">
-                    <label for="archivos_seleccionados" class="block w-1/4 text-sm font-medium text-white">Selección de
+                    <label for="archivos_seleccionados" class="block w-1/4 text-sm font-medium ">Selección de
                         Archivos:</label>
                     <input type="file" id="archivos_seleccionados" ref="archivos_seleccionados"
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

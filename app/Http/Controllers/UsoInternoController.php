@@ -133,11 +133,13 @@ class UsoInternoController extends Controller
 
     public function showPolizas()
     {
-     
+        $clientes = User::all();
         $polizas = Poliza::all();
         // Pasar los datos a la vista Dashboard usando Inertia
         return Inertia::render('ShowPolizas', [
             'polizas' => $polizas,
+            'clientes' => $clientes,
+
         ]);
     }
 
@@ -179,7 +181,7 @@ class UsoInternoController extends Controller
      
         $clientes = User::all();
         // Pasar los datos a la vista Dashboard usando Inertia
-        return Inertia::render('CrearPoliza', [
+        return Inertia::render('ShowPolizas', [
             'clientes' => $clientes
 
         ]);
@@ -232,39 +234,40 @@ class UsoInternoController extends Controller
  
     public function polizaCrear(Request $request)
     {
-        $validatedData = $request->validate([
-            'tipo_poliza' => 'required',
-            'numero_poliza' => 'required',
-            'monto_asegurado' => 'required',
-            'prima' => 'required',
-            'valor_neto' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_vencimiento' => 'required',
-            'deducible' => 'required',
-            'cantidad_cuotas' => 'required',
-            'dia_pago' => 'required',
-            'metodo_pago' => 'required',
-            'aseguradora' => 'required',
-            'vendedor' => 'required',
-            'cliente_id' => 'required'
+        
+        // $validatedData = $request->validate([
+            // 'tipo_poliza' => 'required',
+            // 'numero_poliza' => 'required',
+            // 'monto_asegurado' => 'required',
+            // 'prima' => 'required',
+            // 'valor_neto' => 'required',
+            // 'fecha_inicio' => 'required',
+            // 'fecha_vencimiento' => 'required',
+            // 'deducible' => 'required',
+            // 'cantidad_cuotas' => 'required',
+            // 'dia_pago' => 'required',
+            // 'metodo_pago' => 'required',
+            // 'aseguradora' => 'required',
+            // 'vendedor' => 'required',
+            // 'cliente_id' => 'required'
             // No necesitas validar los archivos seleccionados ya que Laravel maneja la subida de archivos automáticamente
-        ]);
+        // ]);
 
         $poliza = new Poliza();
-        $poliza->tipo_poliza = $validatedData['tipo_poliza'];
-        $poliza->numero_poliza = $validatedData['numero_poliza'];
-        $poliza->monto_asegurado = $validatedData['monto_asegurado'];
-        $poliza->prima = $validatedData['prima'];
-        $poliza->valor_neto = $validatedData['valor_neto'];
-        $poliza->fecha_inicio = $validatedData['fecha_inicio'];
-        $poliza->fecha_vencimiento = $validatedData['fecha_vencimiento'];
-        $poliza->deducible = $validatedData['deducible'];
-        $poliza->cantidad_cuotas = $validatedData['cantidad_cuotas'];
-        $poliza->dia_pago = $validatedData['dia_pago'];
-        $poliza->metodo_pago = $validatedData['metodo_pago'];
-        $poliza->aseguradora = $validatedData['aseguradora'];
-        $poliza->vendedor = $validatedData['vendedor'];
-        $poliza->cliente_id = $validatedData['cliente_id'];
+        $poliza->tipo_poliza = $request->tipo_poliza;
+        $poliza->numero_poliza = $request->numero_poliza;
+        $poliza->monto_asegurado = $request->monto_asegurado;
+        $poliza->prima = $request->prima;
+        $poliza->valor_neto = $request->valor_neto;
+        $poliza->fecha_inicio = $request->fecha_inicio;
+        $poliza->fecha_vencimiento = $request->fecha_vencimiento;
+        $poliza->deducible = $request->deducible;
+        $poliza->cantidad_cuotas = $request->cantidad_cuotas;
+        $poliza->dia_pago = $request->dia_pago;
+        $poliza->metodo_pago = $request->metodo_pago;
+        $poliza->aseguradora = $request->aseguradora;
+        $poliza->vendedor = $request->vendedor;
+        $poliza->cliente_id = $request->cliente_id;
 
         // Guarda la instancia de Poliza en la base de datos
         $poliza->save();
