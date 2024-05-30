@@ -24,6 +24,7 @@
                             <thead class="t-head">
                                 <tr>
                                     <th class="rounded-l-lg">ID</th>
+
                                     <th>RUT</th>
                                     <th>Cliente</th>
                                     <th>Nº Póliza</th>
@@ -35,28 +36,42 @@
                                     <th>Fecha Vencimiento</th>
                                     <th>Compañia</th>
                                     <th>Estado</th>
-                                    <th class="rounded-r-lg">Acción</th>
+                                    <th class="rounded-r-lg">12. Acción</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="cliente in polizas" :key="cliente.id">
-                                    <td>{{ cliente.id }}</td>
-                                    <td>{{ cliente.cliente_id }}</td>
-                                    <td>{{ cliente.numero_poliza }}</td>
-                                    <td>{{ cliente.tipo_poliza }}</td>
-                                    <td>{{ cliente.monto_asegurado }}</td>
-                                    <td>{{ cliente.prima }}</td>
-                                    <td>{{ cliente.valor_neto }}</td>
-                                    <td>{{ cliente.fecha_inicio }}</td>
-                                    <td>{{ cliente.fecha_vencimiento }}</td>
-                                    <td>{{ cliente.dia_pago }}</td>
-                                    <td>{{ cliente.metodo_pago }}</td>
-                                    <td>{{ cliente.aseguradora }}</td>
-                                    <td>{{ cliente.vendedor }}</td>
+                                <tr v-for="poliza in polizas" :key="poliza.id">
+
+                                    <td>{{ poliza.id }}</td>
+                                    <td>{{ poliza.cliente_id }}</td>
+                                    <td>{{ poliza.numero_poliza }}</td>
+                                    <td>{{ poliza.tipo_poliza }}</td>
+                                    <td>{{ poliza.monto_asegurado }}</td>
+                                    <td>{{ poliza.prima }}</td>
+                                    <td>{{ poliza.valor_neto }}</td>
+                                    <td>{{ poliza.fecha_inicio }}</td>
+                                    <td>{{ poliza.fecha_vencimiento }}</td>
+                                    <td>{{ poliza.dia_pago }}</td>
+                                    <td>{{ poliza.metodo_pago }}</td>
+                                    <td>12 {{ poliza.aseguradora }}</td>
+                                    <td>
+                                        <button class="btn btn-ver" @click="ver(poliza.id)">Ver</button>
+                                        <button class="btn btn-editar" @click="editar(poliza.id)">Editar</button>
+                                        <button class="btn btn-eliminar"
+                                            @click="confirmarEliminar(poliza.id)">Eliminar</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-
+                        <div v-if="mostrarModal" class="modal" v-for="poliza in polizas" :key="poliza.id">
+                            <div class="modal-content">
+                                <span class="close" @click="cerrarModal">&times;</span>
+                                <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                                <button class="btn btn-confirmar" @click="deletePoliza(poliza.id)">Confirmar</button>
+                                <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,6 +82,19 @@
                 <button @click="close">Cerrar</button>
             </template>
         </CreatePolizaModal>
+
+        <ShowPolizaModal v-if="showPolizaModal" :show="ShowPolizaModal" @close="close" :poliza="polizaIdSelect">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </ShowPolizaModal>
+
+        <EditPolizaModal v-if="editPolizaModal" :show="EditPolizaModal" @close="close" :poliza="polizaIdSelect">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </EditPolizaModal>
+
     </AppLayout>
 </template>
 
@@ -77,8 +105,8 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import DialogModal from '@/Components/DialogModal.vue'
 import Button1 from '@/Components/Button.vue'
 import CreatePolizaModal from '@/Pages/ClientesExternos/CreatePolizaModal.vue'
-import ShowEmpresaModal from '@/Pages/ClientesExternos/ShowEmpresaModal.vue'
-import EditEmpresaModal from '@/Pages/ClientesExternos/EditEmpresaModal.vue'
+import ShowPolizaModal from '@/Pages/ClientesExternos/ShowPolizaModal.vue'
+import EditPolizaModal from '@/Pages/ClientesExternos/EditPolizaModal.vue'
 
 import $ from 'jquery'
 import 'datatables.net'
@@ -89,8 +117,8 @@ export default {
         DialogModal,
         Button1,
         CreatePolizaModal,
-        ShowEmpresaModal,
-        EditEmpresaModal
+        ShowPolizaModal,
+        EditPolizaModal
     },
     props: {
         polizas: {
@@ -107,9 +135,9 @@ export default {
             showModal: false,
             mostrarModal: false,
             searchQuery: '',
-            ShowEmpresaModal: false,
-            empresaIdSeleccionado: {},
-            editEmpresaModal: false,
+            showPolizaModal: false,
+            polizaIdSelect: {},
+            editPolizaModal: false,
             createPolizaModal: false
         };
     },
@@ -118,12 +146,14 @@ export default {
             this.createPolizaModal = true;
         },
         close() {
-             this.createPolizaModal = false;
+            this.showPolizaModal = false;
+            this.createPolizaModal = false;
+            this.editPolizaModal = false;
 
 
         },
         confirmarEliminar() {
-            this.createPolizaModal = true;
+            this.mostrarModal = true;
         },
         cerrarModal() {
             this.createPolizaModal = false;
@@ -132,31 +162,32 @@ export default {
             const table = $('#polizasTable').DataTable();
             table.search(this.searchQuery).draw();
         },
-        verEmpresa(id) {
-            axios.get('/crud/show-empresa/' + id)
+        ver(id) {
+            axios.get('/show-poliza/' + id)
                 .then(res => {
                     console.log("Res Cliente", res.data);
-                    this.empresaIdSeleccionado = res.data;
-                    // Aquí se puede abrir un modal para mostrar la información del cliente
-                    this.ShowEmpresaModal = true;
+                    this.polizaIdSelect = res.data;
+                    // Aquí se puede abrir un modal para mostrar la información del poliza
+                    this.showPolizaModal = true;
                 })
                 .catch(error => {
                     console.log("Error Ver Cliente", error);
                 });
         },
         editar(id) {
-            axios.get('/crud/show-empresa/' + id)
+            axios.get('/show-poliza/' + id)
                 .then(res => {
                     console.log("Respuesta", res.data);
-                    this.empresaIdSeleccionado = res.data;
-                    this.editEmpresaModal = true;
+                    this.polizaIdSelect = res.data;
+                    this.editPolizaModal = true;
                 })
                 .catch(error => {
                     console.log("Error", error)
                 });
         },
-        deleteEmpresa(id) {
-            axios.delete("/crud/delete-empresa/" + id)
+        deletePoliza(id) {
+            alert("Delete");
+            axios.delete("/crud/delete-poliza/" + id)
                 .then(response => {
                     console.log("Eliminado", response.data);
                     this.mostrarModal = false;
@@ -171,7 +202,9 @@ export default {
     },
     mounted() {
         $('#polizasTable').DataTable({
-            dom: 'rtip'  // Remueve el campo de búsqueda por defecto
+            dom: 'rtip',  // Remueve el campo de búsqueda por defecto
+            scrollX: true,  // Habilita el scroll horizontal
+            autoWidth: false,  // Permite que la tabla ajuste su ancho automáticamente
         });
     }
 };

@@ -143,12 +143,10 @@
                         <input type="text" id="vendedor" v-model="form2.vendedor"
                             class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
-                    <div class="flex">
-                        <label for="archivos_seleccionados" class="block w-1/4 text-sm font-medium ">Selección de
-                            Archivos:</label>
-                        <input type="file" id="archivos_seleccionados" ref="archivos_seleccionados"
-                            class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            multiple>
+                    <div class="flex mt-4">
+                        <label for="file" class="block w-1/4 text-sm font-medium">Archivo:</label>
+                        <input type="file" @change="handleFileChange" id="file" name="file"
+                            class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 
                     <div class="py-4 w-60 justify-items-end">
@@ -200,24 +198,7 @@ export default {
         return {
             searchQuery: '',
             clientes: [],
-            cliente_id:'' ,
-            tipo_poliza: '',
-            numero_poliza: '',
-            monto_asegurado: '',
-            prima: '',
-            valor_neto: '',
-            fecha_inicio: '',
-            fecha_vencimiento: '',
-            deducible: '',
-            cantidad_cuotas: '',
-            dia_pago: '',
-            metodo_pago: '',
-            aseguradora: '',
-            vendedor: '',
-            archivos_seleccionados: [],
-
-
-            form2: {
+             form2: {
                 cliente_id: '',
                 tipo_poliza: '',
                 numero_poliza: '',
@@ -232,7 +213,7 @@ export default {
                 metodo_pago: '',
                 aseguradora: '',
                 vendedor: '',
-                archivos_seleccionados: null,
+                file: null,
             },
 
         };
@@ -268,8 +249,7 @@ export default {
 
         },
         handleFileChange(event) {
-            const files = event.target.files;
-            this.form2.archivos_seleccionados = files;
+            this.form2.file = event.target.files[0];;
         },
     },
 

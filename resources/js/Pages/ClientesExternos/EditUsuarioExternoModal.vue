@@ -11,17 +11,17 @@
 
                 <div>
                     <label for="nivel_ejecutivo">Nivel Ejecutivo:</label>
-                    <input type="text" v-model="form.nivel_ejecutivo" :placeholder="usuario_externo.nivel_ejecutivo"
+                    <input type="text" v-model="form.nivel_ejecutivo" 
                         class="custom-input" />
                 </div>
                 <div>
                     <label for="nombres">Nombres:</label>
-                    <input type="text" v-model="form.nombres" :placeholder="usuario_externo.nombres"
+                    <input type="text" v-model="form.nombres" 
                         class="custom-input" />
                 </div>
                 <div>
                     <label for="apellido_paterno">Apellido Paterno:</label>
-                    <input type="text" v-model="form.apellido_paterno" :placeholder="usuario_externo.apellido_paterno"
+                    <input type="text" v-model="form.apellido_paterno" 
                         class="custom-input" />
                 </div>
                 <div>

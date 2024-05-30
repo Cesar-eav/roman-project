@@ -24,37 +24,43 @@ class UsoInternoController extends Controller
         ]);
     }
 
-    public function showCliente ($id){
-       $cliente = User::where('id', $id)->first();
-       return $cliente;
-    }
-
-    public function showCia ($id){
-        $cia = CiaAseguradora::where('id', $id)->first();
-        return $cia;
-     }
-
-    public function editShowCliente ($id){
+    public function showCliente($id)
+    {
         $cliente = User::where('id', $id)->first();
         return $cliente;
-     }
+    }
 
-     public function deleteCliente ($id){
+    public function showCia($id)
+    {
+        $cia = CiaAseguradora::where('id', $id)->first();
+        return $cia;
+    }
+
+    public function editShowCliente($id)
+    {
+        $cliente = User::where('id', $id)->first();
+        return $cliente;
+    }
+
+    public function deleteCliente($id)
+    {
         $cliente = User::find($id);
         $response = $cliente->delete();
         return $response;
-     }
+    }
 
-     public function deleteCia ($id){
+    public function deleteCia($id)
+    {
         $cia = CiaAseguradora::find($id);
         $response = $cia->delete();
         return $response;
-     }
+    }
 
 
-     public function editCliente (Request $request){
+    public function editCliente(Request $request)
+    {
         $cliente = User::find($request->id);
-        $cliente->cargo=                 $request->cargo;
+        $cliente->cargo =                 $request->cargo;
         $cliente->name = $request->name;
         $cliente->last_name = $request->last_name;
         $cliente->rut = $request->rut;
@@ -73,12 +79,13 @@ class UsoInternoController extends Controller
 
         // $cliente = User::where('id', $id)->first();
         //return $cliente;
-     }
+    }
 
-     
-     public function editCia (Request $request){
 
-       
+    public function editCia(Request $request)
+    {
+
+
         $cia = CiaAseguradora::find($request->id);
         $cia->razon_social = $request->razon_social;
         $cia->nombre_fantasia = $request->nombre_fantasia;
@@ -120,7 +127,7 @@ class UsoInternoController extends Controller
 
         // $cliente = User::where('id', $id)->first();
         //return $cliente;
-     }
+    }
 
     public function showCias()
     {
@@ -131,6 +138,7 @@ class UsoInternoController extends Controller
         ]);
     }
 
+    //POLIZAZ
     public function showPolizas()
     {
         $clientes = User::all();
@@ -139,17 +147,50 @@ class UsoInternoController extends Controller
         return Inertia::render('ShowPolizas', [
             'polizas' => $polizas,
             'clientes' => $clientes,
-
         ]);
     }
+
+    public function editPoliza(Request $request)
+    {
+        $poliza = Poliza::find($request->id);
+        $poliza->numero_poliza = $request->numero_poliza;
+        $poliza->tipo_poliza = $request->tipo_poliza;
+        $poliza->monto_asegurado = $request->monto_asegurado;
+        $poliza->prima = $request->prima;
+        $poliza->valor_neto = $request->valor_neto;
+        $poliza->fecha_inicio = $request->fecha_inicio;
+        $poliza->fecha_vencimiento = $request->fecha_vencimiento;
+        $poliza->dia_pago = $request->dia_pago;
+        $poliza->metodo_pago = $request->metodo_pago;
+        $poliza->aseguradora = $request->aseguradora;
+
+        $response = $poliza->save();
+        return $response;
+    }
+
+    public function deletePoliza($id)
+    {
+        $poliza = Poliza::find($id);
+        $response = $poliza->delete();
+
+        return $response;
+    }
+
+    public function showPoliza($id)
+    {
+        $poliza = Poliza::where('id', $id)->first();
+        return $poliza;
+    }
+
+
 
 
     public function search(Request $request)
     {
         $query = $request->input('query');
         $clientes = User::where('name', 'LIKE', "%{$query}%")
-                           ->orWhere('rut', 'LIKE', "%{$query}%")
-                           ->get();
+            ->orWhere('rut', 'LIKE', "%{$query}%")
+            ->get();
         return response()->json($clientes);
     }
 
@@ -178,7 +219,7 @@ class UsoInternoController extends Controller
 
     public function ViewAddPoliza()
     {
-     
+
         $clientes = User::all();
         // Pasar los datos a la vista Dashboard usando Inertia
         return Inertia::render('ShowPolizas', [
@@ -231,26 +272,26 @@ class UsoInternoController extends Controller
     }
 
 
- 
+
     public function polizaCrear(Request $request)
     {
-        
+
         // $validatedData = $request->validate([
-            // 'tipo_poliza' => 'required',
-            // 'numero_poliza' => 'required',
-            // 'monto_asegurado' => 'required',
-            // 'prima' => 'required',
-            // 'valor_neto' => 'required',
-            // 'fecha_inicio' => 'required',
-            // 'fecha_vencimiento' => 'required',
-            // 'deducible' => 'required',
-            // 'cantidad_cuotas' => 'required',
-            // 'dia_pago' => 'required',
-            // 'metodo_pago' => 'required',
-            // 'aseguradora' => 'required',
-            // 'vendedor' => 'required',
-            // 'cliente_id' => 'required'
-            // No necesitas validar los archivos seleccionados ya que Laravel maneja la subida de archivos automáticamente
+        // 'tipo_poliza' => 'required',
+        // 'numero_poliza' => 'required',
+        // 'monto_asegurado' => 'required',
+        // 'prima' => 'required',
+        // 'valor_neto' => 'required',
+        // 'fecha_inicio' => 'required',
+        // 'fecha_vencimiento' => 'required',
+        // 'deducible' => 'required',
+        // 'cantidad_cuotas' => 'required',
+        // 'dia_pago' => 'required',
+        // 'metodo_pago' => 'required',
+        // 'aseguradora' => 'required',
+        // 'vendedor' => 'required',
+        // 'cliente_id' => 'required'
+        // No necesitas validar los archivos seleccionados ya que Laravel maneja la subida de archivos automáticamente
         // ]);
 
         $poliza = new Poliza();
@@ -288,5 +329,4 @@ class UsoInternoController extends Controller
 
         return Inertia::render('CrearPoliza');
     }
-
 }

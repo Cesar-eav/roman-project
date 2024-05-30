@@ -86,6 +86,11 @@ Route::middleware([
     Route::get('/view-add-poliza', [UsoInternoController::class, 'ViewAddPoliza'])->name('view-add-poliza');
     Route::post('/crear-poliza',[UsoInternoController::class, 'polizaCrear'])->name('crear-poliza');
     Route::get('/show-polizas', [UsoInternoController::class, 'showPolizas'])->name('show-polizas');
+    Route::get('/show-poliza/{id}',[UsoInternoController::class, 'showPoliza']);
+    Route::post('/crud/edit-poliza',[UsoInternoController::class, 'editPoliza']);
+    Route::delete('/crud/delete-poliza/{id}',[UsoInternoController::class, 'deletePoliza']);
+
+
 
 
 
