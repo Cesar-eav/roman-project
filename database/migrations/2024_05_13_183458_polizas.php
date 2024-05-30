@@ -13,7 +13,7 @@ class Polizas extends Migration
      */
     public function up()
     {
-        Schema::create('nombre_de_tabla', function (Blueprint $table) {
+        Schema::create('polizas', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_poliza')->nullable();
             $table->string('numero_poliza')->nullable();
