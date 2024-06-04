@@ -137,17 +137,17 @@ export default {
         exportData() {
             console.log("EXPORTANDO EXCEL");
             axios.get('/export-users', { responseType: 'blob' })
-        .then(response => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'users.xlsx');
-          document.body.appendChild(link);
-          link.click();
-        })
-        .catch(error => {
-          console.error('Error exporting data:', error);
-        });
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'users.xlsx');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error('Error exporting data:', error);
+                });
 
         },
 
