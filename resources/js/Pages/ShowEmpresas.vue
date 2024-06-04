@@ -35,12 +35,12 @@
                                     <td>{{ empresa.razon_social }}</td>
                                     <td>{{ empresa.nombre_fantasia }}</td>
                                     <td>{{ empresa.rut_empresa_persona }}</td>
-                                    <th>
+                                    <td class="flex">
                                         <button class="btn btn-ver" @click="verEmpresa(empresa.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editar(empresa.id)">Editar</button>
                                         <button class="btn btn-eliminar"
                                             @click="confirmarEliminar(empresa.id)">Eliminar</button>
-                                    </th>
+                                    </td>
                                     <div v-if="mostrarModal" class="modal">
                                         <div class="modal-content">
                                             <span class="close" @click="cerrarModal">&times;</span>
@@ -51,7 +51,6 @@
                                         </div>
                                     </div>
                                 </tr>
-
                             </tbody>
                         </table>
 
@@ -181,7 +180,9 @@ export default {
     },
     mounted() {
         $('#clientesTable').DataTable({
-            dom: 'rtip'  // Remueve el campo de búsqueda por defecto
+            dom: 'rtip',  // Remueve el campo de búsqueda por defecto
+            scrollX: true,  // Habilita el scroll horizontal
+            autoWidth: false,  // Permite que
         });
     }
 };

@@ -38,7 +38,7 @@
                         <input type="text" v-model="form.apellidoMaternoPersonaNatural" placeholder="Apellido Materno Persona Natural"
                             class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                        <input type="text" v-model="form.rutEmpresaPersona" placeholder="RUT Empresa Persona"
+                        <input type="text" v-model="form.rutEmpresaPersona" placeholder="RUT Empresa/Persona"
                             class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 

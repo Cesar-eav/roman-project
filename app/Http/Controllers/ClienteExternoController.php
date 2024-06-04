@@ -55,7 +55,7 @@ class ClienteExternoController extends Controller
         $empresa->rut_representante_legal = $request->rut_representante_legal;
         $empresa->mail_representante_legal = $request->mail_representante_legal;
         $empresa->fono_representante_legal = $request->fono_representante_legal;
-        $empresa->fecha_nacimiento = $request->fecha_nacimiento;
+        $empresa->fecha_nacimiento = $request->fecha_nacimiento_gerente;
 
         // Guardar la empresa en la base de datos
         $response = $empresa->save();
