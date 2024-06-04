@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UsoInternoController;
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +93,8 @@ Route::middleware([
 
 
 
+
+    Route::get('/export-users', [UsoInternoController::class, 'export']);
 
 
 // APIS

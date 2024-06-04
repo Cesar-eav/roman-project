@@ -8,6 +8,8 @@ use App\Models\CiaAseguradora;
 use App\Models\Poliza;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
@@ -24,6 +26,13 @@ class UsoInternoController extends Controller
         ]);
     }
 
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+
+    
     public function showCliente($id)
     {
         $cliente = User::where('id', $id)->first();

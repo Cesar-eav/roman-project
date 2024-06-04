@@ -9,7 +9,7 @@
                 class="border rounded-lg" />
             <button1 @click="openModal">Crear Empresa</button1>
 
-            <button
+            <button @click="exportData"
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold p-2  rounded-lg transition-colors duration-300">
                 Generar Excel
             </button>
