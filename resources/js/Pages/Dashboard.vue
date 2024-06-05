@@ -24,9 +24,9 @@
                                     <th class="rounded-l-full">Id</th>
                                     <th>Rut</th>
                                     <th>Nombre</th>
-                                    <!-- <th>Email</th>
-                                    <th>Telefono</th> -->
-                                    <th class="rounded-r-full">Acciones</th>
+                                     <th>Comuna</th>
+                                    
+                                    <th class="flex justify-center rounded-r-full	">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,9 +34,10 @@
                                     <td>{{ cliente.id }}</td>
                                     <td>{{ cliente.rut }}</td>
                                     <td>{{ cliente.name }}</td>
+                                    <td>{{ cliente.ciudad }}</td>
                                     <!-- <td>{{ cliente.email }}</td>
                                     <td>{{ cliente.telefono }}</td> -->
-                                    <th class="flex justify-start">
+                                    <th class="flex justify-center">
                                         <button class="btn btn-ver" @click="verCliente(cliente.id)">Ver</button>
                                         <button class="btn btn-editar"
                                             @click="editarCliente(cliente.id)">Editar</button>
@@ -96,8 +97,6 @@ import CrearUsuario from '@/Pages/CrearUsuarioForm.vue'
 import CreateUserModal from '@/Pages/CreateUserModal.vue'
 import ShowClientModal from '@/Pages/ClientesInternos/ShowModal.vue'
 import EditModal from './ClientesInternos/EditModal.vue'
-import { ref, onMounted } from 'vue'
-import Button from "@/Components/Button.vue"
 import $ from 'jquery'
 import 'datatables.net'
 import axios from 'axios';
@@ -135,7 +134,6 @@ export default {
     },
     methods: {
         exportData() {
-            console.log("EXPORTANDO EXCEL");
             axios.get('/export-users', { responseType: 'blob' })
                 .then(response => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));

@@ -9,6 +9,8 @@ use App\Models\Poliza;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use App\Exports\UsersExport;
+use App\Exports\CiasExport;
+use App\Exports\PolizasExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -31,6 +33,15 @@ class UsoInternoController extends Controller
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
+    public function exportCia()
+    {
+        return Excel::download(new CiasExport, 'cias-aseguradoras.xlsx');
+    }
+
+    public function exportPolizas()
+    {
+        return Excel::download(new PolizasExport, 'polizas.xlsx');
+    }
 
     
     public function showCliente($id)

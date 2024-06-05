@@ -8,7 +8,7 @@
             <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
                 class="border rounded-lg" />
             <button1 @click="openCreateModal">Crear Póliza</button1>
-            <button
+            <button @click="exportData"
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold p-2  rounded-lg transition-colors duration-300">
                 Generar Excel
             </button>
@@ -142,6 +142,20 @@ export default {
         };
     },
     methods: {
+        exportData(){
+            axios.get('/export-polizas', { responseType: 'blob' })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'polizas.xlsx');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error('Error exporting data:', error);
+                });
+        },
         openCreateModal() {
             this.createPolizaModal = true;
         },

@@ -4,8 +4,7 @@
 
         <div class="flex py-2 justify-start text-gray-900">
             <button1 @click="openCreateModal" class="mr-2">Crear Cía de Seguros</button1>
-            <button
-                class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+            <button @click="exportData" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
                 Generar Excel
             </button>
         </div>
@@ -118,6 +117,22 @@ export default {
         };
     },
     methods: {
+        exportData() {
+            
+            axios.get('/export-cias', { responseType: 'blob' })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'cias-aseguradoras.xlsx');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error('Error exporting data:', error);
+                });
+
+        },
         openCreateModal() {
             this.CreateCiaModal = true;
         },

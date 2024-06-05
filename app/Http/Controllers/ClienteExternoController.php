@@ -6,6 +6,9 @@ use App\Models\Empresa;
 use App\Models\UsuarioExterno;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Exports\EmpresasExport;
+use App\Exports\ClientesExternosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class ClienteExternoController extends Controller
@@ -19,6 +22,16 @@ class ClienteExternoController extends Controller
             'empresas' => $empresas,
 
         ]);
+    }
+
+    public function exportEmpresas()
+    {
+        return Excel::download(new EmpresasExport, 'empresas.xlsx');
+    }
+
+    public function exportClienteExterno()
+    {
+        return Excel::download(new ClientesExternosExport, 'clientes-externos.xlsx');
     }
 
     public function showEmpresa($id)

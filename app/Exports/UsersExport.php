@@ -23,9 +23,10 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'ID',
             'Rut',
             'Nombre',
+            'Email',
+            
 
         ];
     }
@@ -38,7 +39,6 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
     public function map($user): array
     {
         return [
-            $user->id,
             $user->rut,
             $user->name,
 

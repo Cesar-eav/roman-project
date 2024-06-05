@@ -56,13 +56,14 @@ Route::middleware([
     Route::get('/edit-show-cliente/{id}',[UsoInternoController::class, 'editShowCliente'])->name('show-cliente-id');
     Route::post('/crud/edit-cliente-back',[UsoInternoController::class, 'editCliente']);
     ROute::delete('/crud/delete-cliente/{id}', [UsoInternoController::class, 'deleteCliente']);
+    Route::get('/export-users', [UsoInternoController::class, 'export']);
 
 //CIAS SEGUROS
     Route::get('/show-cia/{id}',[UsoInternoController::class, 'showCia']);
     Route::get('/edit-cia/{id}',[UsoInternoController::class, 'editCia']);
     Route::post('/crud/edit-cia-back',[UsoInternoController::class, 'editCia']);
     ROute::delete('/crud/delete-cia/{id}', [UsoInternoController::class, 'deleteCia']);
-
+    Route::get('/export-cias', [UsoInternoController::class, 'exportCia']);
 
 
 // CLIENTES EXTERNOS EMPRESA
@@ -73,6 +74,7 @@ Route::middleware([
     Route::get('/crud/edit-show-cia/{id}',[ClienteExternoController::class, 'editShowEmpresa']);
     Route::post('/crud/edit-empresa-back',[ClienteExternoController::class, 'editEmpresa']);
     ROute::delete('/crud/delete-empresa/{id}', [ClienteExternoController::class, 'deleteEmpresa']);
+    Route::get('/export-empresas', [ClienteExternoController::class, 'exportEmpresas']);
 
 
 // CLIENTES EXTERNOS USUARIO
@@ -82,6 +84,8 @@ Route::middleware([
     Route::get('/show-cliente-externo/{id}',[ClienteExternoController::class, 'showClienteExterno']);
     Route::post('/crud/edit-usuario-externo',[ClienteExternoController::class, 'editUsuarioExterno']);
     Route::delete('/crud/delete-usuario-externo/{id}',[ClienteExternoController::class, 'deleteUsuarioExterno']);
+    Route::get('/export-clientes-externos', [ClienteExternoController::class, 'exportClienteExterno']);
+
 
 #POLIZA
     Route::get('/view-add-poliza', [UsoInternoController::class, 'ViewAddPoliza'])->name('view-add-poliza');
@@ -90,11 +94,13 @@ Route::middleware([
     Route::get('/show-poliza/{id}',[UsoInternoController::class, 'showPoliza']);
     Route::post('/crud/edit-poliza',[UsoInternoController::class, 'editPoliza']);
     Route::delete('/crud/delete-poliza/{id}',[UsoInternoController::class, 'deletePoliza']);
+    Route::get('/export-polizas', [UsoInternoController::class, 'exportPolizas']);
 
 
 
 
-    Route::get('/export-users', [UsoInternoController::class, 'export']);
+
+    
 
 
 // APIS

@@ -121,6 +121,22 @@ export default {
         };
     },
     methods: {
+        
+        exportData() {
+            axios.get('/export-empresas', { responseType: 'blob' })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'empresas.xlsx');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error('Error exporting data:', error);
+                });
+            },
+
         openModal() {
             this.CreateEmpresaModal = true;
         },
