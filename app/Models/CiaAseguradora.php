@@ -10,4 +10,8 @@ class CiaAseguradora extends Model
     use HasFactory;
 
     protected $table = 'cia_seguros';
+
+    public function banco(){
+        return $this->belongsTo(Banco::class);
+    }
 }

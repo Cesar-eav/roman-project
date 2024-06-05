@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\CiaAseguradora;
 use App\Models\Poliza;
+use App\Models\Banco;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use App\Exports\UsersExport;
@@ -27,6 +28,8 @@ class UsoInternoController extends Controller
 
         ]);
     }
+
+
 
     public function export()
     {
@@ -52,7 +55,7 @@ class UsoInternoController extends Controller
 
     public function showCia($id)
     {
-        $cia = CiaAseguradora::where('id', $id)->first();
+        $cia = CiaAseguradora::with('banco')->where('id', $id)->first();
         return $cia;
     }
 
@@ -105,7 +108,6 @@ class UsoInternoController extends Controller
     public function editCia(Request $request)
     {
 
-
         $cia = CiaAseguradora::find($request->id);
         $cia->razon_social = $request->razon_social;
         $cia->nombre_fantasia = $request->nombre_fantasia;
@@ -116,6 +118,7 @@ class UsoInternoController extends Controller
         $cia->fono = $request->fono;
         $cia->mail = $request->mail;
         $cia->nombre_banco = $request->nombre_banco;
+        $cia->banco_id = $request->banco_id;
         $cia->num_cuenta = $request->num_cuenta;
         $cia->representante_legal = $request->representante_legal;
         $cia->rut_representante = $request->rut_representante;
@@ -151,10 +154,14 @@ class UsoInternoController extends Controller
 
     public function showCias()
     {
-        $companies = CiaAseguradora::all();
+        $companies = CiaAseguradora::with('banco')->get();
+        $bancos = Banco::get();
+        // return $companies;
+        // var_dump($companies);
         // Pasar los datos a la vista Dashboard usando Inertia
         return Inertia::render('ShowCias', [
             'companies' => $companies,
+            'bancos' => $bancos
         ]);
     }
 
@@ -262,6 +269,7 @@ class UsoInternoController extends Controller
         $cia->fono = $request->fono;
         $cia->mail = $request->mail;
         $cia->nombre_banco = $request->nombre_banco;
+        $cia->banco_id = $request->banco_id;
         $cia->num_cuenta = $request->num_cuenta;
         $cia->representante_legal = $request->representante_legal;
         $cia->rut_representante = $request->rut_representante;

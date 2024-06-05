@@ -11,9 +11,10 @@
                     Crear Compañia de Seguros
                 </h2>
             </div>
+
             <form @submit.prevent="submit" class="text-gray-900">
                 <div v-if="mostrarModal">
-                    <div class="p-4  ustify-center rounded-md">
+                    <div class="p-4  justify-center rounded-md">
 
                         <div class="flex">
                             <input type="text" v-model="form.razon_social" placeholder="Razón Social"
@@ -44,59 +45,74 @@
                         </div>
 
                         <div class="flex">
-                            <input type="text" v-model="form.nombre_banco" placeholder="Nombre Banco"
-                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.num_cuenta" placeholder="Nº Cuenta"
-                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <select v-model="form.banco_id" id="banco_id" name="banco_id"
+                                class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Banco</option>
+                                <template v-for="banco in bancos" :key="banco.id">
+                                    <option :value="banco.id">{{ banco.nombre }}</option>
+                                </template>
+                            </select>
+
+
+                        </div>
+
+
+
+
+                        <div class="mt-4">
+                            <h2 class="text-lg font-semibold text-left leading-tight">
+                                Reprentante legal:
+                            </h2>
                         </div>
 
                         <div class="flex">
-                            <input type="text" v-model="form.representante_legal" placeholder="Representante Legal"
-                                class="mt-1  mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.rut_representante" placeholder="Rut Representante"
-                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                
+                                <input type="text" v-model="form.representante_legal" placeholder="Nombre"
+                                    class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <input type="text" v-model="form.representante_legal" placeholder="Apellidos"
+                                    class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="flex">
+                                <input type="text" v-model="form.rut_representante" placeholder="Rut "
+                                    class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <input type="email" v-model="form.mail_representante" placeholder="Email"
+                                    class="mt-1 mx-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <input type="text" v-model="form.fono_representante" placeholder="Fono "
+                                    class="block mt-1 border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            </div>
+            
+                        <div class="mt-4">
+                            <h2 class="text-lg font-semibold text-left leading-tight">
+                                Gerente:
+                            </h2>
                         </div>
-
                         <div class="flex">
-                            <input type="email" v-model="form.mail_representante" placeholder="Email Representante"
-                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.fono_representante" placeholder="Fono Representante"
-                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        </div>
 
-                        <div class="flex">
                             <input type="text" v-model="form.nombre_gerente" placeholder="Nombre Gerente Local"
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
                             <input type="text" v-model="form.direccion_gerente" placeholder="Dirección Gerente"
-                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
+
                             <input type="text" v-model="form.comuna_gerente" placeholder="Comuna Gerente"
-                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.region_gerente" placeholder="Región Gerente"
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="text" v-model="form.region_gerente" placeholder="Región Gerente"
+                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
                             <input type="text" v-model="form.fono_gerente" placeholder="Fono Gerente"
-                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="email" v-model="form.mail_gerente" placeholder="Email Gerente"
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        </div>
-
-                        <div class="flex">
+                            <input type="email" v-model="form.mail_gerente" placeholder="Email Gerente"
+                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <input type="date" v-model="form.fecha_nacimiento_gerente"
                                 placeholder="Fecha Nacimiento Gerente"
-                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
-
-
-
                     </div>
-
-
-
                 </div>
                 <div v-if="showModalEjecutiva1">
                     Agregar ejecutiva 1
@@ -168,7 +184,7 @@
             <div class="flex flex-col">
                 <button @click="volver1" v-if="ejecutiva2 || ejecutiva1">Volver </button>
                 <button @click="volverEjecutiva1" v-if="showModalEjecutiva2">Volver a Ejecutiva 1</button>
-                <button @click="siguiente" v-if="ejecutiva1  || mostrarModal">Agregar Ejecutiva 1</button>
+                <button @click="siguiente" v-if="ejecutiva1 || mostrarModal">Agregar Ejecutiva 1</button>
                 <button @click="siguiente2" v-if="ejecutiva2">Agregar Ejecutiva 2</button>
             </div>
 
@@ -176,8 +192,8 @@
 
         </div>
         <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
-                <slot name="footer"> </slot>
-            </div>
+            <slot name="footer"> </slot>
+        </div>
     </Modal>
 
 </template>
@@ -206,6 +222,10 @@ export default {
             type: Boolean,
             default: true,
         },
+        bancos: {
+            type: Array,
+            required: true,
+        }
     },
     data() {
         return {
@@ -223,7 +243,7 @@ export default {
                 region: '',
                 fono: '',
                 mail: '',
-                nombre_banco: '',
+                banco_id: '',
                 num_cuenta: '',
                 representante_legal: '',
                 rut_representante: '',
@@ -284,8 +304,6 @@ export default {
         },
 
         submit() {
-            //   this.form.post('/crear-usuario-interno')
-
             axios.post('/crear-cia', {
                 'razon_social': this.form.razon_social || '',
                 'nombre_fantasia': this.form.nombre_fantasia || '',
@@ -295,7 +313,7 @@ export default {
                 'region': this.form.region || '',
                 'fono': this.form.fono || '',
                 'mail': this.form.mail || '',
-                'nombre_banco': this.form.nombre_banco || '',
+                'banco_id': this.form.banco_id || '',
                 'num_cuenta': this.form.num_cuenta || '',
                 'representante_legal': this.form.representante_legal || '',
                 'rut_representante': this.form.rut_representante || '',

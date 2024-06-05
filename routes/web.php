@@ -44,7 +44,7 @@ Route::middleware([
     })->name('crearusuario');
 
     Route::get('/modal', function () {
-        return Inertia::render('ClientesExternos/ShowEmpresaModal');
+        return Inertia::render('ClientesInternos/EditCiaModal');
     });
 
     Route::get('/add-compania', function () {return Inertia::render('CrearCompania'); })->name('add-compania');

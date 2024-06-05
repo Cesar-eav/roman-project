@@ -6,6 +6,9 @@
                 <p class="text-xl">{{ companies.razon_social }}</p>
             </h2>
         </div>
+
+
+
         <form @submit.prevent="submit">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-900 mx-4">
 
@@ -50,9 +53,18 @@
                 </div>
                 <div>
                     <label for="nombre_banco">Nombre del Banco:</label>
-                    <input type="text" v-model="formCliente.nombre_banco" :placeholder="companies.nombre_banco"
-                        class="custom-input" />
+                    <select v-model="formCliente.banco_id">
+                        <option value="">Seleccionar</option>
+                        <option v-for="banco in bancos" :key="banco.id" :value="banco.id">
+                            {{ banco.nombre }}
+                        </option>
+                    </select>
+
+
+
+
                 </div>
+
                 <div>
                     <label for="num_cuenta">Número de Cuenta:</label>
                     <input type="text" v-model="formCliente.num_cuenta" :placeholder="companies.num_cuenta"
@@ -65,8 +77,8 @@
                 </div>
                 <div>
                     <label for="rut_representante">RUT del Representante:</label>
-                    <input type="text" v-model="formCliente.rut_representante" :placeholder="companies.rut_representante"
-                        class="custom-input" />
+                    <input type="text" v-model="formCliente.rut_representante"
+                        :placeholder="companies.rut_representante" class="custom-input" />
                 </div>
                 <div>
                     <label for="mail_representante">Correo Electrónico del Representante:</label>
@@ -85,8 +97,8 @@
                 </div>
                 <div>
                     <label for="direccion_gerente">Dirección del Gerente:</label>
-                    <input type="text" v-model="formCliente.direccion_gerente" :placeholder="companies.direccion_gerente"
-                        class="custom-input" />
+                    <input type="text" v-model="formCliente.direccion_gerente"
+                        :placeholder="companies.direccion_gerente" class="custom-input" />
                 </div>
                 <div>
                     <label for="comuna_gerente">Comuna del Gerente:</label>
@@ -203,7 +215,12 @@ export default {
         companies: {
             type: Array,
             default: true,
-        }, show: {
+        },
+        bancos: {
+            type: Array,
+            default: true,
+        },
+        show: {
             type: Boolean,
             default: true,
         },
@@ -230,6 +247,7 @@ export default {
                 fono: this.companies.fono,
                 mail: this.companies.mail,
                 nombre_banco: this.companies.nombre_banco,
+                banco_id: this.companies.banco_id,
                 num_cuenta: this.companies.num_cuenta,
                 representante_legal: this.companies.representante_legal,
                 rut_representante: this.companies.rut_representante,
@@ -275,6 +293,7 @@ export default {
                     fono: this.formCliente.fono,
                     mail: this.formCliente.mail,
                     nombre_banco: this.formCliente.nombre_banco,
+                    banco_id: this.formCliente.banco_id,
                     num_cuenta: this.formCliente.num_cuenta,
                     representante_legal: this.formCliente.representante_legal,
                     rut_representante: this.formCliente.rut_representante,
@@ -302,7 +321,6 @@ export default {
 
                 })
                 .then((response) => {
-                    console.log("RESPUESTA EDICION BACK: ", response.data);
                     this.$emit('close');
 
                     if (response.data) {

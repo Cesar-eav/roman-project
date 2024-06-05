@@ -4,10 +4,12 @@
 
         <div class="flex py-2 justify-start text-gray-900">
             <button1 @click="openCreateModal" class="mr-2">Crear Cía de Seguros</button1>
-            <button @click="exportData" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+            <button @click="exportData"
+                class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
                 Generar Excel
             </button>
         </div>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -18,6 +20,7 @@
                                     <th>ID</th>
                                     <th>Razón Social</th>
                                     <th>Rut</th>
+                                    <th>Banco</th>
                                     <th>Comuna</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -27,6 +30,7 @@
                                     <td>{{ company.id }}</td>
                                     <td>{{ company.razon_social }}</td>
                                     <td>{{ company.rut_empresa }}</td>
+                                    <td>{{ company.banco.nombre }}</td>
                                     <td>{{ company.comuna }}</td>
                                     <th>
                                         <button class="btn btn-ver" @click="verCia(company.id)">Ver</button>
@@ -53,7 +57,7 @@
 
 
 
-        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close">
+        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close" :bancos="bancos">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -65,7 +69,7 @@
             </template>
         </ShowCiaModal>
 
-        <EditCiaModal v-if="showModalEditCia" :show="showModalEditCia" :companies="ciaIdSeleccionado" @close="close">
+        <EditCiaModal v-if="showModalEditCia" :show="showModalEditCia" :bancos="bancos" :companies="ciaIdSeleccionado" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -74,6 +78,7 @@
 
 
     </AppLayout>
+
 </template>
 
 <script>
@@ -103,6 +108,10 @@ export default {
         companies: {
             type: Array,
             required: true
+        },
+        bancos: {
+            type: Array,
+            required: true
         }
     },
     data() {
@@ -118,7 +127,7 @@ export default {
     },
     methods: {
         exportData() {
-            
+
             axios.get('/export-cias', { responseType: 'blob' })
                 .then(response => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));

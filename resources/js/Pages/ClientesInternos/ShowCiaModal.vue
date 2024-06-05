@@ -4,7 +4,7 @@
         <div class="m-4 p-4 bg-orange-500">
             <!-- <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> -->
             <h2 class="text-white text-2xl font-semibold text-center leading-tight">
-                {{ companies.id }} {{ companies.razon_social }}
+                {{ companies }} {{ companies.razon_social }}
             </h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-900 mx-4">
@@ -18,6 +18,7 @@
                         <p><strong>Fono:</strong> {{ companies.fono }}</p>
                         <p><strong>Email:</strong> {{ companies.mail }}</p>
                         <p><strong>Nombre Banco:</strong> {{ companies.nombre_banco }}</p>
+                        <p><strong>Nombre Banco:</strong> {{ companies.banco.nombre }}</p>
                         <p><strong>Número Cuenta:</strong> {{ companies.num_cuenta }}</p>
                         <p><strong>Representante Legal:</strong> {{ companies.representante_legal }}</p>
                         <p><strong>RUT Representante:</strong> {{ companies.rut_representante }}</p>
