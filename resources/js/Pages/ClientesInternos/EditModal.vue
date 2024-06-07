@@ -10,7 +10,7 @@
 
                 <div class="flex flex-col mt-1 w-full">
                     <label for="nivel_ejecutivo">Nivel Ejecutivo:</label>
-                    <select v-model="formCliente.cargo"  class="rounded-md ">
+                    <select v-model="formCliente.cargo" class="rounded-md ">
                         <option value="Cobranza">Comercial</option>
                         <option value="Contador">Cobranza</option>
                         <option value="Gestor de Siniestros">Gestor de Siniestros</option>
@@ -69,12 +69,22 @@
                     <label for="afp">AFP:</label>
                     <input type="text" v-model="formCliente.afp" :placeholder="formCliente.afp" class="custom-input" />
                 </div>
-            </div>
-            <div class="flex justify-end mt-2 mr-10">
-                <Button type="button" @keydown.enter="editUser()">
-                    <input type="submit" value="Guardar" title="Guardar" @click="editUser()"
-                        @keydown.enter="editUser()" />
-                </Button>
+                <div>
+                    <label>Nueva contraseña:</label>
+                    <input type="password" v-model="formCliente.password" :placeholder="formCliente.password"
+                        class="custom-input" />
+                </div>
+                <div>
+                    <label>Confirmar contraseña:</label>
+                    <input type="password" v-model="formCliente.password_confirm" :placeholder="formCliente.password_confirm"
+                        class="custom-input" />
+                </div>
+                <div class="flex justify-end mt-2 mr-10">
+                    <Button type="button" @keydown.enter="editUser()">
+                        <input type="submit" value="Guardar" title="Guardar" @click="editUser()"
+                            @keydown.enter="editUser()" />
+                    </Button>
+                </div>
             </div>
         </form>
         <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
@@ -127,7 +137,10 @@ export default {
                 ciudad: this.cliente.ciudad,
                 region: this.cliente.region,
                 isapre: this.cliente.isapre,
-                afp: this.cliente.afp
+                afp: this.cliente.afp,
+                password: null,
+                password_confirm: null,
+                rol_id: 2,
             }
         }
 
@@ -151,7 +164,10 @@ export default {
                     ciudad: this.formCliente.ciudad,
                     region: this.formCliente.region,
                     isapre: this.formCliente.isapre,
-                    afp: this.formCliente.afp
+                    afp: this.formCliente.afp,
+                    password: this.formCliente.password,
+                    password_confirm: this.formCliente.password_confirm,
+                    rol_id: this.formCliente.rol_id
 
                 })
                 .then((response) => {
@@ -166,7 +182,6 @@ export default {
                 })
                 .catch(error => {
                     console.error('Hubo un error:', error);
-                    alert('Hubo un problema al actualizar el cliente');
                 });
             //window.location.href = "/crud/index";
         },

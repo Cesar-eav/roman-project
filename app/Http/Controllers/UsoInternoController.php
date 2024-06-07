@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\CiaAseguradora;
-use App\Models\Poliza;
-use App\Models\Banco;
-use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
-use App\Exports\UsersExport;
+use App\Models\Banco;
+use App\Models\Poliza;
 use App\Exports\CiasExport;
+use App\Exports\UsersExport;
+use Illuminate\Http\Request;
 use App\Exports\PolizasExport;
+use App\Models\CiaAseguradora;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -46,7 +47,7 @@ class UsoInternoController extends Controller
         return Excel::download(new PolizasExport, 'polizas.xlsx');
     }
 
-    
+
     public function showCliente($id)
     {
         $cliente = User::where('id', $id)->first();
@@ -82,6 +83,31 @@ class UsoInternoController extends Controller
 
     public function editCliente(Request $request)
     {
+
+        $updateData = $request->validate([
+            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
+            'rut' => 'required|string|max:20|unique:users,rut,'.$request->id,
+            'telefono' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'ciudad' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'rol_id' => 'required|integer',
+            'fecha_nacimiento' => 'required|date',
+            'afp' => 'required|string|max:255',
+            'isapre' => 'required|string|max:255',
+            'password' => 'nullable|string|min:3|same:password_confirm',
+            'password_confirm' => 'nullable|string|min:3'
+        ]);
+
+        if (!empty($request->password)) {
+            $updateData['password'] = Hash::make($request->password);
+            }
+
+        Log::info("message", $updateData);
+
+
         $cliente = User::find($request->id);
         $cliente->cargo =                 $request->cargo;
         $cliente->name = $request->name;
@@ -94,6 +120,7 @@ class UsoInternoController extends Controller
         $cliente->ciudad = $request->ciudad;
         $cliente->region = $request->region;
         $cliente->isapre = $request->isapre;
+        $cliente->password = $updateData['password'];
         $cliente->afp = $request->afp;
 
 
@@ -223,25 +250,50 @@ class UsoInternoController extends Controller
 
     public function usuarioCrear(Request $request)
     {
+
+
+        $validate = $request->validate([
+            'name' => 'required|string|max:255',
+            'selectedCargo' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'rut' => 'required|string|max:20|unique:users',
+            'telefono' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'ciudad' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'rol_id' => 'required|integer',
+            'fecha_nacimiento' => 'required|date',
+            'afp' => 'required|string|max:255',
+            'isapre' => 'required|string|max:255',
+            'password' => 'required|string|min:8|confirmed'
+
+        ]);
+
+        Log::info("message", $validate);
+
+
+        // Crear una nueva instancia del modelo User
         $user = new User();
-        $user->name =        $request->name;
-        $user->cargo =        $request->selectedCargo;
-        $user->last_name =   $request->last_name;
-        $user->email =       $request->email;
-        $user->rut =         $request->rut;
-        $user->telefono =    $request->telefono;
-        $user->address =     $request->address;
-        $user->ciudad =      $request->ciudad;
-        $user->region =      $request->region;
-        $user->rol_id =      $request->rol_id;
-        $user->fecha_nacimiento =      $request->fecha_nacimiento;
-        $user->afp =         $request->afp;
-        $user->isapre =         $request->isapre;
-        $user->cargo =       $request->selectedCargo;
-        $user->password =    Hash::make($request->password);
+        $user->name = $request->name;
+        $user->cargo = $request->selectedCargo;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->rut = $request->rut;
+        $user->telefono = $request->telefono;
+        $user->address = $request->address;
+        $user->ciudad = $request->ciudad;
+        $user->region = $request->region;
+        $user->rol_id = $request->rol_id;
+        $user->fecha_nacimiento = $request->fecha_nacimiento;
+        $user->afp = $request->afp;
+        $user->isapre = $request->isapre;
+        $user->password = Hash::make($request->password);
+
+        // Guardar el usuario en la base de datos
         $user->save();
 
-        return response()->json('Ok');
+        return response()->json('Ok', 200);
     }
 
     public function ViewAddPoliza()
@@ -304,23 +356,22 @@ class UsoInternoController extends Controller
     public function polizaCrear(Request $request)
     {
 
-        // $validatedData = $request->validate([
-        // 'tipo_poliza' => 'required',
-        // 'numero_poliza' => 'required',
-        // 'monto_asegurado' => 'required',
-        // 'prima' => 'required',
-        // 'valor_neto' => 'required',
-        // 'fecha_inicio' => 'required',
-        // 'fecha_vencimiento' => 'required',
-        // 'deducible' => 'required',
-        // 'cantidad_cuotas' => 'required',
-        // 'dia_pago' => 'required',
-        // 'metodo_pago' => 'required',
-        // 'aseguradora' => 'required',
-        // 'vendedor' => 'required',
-        // 'cliente_id' => 'required'
-        // No necesitas validar los archivos seleccionados ya que Laravel maneja la subida de archivos automáticamente
-        // ]);
+        $validatedData = $request->validate([
+            'tipo_poliza' => 'required',
+            'numero_poliza' => 'required',
+            'monto_asegurado' => 'required',
+            'prima' => 'required',
+            'valor_neto' => 'required',
+            'fecha_inicio' => 'required',
+            'fecha_vencimiento' => 'required',
+            'deducible' => 'required',
+            'cantidad_cuotas' => 'required',
+            'dia_pago' => 'required',
+            'metodo_pago' => 'required',
+            'aseguradora' => 'required',
+            'vendedor' => 'required',
+            'cliente_id' => 'required'
+        ]);
 
         $poliza = new Poliza();
         $poliza->tipo_poliza = $request->tipo_poliza;
