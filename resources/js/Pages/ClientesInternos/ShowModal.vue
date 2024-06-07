@@ -28,7 +28,7 @@
             </div>
             <div class="flex flex-col bg-slate-200 rounded-lg p-2">
                 <p><strong>Fecha de Nacimiento:</strong></p>
-                <p>{{ cliente.fechaNacimiento }}</p>
+                <p>{{ cliente.fecha_nacimiento }}</p>
             </div>
             <div class="flex flex-col bg-slate-200 rounded-lg p-2">
                 <p><strong>Fono:</strong></p>

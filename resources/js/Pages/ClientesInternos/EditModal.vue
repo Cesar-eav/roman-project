@@ -120,7 +120,7 @@ export default {
                 name: this.cliente.name,
                 last_name: this.cliente.last_name,
                 rut: this.cliente.rut,
-                fechaNacimiento: this.cliente.fecha_nacimiento,
+                fecha_nacimiento: this.cliente.fecha_nacimiento,
                 telefono: this.cliente.telefono,
                 email: this.cliente.email,
                 address: this.cliente.address,
@@ -144,7 +144,7 @@ export default {
                     name: this.formCliente.name,
                     last_name: this.formCliente.last_name,
                     rut: this.formCliente.rut,
-                    fechaNacimiento: this.formCliente.fecha_nacimiento,
+                    fecha_nacimiento: this.formCliente.fecha_nacimiento,
                     telefono: this.formCliente.telefono,
                     email: this.formCliente.email,
                     address: this.formCliente.address,
@@ -155,7 +155,7 @@ export default {
 
                 })
                 .then((response) => {
-                    console.log("RESPUESTA EDICION BACK: ", response.data);
+                    console.log("RESPUESTA EDICION BACK: ", response);
                     this.$emit('close');
 
                     if (response.data) {
