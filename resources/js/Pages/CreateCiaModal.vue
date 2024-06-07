@@ -17,47 +17,42 @@
                     <div class="p-4  justify-center rounded-md">
 
                         <div class="flex">
-                            <input type="text" v-model="form.razon_social" placeholder="Razón Social"
+                            <input type="text" v-model="form.razon_social" placeholder="Razón Social" required
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.nombre_fantasia" placeholder="Nombre de Fantasía"
+                            <input type="text" v-model="form.nombre_fantasia" placeholder="Nombre de Fantasía" required
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
-                            <input type="text" v-model="form.rut_empresa" placeholder="Rut Empresa"
+                            <input type="text" v-model="form.rut_empresa" placeholder="Rut Empresa" required
                                 class="mt-1  mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.direccion" placeholder="Dirección"
+                            <input type="text" v-model="form.direccion" placeholder="Dirección" required
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
-                            <input type="text" v-model="form.comuna" placeholder="Comuna"
+                            <input type="text" v-model="form.comuna" placeholder="Comuna" required
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.region" placeholder="Región"
+                            <input type="text" v-model="form.region" placeholder="Región" required
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
-                            <input type="text" v-model="form.fono" placeholder="Fono"
+                            <input type="text" v-model="form.fono" placeholder="Fono" required
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="email" v-model="form.mail" placeholder="Email"
+                            <input type="email" v-model="form.mail" placeholder="Email" required
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
-                            <select v-model="form.banco_id" id="banco_id" name="banco_id"
+                            <select v-model="form.banco_id" id="banco_id" name="banco_id"  required
                                 class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Seleccionar Banco</option>
                                 <template v-for="banco in bancos" :key="banco.id">
                                     <option :value="banco.id">{{ banco.nombre }}</option>
                                 </template>
                             </select>
-
-
                         </div>
-
-
-
 
                         <div class="mt-4">
                             <h2 class="text-lg font-semibold text-left leading-tight">

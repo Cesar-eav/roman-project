@@ -31,9 +31,9 @@
                             <select v-model="form.selectedCargo" id="cargo" name="cargo"
                                 class="block  border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Seleccionar Nivel Ejecutivo</option>
-                                <option value="cobranza">Comercial</option>
-                                <option value="contador">Cobranza</option>
-                                <option value="gestor_siniestro">Gestor de Siniestros</option>
+                                <option value="Cobranza">Comercial</option>
+                                <option value="Contador">Cobranza</option>
+                                <option value="Gestor de Siniestros">Gestor de Siniestros</option>
                             </select>
                         </div>
 
@@ -127,20 +127,20 @@ export default {
         return {
             form: this.$inertia.form({
                 selectedCargo: '',
-                name: 'cesar',
+                name: '',
                 last_name: '',
                 rut: '',
                 fecha_nacimiento: '',
                 telefono: '',
-                email: '1@2.cl',
+                email: '',
                 address: '',
                 isapre: '',
                 afp: '',
                 ciudad: '',
                 region: '',
-                rol_id: 2,
-                password: 'qwedsar1ASD',
-                password_confirmation: 'qwedsar1ASD',
+                rol_id: '',
+                password: '123123123',
+                password_confirmation: '123123123',
             })
         };
     },

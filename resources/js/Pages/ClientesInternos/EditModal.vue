@@ -2,15 +2,19 @@
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <div class="m-4 p-4 bg-orange-500">
             <h2 class="text-white text-2xl font-semibold text-center leading-tight">
-                Editar {{ cliente.name }} {{ cliente.last_name }} {{ cliente.id }}
+                {{ cliente.name }} {{ cliente.last_name }}
             </h2>
         </div>
         <form @submit.prevent="submit">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-900 mx-4">
-                <div>
+
+                <div class="flex flex-col mt-1 w-full">
                     <label for="nivel_ejecutivo">Nivel Ejecutivo:</label>
-                    <input type="text" v-model="formCliente.cargo" :placeholder="formCliente.cargo"
-                        class="custom-input" />
+                    <select v-model="formCliente.cargo"  class="rounded-md ">
+                        <option value="Cobranza">Comercial</option>
+                        <option value="Contador">Cobranza</option>
+                        <option value="Gestor de Siniestros">Gestor de Siniestros</option>
+                    </select>
                 </div>
                 <div>
                     <label for="name">Nombre:</label>

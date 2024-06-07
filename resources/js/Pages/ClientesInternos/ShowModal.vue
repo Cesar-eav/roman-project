@@ -8,25 +8,59 @@
             </h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-900 mx-4">
-                    <p><strong>Nivel Ejecutivo:</strong> {{ cliente.cargo }}</p>
-                    <p><strong>Nombres:</strong> {{ cliente.name }}</p>
-                    <p><strong>Apellidos:</strong> {{ cliente.last_name }}</p>
-                    <p><strong>RUT:</strong> {{ cliente.rut }}</p>
-                    <p><strong>Fecha de Nacimiento:</strong> {{ cliente.fechaNacimiento }}</p>
-                    <p><strong>Fono:</strong> {{ cliente.telefono }}</p>
-                    <p><strong>Mail:</strong> {{ cliente.email }}</p>
-                    <p><strong>Dirección:</strong> {{ cliente.address }}</p>
-                    <p><strong>Comuna:</strong> {{ cliente.ciudad }}</p>
-                    <p><strong>Región:</strong> {{ cliente.region }}</p>
-                    <p><strong>Isapre:</strong> {{ cliente.isapre }}</p>
-                    <p><strong>AFP:</strong> {{ cliente.afp }}</p>
-                </div>
 
-
-
-            <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
-                <slot name="footer"> </slot>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Nivel Ejecutivo</strong></p>
+                <p>{{ cliente.cargo }}</p>
             </div>
+
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Nombres:</strong></p>
+                <p>{{ cliente.name }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Apellidos:</strong></p>
+                <p>{{ cliente.last_name }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>RUT:</strong></p>
+                <p>{{ cliente.rut }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Fecha de Nacimiento:</strong></p>
+                <p>{{ cliente.fechaNacimiento }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Fono:</strong></p>
+                <p>{{ cliente.telefono }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Mail:</strong></p>
+                <p>{{ cliente.email }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Dirección:</strong></p>
+                <p>{{ cliente.address }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Comuna:</strong></p>
+                <p>{{ cliente.ciudad }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Región:</strong></p>
+                <p>{{ cliente.region }}</p>
+            </div>
+            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
+                <p><strong>Isapre:</strong></p>
+                <p>{{ cliente.isapre }}</p>
+            </div>
+        </div>
+
+
+
+        <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
+            <slot name="footer"> </slot>
+        </div>
     </Modal>
 </template>
 
