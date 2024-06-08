@@ -87,8 +87,8 @@ class UsoInternoController extends Controller
         $updateData = $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
-            'rut' => 'required|string|max:20|unique:users,rut,'.$request->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $request->id,
+            'rut' => 'required|string|max:20|unique:users,rut,' . $request->id,
             'telefono' => 'required|string|max:20',
             'address' => 'required|string|max:255',
             'ciudad' => 'required|string|max:255',
@@ -103,7 +103,7 @@ class UsoInternoController extends Controller
 
         if (!empty($request->password)) {
             $updateData['password'] = Hash::make($request->password);
-            }
+        }
 
         Log::info("message", $updateData);
 
@@ -120,15 +120,14 @@ class UsoInternoController extends Controller
         $cliente->ciudad = $request->ciudad;
         $cliente->region = $request->region;
         $cliente->isapre = $request->isapre;
-        $cliente->password = $updateData['password'];
         $cliente->afp = $request->afp;
 
+        if (!empty($request->password)) {
+            $cliente->password = $updateData['password'];
+        }
 
         $response = $cliente->save();
         return $response;
-
-        // $cliente = User::where('id', $id)->first();
-        //return $cliente;
     }
 
 

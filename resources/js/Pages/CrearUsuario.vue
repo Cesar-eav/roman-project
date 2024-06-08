@@ -15,7 +15,7 @@
             <div class="p-4 text-white w-3/4 justify-center bg-slate-900">
                 <div class="flex">
                         <label for="cargo" class="block w-1/4 text-sm font-medium ">Nivel ejecutivo:</label>
-                        <select v-model="form.selectedCargo" id="cargo" name="cargo"
+                        <select v-model="form.selectedCargo" id="cargo" name="cargo" required
                             class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <option value="">Seleccionar Nivel Ejecutivo</option>
                             <option value="cobranza">Comercial</option>
@@ -31,13 +31,13 @@
                 </div>
                 <div class="flex">
                     <label class="block text-sm w-1/4 font-medium  mt-4">Apellidos:</label>
-                    <input type="text" v-model="form.last_name"
+                    <input type="text" v-model="form.last_name" required
                         class="mt-1 block border-gray-300  w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex">
                     <label class="block text-sm w-1/4 font-medium  mt-4">Rut:</label>
-                    <input type="text" v-model="form.rut"
+                    <input type="text" v-model="form.rut" required
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
@@ -91,12 +91,12 @@
                   <div class="flex">
 
                   <label class="block w-1/4 text-sm font-medium  mt-4">Contraseña:</label>
-                    <input type="password" v-model="form.password"
+                    <input type="password" v-model="form.password" required
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
                 <div class="flex">
                     <label class="block w-1/4 text-sm font-medium  mt-4">Confirmar Contraseña:</label>
-                    <input type="password" v-model="form.password_confirmation"
+                    <input type="password" v-model="form.password_confirmation" required
                         class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
