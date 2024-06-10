@@ -17,13 +17,14 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-300  justify-start">
+                    <div class="p-6 text-gray-300 text-sm justify-start">
                         <table id="clientesTable" class="display">
                             <thead class="bg-gray-900">
                                 <tr>
                                     <th class="rounded-l-full">Id</th>
-                                    <th>Rut</th>
+                                    <th>Nivel Ejecutivo</th>
                                     <th>Nombre</th>
+                                    <th>Comuna</th>
                                     <th class="rounded-r-full">Acciones</th>
                                 </tr>
                             </thead>
@@ -31,7 +32,8 @@
                                 <tr v-for="cliente in usuarios_externos" :key="cliente.id">
                                     <td>{{ cliente.id }}</td>
                                     <td>{{ cliente.nivel_ejecutivo }}</td>
-                                    <td>{{ cliente.nombres }}</td>
+                                    <td>{{ cliente.nombres }} {{ cliente.apellido_paterno }}</td>
+                                    <td>{{ cliente.nombres }} {{ cliente.comuna }}</td>
                                     <th class="flex justify-start">
                                         <button class="btn btn-ver" @click="verUsuario(cliente.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editarUsuario(cliente.id)">Editar</button>
