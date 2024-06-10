@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="flex">
-                            <select v-model="form.banco_id" id="banco_id" name="banco_id"  required
+                            <select v-model="form.banco_id" id="banco_id" name="banco_id" required
                                 class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Seleccionar Banco</option>
                                 <template v-for="banco in bancos" :key="banco.id">
@@ -61,21 +61,21 @@
                         </div>
 
                         <div class="flex">
-                
-                                <input type="text" v-model="form.representante_legal" placeholder="Nombre"
-                                    class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <input type="text" v-model="form.representante_legal" placeholder="Apellidos"
-                                    class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div class="flex">
-                                <input type="text" v-model="form.rut_representante" placeholder="Rut "
-                                    class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <input type="email" v-model="form.mail_representante" placeholder="Email"
-                                    class="mt-1 mx-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <input type="text" v-model="form.fono_representante" placeholder="Fono "
-                                    class="block mt-1 border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-            
+
+                            <input type="text" v-model="form.representante_legal" placeholder="Nombre"
+                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="text" v-model="form.representante_legal" placeholder="Apellidos"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div class="flex">
+                            <input type="text" v-model="form.rut_representante" placeholder="Rut "
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="email" v-model="form.mail_representante" placeholder="Email"
+                                class="mt-1 mx-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="text" v-model="form.fono_representante" placeholder="Fono "
+                                class="block mt-1 border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+
                         <div class="mt-4">
                             <h2 class="text-lg font-semibold text-left leading-tight">
                                 Gerente:
@@ -110,11 +110,11 @@
                     </div>
                 </div>
                 <div v-if="showModalEjecutiva1">
-                    Agregar ejecutiva 1
+                  <p class="flex text-xl justify-center">Ejecutiva 1</p>
                     <div class="p-2 border border-spacing-2">
                         <div class="flex">
                             <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva
-                                1:</label>
+                                :</label>
                             <input type="text" v-model="form.ejecutiva_1"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
@@ -141,10 +141,10 @@
                 </div>
 
                 <div v-if="showModalEjecutiva2">
-                    <p class="">Agregar ejecutiva 2</p>
+                    <p class="flex text-xl justify-center">Ejecutiva 2</p>
                     <div class="p-2 border border-spacing-2">
                         <div class="flex">
-                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva 2:</label>
+                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva:</label>
                             <input type="text" v-model="form.ejecutiva_2"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
@@ -168,19 +168,21 @@
                     </div>
                 </div>
 
-                <div class="py-4 w-60 justify-items-end">
-                    <Button type="submit" class="w-full justify-center gap-2">
+                <div class="flex py-4 w-full justify-between ">
+                    <Button type="submit">
                         <span>Registrar Compañia</span>
                     </Button>
+
+                    <button class="button-ejecutiva" @click="irEjecutiva1" v-if="mostrarModal">Agregar Ejecutiva 1</button>
+                    <button class="button-ejecutiva" @click="inicio" v-if="showModalEjecutiva1 || showModalEjecutiva2">Inicio</button>
+                    <button class="button-ejecutiva" @click="volverEjecutiva1" v-if="showModalEjecutiva2">Volver a Ejecutiva 1</button>
+                    <button class="button-ejecutiva" @click="siguiente2" v-if="showModalEjecutiva1">Agregar Ejecutiva 2</button>
                 </div>
 
             </form>
 
             <div class="flex flex-col">
-                <button @click="volver1" v-if="ejecutiva2 || ejecutiva1">Volver </button>
-                <button @click="volverEjecutiva1" v-if="showModalEjecutiva2">Volver a Ejecutiva 1</button>
-                <button @click="siguiente" v-if="ejecutiva1 || mostrarModal">Agregar Ejecutiva 1</button>
-                <button @click="siguiente2" v-if="ejecutiva2">Agregar Ejecutiva 2</button>
+
             </div>
 
 
@@ -225,7 +227,6 @@ export default {
     data() {
         return {
             mostrarModal: true,
-            ejecutiva1: false,
             volverEjecutiva: false,
             showModalEjecutiva1: false,
             showModalEjecutiva2: false,
@@ -268,32 +269,32 @@ export default {
     },
     methods: {
 
-        siguiente() {
+        irEjecutiva1() {
             this.mostrarModal = false,
-                this.showModalEjecutiva1 = true;
+            this.showModalEjecutiva1 = true;
             this.showModalEjecutiva2 = false;
-            this.ejecutiva1 = false;
-            this.ejecutiva2 = true;
+
         },
+
+        //Ejecutiva 2
         siguiente2() {
             this.mostrarModal = false;
             this.showModalEjecutiva1 = false;
             this.showModalEjecutiva2 = true;
-            this.ejecutiva1 = false;
-            this.ejecutiva2 = false;
+
         },
-        volver1() {
+
+        //Despliego Modal Inicio
+        inicio() {
             this.mostrarModal = true;
-            this.ejecutiva1 = true;
-            this.ejecutiva2 = false;
+
             this.showModalEjecutiva1 = false;
             this.showModalEjecutiva2 = false;
         },
         volverEjecutiva1() {
             this.mostrarModal = false;
             this.volverEjecutiva = false;
-            this.ejecutiva1 = true;
-            this.ejecutiva2 = false;
+
             this.showModalEjecutiva1 = true;
             this.showModalEjecutiva2 = false;
         },
@@ -344,3 +345,14 @@ export default {
     }
 };
 </script>
+
+<style>
+.button-ejecutiva {
+
+        background-color: #1f2937;
+        padding: 0.5rem;
+        color: white;
+        border-radius: 0.5rem;
+    
+}
+</style>
