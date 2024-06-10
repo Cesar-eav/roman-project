@@ -13,7 +13,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-300 justify-start">
+                    <div class="p-6 text-gray-300 text-sm justify-start">
                         <table id="clientesTable" class="display">
                             <thead>
                                 <tr>
@@ -32,7 +32,7 @@
                                     <td>{{ company.rut_empresa }}</td>
                                     <td>{{ company.banco.nombre }}</td>
                                     <td>{{ company.comuna }}</td>
-                                    <th>
+                                    <th class="flex justify-center">
                                         <button class="btn btn-ver" @click="verCia(company.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editarCia(company.id)">Editar</button>
                                         <button class="btn btn-eliminar"
