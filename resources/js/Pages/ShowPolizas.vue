@@ -55,7 +55,7 @@
                                     <td>{{ poliza.dia_pago }}</td>
                                     <td>{{ poliza.metodo_pago }}</td>
                                     <td>12 {{ poliza.aseguradora }}</td>
-                                    <td>
+                                    <td class="flex justify-start">
                                         <button class="btn btn-ver" @click="ver(poliza.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editar(poliza.id)">Editar</button>
                                         <button class="btn btn-eliminar"
