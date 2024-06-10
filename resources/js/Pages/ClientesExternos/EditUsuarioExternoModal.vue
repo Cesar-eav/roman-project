@@ -3,7 +3,6 @@
         <div class="m-4 p-4 bg-orange-500">
             <h2 class="flex flex-col text-white text-2xl font-semibold text-center leading-tight">
                 <p>Editar Usuario Externo </p>
-                <p class="text-2xl">{{ usuario_externo.nombres }}</p>
             </h2>
         </div>
         <form @submit.prevent="submit">
@@ -35,7 +34,7 @@
                 </div>
                 <div>
                     <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                    <input type="text" v-model="form.fecha_nacimiento" :placeholder="usuario_externo.fecha_nacimiento"
+                    <input type="date" v-model="form.fecha_nacimiento" :placeholder="usuario_externo.fecha_nacimiento"
                         class="custom-input" />
                 </div>
                 <div>

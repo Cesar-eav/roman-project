@@ -33,7 +33,7 @@
                                     <td>{{ cliente.id }}</td>
                                     <td>{{ cliente.nivel_ejecutivo }}</td>
                                     <td>{{ cliente.nombres }} {{ cliente.apellido_paterno }}</td>
-                                    <td>{{ cliente.nombres }} {{ cliente.comuna }}</td>
+                                    <td>{{ cliente.comuna }}</td>
                                     <th class="flex justify-start">
                                         <button class="btn btn-ver" @click="verUsuario(cliente.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editarUsuario(cliente.id)">Editar</button>
