@@ -81,6 +81,25 @@ class ClienteExternoController extends Controller
     public function editUsuarioExterno(Request $request)
     {
 
+        $updateData = $request->validate([
+            'id' => 'required|integer|exists:usuarios_externos,id', // Ajusta las reglas según tus necesidades
+            'nivel_ejecutivo' => 'required|string|max:255',
+            'nombres' => 'required|string|max:255',
+            'apellido_paterno' => 'required|string|max:255',
+            'apellido_materno' => 'required|string|max:255',
+            'rut' => 'required|string|max:20|unique:usuarios_externos,rut,' . $request->id,
+            'fecha_nacimiento' => 'required|date',
+            'fono' => 'required|string|max:20',
+            'mail' => 'required|string|email|max:255|unique:usuarios_externos,mail,' . $request->id,
+            'direccion' => 'required|string|max:255',
+            'comuna' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'isapre' => 'required|string|max:255',
+            'afp' => 'required|string|max:255',
+
+        ]);
+
+
         $usuarioExterno = UsuarioExterno::find($request->id);
         $usuarioExterno->id = $request->id;
         $usuarioExterno->nivel_ejecutivo = $request->nivel_ejecutivo;
