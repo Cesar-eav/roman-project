@@ -16,23 +16,23 @@
                 <div class="p-4 justify-center text-slate-900">
 
                     <div class="flex text-slate-900">
-                        <input type="text" v-model="form.nombres" required placeholder="Nombres"
+                        <input type="text" v-model="form.nombres" placeholder="Nombres" required
                             class="mt-1 mr-1 w-1/2 block border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                        <input type="text" v-model="form.apellidoPaterno" placeholder="Apellido Paterno"
+                        <input type="text" v-model="form.apellidoPaterno" placeholder="Apellido Paterno" required
                             class="mt-1 block w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 
                     <div class="flex text-slate-900">
-                        <input type="text" v-model="form.apellidoMaterno" placeholder="Apellido Materno"
+                        <input type="text" v-model="form.apellidoMaterno" placeholder="Apellido Materno" required
                             class="mt-1 mr-1 w-1/2 block border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                        <input type="text" v-model="form.rut" placeholder="RUT"
+                        <input type="text" v-model="form.rut" placeholder="RUT" required
                             class="mt-1 block w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 
                     <div class="flex text-slate-900">
-                        <select v-model="form.nivelEjecutivo" id="nivelEjecutivo" name="nivelEjecutivo"
+                        <select v-model="form.nivelEjecutivo" id="nivelEjecutivo" name="nivelEjecutivo" required
                             class="mt-1 mr-1 block w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <option value="">Seleccionar Nivel Ejecutivo</option>
                             <option value="comercial">Comercial</option>
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="flex">
-                        <input type="email" v-model="form.mail" required placeholder="Correo"
+                        <input type="email" v-model="form.mail" placeholder="Correo" required
                             class="mt-1 mr-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         <input type="text" v-model="form.direccion" placeholder="Dirección"
@@ -73,18 +73,6 @@
                         <input type="text" v-model="form.afp" placeholder="AFP"
                             class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
-
-                    <!-- <div class="flex">
-            <label class="block w-1/4 text-sm font-medium mt-4">Contraseña:</label>
-            <input type="password" v-model="form.password"
-                class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-        </div>
-
-        <div class="flex">
-            <label class="block w-1/4 text-sm font-medium mt-4">Confirmar Contraseña:</label>
-            <input type="password" v-model="form.password_confirmation"
-                class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-        </div> -->
 
                     <div class="py-4 w-60 justify-items-end">
                         <Button  class="w-full justify-center gap-2">
@@ -136,7 +124,7 @@ export default {
                 rut: '',
                 fechaNacimiento: '',
                 fono: '',
-                mail: '1@1.cl',
+                mail: '',
                 direccion: '',
                 comuna: '',
                 region: '',

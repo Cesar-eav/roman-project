@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Empresa;
-use App\Models\UsuarioExterno;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Empresa;
+use Illuminate\Http\Request;
+use App\Models\UsuarioExterno;
 use App\Exports\EmpresasExport;
-use App\Exports\ClientesExternosExport;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ClientesExternosExport;
 
 
 class ClienteExternoController extends Controller
@@ -133,31 +134,33 @@ class ClienteExternoController extends Controller
     public function guardarClienteExterno(Request $request)
     {
 
-        //    Validar los datos del formulario
-        //    $request-> $request->validate([
-        // 'nivelEjecutivo' => 'nullable|string|max:255',
-        // 'nombres' => 'nullable|string|max:255',
-        // 'apellidoPaterno' => 'nullable|string|max:255',
-        // 'apellidoMaterno' => 'nullable|string|max:255',
-        // 'rut' => 'nullable|string|max:255',
-        // 'fechaNacimiento' => 'nullable|date',
-        // 'fono' => 'nullable|string|max:255',
-        // 'mail' => 'nullable|string|email|max:255',
-        // 'direccion' => 'nullable|string|max:255',
-        // 'comuna' => 'nullable|string|max:255',
-        // 'region' => 'nullable|string|max:255',
-        // 'isapre' => 'nullable|string|max:255',
-        // 'afp' => 'nullable|string|max:255',
-        // ]);
+        // Validar los datos del formulario
+           $validate = $request->validate([
+        'nivel_ejecutivo' => 'required|string|max:255',
+        'nombres' => 'required|string|max:255',
+        'apellido_paterno' => 'required|string|max:255',
+        'apellido_materno' => 'required|string|max:255',
+        'rut' => 'required|string|max:255',
+        'fecha_nacimiento' => 'nullable|date',
+        'fono' => 'nullable|string|max:255',
+        'mail' => 'required|string|email|max:255',
+        'direccion' => 'nullable|string|max:255',
+        'comuna' => 'nullable|string|max:255',
+        'region' => 'nullable|string|max:255',
+        'isapre' => 'nullable|string|max:255',
+        'afp' => 'nullable|string|max:255',
+        ]);
+
+        Log::info("message", $validate);
 
         // Crear una nueva instancia de Empresa y asignar los valores
         $usuarioExterno = new UsuarioExterno();
-        $usuarioExterno->nivel_ejecutivo = $request->nivelEjecutivo;
+        $usuarioExterno->nivel_ejecutivo = $request->nivel_ejecutivo;
         $usuarioExterno->nombres = $request->nombres;
-        $usuarioExterno->apellido_paterno = $request->apellidoPaterno;
-        $usuarioExterno->apellido_materno = $request->apellidoMaterno;
+        $usuarioExterno->apellido_paterno = $request->apellido_paterno;
+        $usuarioExterno->apellido_materno = $request->apellido_materno;
         $usuarioExterno->rut = $request->rut;
-        $usuarioExterno->fecha_nacimiento = $request->fechaNacimiento;
+        $usuarioExterno->fecha_nacimiento = $request->fecha_nacimiento;
         $usuarioExterno->fono = $request->fono;
         $usuarioExterno->mail = $request->mail;
         $usuarioExterno->direccion = $request->direccion;
