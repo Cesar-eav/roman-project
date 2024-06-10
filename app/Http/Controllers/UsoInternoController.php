@@ -310,6 +310,23 @@ class UsoInternoController extends Controller
     public function ciaCrear(Request $request)
     {
 
+        $validate = $request->validate([
+            'razon_social' => 'required|string|max:255',
+            'nombre_fantasia' => 'required|string|max:255',
+            'rut_empresa' => 'required|string|max:15', 
+            'direccion' => 'required|string',
+            'comuna' => 'required|string',
+            'region' => 'required|string',
+            'fono' => 'required|phone', 
+            'mail' => 'required|email',
+            'nombre_banco' => 'required|string',
+            'banco_id' => 'required|integer',
+            'num_cuenta' => 'required|string',
+
+        ]);
+
+        Log::info("message", $validate);
+
         $cia = new CiaAseguradora();
         $cia->razon_social = $request->razon_social;
         $cia->nombre_fantasia = $request->nombre_fantasia;
