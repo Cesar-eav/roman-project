@@ -165,26 +165,7 @@
                     <input type="date" v-model="formCliente.fecha_nacimiento_ejecutiva_2"
                         :placeholder="formCliente.fecha_nacimiento_ejecutiva_2" class="custom-input" />
                 </div>
-                <div>
-                    <label for="ejecutiva_3">Ejecutiva 3:</label>
-                    <input type="text" v-model="formCliente.ejecutiva_3" :placeholder="companies.ejecutiva_3"
-                        class="custom-input" />
-                </div>
-                <div>
-                    <label for="fono_ejecutiva_3">Teléfono de Ejecutiva 3:</label>
-                    <input type="text" v-model="formCliente.fono_ejecutiva_3" :placeholder="companies.fono_ejecutiva_3"
-                        class="custom-input" />
-                </div>
-                <div>
-                    <label for="mail_ejecutiva_3">Correo Electrónico de Ejecutiva 3:</label>
-                    <input type="email" v-model="formCliente.mail_ejecutiva_3" :placeholder="companies.mail_ejecutiva_3"
-                        class="custom-input" />
-                </div>
-                <div>
-                    <label for="fecha_nacimiento_ejecutiva_3">Fecha de Nacimiento de Ejecutiva 3:</label>
-                    <input type="date" v-model="formCliente.fecha_nacimiento_ejecutiva_3"
-                        :placeholder="formCliente.fecha_nacimiento_ejecutiva_3" class="custom-input" />
-                </div>
+                
 
             </div>
             <div class="flex justify-end mt-2 mr-10">

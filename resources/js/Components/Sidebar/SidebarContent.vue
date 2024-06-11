@@ -7,15 +7,23 @@
             </template>
         </SidebarLink>
 
+        <CreateUserModal v-if="showModal" :show="showModal" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreateUserModal>
+
         <!-- CONFIGURACION INTERNA -->
-        <SidebarCollapsible title="Configuración Interna" :href="route('crearusuario')" class="text-xs"
-            :active="route().current('crearusuario') || 
-            route().current('dashboard') || 
-            route().current('cliente') || 
-            route().current('show-cias') || 
-            route().current('add-compania')">
-            <SidebarCollapsibleItem title="Crear Usuario Interno" :href="route('crearusuario')"
-                :active="route().current('crearusuario')" />
+        <SidebarCollapsible title="Configuración Interna"  class="text-xs" 
+            :active="
+            route().current('crearusuario') ||
+            route().current('dashboard') ||
+            route().current('cliente') ||
+            route().current('show-cias') ||
+            route().current('add-compania')
+            ">
+
+            <SidebarCollapsibleItem title="Crear Usuario Interno" @click.prevent="openModal"/>
             <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
                 :active="route().current('dashboard')" />
             <SidebarCollapsibleItem title="Asignación de Atribuciones" />
@@ -27,15 +35,14 @@
         </SidebarCollapsible>
 
         <!-- CLIENTES EXTERNOS -->
-        <SidebarCollapsible title="Clientes Externos" class="text-xs"
-            :active="route().current('crear-empresa') || 
-            route().current('show-empresas') || 
-            route().current('show-cliente-externo') ">
+        <SidebarCollapsible title="Clientes Externos" class="text-xs" :active="route().current('crear-empresa') ||
+            route().current('show-empresas') ||
+            route().current('show-cliente-externo')">
             <SidebarCollapsibleItem title="Crear Empresa Nueva" :href="route('crear-empresa')"
                 :active="route().current('crear-empresa')" />
             <SidebarCollapsibleItem title="Aprobación de Solicitud" />
             <SidebarCollapsibleItem title="Listado Empresas" :href="route('show-empresas')"
-                :active="route().current('show-empresas')" /> 
+                :active="route().current('show-empresas')" />
             <SidebarCollapsibleItem title="Crear Usuarios Exeternos" />
             <SidebarCollapsibleItem title="Listado Clientes Externos" :href="route('show-cliente-externo')"
                 :active="route().current('show-cliente-externo')" />
@@ -101,9 +108,29 @@
 </template>
 
 <script setup>
+
+import { ref, reactive } from 'vue';
+
 import PerfrectScrollbar from '@/Components/PerfectScrollbar'
 import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
 import SidebarCollapsibleItem from '@/Components/Sidebar/SidebarCollapsibleItem.vue'
 import SidebarCollapsible from '@/Components/Sidebar/SidebarCollapsible.vue'
+import CreateUserModal from '@/Pages/CreateUserModal.vue'
 import { DashboardIcon } from '@/Components/Icons/Outline'
+
+
+
+// Declarar variables reactivas usando ref
+const showModal = ref(false);
+
+
+function openModal(event){
+    event.preventDefault();
+    showModal.value = true
+}
+
+function close() {
+    showModal.value = false
+}
+
 </script>

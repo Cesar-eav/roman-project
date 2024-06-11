@@ -9,7 +9,11 @@ class Banco extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre'
 
+    ];
+    
     public function users(){
         return $this->hasMany(User::class);
     }

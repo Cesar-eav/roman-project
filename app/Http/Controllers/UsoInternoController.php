@@ -313,20 +313,17 @@ class UsoInternoController extends Controller
         $validate = $request->validate([
             'razon_social' => 'required|string|max:255',
             'nombre_fantasia' => 'required|string|max:255',
-            'rut_empresa' => 'required|string|max:15', 
+            'rut_empresa' => 'required|string|max:15',
             'direccion' => 'required|string',
             'comuna' => 'required|string',
             'region' => 'required|string',
-            'fono' => 'required|phone', 
+            'fono' => 'required|max:15',
             'mail' => 'required|email',
-            'nombre_banco' => 'required|string',
             'banco_id' => 'required|integer',
-            'num_cuenta' => 'required|string',
 
         ]);
 
         Log::info("message", $validate);
-
         $cia = new CiaAseguradora();
         $cia->razon_social = $request->razon_social;
         $cia->nombre_fantasia = $request->nombre_fantasia;

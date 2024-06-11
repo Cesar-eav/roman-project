@@ -196,7 +196,9 @@ export default {
     },
     mounted() {
         $('#clientesTable').DataTable({
-            dom: 'rtip'  // Remueve el campo de búsqueda por defecto
+            dom: 'rtip',  // Remueve el campo de búsqueda por defecto
+            scrollX: true,  // Habilita el scroll horizontal
+            autoWidth: false,  // Permite que la tabla ajuste su ancho automáticamente
         });
     }
 };
