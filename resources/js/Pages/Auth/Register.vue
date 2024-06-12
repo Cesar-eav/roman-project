@@ -6,7 +6,7 @@
         <form @submit.prevent="submit">
             <div class="grid gap-4">
 
-
+<!-- 
                 <div class="flex ">
                     <label class="block text-sm font-medium w-1/4  mt-4">Tipo de Cliente:</label>
                     <select v-model="selectedType"
@@ -14,7 +14,7 @@
                         <option value="externo">Cliente Externo</option>
                         <option value="interno">Cliente Interno</option>
                     </select>
-                </div>
+                </div> -->
 
 
                 <div v-if="selectedType === 'interno'">

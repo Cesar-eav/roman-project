@@ -12,9 +12,9 @@
                     Acceso a clientes
                 </Link>
 
-                <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
+                <!-- <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
                     Register
-                </Link>
+                </Link> -->
             </template>
         </div>
 

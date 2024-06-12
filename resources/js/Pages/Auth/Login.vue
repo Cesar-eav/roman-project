@@ -34,9 +34,9 @@
                         <span class="ml-2 text-sm text-gray-600">Recordarme</span>
                     </label>
 
-                    <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-blue-500 hover:underline">
+                    <!-- <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-blue-500 hover:underline">
                         ¿Olvidaste tu contraseña?
-                    </Link>
+                    </Link> -->
                 </div>
 
                 <div>
@@ -45,13 +45,13 @@
                         <span>Iniciar sesión</span>
                     </Button>
                 </div>
-
+<!-- 
                 <p class="text-sm text-gray-600 dark:text-gray-400">
                     ¿No tienes una cuenta?
                     <Link :href="route('register')" class="text-blue-500 hover:underline">
                         Registrarse
                     </Link>
-                </p>
+                </p> -->
             </div>
         </form>
     </AuthenticationLayout>
