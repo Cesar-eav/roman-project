@@ -7,17 +7,6 @@
             </template>
         </SidebarLink>
 
-        <CreateUserModal v-if="showModal" :show="showModal" @close="close">
-            <template #footer>
-                <button @click="close">Cerrar</button>
-            </template>
-        </CreateUserModal>
-
-        <CreateCiaModal v-if="showCiaModal" :show="showCiaModal" @close="close">
-            <template #footer>
-                <button @click="close">Cerrar</button>
-            </template>
-        </CreateCiaModal>
 
         <!-- CONFIGURACION INTERNA -->
         <SidebarCollapsible title="Configuración Interna" class="text-xs" :active="route().current('crearusuario') ||
@@ -41,8 +30,10 @@
         <SidebarCollapsible title="Clientes Externos" class="text-xs" :active="route().current('crear-empresa') ||
             route().current('show-empresas') ||
             route().current('show-cliente-externo')">
-            <SidebarCollapsibleItem title="Crear Empresa Nueva" :href="route('crear-empresa')"
-                :active="route().current('crear-empresa')" />
+
+
+        <SidebarCollapsibleItem title="Crear Empresa Nueva" :onClick="openEmpresaModal" :active="false" />
+
             <SidebarCollapsibleItem title="Aprobación de Solicitud" />
             <SidebarCollapsibleItem title="Listado Empresas" :href="route('show-empresas')"
                 :active="route().current('show-empresas')" />
@@ -101,12 +92,32 @@
             <p>-Asignación y Carga de Permisos x Ejecutivo</p>
             <p>-Asignación y Carga de Licencias Médicas x Ejecutivo</p>
 
-
-
-
-
         </SidebarCollapsible>
 
+
+        
+        <CreateUserModal v-if="showModal" :show="showModal" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreateUserModal>
+
+        <CreateCiaModal v-if="showCiaModal" :show="showCiaModal" :bancos="bancos" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreateCiaModal>
+
+
+        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal"  :bancos="bancos" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreateEmpresaModal>
+
+
+
+        
     </PerfrectScrollbar>
 </template>
 
@@ -123,14 +134,18 @@ import SidebarCollapsible from '@/Components/Sidebar/SidebarCollapsible.vue'
 import CreateUserModal from '@/Pages/CreateUserModal.vue'
 import { DashboardIcon } from '@/Components/Icons/Outline'
 import CreateCiaModal from '@/Pages/CreateCiaModal.vue'
+import CreateEmpresaModal from '@/Pages/CreateEmpresaModal.vue'
 
 
 const page = usePage();
+const companies = computed(() => page.props.value.companies);
 const bancos = computed(() => page.props.value.bancos);
+
 
 // Declarar variables reactivas usando ref
 const showModal = ref(false);
 const showCiaModal = ref(false);
+const showEmpresaModal = ref(false);
 
 
 function openCreateUserModal(event) {
@@ -139,15 +154,20 @@ function openCreateUserModal(event) {
 
 }
 
-
 function openCiaSeguroModal(event) {
     showCiaModal.value = true
+    event.preventDefault();
+}
+
+function openEmpresaModal(event) {
+    showEmpresaModal.value = true
     event.preventDefault();
 }
 
 function close() {
     showModal.value = false
     showCiaModal.value = false
+    // showEmpresaModal.value = false
 
 }
 

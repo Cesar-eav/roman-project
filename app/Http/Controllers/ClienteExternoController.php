@@ -37,19 +37,20 @@ class ClienteExternoController extends Controller
 
     public function showEmpresa($id)
     {
-        $empresa = Empresa::where('id',$id)->first();
+        $empresa = Empresa::where('id', $id)->first();
         return $empresa;
     }
 
-    public function editShowEmpresa ($id){
-        
+    public function editShowEmpresa($id)
+    {
+
         $empresa = Empresa::where('id', $id)->first();
         return $empresa;
-     }
+    }
 
     public function editEmpresa(Request $request)
     {
-     
+
         $empresa = Empresa::find($request->id);
         $empresa->id = $request->id;
         $empresa->razon_social = $request->razon_social;
@@ -134,40 +135,71 @@ class ClienteExternoController extends Controller
 
     public function showClienteExterno($id)
     {
-        $cliente = UsuarioExterno::where('id',$id)->first();
+        $cliente = UsuarioExterno::where('id', $id)->first();
         return $cliente;
     }
 
-    public function deleteEmpresa ($id){
+    public function deleteEmpresa($id)
+    {
         $empresa = Empresa::find($id);
         $response = $empresa->delete();
         return $response;
-     }
+    }
 
-     public function deleteUsuarioExterno ($id){
+    public function deleteUsuarioExterno($id)
+    {
         $usuario_externo = UsuarioExterno::find($id);
         $response = $usuario_externo->delete();
         return $response;
-     }
-    
+    }
+
+    public function guardarEmpresa(Request $request)
+    {
+
+
+        $empresa = new Empresa();
+
+        $empresa->razon_social = $request->razon_social;
+        $empresa->nombre_fantasia = $request->nombre_fantasia;
+        $empresa->nombres_persona_natural = $request->nombres_persona_natural;
+        $empresa->apellido_paterno_persona_natural = $request->apellido_paterno_persona_natural;
+        $empresa->apellido_materno_persona_natural = $request->apellido_materno_persona_natural;
+        $empresa->rut_empresa_persona = $request->rut_empresa_persona;
+        $empresa->direccion = $request->direccion;
+        $empresa->comuna = $request->comuna;
+        $empresa->region = $request->region;
+        $empresa->fono = $request->fono;
+        $empresa->mail = $request->mail;
+        $empresa->nombre_banco = $request->nombre_banco;
+        $empresa->numero_cuenta = $request->numero_cuenta;
+        $empresa->representante_legal = $request->representante_legal;
+        $empresa->rut_representante_legal = $request->rut_representante_legal;
+        $empresa->mail_representante_legal = $request->mail_representante_legal;
+        $empresa->fono_representante_legal = $request->fono_representante_legal;
+        $empresa->fecha_nacimiento = $request->fecha_nacimiento;
+        $empresa->banco_id = $request->banco_id;
+
+        return $empresa->save();
+    }
+
     public function guardarClienteExterno(Request $request)
     {
 
         // Validar los datos del formulario
-           $validate = $request->validate([
-        'nivel_ejecutivo' => 'required|string|max:255',
-        'nombres' => 'required|string|max:255',
-        'apellido_paterno' => 'required|string|max:255',
-        'apellido_materno' => 'required|string|max:255',
-        'rut' => 'required|string|max:255',
-        'fecha_nacimiento' => 'nullable|date',
-        'fono' => 'nullable|string|max:255',
-        'mail' => 'required|string|email|max:255',
-        'direccion' => 'nullable|string|max:255',
-        'comuna' => 'nullable|string|max:255',
-        'region' => 'nullable|string|max:255',
-        'isapre' => 'nullable|string|max:255',
-        'afp' => 'nullable|string|max:255',
+        $validate = $request->validate([
+            'nivel_ejecutivo' => 'required|string|max:255',
+            'nombres' => 'required|string|max:255',
+            'apellido_paterno' => 'required|string|max:255',
+            'apellido_materno' => 'required|string|max:255',
+            'rut' => 'required|string|max:255',
+            'fecha_nacimiento' => 'nullable|date',
+            'fono' => 'nullable|string|max:255',
+            'mail' => 'required|string|email|max:255',
+            'direccion' => 'nullable|string|max:255',
+            'comuna' => 'nullable|string|max:255',
+            'region' => 'nullable|string|max:255',
+            'isapre' => 'nullable|string|max:255',
+            'afp' => 'nullable|string|max:255',
         ]);
 
         Log::info("message", $validate);
@@ -190,7 +222,6 @@ class ClienteExternoController extends Controller
 
 
         // Guardar la empresa en la base de datos
-        return $usuarioExterno->save();  
-        
+        return $usuarioExterno->save();
     }
 }
