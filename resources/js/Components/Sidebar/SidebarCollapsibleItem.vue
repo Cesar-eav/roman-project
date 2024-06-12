@@ -12,12 +12,13 @@
             :href="href"
             v-bind="$attrs"
             :class="[
-                'transition-colors hover:text-gray-500 dark:hover:text-gray-100 ',
+                'transition-colors hover:text-gray-500 dark:hover:text-gray-100',
                 {
                     'text-white dark:text-gray-200 font-bold': active,
-                    'text-gray-300 dark:text-gray-400 ': !active,
+                    'text-gray-300 dark:text-gray-400': !active,
                 },
             ]"
+            @click="handleClick"
         >
             {{ title }}
         </component>
@@ -38,9 +39,17 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    onClick: Function
 })
 
-const { external } = props
+const Tag = props.external ? 'a' : props.href ? Link : 'button'
 
-const Tag = external ? 'a' : Link
+const handleClick = (event) => {
+    if (Tag === 'button') {
+        event.preventDefault();
+        if (props.onClick) {
+            props.onClick(event);
+        }
+    }
+}
 </script>

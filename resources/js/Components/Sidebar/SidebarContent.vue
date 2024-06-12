@@ -13,22 +13,25 @@
             </template>
         </CreateUserModal>
 
+        <CreateCiaModal v-if="showCiaModal" :show="showCiaModal" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreateCiaModal>
+
         <!-- CONFIGURACION INTERNA -->
-        <SidebarCollapsible title="Configuración Interna"  class="text-xs" 
-            :active="
-            route().current('crearusuario') ||
+        <SidebarCollapsible title="Configuración Interna" class="text-xs" :active="route().current('crearusuario') ||
             route().current('dashboard') ||
             route().current('cliente') ||
             route().current('show-cias') ||
             route().current('add-compania')
             ">
+            <SidebarCollapsibleItem title="Crear Usuario Interno" :onClick="openCreateUserModal" :active="false" />
 
-            <SidebarCollapsibleItem title="Crear Usuario Interno" @click.prevent="openModal"/>
             <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
                 :active="route().current('dashboard')" />
             <SidebarCollapsibleItem title="Asignación de Atribuciones" />
-            <SidebarCollapsibleItem title="Agregar Cía. Seguros" :href="route('add-compania')"
-                :active="route().current('add-compania')" />
+            <SidebarCollapsibleItem title="Agregar Cía. Seguro" :onClick="openCiaSeguroModal" :active="false" />
             <SidebarCollapsibleItem title="Listar Cía. Seguros" :href="route('show-cias')"
                 :active="route().current('show-cias')" />
             <SidebarCollapsibleItem title="Crear mensaje de Avisos" />
@@ -108,6 +111,8 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/inertia-vue3';
 
 import { ref, reactive } from 'vue';
 
@@ -117,20 +122,33 @@ import SidebarCollapsibleItem from '@/Components/Sidebar/SidebarCollapsibleItem.
 import SidebarCollapsible from '@/Components/Sidebar/SidebarCollapsible.vue'
 import CreateUserModal from '@/Pages/CreateUserModal.vue'
 import { DashboardIcon } from '@/Components/Icons/Outline'
+import CreateCiaModal from '@/Pages/CreateCiaModal.vue'
 
 
+const page = usePage();
+const bancos = computed(() => page.props.value.bancos);
 
 // Declarar variables reactivas usando ref
 const showModal = ref(false);
+const showCiaModal = ref(false);
 
 
-function openModal(event){
-    event.preventDefault();
+function openCreateUserModal(event) {
     showModal.value = true
+    event.preventDefault();
+
+}
+
+
+function openCiaSeguroModal(event) {
+    showCiaModal.value = true
+    event.preventDefault();
 }
 
 function close() {
     showModal.value = false
+    showCiaModal.value = false
+
 }
 
 </script>

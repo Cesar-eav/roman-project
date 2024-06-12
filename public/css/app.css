@@ -9,7 +9,7 @@
   --dt-html-background: white;
 }
 :root.dark {
-  --dt-html-background: rgb(33, 37, 41);
+  --dt-html-background: rgb(41, 33, 38);
 }
 table.dataTable td.dt-control {
   text-align: center;
@@ -2841,6 +2841,10 @@ select{
 .text-purple-500{
   --tw-text-opacity: 1;
   color: rgb(168 85 247 / var(--tw-text-opacity));
+}
+.text-red-200{
+  --tw-text-opacity: 1;
+  color: rgb(254 202 202 / var(--tw-text-opacity));
 }
 .text-red-500{
   --tw-text-opacity: 1;
