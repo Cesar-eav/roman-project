@@ -1,7 +1,7 @@
 <template>
     <AppLayout title="Polizas">
-        <div class="flex justify-center text-4xl pb-4">Listado de Empresas</div>
-        <div class="flex py-2 px-8 justify-between text-gray-900">
+        <div class="flex justify-center text-4xl pb-4">Listado de Empresas ss</div>
+        <div class="flex py-2 px-8 justify-between text-red-200">
 
 
             <!-- Campo de búsqueda personalizado -->
@@ -18,15 +18,15 @@
         <div class="py-12">
             <div class="w-full mx-auto sm:px-6 lg:px-8">
                 <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-300  justify-start">
-                        <table id="clientesTable" class="display">
+                    <div class="p-6 text-gray-300 text-sm  justify-start">
+                        <table id="clientesTable" class="display text-gray-300">
                             <thead class="bg-gray-900">
                                 <tr>
-                                    <th class="rounded-l-full">ID</th>
+                                    <th class="rounded-l-lg">ID</th>
                                     <th>Razón Social</th>
                                     <th>Nombre Fantasía</th>
                                     <th>Rut Empresa</th>
-                                    <th class="rounded-r-full">Acciones</th>
+                                    <th class="rounded-r-lg">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,6 +93,8 @@ import ShowEmpresaModal from '@/Pages/ClientesExternos/ShowEmpresaModal.vue'
 import EditEmpresaModal from '@/Pages/ClientesExternos/EditEmpresaModal.vue'
 import $ from 'jquery'
 import 'datatables.net'
+import 'datatables.net-dt/css/dataTables.dataTables.css';
+
 
 export default {
     components: {
@@ -121,7 +123,7 @@ export default {
         };
     },
     methods: {
-        
+
         exportData() {
             axios.get('/export-empresas', { responseType: 'blob' })
                 .then(response => {
@@ -135,7 +137,7 @@ export default {
                 .catch(error => {
                     console.error('Error exporting data:', error);
                 });
-            },
+        },
 
         openModal() {
             this.CreateEmpresaModal = true;
@@ -206,6 +208,18 @@ export default {
 
 
 <style>
+/* Estilo para los botones de paginación */
+.dt-container .dt-paging .dt-paging-button.disabled {
+    color: red;
+    /* Cambia 'red' al color que prefieras */
+}
+
+/* Estilo para el botón de la página actual */
+.dt-paging-button .dataTables_paginate .paginate_button.current {
+    color: blue;
+    /* Cambia 'blue' al color que prefieras */
+}
+
 .btn {
     padding: 0.5rem 0.5rem;
     margin: 0 0.2rem;

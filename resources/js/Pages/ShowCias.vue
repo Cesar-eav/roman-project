@@ -12,10 +12,10 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-300 text-sm justify-start">
                         <table id="clientesTable" class="display">
-                            <thead>
+                            <thead class="bg-gray-900">
                                 <tr>
                                     <th>ID</th>
                                     <th>Razón Social</th>

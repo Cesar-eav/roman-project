@@ -21,12 +21,11 @@
                         <table id="clientesTable" class="display">
                             <thead class="bg-gray-900">
                                 <tr>
-                                    <th class="rounded-l-full">Id</th>
+                                    <th>Id</th>
                                     <th>Rut</th>
                                     <th>Nombre</th>
                                     <th>Comuna</th>
-
-                                    <th class="flex justify-center rounded-r-full	">Acciones</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
