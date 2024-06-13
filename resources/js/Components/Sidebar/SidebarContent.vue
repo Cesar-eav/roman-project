@@ -32,7 +32,7 @@
             route().current('show-cliente-externo')">
 
 
-        <SidebarCollapsibleItem title="Crear Empresa Nueva" :onClick="openEmpresaModal" :active="false" />
+            <SidebarCollapsibleItem title="Crear Empresa Nueva" :onClick="openEmpresaModal" :active="false" />
 
             <SidebarCollapsibleItem title="Aprobación de Solicitud" />
             <SidebarCollapsibleItem title="Listado Empresas" :href="route('show-empresas')"
@@ -55,8 +55,7 @@
             <SidebarCollapsibleItem title="Envío de Cotizaciones" />
             <SidebarCollapsibleItem title="Crear Propuestas" />
             <SidebarCollapsibleItem title="Listado de Propuestas" />
-            <SidebarCollapsibleItem title="Crear Poliza" :href="route('view-add-poliza')"
-                :active="route().current('view-add-poliza')" />
+            <SidebarCollapsibleItem title="Crear Poliza" :onClick="openPolizaModal" :active="false" />
             <SidebarCollapsibleItem title="Listado Polizas General" :href="route('show-polizas')"
                 :active="route().current('show-polizas')" />
 
@@ -95,7 +94,7 @@
         </SidebarCollapsible>
 
 
-        
+
         <CreateUserModal v-if="showModal" :show="showModal" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
@@ -109,15 +108,21 @@
         </CreateCiaModal>
 
 
-        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal"  :bancos="bancos" @close="close">
+        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal" :bancos="bancos" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </CreateEmpresaModal>
 
 
+        <CreatePolizaModal v-if="showPolizaModal" :show="showPolizaModal" :bancos="bancos" @close="close">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreatePolizaModal>
 
-        
+
+
     </PerfrectScrollbar>
 </template>
 
@@ -135,6 +140,7 @@ import CreateUserModal from '@/Pages/CreateUserModal.vue'
 import { DashboardIcon } from '@/Components/Icons/Outline'
 import CreateCiaModal from '@/Pages/CreateCiaModal.vue'
 import CreateEmpresaModal from '@/Pages/CreateEmpresaModal.vue'
+import CreatePolizaModal from '@/Pages/ClientesExternos/CreatePolizaModal.vue'
 
 
 const page = usePage();
@@ -146,6 +152,7 @@ const bancos = computed(() => page.props.value.bancos);
 const showModal = ref(false);
 const showCiaModal = ref(false);
 const showEmpresaModal = ref(false);
+const showPolizaModal = ref(false);
 
 
 function openCreateUserModal(event) {
@@ -164,10 +171,18 @@ function openEmpresaModal(event) {
     event.preventDefault();
 }
 
+
+function openPolizaModal(event) {
+    showPolizaModal.value = true
+    event.preventDefault();
+}
+
+
 function close() {
     showModal.value = false
     showCiaModal.value = false
-    // showEmpresaModal.value = false
+    showEmpresaModal.value = false
+    showPolizaModal.value = false
 
 }
 
