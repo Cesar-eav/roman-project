@@ -3,7 +3,7 @@
         <template #header>
             <div class="flex flex-col  gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold text-center leading-tight">
-                    Crear Poliza
+                    Crear Poliza asdsadsad
                 </h2>
             </div>
         </template>

@@ -2,7 +2,7 @@
     <AppLayout title="Dashboard">
         <template #header>
             <div class="flex flex-col  gap-4 md:flex-row md:items-center md:justify-between">
-                <h2 class="text-xl font-semibold text-center leading-tight">
+                <h2 class="text-xl font-semibold text-center leading-tight bg-orange-500 uppercase">
                     Crear Usuario Interno
                 </h2>
 

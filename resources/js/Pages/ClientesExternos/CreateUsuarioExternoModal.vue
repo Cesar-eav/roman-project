@@ -7,7 +7,8 @@
 
             <div class="mt-4 ">
                 <!-- <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> -->
-                <h2 class="text-xl font-semibold text-center leading-tight">
+                <h2
+                    class="text-xl font-semibold rounded-lg text-center text-white leading-tight bg-orange-500 uppercase p-4">
                     Crear Usuario Externo
                 </h2>
             </div>
@@ -75,7 +76,7 @@
                     </div>
 
                     <div class="py-4 w-60 justify-items-end">
-                        <Button  class="w-full justify-center gap-2">
+                        <Button class="w-full justify-center gap-2">
                             <span>Registrar</span>
                         </Button>
                     </div>

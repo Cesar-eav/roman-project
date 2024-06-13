@@ -7,7 +7,8 @@
 
             <div class="mt-4">
                 <!-- <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> -->
-                <h2 class="text-xl font-semibold text-center leading-tight">
+                <h2
+                    class="text-xl font-semibold rounded-lg text-center text-white leading-tight bg-orange-500 uppercase p-4">
                     Crear Compañia de Seguros
                 </h2>
             </div>
@@ -110,7 +111,7 @@
                     </div>
                 </div>
                 <div v-if="showModalEjecutiva1">
-                  <p class="flex text-xl justify-center">Ejecutiva 1</p>
+                    <p class="flex text-xl justify-center">Ejecutiva 1</p>
                     <div class="p-2 border border-spacing-2">
                         <div class="flex">
                             <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva
@@ -173,10 +174,14 @@
                         <span>Registrar Compañia</span>
                     </Button>
 
-                    <button class="button-ejecutiva" @click="irEjecutiva1" v-if="mostrarModal">Agregar Ejecutiva 1</button>
-                    <button class="button-ejecutiva" @click="inicio" v-if="showModalEjecutiva1 || showModalEjecutiva2">Inicio</button>
-                    <button class="button-ejecutiva" @click="volverEjecutiva1" v-if="showModalEjecutiva2">Volver a Ejecutiva 1</button>
-                    <button class="button-ejecutiva" @click="siguiente2" v-if="showModalEjecutiva1">Agregar Ejecutiva 2</button>
+                    <button class="button-ejecutiva" @click="irEjecutiva1" v-if="mostrarModal">Agregar Ejecutiva
+                        1</button>
+                    <button class="button-ejecutiva" @click="inicio"
+                        v-if="showModalEjecutiva1 || showModalEjecutiva2">Inicio</button>
+                    <button class="button-ejecutiva" @click="volverEjecutiva1" v-if="showModalEjecutiva2">Volver a
+                        Ejecutiva 1</button>
+                    <button class="button-ejecutiva" @click="siguiente2" v-if="showModalEjecutiva1">Agregar Ejecutiva
+                        2</button>
                 </div>
 
             </form>
@@ -271,7 +276,7 @@ export default {
 
         irEjecutiva1() {
             this.mostrarModal = false,
-            this.showModalEjecutiva1 = true;
+                this.showModalEjecutiva1 = true;
             this.showModalEjecutiva2 = false;
 
         },
@@ -349,10 +354,10 @@ export default {
 <style>
 .button-ejecutiva {
 
-        background-color: #1f2937;
-        padding: 0.5rem;
-        color: white;
-        border-radius: 0.5rem;
-    
+    background-color: #1f2937;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 0.5rem;
+
 }
 </style>

@@ -89,7 +89,6 @@
 import AppLayout from '@/Layouts/AppLayout.vue'
 import DialogModal from '@/Components/DialogModal.vue'
 import Button1 from '@/Components/Button.vue'
-import CrearUsuario from '@/Pages/CrearUsuarioForm.vue'
 import CreateUserModal from '@/Pages/CreateUserModal.vue'
 import ShowClientModal from '@/Pages/ClientesInternos/ShowModal.vue'
 import EditModal from './ClientesInternos/EditModal.vue'

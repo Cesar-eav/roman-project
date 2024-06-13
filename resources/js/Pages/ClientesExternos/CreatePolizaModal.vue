@@ -1,17 +1,17 @@
 <template>
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <div class="px-6 py-4 bg-gray-100">
-            <div class="flex flex-col  gap-4 md:flex-row md:items-center md:justify-between">
-                <h2 class="text-xl font-semibold text-center leading-tight">
+
+                <h2 class="text-xl font-semibold rounded-lg text-center text-white leading-tight bg-orange-500 uppercase p-4">
                     Crear Poliza
                 </h2>
-            </div>
+      
 
-            <div class="flex justify-start py-2 px-8  text-gray-900">
+            <div class="flex justify-start py-2  text-gray-900">
                 <!-- Campo de búsqueda personalizado -->
                 <label for="numero_poliza" class="block w-1/4 text-sm font-medium  mt-4">Buscar cliente: </label>
                 <input v-model="searchQuery" @input="searchClientes" type="text" placeholder="Rut, N° Poliza, Nombre..."
-                    class="border rounded-lg block w-2/4 " />
+                    class="border rounded-lg block " />
             </div>
 
 
