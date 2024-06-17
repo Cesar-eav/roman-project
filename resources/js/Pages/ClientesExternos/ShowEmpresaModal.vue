@@ -5,9 +5,22 @@
             <h2 class="text-white text-2xl font-semibold text-center leading-tight">
                 {{ empresas.razon_social }}
             </h2>
+
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-900 mx-4 text-sm ">
+
+
+            <div class="mt-4 col-span-2">
+                <h2 class="text-lg font-semibold text-left leading-tight">
+                    Datos Generales
+                </h2>
+            </div>
+
+
+
             <!-- Información Básica de la Empresa -->
-            <div class="empresa p-4 rounded-md mx-4">              
+            <div class="section col-span-2">
                 <p><strong>Razón Social:</strong> {{ empresas.razon_social }}</p>
                 <p><strong>Nombre Fantasía:</strong> {{ empresas.nombre_fantasia }}</p>
                 <p><strong>RUT Empresa:</strong> {{ empresas.rut_empresa_persona }}</p>
@@ -19,8 +32,12 @@
                 <p><strong>Nombre Banco:</strong>{{ empresas.nombre_banco }}</p>
                 <p><strong>Número Cuenta:</strong> {{ empresas.numero_cuenta }}</p>
             </div>
-            <!-- Información del Representante Legal -->
-            <div class="representante p-4 mt-2 rounded-md  mx-4">
+            <div class="mt-4 col-span-2">
+                <h2 class="text-lg font-semibold text-left leading-tight">
+                    Representante Legal
+                </h2>
+            </div>
+            <div class="section col-span-2">
                 <p><strong>Representante Legal:</strong> {{ empresas.representante_legal }}</p>
                 <p><strong>RUT Representante:</strong> {{ empresas.rut_representante_legal }}</p>
                 <p><strong>Email Representante:</strong> {{ empresas.mail_representante_legal }}</p>
@@ -28,9 +45,9 @@
                 <p><strong>Fecha Nacimiento Gerente:</strong> {{ empresas.fecha_nacimiento }}</p>
             </div>
             <!-- Separador -->
-            <div class="col-span-1 md:col-span-3 border-t-2 border-gray-300 my-4"></div>
+        </div>
 
-           <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
+        <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
             <slot name="footer"> </slot>
         </div>
     </Modal>
@@ -70,10 +87,17 @@ export default {
 </script>
 
 <style>
-.empresa {
-    background-color: #ffcf80;
-}
-.representante{
-    background-color: #ffcf80;
+.section {
+    background-color: #f5f5f5;
+    /* Fondo rojo claro */
+    padding: 16px;
+    /* Espacio interno */
+    margin-bottom: 16px;
+    /* Espacio entre secciones */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    border-radius: 8px;
+    /* Bordes redondeados */
 }
 </style>

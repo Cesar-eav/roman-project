@@ -14,7 +14,6 @@
                 Generar Excel
             </button>
         </div>
-
         <div class="py-12">
             <div class="w-full mx-auto sm:px-6 lg:px-8">
                 <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
@@ -77,10 +76,6 @@
                 <button @click="close">Cerrar</button>
             </template>
         </EditEmpresaModal>
-
-
-
-
     </AppLayout>
 </template>
 

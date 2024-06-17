@@ -2,8 +2,7 @@
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <div class="m-4 p-4 bg-orange-500">
             <h2 class="flex flex-col text-white text-2xl font-semibold text-center leading-tight">
-                <p>Editar Usuario Externo </p>
-                <p class="text-2xl">{{ poliza.id }}</p>
+                <p>Editar Poliza </p>
             </h2>
         </div>
         <form @submit.prevent="submit">

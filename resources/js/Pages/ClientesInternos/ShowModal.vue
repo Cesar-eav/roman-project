@@ -3,11 +3,11 @@
 
         <div class="m-4 p-4 bg-orange-500">
             <!-- <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> -->
-            <h2 class="text-white text-2xl font-semibold text-center leading-tight">
+            <h2 class="text-white text-2xl font-semibold text-center leading-tight rounded-lg">
                 {{ cliente.name }} {{ cliente.last_name }}
             </h2>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-900 mx-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-900 mx-4 text-sm">
 
             <div class="flex flex-col bg-slate-200 rounded-lg p-2">
                 <p><strong>Nivel Ejecutivo</strong></p>
@@ -15,13 +15,10 @@
             </div>
 
             <div class="flex flex-col bg-slate-200 rounded-lg p-2">
-                <p><strong>Nombres:</strong></p>
-                <p>{{ cliente.name }}</p>
+                <p><strong>Nombre Completo</strong></p>
+                <p>{{ cliente.name }} {{ cliente.last_name }}</p>
             </div>
-            <div class="flex flex-col bg-slate-200 rounded-lg p-2">
-                <p><strong>Apellidos:</strong></p>
-                <p>{{ cliente.last_name }}</p>
-            </div>
+
             <div class="flex flex-col bg-slate-200 rounded-lg p-2">
                 <p><strong>RUT:</strong></p>
                 <p>{{ cliente.rut }}</p>
