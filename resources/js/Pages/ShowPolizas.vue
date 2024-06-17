@@ -21,8 +21,8 @@
                         <table id="polizasTable" class="display">
                             <thead class="bg-gray-900">
                                 <tr>
-                                    <th class="rounded-l-lg">Nº Póliza</th>
-                                    <th>Tipo Poliza</th>
+                                    <th class="rounded-l-lg">Id</th>
+                                    <th>Nº Póliza</th>
                                     <th>Monto Asegurado</th>
                                     <th>Fecha Inicio</th>
                                     <th>Fecha Vencimiento</th>
@@ -35,15 +35,14 @@
                             </thead>
                             <tbody>
                                 <tr v-for="poliza in polizas" :key="poliza.id">
-
+                                    <td>{{ poliza.id }}</td>
                                     <td>{{ poliza.numero_poliza }}</td>
-                                    <td>{{ poliza.tipo_poliza }}</td>
                                     <td>{{ poliza.monto_asegurado }}</td>
                                     <td>{{ poliza.fecha_inicio }}</td>
                                     <td>{{ poliza.fecha_vencimiento }}</td>
                                     <td>{{ poliza.dia_pago }}</td>
                                     <td>{{ poliza.metodo_pago }}</td>
-                                    <td>12 {{ poliza.aseguradora }}</td>
+                                    <td>{{ poliza.aseguradora }}</td>
                                     <td class="flex justify-start">
                                         <button class="btn btn-ver" @click="ver(poliza.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editar(poliza.id)">Editar</button>
@@ -208,6 +207,8 @@ export default {
             dom: 'rtip',  // Remueve el campo de búsqueda por defecto
             scrollX: true,  // Habilita el scroll horizontal
             autoWidth: false,  // Permite que la tabla ajuste su ancho automáticamente
+            order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
+
         });
     }
 };

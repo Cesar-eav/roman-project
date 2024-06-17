@@ -196,6 +196,8 @@ export default {
             dom: 'rtip',  // Remueve el campo de búsqueda por defecto
             scrollX: true,  // Habilita el scroll horizontal
             autoWidth: false,  // Permite que la tabla ajuste su ancho automáticamente
+            order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
+
         });
     }
 };
