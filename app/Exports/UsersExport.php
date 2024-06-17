@@ -30,17 +30,17 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping, WithEven
     public function headings(): array
     {
         return [
-            'Rut',
-            'Nombre',
-            'Apellido',
-            'Correo',
-            'Telefono',
-            'Dirección',
-            'Comuna',
-            'Región',
-            'Cargo',
-            'Isapre',
-            'Afp'
+            'RUT',
+            'NOMBRE',
+            'APELLIDO',
+            'CORREO',
+            'TELÉFONO',
+            'DIRECCIÓN',
+            'COMUNA',
+            'REGIÓN',
+            'CARGO',
+            'ISAPRE',
+            'AFP'
             
 
         ];
@@ -80,7 +80,7 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping, WithEven
                     ],
                     'fill' => [
                         'fillType' => Fill::FILL_SOLID,
-                        'color' => ['argb' => 'F97316'],
+                        'color' => ['argb' => '040BA8'],
                     ],
                 ]);
 
