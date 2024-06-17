@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Banco;
-use App\Models\User;
+use App\Models\Comuna;
 use Illuminate\Support\ServiceProvider;
 
 class SharedDataProvider extends ServiceProvider
@@ -35,6 +36,12 @@ class SharedDataProvider extends ServiceProvider
         Inertia::share([
             'clientes' => function () {
                 return User::all();
+            },
+        ]);
+
+        Inertia::share([
+            'comunas' => function () {
+                return Comuna::all();
             },
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Comuna;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 use App\Models\UsuarioExterno;
@@ -18,12 +19,27 @@ class ClienteExternoController extends Controller
     public function showEmpresas()
     {
         $empresas = Empresa::all();
+        $comunas = Comuna::all();
         // Pasar los datos a la vista Dashboard usando Inertia
         return Inertia::render('ShowEmpresas', [
             'empresas' => $empresas,
+            'comunas' => $comunas
 
         ]);
     }
+
+    public function showEmpresas()
+    {
+        $empresas = Empresa::all();
+        $comunas = Comuna::all();
+        // Pasar los datos a la vista Dashboard usando Inertia
+        return Inertia::render('ShowEmpresas', [
+            'empresas' => $empresas,
+            'comunas' => $comunas
+
+        ]);
+    }
+
 
     public function exportEmpresas()
     {
