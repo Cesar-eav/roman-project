@@ -49,8 +49,14 @@
         <!-- POLIZAS -->
 
         <SidebarCollapsible title="Polizas" class="text-xs"
-            :active="route().current('view-add-poliza') || route().current('show-polizas')">
-            <SidebarCollapsibleItem title="Crear Cotizaciones" />
+            :active="
+            route().current('crear-cotizacion') || 
+            route().current('show-polizas')
+            ">
+
+            <SidebarCollapsibleItem title="Crear Cotizacion" :href="route('crear-cotizacion')"
+                :active="route().current('crear-cotizacion')" />
+
             <SidebarCollapsibleItem title="Listado de Cotizaciones" />
             <SidebarCollapsibleItem title="Envío de Cotizaciones" />
             <SidebarCollapsibleItem title="Crear Propuestas" />
