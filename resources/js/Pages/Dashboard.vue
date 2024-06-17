@@ -102,7 +102,6 @@ export default {
         AppLayout,
         DialogModal,
         Button1,
-        CrearUsuario,
         CreateUserModal,
         ShowClientModal,
         EditModal
