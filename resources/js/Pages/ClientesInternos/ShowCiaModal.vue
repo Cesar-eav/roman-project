@@ -38,7 +38,7 @@
             </div>
 
             <div class="section col-span-2">
-                <p><strong>Representante Legal:</strong> {{ companies.representante_legal }}</p>
+                <p><strong>Representante Legal:</strong> {{ companies.representante_legal }} {{ companies.apellidos_representante_legal }} </p>
                 <p><strong>RUT Representante:</strong> {{ companies.rut_representante }}</p>
                 <p><strong>Email Representante:</strong> {{ companies.mail_representante }}</p>
                 <p><strong>Fono Representante:</strong> {{ companies.fono_representante }}</p>

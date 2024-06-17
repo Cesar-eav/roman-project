@@ -337,6 +337,7 @@ class UsoInternoController extends Controller
         $cia->banco_id = $request->banco_id;
         $cia->num_cuenta = $request->num_cuenta;
         $cia->representante_legal = $request->representante_legal;
+        $cia->apellidos_representante_legal = $request->apellidos_representante_legal;
         $cia->rut_representante = $request->rut_representante;
         $cia->mail_representante = $request->mail_representante;
         $cia->fono_representante = $request->fono_representante;

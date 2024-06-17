@@ -65,7 +65,7 @@
 
                             <input type="text" v-model="form.representante_legal" placeholder="Nombre"
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.representante_legal" placeholder="Apellidos"
+                            <input type="text" v-model="form.apellidos_representante_legal" placeholder="Apellidos"
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
                         <div class="flex">
@@ -84,27 +84,27 @@
                         </div>
                         <div class="flex">
 
-                            <input type="text" v-model="form.nombre_gerente" placeholder="Nombre Gerente Local"
+                            <input type="text" v-model="form.nombre_gerente" placeholder="Nombre Gerente Local" required
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                            <input type="text" v-model="form.direccion_gerente" placeholder="Dirección Gerente"
+                            <input type="text" v-model="form.direccion_gerente" placeholder="Dirección Gerente" required
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
 
-                            <input type="text" v-model="form.comuna_gerente" placeholder="Comuna Gerente"
+                            <input type="text" v-model="form.comuna_gerente" placeholder="Comuna Gerente" required
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.region_gerente" placeholder="Región Gerente"
+                            <input type="text" v-model="form.region_gerente" placeholder="Región Gerente" required
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
                         <div class="flex">
-                            <input type="text" v-model="form.fono_gerente" placeholder="Fono Gerente"
+                            <input type="text" v-model="form.fono_gerente" placeholder="Fono Gerente" required
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <input type="email" v-model="form.mail_gerente" placeholder="Email Gerente"
                                 class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="date" v-model="form.fecha_nacimiento_gerente"
+                            <input type="date" v-model="form.fecha_nacimiento_gerente" required
                                 placeholder="Fecha Nacimiento Gerente"
                                 class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
@@ -133,7 +133,7 @@
                         <div class="flex">
                             <label class="block w-1/4 text-sm font-medium  mt-4">Fecha de
                                 Nacimiento:</label>
-                            <input type="date" v-model="form.mail_ejecutiva_1"
+                            <input type="date" v-model="form.fecha_nacimiento_ejecutiva_1"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
@@ -162,7 +162,7 @@
 
                         <div class="flex">
                             <label class="block w-1/4 text-sm font-medium mt-4">Fecha de Nacimiento:</label>
-                            <input type="date" v-model="form.mail_ejecutiva_2"
+                            <input type="date" v-model="form.fecha_nacimiento_ejecutiva_2"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
@@ -247,6 +247,7 @@ export default {
                 banco_id: '',
                 num_cuenta: '',
                 representante_legal: '',
+                apellidos_representante_legal: '',
                 rut_representante: '',
                 mail_representante: '',
                 fono_representante: '',
@@ -317,6 +318,7 @@ export default {
                 'banco_id': this.form.banco_id || '',
                 'num_cuenta': this.form.num_cuenta || '',
                 'representante_legal': this.form.representante_legal || '',
+                'apellidos_representante_legal': this.form.apellidos_representante_legal || '',               
                 'rut_representante': this.form.rut_representante || '',
                 'mail_representante': this.form.mail_representante || '',
                 'fono_representante': this.form.fono_representante || '',

@@ -1,7 +1,7 @@
 <template>
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <div class="m-4 p-4 bg-orange-500">
-            <h2 class="flex flex-col text-white text-2xl font-semibold text-center leading-tight">
+            <h2 class="flex flex-row text-white text-2xl font-semibold text-center leading-tight">
                 <p>Editar Compañia </p>
                 <p class="text-xl">{{ companies.razon_social }}</p>
             </h2>
@@ -74,6 +74,11 @@
                     <label for="representante_legal">Representante Legal:</label>
                     <input type="text" v-model="formCliente.representante_legal"
                         :placeholder="formCliente.representante_legal" class="custom-input" />
+                </div>
+                <div>
+                    <label for="apellidos_representante_legal">Representante Legal:</label>
+                    <input type="text" v-model="formCliente.apellidos_representante_legal"
+                        :placeholder="formCliente.apellidos_representante_legal" class="custom-input" />
                 </div>
                 <div>
                     <label for="rut_representante">RUT del Representante:</label>
@@ -231,6 +236,7 @@ export default {
                 banco_id: this.companies.banco_id,
                 num_cuenta: this.companies.num_cuenta,
                 representante_legal: this.companies.representante_legal,
+                apellidos_representante_legal: this.companies.apellidos_representante_legal,
                 rut_representante: this.companies.rut_representante,
                 mail_representante: this.companies.mail_representante,
                 fono_representante: this.companies.fono_representante,
