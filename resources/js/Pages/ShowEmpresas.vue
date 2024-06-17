@@ -1,6 +1,6 @@
 <template>
     <AppLayout title="Polizas">
-        <div class="flex justify-center text-4xl pb-4">Listado de Empresas ss</div>
+        <div class="flex justify-center text-4xl pb-4">Listado de Empresas</div>
         <div class="flex py-2 px-8 justify-between text-red-200">
 
 
