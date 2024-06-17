@@ -114,7 +114,7 @@
         </CreateCiaModal>
 
 
-        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal" :bancos="bancos" @close="close">
+        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal" :bancos="bancos" @close="close" :comunas="comunas">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -150,7 +150,7 @@ import CreatePolizaModal from '@/Pages/ClientesExternos/CreatePolizaModal.vue'
 
 
 const page = usePage();
-const companies = computed(() => page.props.value.companies);
+const comunas = computed(() => page.props.value.comunas);
 const bancos = computed(() => page.props.value.bancos);
 
 

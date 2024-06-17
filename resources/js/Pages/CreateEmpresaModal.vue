@@ -9,7 +9,7 @@
                 <!-- <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> -->
                 <h2
                     class="text-xl font-semibold rounded-lg text-center text-white leading-tight bg-orange-500 uppercase p-4">
-                    Crear Empresa
+                    Crear Empresa AS
                 </h2>
             </div>
 
@@ -48,8 +48,17 @@
                     <div class="flex">
                         <input type="text" v-model="form.direccion" placeholder="Dirección"
                             class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <input type="text" v-model="form.comuna" placeholder="Comuna"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                      
+                        <div>
+                            <select v-model="form.comuna"  required
+                                class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Comuna</option>
+                                <template v-for="comuna in comunas" :key="comuna.id">
+                                    <option :value="comuna.comuna">{{ comuna.comuna }}</option>
+                                </template>
+                            </select>
+                        </div>
+
                     </div>
 
                     <div class="flex">
@@ -146,6 +155,10 @@ export default {
             default: true,
         },
         bancos: {
+            type: Array,
+            required: true,
+        },
+        comunas: {
             type: Array,
             required: true,
         }

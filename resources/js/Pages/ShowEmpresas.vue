@@ -57,14 +57,15 @@
                 </div>
             </div>
         </div>
-        <CreateEmpresaModal v-if="CreateEmpresaModal" :show="CreateEmpresaModal" @close="close">
+        <CreateEmpresaModal v-if="CreateEmpresaModal" :show="CreateEmpresaModal" @close="close"
+        :comunas="comunas" :bancos="bancos">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </CreateEmpresaModal>
 
         <ShowEmpresaModal v-if="ShowEmpresaModal" :show="ShowEmpresaModal" @close="close"
-            :empresas="empresaIdSeleccionado">
+            :empresas="empresaIdSeleccionado" :comunas="comunas">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -102,6 +103,10 @@ export default {
     },
     props: {
         empresas: {
+            type: Array,
+            required: true
+        },
+        comunas: {
             type: Array,
             required: true
         }
