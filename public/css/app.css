@@ -1836,6 +1836,9 @@ select{
 .col-span-1{
   grid-column: span 1 / span 1;
 }
+.col-span-2{
+  grid-column: span 2 / span 2;
+}
 .col-span-6{
   grid-column: span 6 / span 6;
 }
@@ -2531,6 +2534,10 @@ select{
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
 }
+.bg-slate-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(71 85 105 / var(--tw-bg-opacity));
+}
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
 }
@@ -2564,6 +2571,9 @@ select{
 }
 .p-6{
   padding: 1.5rem;
+}
+.p-5{
+  padding: 1.25rem;
 }
 .px-0{
   padding-left: 0px;
