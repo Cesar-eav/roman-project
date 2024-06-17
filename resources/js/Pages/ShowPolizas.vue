@@ -16,40 +16,29 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-100  justify-start">
-                        <!-- <DataTable :data="polizas" :columns="columns" class="text-gray-900 ">
-                        </DataTable> -->
-                        <table id="polizasTable" class="display text-gray-900 text-xs">
-                            <thead class="t-head">
+                <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-300 text-xs justify-start">
+                        <table id="polizasTable" class="display">
+                            <thead class="bg-gray-900">
                                 <tr>
-                                    <th class="rounded-l-lg">ID</th>
-
-                                    <th>RUT</th>
-                                    <th>Cliente</th>
-                                    <th>Nº Póliza</th>
+                                    <th class="rounded-l-lg">Nº Póliza</th>
                                     <th>Tipo Poliza</th>
-                                    <th>Valor Prima</th>
-                                    <th>Valor Neto</th>
-                                    <th>Patente</th>
+                                    <th>Monto Asegurado</th>
                                     <th>Fecha Inicio</th>
                                     <th>Fecha Vencimiento</th>
-                                    <th>Compañia</th>
-                                    <th>Estado</th>
-                                    <th class="rounded-r-lg">12. Acción</th>
+                                    <th>Día de Pago</th>
+                                    <th>Método de Pago</th>
+                                    <th>Aseguradora</th>
+                                    <th class="rounded-r-lg">Acciónes</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="poliza in polizas" :key="poliza.id">
 
-                                    <td>{{ poliza.id }}</td>
-                                    <td>{{ poliza.cliente_id }}</td>
                                     <td>{{ poliza.numero_poliza }}</td>
                                     <td>{{ poliza.tipo_poliza }}</td>
                                     <td>{{ poliza.monto_asegurado }}</td>
-                                    <td>{{ poliza.prima }}</td>
-                                    <td>{{ poliza.valor_neto }}</td>
                                     <td>{{ poliza.fecha_inicio }}</td>
                                     <td>{{ poliza.fecha_vencimiento }}</td>
                                     <td>{{ poliza.dia_pago }}</td>
