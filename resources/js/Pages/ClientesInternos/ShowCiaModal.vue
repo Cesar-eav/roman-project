@@ -38,7 +38,8 @@
             </div>
 
             <div class="section col-span-2">
-                <p><strong>Representante Legal:</strong> {{ companies.representante_legal }} {{ companies.apellidos_representante_legal }} </p>
+                <p><strong>Representante Legal:</strong> {{ companies.representante_legal }} {{
+                    companies.apellidos_representante_legal }} </p>
                 <p><strong>RUT Representante:</strong> {{ companies.rut_representante }}</p>
                 <p><strong>Email Representante:</strong> {{ companies.mail_representante }}</p>
                 <p><strong>Fono Representante:</strong> {{ companies.fono_representante }}</p>
@@ -68,6 +69,19 @@
                 <p><strong>Fecha Nacimiento Ejecutiva 2:</strong> {{ companies.fecha_nacimiento_ejecutiva_2 }}</p>
             </div>
         </div>
+
+        <div v-for="(ejecutiva, index) in ejecutivas" :key="index" class="section col-span-2">
+                <p><strong>Ejecutiva {{ index + 1 }}:</strong></p>
+                <input type="text" v-model="ejecutiva.nombre" placeholder="Nombre">
+                <input type="text" v-model="ejecutiva.apellido" placeholder="Apellido">
+                <input type="email" v-model="ejecutiva.correo" placeholder="Correo">
+                <input type="tel" v-model="ejecutiva.telefono" placeholder="Teléfono">
+                <input type="hidden" v-model="ejecutiva.companyId">
+                <button @click="removeEjecutiva(index)" class="bg-red-500 text-white px-2 py-1 rounded mt-2">Eliminar</button>
+
+            </div>
+
+            <button class="bg-orange-500 text-white px-4 py-2 rounded" @click="addEjecutiva">Agregar Ejecutiva</button>
 
 
 
@@ -109,7 +123,29 @@ export default {
             default: true,
         },
     },
+
+    data() {
+        return {
+            showEjecutiva: false,
+            ejecutivas: []
+
+        }
+    },
+
     methods: {
+        addEjecutiva() {
+            this.ejecutivas.push({
+                nombre: '',
+                apellido: '',
+                correo: '',
+                telefono: '',
+                companyId: this.companies.id
+            });
+
+        },
+        removeEjecutiva(index) {
+            this.ejecutivas.splice(index, 1);
+        },
         close() {
             this.$emit('close');
         }

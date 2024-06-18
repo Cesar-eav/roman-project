@@ -28,7 +28,7 @@ class ClienteExternoController extends Controller
         ]);
     }
 
-    public function showEmpresas()
+    public function crearEjecutivas()
     {
         $empresas = Empresa::all();
         $comunas = Comuna::all();
@@ -36,7 +36,6 @@ class ClienteExternoController extends Controller
         return Inertia::render('ShowEmpresas', [
             'empresas' => $empresas,
             'comunas' => $comunas
-
         ]);
     }
 
