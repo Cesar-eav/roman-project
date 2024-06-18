@@ -109,6 +109,10 @@ export default {
         comunas: {
             type: Array,
             required: true
+        },
+        bancos: {
+            type: Array,
+            required: true
         }
     },
     data() {
