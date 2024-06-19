@@ -232,7 +232,9 @@ class UsoInternoController extends Controller
 
     public function showCias()
     {
-        $companies = CiaAseguradora::with(['banco', 'ejecutivas'])->get();
+        $companies = CiaAseguradora::with(['banco', 'ejecutivas'])
+        ->orderBy('created_at', 'desc')
+        ->get();
         $ejecutivasData = Ejecutiva::with('cia')->get();
      
         

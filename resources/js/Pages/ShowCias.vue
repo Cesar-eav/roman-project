@@ -17,7 +17,6 @@
                         <table id="clientesTable" class="display">
                             <thead class="bg-gray-900">
                                 <tr>
-                                    <th>ID</th>
                                     <th>Razón Social</th>
                                     <th>Rut</th>
                                     <th>Banco</th>
@@ -27,7 +26,6 @@
                             </thead>
                             <tbody>
                                 <tr v-for="company in companies" :key="company.id">
-                                    <td>{{ company.id }}</td>
                                     <td>{{ company.razon_social }}</td>
                                     <td>{{ company.rut_empresa }}</td>
                                     <td>{{ company.banco.nombre }}</td>
@@ -206,7 +204,7 @@ export default {
     mounted() {
         $('#clientesTable').DataTable({
             dom: 'rtip', // Remueve el campo de búsqueda por defecto
-            order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
+            // order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
 
         });
     }
