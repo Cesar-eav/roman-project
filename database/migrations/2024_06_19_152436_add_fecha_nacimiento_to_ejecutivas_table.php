@@ -14,7 +14,7 @@ class AddFechaNacimientoToEjecutivasTable extends Migration
     public function up()
     {
         Schema::table('ejecutivas', function (Blueprint $table) {
-            //
+            $table->date('fecha_nacimiento')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddFechaNacimientoToEjecutivasTable extends Migration
     public function down()
     {
         Schema::table('ejecutivas', function (Blueprint $table) {
-            //
+            $table->date('fecha_nacimiento')->nullable();
         });
     }
 }

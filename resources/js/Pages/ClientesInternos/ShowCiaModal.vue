@@ -80,6 +80,7 @@
                         <p><strong>{{ ejecutiva.name }} {{ ejecutiva.last_name }}</strong></p>
                         <p>{{ ejecutiva.email }}</p>
                         <p>{{ ejecutiva.telefono }}</p>
+                        <p>{{ ejecutiva.fecha_nacimiento }}</p>
 
                     </div>
                 </div>
@@ -92,6 +93,7 @@
                 <input type="text" v-model="ejecutiva.last_name" placeholder="Apellido">
                 <input type="email" v-model="ejecutiva.email" placeholder="Correo">
                 <input type="tel" v-model="ejecutiva.telefono" placeholder="Teléfono">
+                <input type="date" v-model="ejecutiva.fecha_nacimiento" placeholder="Fecha Nacimiento">
                 <input type="hidden" v-model="ejecutiva.cia_id">
                 <button @click="removeEjecutiva(index)"
                     class="bg-red-500 text-white px-2 py-1 rounded mt-2">Eliminar</button>
@@ -161,6 +163,7 @@ export default {
                 last_name: '',
                 email: '',
                 telefono: '',
+                fecha_nacimiento: '',
                 cia_id: this.companies.id
             });
 

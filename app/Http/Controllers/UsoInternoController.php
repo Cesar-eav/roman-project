@@ -194,8 +194,9 @@ class UsoInternoController extends Controller
             $ejecutiva = new Ejecutiva();
             $ejecutiva->name = $data['name'];
             $ejecutiva->last_name = $data['last_name'];
-            $ejecutiva->email = $request['email'];
+            $ejecutiva->email = $data['email'];
             $ejecutiva->telefono = $data['telefono'];
+            $ejecutiva->fecha_nacimiento = $data['fecha_nacimiento'];
             $ejecutiva->cia_id = $data['cia_id'];
 
             $ejecutiva->save();
