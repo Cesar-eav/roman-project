@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Banco;
 use App\Models\Poliza;
+use App\Models\Ejecutiva;
 use App\Exports\CiasExport;
 use App\Exports\UsersExport;
 use Illuminate\Http\Request;
@@ -14,8 +15,7 @@ use App\Models\CiaAseguradora;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-
-
+use PhpParser\Node\Stmt\Return_;
 
 class UsoInternoController extends Controller
 {
@@ -56,7 +56,7 @@ class UsoInternoController extends Controller
 
     public function showCia($id)
     {
-        $cia = CiaAseguradora::with('banco')->where('id', $id)->first();
+        $cia = CiaAseguradora::with(['banco', 'ejecutivas'])->where('id', $id)->first();
         return $cia;
     }
 
@@ -176,18 +176,45 @@ class UsoInternoController extends Controller
 
         // $cliente = User::where('id', $id)->first();
         //return $cliente;
+
+    }
+
+    public function guardarEjecutiva(Request $request)
+    {
+
+        $ejecutivasData = $request->input('ejecutivas', []);
+
+        // return $ejecutivasData;
+        $response = [];
+
+
+
+        foreach ($ejecutivasData as $data) {
+
+            $ejecutiva = new Ejecutiva();
+            $ejecutiva->name = $data['name'];
+            $ejecutiva->last_name = $data['last_name'];
+            $ejecutiva->email = $request['email'];
+            $ejecutiva->telefono = $data['telefono'];
+            $ejecutiva->cia_id = $data['cia_id'];
+
+            $ejecutiva->save();
+            $response[] = $ejecutiva;
+        }
     }
 
     public function showCias()
     {
-        $companies = CiaAseguradora::with('banco')->get();
+        $companies = CiaAseguradora::with(['banco', 'ejecutivas'])->get();
+        $ejecutivasData = Ejecutiva::with('cia')->get();
+     
+        
         $bancos = Banco::get();
-        // return $companies;
-        // var_dump($companies);
-        // Pasar los datos a la vista Dashboard usando Inertia
+
         return Inertia::render('ShowCias', [
             'companies' => $companies,
-            'bancos' => $bancos
+            'bancos' => $bancos,
+            'ejecutivasData'=>$ejecutivasData
         ]);
     }
 

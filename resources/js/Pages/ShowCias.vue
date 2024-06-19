@@ -63,7 +63,7 @@
             </template>
         </CreateCiaModal>
 
-        <ShowCiaModal v-if="ShowCiaModal" :show="ShowCiaModal" @close="close" :companies="ciaIdSeleccionado">
+        <ShowCiaModal v-if="ShowCiaModal" :show="ShowCiaModal" @close="close" :companies="ciaIdSeleccionado" :ejecutivasData="ejecutivasData">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -112,7 +112,12 @@ export default {
         bancos: {
             type: Array,
             required: true
+        },
+        ejecutivasData: {
+            type: Array,
+            required: true
         }
+        
     },
     data() {
         return {

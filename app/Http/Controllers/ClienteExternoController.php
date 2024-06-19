@@ -28,16 +28,6 @@ class ClienteExternoController extends Controller
         ]);
     }
 
-    public function crearEjecutivas()
-    {
-        $empresas = Empresa::all();
-        $comunas = Comuna::all();
-        // Pasar los datos a la vista Dashboard usando Inertia
-        return Inertia::render('ShowEmpresas', [
-            'empresas' => $empresas,
-            'comunas' => $comunas
-        ]);
-    }
 
 
     public function exportEmpresas()

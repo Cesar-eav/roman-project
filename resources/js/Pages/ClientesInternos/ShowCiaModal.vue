@@ -51,45 +51,63 @@
                 <p><strong>Email Gerente:</strong> {{ companies.mail_gerente }}</p>
                 <p><strong>Fecha Nacimiento Gerente:</strong> {{ companies.fecha_nacimiento_gerente }}</p>
             </div>
+        
 
             <div class="mt-4 col-span-2">
                 <h2 class="text-lg font-semibold text-left leading-tight">
-                    Ejecutivas
+                    Ejecutivas/os
                 </h2>
             </div>
 
             <div class="section col-span-2">
-                <p><strong>Ejecutiva 1:</strong> {{ companies.ejecutiva_1 }}</p>
-                <p><strong>Fono Ejecutiva 1:</strong> {{ companies.fono_ejecutiva_1 }}</p>
-                <p><strong>Email Ejecutiva 1:</strong> {{ companies.mail_ejecutiva_1 }}</p>
-                <p><strong>Fecha Nacimiento Ejecutiva 1:</strong> {{ companies.fecha_nacimiento_ejecutiva_1 }}</p>
-                <p><strong>Ejecutiva 2:</strong> {{ companies.ejecutiva_2 }}</p>
-                <p><strong>Fono Ejecutiva 2:</strong> {{ companies.fono_ejecutiva_2 }}</p>
-                <p><strong>Email Ejecutiva 2:</strong> {{ companies.mail_ejecutiva_2 }}</p>
-                <p><strong>Fecha Nacimiento Ejecutiva 2:</strong> {{ companies.fecha_nacimiento_ejecutiva_2 }}</p>
+                <div>
+                    <p><strong> {{ companies.ejecutiva_1 }}</strong></p>
+                    <p> {{ companies.fono_ejecutiva_1 }}</p>
+                    <p>{{ companies.mail_ejecutiva_1 }}</p>
+                </div>
             </div>
-        </div>
 
-        <div v-for="(ejecutiva, index) in ejecutivas" :key="index" class="section col-span-2">
-                <p><strong>Ejecutiva {{ index + 1 }}:</strong></p>
-                <input type="text" v-model="ejecutiva.nombre" placeholder="Nombre">
-                <input type="text" v-model="ejecutiva.apellido" placeholder="Apellido">
-                <input type="email" v-model="ejecutiva.correo" placeholder="Correo">
+            <div class="section col-span-2">
+                <div>
+                    <p><strong>{{ companies.ejecutiva_2 }}</strong> </p>
+                    <p>{{ companies.fono_ejecutiva_2 }}</p>
+                    <p>{{ companies.mail_ejecutiva_2 }}</p>
+                </div>
+            </div>
+
+                <div v-for="ejecutiva in ejecutivasData" :key="ejecutiva.id" class="section col-span-2">
+                    <div>
+                        <p><strong>{{ ejecutiva.name }} {{ ejecutiva.last_name }}</strong></p>
+                        <p>{{ ejecutiva.email }}</p>
+                        <p>{{ ejecutiva.telefono }}</p>
+
+                    </div>
+                </div>
+
+
+            <div v-for="(ejecutiva, index) in ejecutivas" :key="index" class="section col-span-2">
+                <p><strong>Datos Ejecutiva/o</strong></p>
+                <div></div>
+                <input type="text" v-model="ejecutiva.name" placeholder="Nombre">
+                <input type="text" v-model="ejecutiva.last_name" placeholder="Apellido">
+                <input type="email" v-model="ejecutiva.email" placeholder="Correo">
                 <input type="tel" v-model="ejecutiva.telefono" placeholder="Teléfono">
-                <input type="hidden" v-model="ejecutiva.companyId">
-                <button @click="removeEjecutiva(index)" class="bg-red-500 text-white px-2 py-1 rounded mt-2">Eliminar</button>
+                <input type="hidden" v-model="ejecutiva.cia_id">
+                <button @click="removeEjecutiva(index)"
+                    class="bg-red-500 text-white px-2 py-1 rounded mt-2">Eliminar</button>
 
             </div>
 
             <button class="bg-orange-500 text-white px-4 py-2 rounded" @click="addEjecutiva">Agregar Ejecutiva</button>
+            <button class="bg-green-500 text-white px-4 py-2 rounded" @click="saveEjecutivas">Guardar
+                Ejecutivas</button>
 
 
 
-
-        <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
-            <slot name="footer"> </slot>
+            <div class="px-6 py-4 text-right bg-white dark:bg-dark-eval-3">
+                <slot name="footer"> </slot>
+            </div>
         </div>
-
     </Modal>
 </template>
 
@@ -107,6 +125,10 @@ export default {
         Button,
     },
     props: {
+        ejecutivasData: {
+            type: Array,
+            default: true
+        },
         companies: {
             type: Array,
             default: true,
@@ -135,16 +157,31 @@ export default {
     methods: {
         addEjecutiva() {
             this.ejecutivas.push({
-                nombre: '',
-                apellido: '',
-                correo: '',
+                name: '',
+                last_name: '',
+                email: '',
                 telefono: '',
-                companyId: this.companies.id
+                cia_id: this.companies.id
             });
 
         },
         removeEjecutiva(index) {
             this.ejecutivas.splice(index, 1);
+        },
+
+        saveEjecutivas() {
+            axios.post('/guardar-ejecutivas', {
+                ejecutivas: this.ejecutivas,
+
+            })
+                .then(response => {
+                    console.log("RESPUESTA: ", response.data);
+                    this.close();
+                })
+                .catch(error => {
+                    // manejar el error
+                });
+
         },
         close() {
             this.$emit('close');
