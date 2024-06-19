@@ -73,8 +73,9 @@ Route::middleware([
     Route::post('/crud/edit-cia-back', [UsoInternoController::class, 'editCia']);
     ROute::delete('/crud/delete-cia/{id}', [UsoInternoController::class, 'deleteCia']);
     Route::get('/export-cias', [UsoInternoController::class, 'exportCia']);
-    Route::post('/guardar-ejecutivas', [UsoInternoController::class, 'guardarEjecutiva'])->name('guardar-ejecutivas');;
+    Route::post('/guardar-ejecutivas', [UsoInternoController::class, 'guardarEjecutiva'])->name('guardar-ejecutivas');
 
+    Route::post('/edit-save-ejecutiva-modal', [UsoInternoController::class, 'guardarEditEjecutivaModal'])->name('/edit-save-ejecutiva-modal');
 
     // CLIENTES EXTERNOS EMPRESA
     Route::get('/crear-empresa', function () {

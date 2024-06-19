@@ -51,7 +51,7 @@
                 <p><strong>Email Gerente:</strong> {{ companies.mail_gerente }}</p>
                 <p><strong>Fecha Nacimiento Gerente:</strong> {{ companies.fecha_nacimiento_gerente }}</p>
             </div>
-        
+
 
             <div class="mt-4 col-span-2">
                 <h2 class="text-lg font-semibold text-left leading-tight">
@@ -75,15 +75,33 @@
                 </div>
             </div>
 
-                <div v-for="ejecutiva in ejecutivasData" :key="ejecutiva.id" class="section col-span-2">
-                    <div>
+            <div v-for="ejecutiva in ejecutivasData" :key="ejecutiva.id" class="section col-span-2">
+                <div>
+                    <template v-if="editableId === ejecutiva.id">
+                        <p>
+                            <input v-model="editableEjecutiva.name" class="editable-input font-bold	" />
+                            <input v-model="editableEjecutiva.last_name" class="editable-input" />
+                        </p>
+                        <p><input v-model="editableEjecutiva.email" class="editable-input" /></p>
+                        <p><input v-model="editableEjecutiva.telefono" class="editable-input" /></p>
+                        <p><input v-model="editableEjecutiva.fecha_nacimiento" type="date" class="editable-input" /></p>
+                        <div>
+                            <button @click="saveChanges(ejecutiva.id)" class="mr-2 bg-gray-300">Guardar</button>
+                            <button @click="cancelEdit()" class=" bg-gray-300">Cancelar</button>
+                        </div>
+                    </template>
+                    <template v-else>
                         <p><strong>{{ ejecutiva.name }} {{ ejecutiva.last_name }}</strong></p>
                         <p>{{ ejecutiva.email }}</p>
                         <p>{{ ejecutiva.telefono }}</p>
                         <p>{{ ejecutiva.fecha_nacimiento }}</p>
-
-                    </div>
+                        <div>
+                            <button @click="editEjecutiva(ejecutiva)" class="btn-edit p-1 mr-2">Editar</button>
+                            <button @click="deleteEjecutiva(ejecutiva.id)" class="btn-delete p-1">Eliminar</button>
+                        </div>
+                    </template>
                 </div>
+            </div>
 
 
             <div v-for="(ejecutiva, index) in ejecutivas" :key="index" class="section col-span-2">
@@ -118,6 +136,7 @@
 
 import Modal from '@/Components/Modal.vue';
 import Button from '@/Components/Button.vue';
+import axios from 'axios';
 
 
 
@@ -151,7 +170,15 @@ export default {
     data() {
         return {
             showEjecutiva: false,
-            ejecutivas: []
+            ejecutivas: [],
+            editableId: null,
+            editableEjecutiva: {
+                name: '',
+                last_name: '',
+                email: '',
+                telefono: '',
+                fecha_nacimiento: ''
+            }
 
         }
     },
@@ -186,12 +213,62 @@ export default {
                 });
 
         },
-        close() {
-            this.$emit('close');
-        }
+        editEjecutiva(ejecutiva) {
+            this.editableId = ejecutiva.id;
+            this.editableEjecutiva = { ...ejecutiva };
+        },
+        saveChanges(id) {
+            console.log("Guardando..")
+            const index = this.ejecutivasData.findIndex(ejecutiva => ejecutiva.id === id);
+            if (index !== -1) {
+                this.ejecutivasData[index] = { ...this.editableEjecutiva };
+                axios.
+                    post("/edit-save-ejecutiva-modal", {
+                        id: id,
+                        name: this.editableEjecutiva.name,
+                        last_name: this.editableEjecutiva.last_name,
+                        email: this.editableEjecutiva.email,
+                        telefono: this.editableEjecutiva.telefono,
+                        fecha_nacimiento: this.editableEjecutiva.fecha_nacimiento,
 
+                    })
+
+                    .then(response => {
+                        // Manejar la respuesta del servidor
+                        console.log("Cambios guardados correctamente:", response.data);
+                        // Aquí puedes actualizar ejecutivasData si la respuesta contiene datos actualizados
+                        // this.ejecutivasData[index] = response.data;
+                    })
+                    .catch(error => {
+                        // Manejar errores
+                        console.error("Error al guardar los cambios:", error);
+                        // Aquí puedes mostrar un mensaje de error al usuario
+                    });
+            }
+            this.editableId = null;
+        },
+        cancelEdit() {
+            this.editableId = null;
+            this.editableEjecutiva = {
+                name: '',
+                last_name: '',
+                email: '',
+                telefono: '',
+                fecha_nacimiento: ''
+            };
+        },
+        deleteEjecutiva(id) {
+            console.log('Eliminar ejecutiva con ID:', id);
+            this.ejecutivasData = this.ejecutivasData.filter(ejecutiva => ejecutiva.id !== id);
+            // Aquí puedes llamar a tu API para eliminar la ejecutiva y luego actualizar la lista
+        }
+    },
+    close() {
+        this.$emit('close');
     }
+
 }
+
 
 
 
@@ -209,5 +286,30 @@ export default {
     gap: 16px;
     border-radius: 8px;
     /* Bordes redondeados */
+}
+
+.btn-edit {
+    background-color: #4CAF50;
+    /* Verde */
+    color: white;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    /* Rojo */
+    color: white;
+}
+
+.editable-input {
+    border: 1px solid #d1d5db;
+    /* Borde gris claro */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    background: none;
+    padding: 0.2rem 0.4rem;
+    /* Padding ligero */
+    font-size: inherit;
+    color: inherit;
+    outline: none;
 }
 </style>

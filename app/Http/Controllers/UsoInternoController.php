@@ -179,6 +179,24 @@ class UsoInternoController extends Controller
 
     }
 
+    public function guardarEditEjecutivaModal(Request $request){
+
+        // return $request;
+
+        $ejecutiva = Ejecutiva::find($request->id);
+        $ejecutiva->name = $request->name;
+        $ejecutiva->last_name = $request->last_name;
+        $ejecutiva->email = $request->email;
+        $ejecutiva->telefono = $request->telefono;
+        $ejecutiva->fecha_nacimiento = $request->fecha_nacimiento;
+
+
+        $response = $ejecutiva->save();
+        return $response;
+
+    }
+
+
     public function guardarEjecutiva(Request $request)
     {
 
