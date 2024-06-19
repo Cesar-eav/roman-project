@@ -196,6 +196,14 @@ class UsoInternoController extends Controller
 
     }
 
+    public function deleteEjecutivaModal($id){
+
+        $ejecutiva = Ejecutiva::find($id);
+        $response = $ejecutiva->delete();
+        return $response;
+
+    }
+
 
     public function guardarEjecutiva(Request $request)
     {

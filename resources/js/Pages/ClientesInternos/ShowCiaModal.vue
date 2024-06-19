@@ -259,8 +259,20 @@ export default {
         },
         deleteEjecutiva(id) {
             console.log('Eliminar ejecutiva con ID:', id);
-            this.ejecutivasData = this.ejecutivasData.filter(ejecutiva => ejecutiva.id !== id);
-            // Aquí puedes llamar a tu API para eliminar la ejecutiva y luego actualizar la lista
+            this.ejecutivas = this.ejecutivas.filter(ejecutiva => ejecutiva.id !== id);
+
+            axios.delete("/delete/ejecutiva-modal/"+id)
+            .then(response => {
+            // Manejar la respuesta del servidor
+            console.log("Ejecutiva eliminada correctamente:", response.data);
+            // Aquí puedes manejar una respuesta exitosa, por ejemplo, mostrar un mensaje de éxito al usuario
+        })
+        .catch(error => {
+            // Manejar errores
+            console.error("Error al eliminar la ejecutiva:", error);
+            // Aquí puedes manejar un error, por ejemplo, mostrar un mensaje de error al usuario
+        });
+
         }
     },
     close() {
