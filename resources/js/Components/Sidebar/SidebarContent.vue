@@ -55,7 +55,7 @@
             ">
 
             <SidebarCollapsibleItem title="Crear Cotizacion" :href="route('crear-cotizacion')"
-                :active="route().current('crear-cotizacion')" />
+                :active="route().current('/Polizas/crear-cotizacion')" />
 
             <SidebarCollapsibleItem title="Listado de Cotizaciones" />
             <SidebarCollapsibleItem title="Envío de Cotizaciones" />
