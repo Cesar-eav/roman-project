@@ -18,6 +18,6 @@ class CiaAseguradora extends Model
     }
 
     public function ejecutivas(){
-        return $this->hasMany(Ejecutiva::class, 'id', 'cia_id');
+        return $this->hasMany(Ejecutiva::class, 'cia_id', 'id');
     }
 }
