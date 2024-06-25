@@ -207,7 +207,7 @@ class UsoInternoController extends Controller
 
     public function guardarEjecutiva(Request $request)
     {
-
+        return $request;
         $ejecutivasData = $request->input('ejecutivas', []);
 
         // return $ejecutivasData;
@@ -247,7 +247,7 @@ class UsoInternoController extends Controller
         ]);
     }
 
-    //POLIZAZ
+    //POLIZAS
     public function showPolizas()
     {
         $clientes = User::all();

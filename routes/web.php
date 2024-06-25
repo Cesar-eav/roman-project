@@ -64,8 +64,9 @@ Route::middleware([
 
     #COTIZACIONES
     Route::get('/crear-cotizacion', [PolizaController::class, 'crearCotizacion'])->name('crear-cotizacion');
-    Route::post('/upload', [PolizaController::class, 'uploadPDF'])->name('upload.pdf');
-    Route::get('/send-email', [PolizaController::class, 'sendEmail'])->name('send.email');
+    Route::post('/form/cotizaciones-v1', [PolizaController::class, 'cotizacionesV1'])->name('cotizaciones-v1');
+    Route::get('/form/companies', [PolizaController::class, 'getCompanies'])->name('get.companies');
+    Route::get('/form/ejecutivas', [PolizaController::class, 'getEjecutivas'])->name('get.ejecutivas');
 
     //CIAS SEGUROS
     Route::get('/show-cia/{id}', [UsoInternoController::class, 'showCia']);
