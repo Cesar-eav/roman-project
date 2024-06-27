@@ -19,7 +19,7 @@
                 <label :for="'compania-' + compania.id">{{ compania.razon_social }}</label>
 
                 <!-- Ejecutivos asociados a la compañía seleccionada -->
-                <div v-if="isSelected(compania)">
+                <div class="bg-slate-300" v-if="isSelected(compania)">
                     <h3>Seleccione un Ejecutivo de {{ compania.razon_social }}:</h3>
                     <div v-for="ejecutivo in compania.ejecutivas" :key="ejecutivo.id">
                         <input type="radio" :name="'ejecutivo-' + compania.id" :id="'ejecutivo-' + ejecutivo.id"
@@ -29,13 +29,27 @@
                 </div>
             </div>
 
-            <!-- Campos del formulario -->
-            <div v-if="shouldShowForm" class="grid grid-cols-6">
-                <h2 class="col-span-6">Campos del Formulario</h2>
-                <div v-for="campo in campos" :key="campo.id">
-                    <label :for="campo.id">{{ campo.label }}:</label>
-                    <input :type="campo.type" :id="campo.id" v-model="campo.value" />
+            <!-- Botón para agregar un nuevo vehículo -->
+
+            <!-- Campos del formulario para cada vehículo -->
+            <div v-if="shouldShowForm" class="flex justify-end">
+                <div>
+                    <button class="btn-add-vehicle" @click="addVehicle">Agregar (+)</button>
                 </div>
+            </div>
+
+         <!-- Campos del formulario para cada vehículo -->
+         <div v-if="shouldShowForm" v-for="(vehicle, vehicleIndex) in vehicles" :key="vehicleIndex"
+                class="vehicle-form grid grid-cols-8  bg-slate-500 ">
+                <h2 class="col-span-8 bg-slate-600">Campos del Formulario para Vehículo {{ vehicleIndex + 1 }}</h2>
+
+                <div v-for="(campo, index) in vehicle.campos" :key="index">
+                    <label :for="campo.id">{{ campo.label }}:</label>
+                    <input :type="campo.type" :id="campo.id" v-model="campo.value" />                    
+                </div>
+                <button class="btn-remove col-span-1" @click="removeVehicle(vehicleIndex)">(-)</button>
+
+
             </div>
 
             <!-- Botón de envío -->
@@ -62,15 +76,19 @@ export default {
             selectedFormulario: '',
             selectedCompanias: [],
             selectedEjecutivos: {}, // Aquí se almacenan los ejecutivos seleccionados por cada compañía
-            campos: [
-                { id: 'marca', label: 'Marca', type: 'text', value: '' },
-                { id: 'modelo', label: 'Modelo', type: 'text', value: '' },
-                { id: 'agnio', label: 'agnio', type: 'text', value: '' },
-                { id: 'patente', label: 'Patente', type: 'text', value: '' },
-                { id: 'n_chasis', label: 'Nº Chasis', type: 'text', value: '' },
-                { id: 'n_motor', label: 'Nº Motor', type: 'text', value: '' },
-                { id: 'color', label: 'Color', type: 'text', value: '' },
-            ],
+            vehicles: [
+                {
+                    campos: [
+                        { id: 'marca', label: 'Marca', type: 'text', value: '' },
+                        { id: 'modelo', label: 'Modelo', type: 'text', value: '' },
+                        { id: 'agnio', label: 'Año', type: 'text', value: '' },
+                        { id: 'patente', label: 'Patente', type: 'text', value: '' },
+                        { id: 'n_chasis', label: 'Nº Chasis', type: 'text', value: '' },
+                        { id: 'n_motor', label: 'Nº Motor', type: 'text', value: '' },
+                        { id: 'color', label: 'Color', type: 'text', value: '' },
+                    ]
+                }
+            ]
         };
     },
     computed: {
@@ -90,17 +108,37 @@ export default {
                 this.$delete(this.selectedEjecutivos, compania.id);
             }
         },
+        addVehicle() {
+            const newVehicle = {
+                campos: [
+                    { id: 'marca', label: 'Marca', type: 'text', value: '' },
+                    { id: 'modelo', label: 'Modelo', type: 'text', value: '' },
+                    { id: 'agnio', label: 'Año', type: 'text', value: '' },
+                    { id: 'patente', label: 'Patente', type: 'text', value: '' },
+                    { id: 'n_chasis', label: 'Nº Chasis', type: 'text', value: '' },
+                    { id: 'n_motor', label: 'Nº Motor', type: 'text', value: '' },
+                    { id: 'color', label: 'Color', type: 'text', value: '' },
+                ]
+            };
+            this.vehicles.push(newVehicle);
+        },
+        removeVehicle(index) {
+            this.vehicles.splice(index, 1);
+        },
         submitForm() {
+            console.log("Enviando Formulario");
             const formData = {
                 formulario: this.selectedFormulario,
                 companias: this.selectedCompanias.map(compania => ({
                     id: compania.id,
                     ejecutivo: this.selectedEjecutivos[compania.id] || null,
                 })),
-                campos: this.campos.reduce((acc, campo) => {
-                    acc[campo.id] = campo.value;
-                    return acc;
-                }, {}),
+                vehicles: this.vehicles.map(vehicle => ({
+                    campos: vehicle.campos.reduce((acc, campo) => {
+                        acc[campo.id] = campo.value;
+                        return acc;
+                    }, {})
+                }))
             };
             axios.post('/form/cotizaciones-v1', formData)
                 .then(response => {
@@ -118,5 +156,39 @@ export default {
 .checkbox-option {
     margin-bottom: 8px;
 }
-</style>
 
+.vehicle-form {
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn-add-vehicle,
+.btn-remove {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    margin-right: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-add-vehicle {
+    margin-bottom: 16px;
+}
+
+.btn-add-vehicle:hover,
+.btn-remove:hover {
+    background-color: #45a049;
+}
+
+.btn-remove {
+    background-color: #f44336;
+}
+
+.btn-remove:hover {
+    background-color: #da190b;
+}
+</style>

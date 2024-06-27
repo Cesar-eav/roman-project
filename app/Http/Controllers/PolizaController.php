@@ -43,19 +43,17 @@ class PolizaController extends Controller
 
     public function cotizacionesV1(Request $request)
     {
-        // dd($request);
+        // dd($request->vehicles[0]['campos']['marca']);
 
         $formulario = new FormV1Liviano();
 
-        $formulario->marca = $request->campos['marca'];
-        $formulario->modelo = $request->campos['modelo'];
-        $formulario->patente = $request->campos['patente'];
-        $formulario->agnio = $request->campos['agnio'];
-        $formulario->n_chasis = $request->campos['n_chasis'];
-        $formulario->n_motor = $request->campos['n_motor'];
-        $formulario->color = $request->campos['color'];
-  
-
+        $formulario->marca = $request->vehicles[0]['campos']['marca'];
+        $formulario->modelo = $request->vehicles[0]['campos']['modelo'];
+        $formulario->patente = $request->vehicles[0]['campos']['patente'];
+        $formulario->agnio = $request->vehicles[0]['campos']['agnio'];
+        $formulario->n_chasis = $request->vehicles[0]['campos']['n_chasis'];
+        $formulario->n_motor = $request->vehicles[0]['campos']['n_motor'];
+        $formulario->color = $request->vehicles[0]['campos']['color'];
         $formulario->save();
     }
 }
