@@ -207,7 +207,7 @@ class UsoInternoController extends Controller
 
     public function guardarEjecutiva(Request $request)
     {
-        return $request;
+    
         $ejecutivasData = $request->input('ejecutivas', []);
 
         // return $ejecutivasData;
@@ -232,12 +232,12 @@ class UsoInternoController extends Controller
 
     public function showCias()
     {
+
         $companies = CiaAseguradora::with(['banco', 'ejecutivas'])
         ->orderBy('created_at', 'desc')
         ->get();
-        $ejecutivasData = Ejecutiva::with('cia')->get();
-     
-        
+
+        $ejecutivasData = Ejecutiva::with('cia')->get();      
         $bancos = Banco::get();
 
         return Inertia::render('ShowCias', [

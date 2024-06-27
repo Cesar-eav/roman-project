@@ -77,7 +77,7 @@
 
 
             <!-- EDITAR EJECUTIVA -->
-            <div v-for="ejecutiva in ejecutivasData" :key="ejecutiva.id" class="section col-span-2">
+            <div v-for="ejecutiva in companies.ejecutivas" :key="ejecutiva.id" class="section col-span-2">
                 <div>
                     <template v-if="editableId === ejecutiva.id">
                         <p>
