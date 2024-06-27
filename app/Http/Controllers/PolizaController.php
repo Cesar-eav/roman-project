@@ -27,6 +27,15 @@ class PolizaController extends Controller
         ]);
     }
 
+    public function showCotizaciones()
+    {
+        $cotizaciones = FormV1Liviano::all();
+        return Inertia::render('Polizas/ShowCotizaciones',[
+            'cotizaciones' => $cotizaciones
+            
+        ]);
+    }
+
     public function getCompanies()
     {
         $companies = CiaAseguradora::with(['ejecutivas'])

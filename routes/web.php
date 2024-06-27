@@ -63,6 +63,7 @@ Route::middleware([
 
 
     #COTIZACIONES
+    Route::get('/show-cotizaciones', [PolizaController::class, 'showCotizaciones'])->name('show-cotizaciones');
     Route::get('/crear-cotizacion', [PolizaController::class, 'crearCotizacion'])->name('crear-cotizacion');
     Route::post('/form/cotizaciones-v1', [PolizaController::class, 'cotizacionesV1'])->name('cotizaciones-v1');
     Route::get('/form/companies', [PolizaController::class, 'getCompanies'])->name('get.companies');
