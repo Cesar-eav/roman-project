@@ -16,7 +16,7 @@
             <div v-for="compania in companias" :key="compania.id">
                 <input type="checkbox" :id="'compania-' + compania.id" :value="compania" v-model="selectedCompanias"
                     @change="updateSelectedEjecutivos(compania)" />
-                <label :for="'compania-' + compania.id">{{ compania.razon_social }}</label>
+                <label :for="'compania-' + compania.id" class="text-2xl">{{ compania.razon_social }}</label>
 
                 <!-- Ejecutivos asociados a la compañía seleccionada -->
                 <div class="bg-slate-300" v-if="isSelected(compania)">

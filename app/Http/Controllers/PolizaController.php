@@ -18,9 +18,9 @@ class PolizaController extends Controller
     {
         $formularios = PolizaForm::all();
         $companias = CiaAseguradora::with(['ejecutivas'])
-        ->get();
+            ->get();
 
-   
+
         return Inertia::render('Polizas/CrearCotizacion', [
             'formularios' => $formularios,
             'companias' => $companias
@@ -30,7 +30,7 @@ class PolizaController extends Controller
     public function getCompanies()
     {
         $companies = CiaAseguradora::with(['ejecutivas'])
-        ->get();
+            ->get();
         return response()->json($companies);
     }
 
@@ -43,17 +43,24 @@ class PolizaController extends Controller
 
     public function cotizacionesV1(Request $request)
     {
-        // dd($request->vehicles[0]['campos']['marca']);
+        return $request;
 
-        $formulario = new FormV1Liviano();
-
-        $formulario->marca = $request->vehicles[0]['campos']['marca'];
-        $formulario->modelo = $request->vehicles[0]['campos']['modelo'];
-        $formulario->patente = $request->vehicles[0]['campos']['patente'];
-        $formulario->agnio = $request->vehicles[0]['campos']['agnio'];
-        $formulario->n_chasis = $request->vehicles[0]['campos']['n_chasis'];
-        $formulario->n_motor = $request->vehicles[0]['campos']['n_motor'];
-        $formulario->color = $request->vehicles[0]['campos']['color'];
-        $formulario->save();
+        foreach ($request->vehicles as $vehicle) {
+            foreach ($request->companias as $compania) {
+                $formulario = new FormV1Liviano();
+    
+                $formulario->marca = $vehicle['campos']['marca'];
+                $formulario->modelo = $vehicle['campos']['modelo'];
+                $formulario->patente = $vehicle['campos']['patente'];
+                $formulario->agnio = $vehicle['campos']['agnio'];
+                $formulario->n_chasis = $vehicle['campos']['n_chasis'];
+                $formulario->n_motor = $vehicle['campos']['n_motor'];
+                $formulario->color = $vehicle['campos']['color'];
+                $formulario->compania_id = $compania['ejecutivo']['cia_id'];
+                $formulario->ejecutivo_id = $compania['ejecutivo']['id'];
+    
+                $formulario->save();
+            }
+        }
     }
 }
