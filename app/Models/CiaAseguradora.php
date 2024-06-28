@@ -20,4 +20,8 @@ class CiaAseguradora extends Model
     public function ejecutivas(){
         return $this->hasMany(Ejecutiva::class, 'cia_id', 'id');
     }
+
+    public function formulariosF1(){
+        return $this->hasMany(FormV1Liviano::class);
+    }
 }

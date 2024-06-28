@@ -29,7 +29,7 @@ class PolizaController extends Controller
 
     public function showCotizaciones()
     {
-        $cotizaciones = FormV1Liviano::all();
+        $cotizaciones = FormV1Liviano::with(['ejecutivas','cias'])->get();
         return Inertia::render('Polizas/ShowCotizaciones',[
             'cotizaciones' => $cotizaciones
             
@@ -52,7 +52,6 @@ class PolizaController extends Controller
 
     public function cotizacionesV1(Request $request)
     {
-        return $request;
 
         foreach ($request->vehicles as $vehicle) {
             foreach ($request->companias as $compania) {

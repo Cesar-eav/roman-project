@@ -5,7 +5,6 @@
             <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
                 class="border rounded-lg" />
 
-
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-slate-700 overflow-hidden shadow-sm sm:rounded-lg">
@@ -25,13 +24,16 @@
                                         <td>COT-{{ getYear(cotizacion.created_at) }}-{{ getMonth(cotizacion.created_at)
                                             }}-{{ cotizacion.id }}</td>
                                         <td>{{ cotizacion.marca }}</td>
-                                        <td>{{ cotizacion.ejecutivo_id }}</td>
-                                        <td>{{ cotizacion.compania_id }}</td>
+                                        <td v-for="ejecutiva in cotizacion.ejecutivas" :key="ejecutiva.id">
+                                            {{ ejecutiva.name }}</td>
+                                        <td v-for="cia in cotizacion.cias" :key="cia.id">
+                                            {{ cia.razon_social }}</td>
+        
 
                                         <th class="flex justify-center">
                                             <button class="btn btn-ver" @click="verCia(cotizacion.id)">Ver</button>
                                             <button class="btn btn-editar"
-                                                @click="editarCia(cotizacion.id)">Editar</button>
+                                                @click="editarCia(cotizacion.id)">Enviar</button>
                                             <button class="btn btn-eliminar"
                                                 @click="confirmarEliminar(cotizacion.id)">Eliminar</button>
                                         </th>
