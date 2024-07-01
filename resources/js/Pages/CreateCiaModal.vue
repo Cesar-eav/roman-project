@@ -343,6 +343,8 @@ export default {
                 'fecha_nacimiento_ejecutiva_3': this.form.fecha_nacimiento_ejecutiva_3 || ''
             }).then(response => {
                 console.log(response.data);
+                this.$inertia.visit('/show-cias');
+
                 this.close()
             });
         },

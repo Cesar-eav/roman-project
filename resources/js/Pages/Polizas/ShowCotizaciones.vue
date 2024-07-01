@@ -12,6 +12,7 @@
                             <table id="clientesTable" class="display">
                                 <thead class="bg-gray-900">
                                     <tr>
+                                        <th>Id</th>
                                         <th>Codigo</th>
                                         <th>Marca</th>
                                         <th>Ejecutivo</th>
@@ -21,6 +22,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="cotizacion in cotizaciones" :key="cotizacion.id">
+                                        <td>{{ cotizacion.id }}</td>
                                         <td>COT-{{ getYear(cotizacion.created_at) }}-{{ getMonth(cotizacion.created_at)
                                             }}-{{ cotizacion.id }}</td>
                                         <td>{{ cotizacion.marca }}</td>
@@ -28,12 +30,13 @@
                                             {{ ejecutiva.name }}</td>
                                         <td v-for="cia in cotizacion.cias" :key="cia.id">
                                             {{ cia.razon_social }}</td>
-        
+
 
                                         <th class="flex justify-center">
                                             <button class="btn btn-ver" @click="verCia(cotizacion.id)">Ver</button>
                                             <button class="btn btn-editar"
                                                 @click="editarCia(cotizacion.id)">Enviar</button>
+                                            <button @click="generatePDF(cotizacion.id)">PDF</button>
                                             <button class="btn btn-eliminar"
                                                 @click="confirmarEliminar(cotizacion.id)">Eliminar</button>
                                         </th>
@@ -76,6 +79,21 @@ export default {
         },
     },
     methods: {
+        generatePDF($id) {
+            console.log($id);
+            axios.get('/generate-pdf/'+$id, { responseType: 'blob' })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'document.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error("There was an error generating the PDF!", error);
+                });
+        },
         searchTable() {
             const table = $('#clientesTable').DataTable();
             table.search(this.searchQuery).draw();
@@ -92,9 +110,9 @@ export default {
     mounted() {
         $('#clientesTable').DataTable({
             dom: 'rtip', // Remueve el campo de búsqueda por defecto
-            // order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
+            order: [[0, 'desc']],
             autoWidth: false,  // Permite que la tabla ajuste su ancho automáticamente
-            order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
+            // order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
 
         });
     }

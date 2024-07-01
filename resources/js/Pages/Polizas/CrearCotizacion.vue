@@ -174,6 +174,9 @@ export default {
             axios.post('/form/cotizaciones-v1', formData)
                 .then(response => {
                     console.log('Formulario enviado con éxito:', response.data);
+                    this.$inertia.visit('/show-cotizaciones');
+                    console.log("Redirigiendo");
+
                 })
                 .catch(error => {
                     console.error('Error al enviar el formulario:', error);

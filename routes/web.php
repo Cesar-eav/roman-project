@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PolizaController;
 use App\Http\Controllers\UsoInternoController;
@@ -114,6 +115,7 @@ Route::middleware([
 
 
 
+    Route::get('/generate-pdf/{id?}', [PDFController::class, 'generatePDF']);
 
 
 

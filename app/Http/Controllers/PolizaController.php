@@ -29,7 +29,11 @@ class PolizaController extends Controller
 
     public function showCotizaciones()
     {
-        $cotizaciones = FormV1Liviano::with(['ejecutivas','cias'])->get();
+        $cotizaciones = FormV1Liviano::with(['ejecutivas','cias'])
+        ->orderBy('id', 'desc')
+        ->get();
+    
+
         return Inertia::render('Polizas/ShowCotizaciones',[
             'cotizaciones' => $cotizaciones
             

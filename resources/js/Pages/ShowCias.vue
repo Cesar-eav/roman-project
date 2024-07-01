@@ -17,6 +17,7 @@
                         <table id="clientesTable" class="display">
                             <thead class="bg-gray-900">
                                 <tr>
+                                    <th >Id</th>
                                     <th>Razón Social</th>
                                     <th>Rut</th>
                                     <th>Banco</th>
@@ -26,6 +27,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="company in companies" :key="company.id">
+                                    <td >{{ company.id }}</td>
                                     <td>{{ company.razon_social }}</td>
                                     <td>{{ company.rut_empresa }}</td>
                                     <td>{{ company.banco.nombre }}</td>
@@ -203,8 +205,10 @@ export default {
     },
     mounted() {
         $('#clientesTable').DataTable({
-            dom: 'rtip', // Remueve el campo de búsqueda por defecto
-            // order: [[0, 'desc']],  // Ordena la primera columna en orden descendente
+            dom: 'rtip', 
+            scrollX: true, 
+            autoWidth: false,  
+            order: [[0, 'desc']], 
 
         });
     }
@@ -309,5 +313,9 @@ export default {
 
 .btn-cancelar:hover {
     background-color: #d32f2f;
+}
+
+.hidden-cell {
+    display: none;
 }
 </style>
