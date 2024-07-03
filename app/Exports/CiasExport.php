@@ -16,90 +16,90 @@ class CiasExport implements FromCollection, WithHeadings, WithMapping
     {
         return CiaAseguradora::all();
     }
+
     /**
      * @return array
      */
-
     public function headings(): array
     {
         return [
-            'Razon Social',
-            'Nombre Fantasía',
-            'Rut empresa',
-            'Dirección',
-            'Comuna',
-            'Region',
-            'Telefono',
-            'Correo',
-            'Nombre Banco',
-            'Numero de Cta',
-            'Representante legal',
-            'Rut Representante',
-            'Correo Representante',
-            'Telefono Representante',
-            'Nombre Gerente',
-            'Direccion Gerente',
-            'Comuna Gerente',
-            'Región Gerente',
-            'Telefono Gerente',
-            'Correo Gerente',
-            'Fecha nacimiento gerente',
-            'Ejecutiva 1',
-            'Fono ejecutiva 1',
-            'Correo ejecutiva 1',
-            'Fecha nacimiento ejecutiva 1',
-            'Ejecutiva 2',
-            'Fono ejecutiva 2',
-            'Correo ejecutiva 2',
-            'Fecha nacimiento ejecutiva 2',
-
+            'RAZÓN SOCIAL',
+            'NOMBRE FANTASÍA',
+            'RUT EMPRESA',
+            'DIRECCIÓN',
+            'COMUNA',
+            'REGIÓN',
+            'TELÉFONO',
+            'CORREO',
+            'NOMBRE BANCO',
+            'NÚMERO DE CTA',
+            'REPRESENTANTE LEGAL',
+            'RUT REPRESENTANTE',
+            'CORREO REPRESENTANTE',
+            'TELÉFONO REPRESENTANTE',
+            'NOMBRE GERENTE',
+            'DIRECCIÓN GERENTE',
+            'COMUNA GERENTE',
+            'REGIÓN GERENTE',
+            'TELÉFONO GERENTE',
+            'CORREO GERENTE',
+            'FECHA NACIMIENTO GERENTE',
+            'EJECUTIVA 1',
+            'FONO EJECUTIVA 1',
+            'CORREO EJECUTIVA 1',
+            'FECHA NACIMIENTO EJECUTIVA 1',
+            'EJECUTIVA 2',
+            'FONO EJECUTIVA 2',
+            'CORREO EJECUTIVA 2',
+            'FECHA NACIMIENTO EJECUTIVA 2',
+            'EJECUTIVA 3',
+            'FONO EJECUTIVA 3',
+            'CORREO EJECUTIVA 3',
+            'FECHA NACIMIENTO EJECUTIVA 3',
         ];
     }
 
-        /**
+    /**
      * @param mixed $user
      *
      * @return array
      */
-    
     public function map($user): array
     {
         return [
-            $user->razon_social,
-            $user->nombre_fantasia,
-            $user->rut_empresa,
-            $user->direccion,
-            $user->comuna,
-            $user->region,
-            $user->fono,
-            $user->mail,
-            $user->nombre_banco,
-            $user->banco_id,
-            $user->num_cuenta,
-            $user->representante_legal,
-            $user->rut_representante,
-            $user->mail_representante,
-            $user->fono_representante,
-            $user->nombre_gerente,
-            $user->direccion_gerente,
-            $user->comuna_gerente,
-            $user->region_gerente,
-            $user->fono_gerente,
-            $user->mail_gerente,
-            $user->fecha_nacimiento_gerente,
-            $user->ejecutiva_1,
-            $user->fono_ejecutiva_1,
-            $user->mail_ejecutiva_1,
-            $user->fecha_nacimiento_ejecutiva_1,
-            $user->ejecutiva_2,
-            $user->fono_ejecutiva_2,
-            $user->mail_ejecutiva_2,
-            $user->fecha_nacimiento_ejecutiva_2,
-            $user->ejecutiva_3,
-            $user->fono_ejecutiva_3,
-            $user->mail_ejecutiva_3,
-            $user->fecha_nacimiento_ejecutiva_3,
-
+            strtoupper($user->razon_social),
+            strtoupper($user->nombre_fantasia),
+            strtoupper($user->rut_empresa),
+            strtoupper($user->direccion),
+            strtoupper($user->comuna),
+            strtoupper($user->region),
+            strtoupper($user->fono),
+            strtoupper($user->mail),
+            strtoupper($user->nombre_banco),
+            strtoupper($user->num_cuenta),
+            strtoupper($user->representante_legal),
+            strtoupper($user->rut_representante),
+            strtoupper($user->mail_representante),
+            strtoupper($user->fono_representante),
+            strtoupper($user->nombre_gerente),
+            strtoupper($user->direccion_gerente),
+            strtoupper($user->comuna_gerente),
+            strtoupper($user->region_gerente),
+            strtoupper($user->fono_gerente),
+            strtoupper($user->mail_gerente),
+            $user->fecha_nacimiento_gerente, // Fechas no necesitan strtoupper
+            strtoupper($user->ejecutiva_1),
+            strtoupper($user->fono_ejecutiva_1),
+            strtoupper($user->mail_ejecutiva_1),
+            $user->fecha_nacimiento_ejecutiva_1, // Fechas no necesitan strtoupper
+            strtoupper($user->ejecutiva_2),
+            strtoupper($user->fono_ejecutiva_2),
+            strtoupper($user->mail_ejecutiva_2),
+            $user->fecha_nacimiento_ejecutiva_2, // Fechas no necesitan strtoupper
+            strtoupper($user->ejecutiva_3),
+            strtoupper($user->fono_ejecutiva_3),
+            strtoupper($user->mail_ejecutiva_3),
+            $user->fecha_nacimiento_ejecutiva_3, // Fechas no necesitan strtoupper
         ];
     }
 }

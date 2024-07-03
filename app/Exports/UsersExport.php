@@ -54,17 +54,17 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping, WithEven
     public function map($user): array
     {
         return [
-            $user->rut,
-            $user->name,
-            $user->last_name,
-            $user->email,
-            $user->telefono,
-            $user->address,
-            $user->ciudad,
-            $user->region,
-            $user->cargo,
-            $user->isapre,
-            $user->afp
+            strtoupper($user->rut),
+            strtoupper($user->name),
+            strtoupper($user->last_name),
+            strtoupper($user->email),
+            strtoupper($user->telefono),
+            strtoupper($user->address),
+            strtoupper($user->ciudad),
+            strtoupper($user->region),
+            strtoupper($user->cargo),
+            strtoupper($user->isapre),
+            strtoupper($user->afp)
 
         ];
     }
