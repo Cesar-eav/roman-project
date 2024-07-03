@@ -58,7 +58,7 @@
             </div>
         </div>
         <CreateEmpresaModal v-if="CreateEmpresaModal" :show="CreateEmpresaModal" @close="close"
-        :comunas="comunas" :bancos="bancos">
+        :comunas="comunas" :bancos="bancos" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -109,6 +109,10 @@ export default {
         comunas: {
             type: Array,
             required: true
+        },
+        regiones: {
+            type: Array,
+            required: true,
         },
         bancos: {
             type: Array,

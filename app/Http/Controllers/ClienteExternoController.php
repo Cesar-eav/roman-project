@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Comuna;
+use App\Models\Region;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 use App\Models\UsuarioExterno;
@@ -20,10 +21,13 @@ class ClienteExternoController extends Controller
     {
         $empresas = Empresa::all();
         $comunas = Comuna::all();
+        $regiones = Region::all();
         // Pasar los datos a la vista Dashboard usando Inertia
         return Inertia::render('ShowEmpresas', [
             'empresas' => $empresas,
-            'comunas' => $comunas
+            'comunas' => $comunas,
+            'regiones' => $regiones
+
 
         ]);
     }
