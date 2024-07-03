@@ -115,7 +115,7 @@
         </CreateCiaModal>
 
 
-        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal" :bancos="bancos" @close="close" :comunas="comunas">
+        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal" :bancos="bancos" @close="close" :comunas="comunas" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -153,6 +153,7 @@ import CreatePolizaModal from '@/Pages/ClientesExternos/CreatePolizaModal.vue'
 const page = usePage();
 const comunas = computed(() => page.props.value.comunas);
 const bancos = computed(() => page.props.value.bancos);
+const regiones = computed(() => page.props.value.regiones);
 
 
 // Declarar variables reactivas usando ref
