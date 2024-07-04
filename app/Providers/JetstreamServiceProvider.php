@@ -58,10 +58,31 @@ class JetstreamServiceProvider extends ServiceProvider
             'delete',
         ])->description('Administrator users can perform any action.');
 
-        Jetstream::role('editor', 'Editor', [
+        // Jetstream::role('editor', 'Editor', [
+        //     'read',
+        //     'create',
+        //     'update',
+        // ])->description('Editor users have the ability to read, create, and update.');
+
+        Jetstream::role('ejecutivo', 'Cliente Interno - CREAR EJECUTIVO/A', [
             'read',
             'create',
             'update',
-        ])->description('Editor users have the ability to read, create, and update.');
+        ])->description('Los ejecutivos son de tipo Comercial, Cobraza o Gestor de Siniestros.');
+
+
+        // Jetstream::role('ext-admin', 'Cliente Externo  - ADMIN', [
+        //     'read',
+        //     'create',
+        //     'update',
+        // ])->description('Editor users have the ability to read, create, and update.');
+
+        // Jetstream::role('ext-operario', 'Cliente Externo  - OPERARIO', [
+        //     'read',
+        //     'create',
+        //     'update',
+        // ])->description('Editor users have the ability to read, create, and update.');
+
+
     }
 }
