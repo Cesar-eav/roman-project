@@ -10,6 +10,19 @@
                 </slot> -->
             </template>
 
+            <template>
+    <div>
+        <div @click="$emit('toggle')">
+            <slot name="title">{{ title }}</slot>
+        </div>
+        <transition name="fade">
+            <div v-if="isOpen">
+                <slot></slot>
+            </div>
+        </transition>
+    </div>
+</template>
+
             <template #arrow>
                 <span
                     v-show="sidebarState.isOpen || sidebarState.isHovered"
@@ -65,6 +78,8 @@
     </div>
 </template>
 
+
+
 <script setup>
 import { ref } from 'vue'
 import { sidebarState } from '@/Composables'
@@ -74,6 +89,8 @@ import { EmptyCircleIcon } from '@/Components/Icons/Outline'
 const props = defineProps({
             title: {
                 type: String,
+                isOpen: Boolean,
+
             },
             icon: {
                 required: false,
@@ -100,3 +117,11 @@ const leave = (el) => {
     el.style.maxHeight = `0px`
 }
 </script>
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active en versiones anteriores de Vue */ {
+    opacity: 0;
+}
+</style>

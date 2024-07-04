@@ -14,7 +14,9 @@
             route().current('cliente') ||
             route().current('show-cias') ||
             route().current('add-compania')
-            ">
+            " 
+            :isOpen="openSubmenu === 'configuracion-interna'" @toggle="toggleSubmenu('configuracion-interna')">
+            
             <SidebarCollapsibleItem title="Crear Usuario Interno" :onClick="openCreateUserModal" :active="false" />
 
             <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
@@ -139,6 +141,7 @@ import { usePage } from '@inertiajs/inertia-vue3';
 
 import { ref, reactive } from 'vue';
 
+
 import PerfrectScrollbar from '@/Components/PerfectScrollbar'
 import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
 import SidebarCollapsibleItem from '@/Components/Sidebar/SidebarCollapsibleItem.vue'
@@ -154,6 +157,7 @@ const page = usePage();
 const comunas = computed(() => page.props.value.comunas);
 const bancos = computed(() => page.props.value.bancos);
 const regiones = computed(() => page.props.value.regiones);
+const openSubmenu = ref(null);
 
 
 // Declarar variables reactivas usando ref
@@ -162,6 +166,14 @@ const showCiaModal = ref(false);
 const showEmpresaModal = ref(false);
 const showPolizaModal = ref(false);
 
+
+function toggleSubmenu(submenu) {
+    if (openSubmenu.value === submenu) {
+        openSubmenu.value = null;
+    } else {
+        openSubmenu.value = submenu;
+    }
+}
 
 function openCreateUserModal(event) {
     showModal.value = true
@@ -195,3 +207,5 @@ function close() {
 }
 
 </script>
+
+
