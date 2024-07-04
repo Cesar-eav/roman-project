@@ -1,17 +1,17 @@
 <template>
     <FormSection @submitted="updateTeamName">
         <template #title>
-            Team Name
+            Nombre del equipo
         </template>
 
         <template #description>
-            The team's name and owner information.
+            Información del equipo
         </template>
 
         <template #form>
             <!-- Team Owner Information -->
             <div class="col-span-6">
-                <Label value="Team Owner" />
+                <Label value="Administrador del Equipo" />
 
                 <div class="flex items-center mt-2">
                     <img class="w-12 h-12 rounded-full object-cover" :src="team.owner.profile_photo_url" :alt="team.owner.name">

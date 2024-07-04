@@ -6,32 +6,35 @@
                 <DashboardIcon class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </template>
         </SidebarLink>
+        <div v-if="this.$page.props.user.all_teams[0]?.membership?.role === 'admin' &&
+            this.$page.props.user.all_teams[0]?.membership?.role !== 'comercial'">
 
+            <!-- CONFIGURACION INTERNA -->
+            <SidebarCollapsible title="Configuración Interna" class="text-xs" :active="route().current('crearusuario') ||
+                route().current('dashboard') ||
+                route().current('cliente') ||
+                route().current('show-cias') ||
+                route().current('add-compania')
+                " :isOpen="openSubmenu === 'configuracion-interna'" @toggle="toggleSubmenu('configuracion-interna')">
 
-        <!-- CONFIGURACION INTERNA -->
-        <SidebarCollapsible title="Configuración Interna" class="text-xs" :active="route().current('crearusuario') ||
-            route().current('dashboard') ||
-            route().current('cliente') ||
-            route().current('show-cias') ||
-            route().current('add-compania')
-            " 
-            :isOpen="openSubmenu === 'configuracion-interna'" @toggle="toggleSubmenu('configuracion-interna')">
-            
-            <SidebarCollapsibleItem title="Crear Usuario Interno" :onClick="openCreateUserModal" :active="false" />
+                <SidebarCollapsibleItem title="Crear Usuario Interno" :onClick="openCreateUserModal" :active="false" />
 
-            <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
-                :active="route().current('dashboard')" />
-            <SidebarCollapsibleItem title="Asignación de Atribuciones" />
-            <SidebarCollapsibleItem title="Agregar Cía. Seguro" :onClick="openCiaSeguroModal" :active="false" />
-            <SidebarCollapsibleItem title="Listar Cía. Seguros" :href="route('show-cias')"
-                :active="route().current('show-cias')" />
-            <SidebarCollapsibleItem title="Crear mensaje de Avisos" />
-        </SidebarCollapsible>
+                <SidebarCollapsibleItem title="Listar Usuarios Internos " :href="route('dashboard')"
+                    :active="route().current('dashboard')" />
+                <SidebarCollapsibleItem title="Asignación de Atribuciones" />
+                <SidebarCollapsibleItem title="Agregar Cía. Seguro" :onClick="openCiaSeguroModal" :active="false" />
+                <SidebarCollapsibleItem title="Listar Cía. Seguros" :href="route('show-cias')"
+                    :active="route().current('show-cias')" />
+                <SidebarCollapsibleItem title="Crear mensaje de Avisos" />
+            </SidebarCollapsible>
+        </div>
 
         <!-- CLIENTES EXTERNOS -->
         <SidebarCollapsible title="Clientes Externos" class="text-xs" :active="route().current('crear-empresa') ||
             route().current('show-empresas') ||
-            route().current('show-cliente-externo')">
+            route().current('show-cliente-externo')" :isOpen="openSubmenu === 'configuracion-interna'"
+            @toggle="toggleSubmenu('clientes-externos')">
+            >
 
 
             <SidebarCollapsibleItem title="Crear Empresa Nueva" :onClick="openEmpresaModal" :active="false" />
@@ -50,17 +53,15 @@
 
         <!-- POLIZAS -->
 
-        <SidebarCollapsible title="Polizas" class="text-xs"
-            :active="
-            route().current('crear-cotizacion') || 
+        <SidebarCollapsible title="Polizas" class="text-xs" :active="route().current('crear-cotizacion') ||
             route().current('show-polizas')
             ">
 
             <SidebarCollapsibleItem title="Crear Cotizacion" :href="route('crear-cotizacion')"
                 :active="route().current('/crear-cotizacion')" />
 
-            <SidebarCollapsibleItem title="Listado de Cotizaciones" :href="route('show-cotizaciones')" 
-                :active="route().current('show-cotizaciones')"/>
+            <SidebarCollapsibleItem title="Listado de Cotizaciones" :href="route('show-cotizaciones')"
+                :active="route().current('show-cotizaciones')" />
             <SidebarCollapsibleItem title="Envío de Cotizaciones" />
             <SidebarCollapsibleItem title="Crear Propuestas" />
             <SidebarCollapsibleItem title="Listado de Propuestas" />
@@ -81,24 +82,31 @@
             <li>-Listado de Siniestros</li>
             <li>-Estatus Gestión de Siniestros</li>
         </SidebarCollapsible>
-
+        <p class="text-white">{{ this.$page.props.user.all_teams[0]?.membership?.role }}</p>
         <SidebarCollapsible title="Reportes">
+            <div v-if="this.$page.props.user.all_teams[0].membership.role === 'admin' &&
+                this.$page.props.user.all_teams[0].membership.role !== 'comercial'">
+                <p>-Reporte mensual x Compañía</p>
+                <p>-Reporte comportamiento acumulado anual</p>
+                <p>-Comisiones</p>
+                <p>-Siniestros</p>
 
-            <p>-Reporte mensual x Compañía</p>
-            <p>-Reporte comportamiento acumulado anual</p>
-            <p>-Comisiones</p>
-            <p>-Siniestros</p>
+                <p>-Listado de Pólizas para asignación de Vendedor</p>
+                <p>-Reporte mensual x Ejecutivo</p>
 
-            <p>-Listado de Pólizas para asignación de Vendedor</p>
-            <p>-Reporte mensual x Ejecutivo</p>
+            </div>
 
             <p>-Listado de Siniestros x Cliente Mensual</p>
             <p>-Listado de Siniestros x Cliente Anual</p>
             <p>-Listado de Siniestros x Cliente y siniestralidad efectiva</p>
 
-            <p>-Asignación y Carga de Liquidaciones de Sueldo x Ejecutivo</p>
-            <p>-Asignación y Carga de Permisos x Ejecutivo</p>
-            <p>-Asignación y Carga de Licencias Médicas x Ejecutivo</p>
+            <span v-if="this.$page.props.user.all_teams[0]?.membership?.role === 'admin' &&
+                this.$page.props.user.all_teams[0]?.membership?.role !== 'comercial'">
+
+                <p>-Asignación y Carga de Liquidaciones de Sueldo x Ejecutivo</p>
+                <p>-Asignación y Carga de Permisos x Ejecutivo</p>
+                <p>-Asignación y Carga de Licencias Médicas x Ejecutivo</p>
+            </span>
 
         </SidebarCollapsible>
 
@@ -117,7 +125,8 @@
         </CreateCiaModal>
 
 
-        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal" :bancos="bancos" @close="close" :comunas="comunas" :regiones="regiones">
+        <CreateEmpresaModal v-if="showEmpresaModal" :show="showEmpresaModal" :bancos="bancos" @close="close"
+            :comunas="comunas" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -207,5 +216,3 @@ function close() {
 }
 
 </script>
-
-

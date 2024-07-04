@@ -4,17 +4,17 @@
             <!-- Add Team Member -->
             <FormSection @submitted="addTeamMember">
                 <template #title>
-                    Add Team Member
+                    Agregar trabajador
                 </template>
 
                 <template #description>
-                    Add a new team member to your team, allowing them to collaborate with you.
+                    Agrega un nuevo ejecutivo o cliente externo.
                 </template>
 
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-                            Please provide the email address of the person you would like to add to this team.
+                            Ingresa el email de la persona para enviarle un correo electronico de registro. 
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
 
                 <template #actions>
                     <Button :disabled="addTeamMemberForm.processing">
-                        Add
+                        Agregar
                     </Button>
                 </template>
             </FormSection>
@@ -70,12 +70,11 @@
             <!-- Team Member Invitations -->
             <ActionSection class="mt-10 sm:mt-0">
                 <template #title>
-                    Pending Team Invitations
+                    Invitaciones pendientes
                 </template>
 
                 <template #description>
-                    These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.
-                </template>
+                    Estas personas han sido invitadas a su equipo y se les ha enviado un correo electrónico de invitación. Pueden unirse al equipo aceptando la invitación por correo electrónico.                </template>
 
                 <!-- Pending Team Member Invitation List -->
                 <template #content>
@@ -88,7 +87,7 @@
                                 <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                     @click="cancelTeamInvitation(invitation)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
                         </div>
@@ -103,12 +102,12 @@
             <!-- Manage Team Members -->
             <ActionSection class="mt-10 sm:mt-0">
                 <template #title>
-                    Team Members
+                    Miembros del equipo
                 </template>
 
                 <template #description>
-                    All of the people that are part of this team.
-                </template>
+
+                    Todas las personas que forman parte de este equipo.                </template>
 
                 <!-- Team Member List -->
                 <template #content>
@@ -142,7 +141,7 @@
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
-                                    Remove
+                                    Eliminar
                                 </button>
                             </div>
                         </div>

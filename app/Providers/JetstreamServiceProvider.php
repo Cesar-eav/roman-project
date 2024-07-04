@@ -64,7 +64,7 @@ class JetstreamServiceProvider extends ServiceProvider
         //     'update',
         // ])->description('Editor users have the ability to read, create, and update.');
 
-        Jetstream::role('ejecutivo', 'Cliente Interno - CREAR EJECUTIVO/A', [
+        Jetstream::role('ejecutivo', 'Ejectuvivo/a', [
             'read',
             'create',
             'update',
