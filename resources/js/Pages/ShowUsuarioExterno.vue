@@ -59,7 +59,7 @@
         </div>
 
 
-        <CreateUsuarioExternoModal v-if="showModalUsuarioExterno" :show="showModalUsuarioExterno" @close="close">
+        <CreateUsuarioExternoModal v-if="showModalUsuarioExterno" :show="showModalUsuarioExterno" @close="close" :comunas="comunas" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -102,6 +102,14 @@ export default {
         usuarios_externos: {
             type: Array,
             required: true
+        },
+        comunas: {
+            type: Array,
+            required: true,
+        },
+        regiones: {
+            type: Array,
+            required: true,
         }
     },
     data() {

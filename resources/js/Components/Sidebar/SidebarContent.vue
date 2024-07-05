@@ -6,8 +6,8 @@
                 <DashboardIcon class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </template>
         </SidebarLink>
-        <div v-if="this.$page.props.user.all_teams[0]?.membership?.role === 'admin' &&
-            this.$page.props.user.all_teams[0]?.membership?.role !== 'comercial'">
+        <div v-if="this.$page.props.user.all_teams[1]?.membership?.role === 'admin' &&
+            this.$page.props.user.all_teams[1]?.membership?.role !== 'comercial'">
 
             <!-- CONFIGURACION INTERNA -->
             <SidebarCollapsible title="Configuración Interna" class="text-xs" :active="route().current('crearusuario') ||
@@ -35,21 +35,17 @@
             route().current('show-cliente-externo')" :isOpen="openSubmenu === 'configuracion-interna'"
             @toggle="toggleSubmenu('clientes-externos')">
             >
-
-
             <SidebarCollapsibleItem title="Crear Empresa Nueva" :onClick="openEmpresaModal" :active="false" />
 
             <SidebarCollapsibleItem title="Aprobación de Solicitud" />
             <SidebarCollapsibleItem title="Listado Empresas" :href="route('show-empresas')"
                 :active="route().current('show-empresas')" />
-            <SidebarCollapsibleItem title="Crear Usuarios Exeternos" />
+            <SidebarCollapsibleItem title="Crear Usuarios Externos" :onClick="openCreateUserExternoModal" :active="false"/>
             <SidebarCollapsibleItem title="Listado Clientes Externos" :href="route('show-cliente-externo')"
                 :active="route().current('show-cliente-externo')" />
             <SidebarCollapsibleItem title="Listado Activos Asegurados" />
             <SidebarCollapsibleItem title="Envío de Cotizaciones" />
         </SidebarCollapsible>
-
-
 
         <!-- POLIZAS -->
 
@@ -82,10 +78,10 @@
             <li>-Listado de Siniestros</li>
             <li>-Estatus Gestión de Siniestros</li>
         </SidebarCollapsible>
-        <p class="text-white">{{ this.$page.props.user.all_teams[0]?.membership?.role }}</p>
+        <p class="text-white">{{ this.$page.props.user.all_teams[1]?.membership?.role }}</p>
         <SidebarCollapsible title="Reportes">
-            <div v-if="this.$page.props.user.all_teams[0].membership.role === 'admin' &&
-                this.$page.props.user.all_teams[0].membership.role !== 'comercial'">
+            <div v-if="this.$page.props.user.all_teams[1].membership.role === 'admin' &&
+                this.$page.props.user.all_teams[1].membership.role !== 'comercial'">
                 <p>-Reporte mensual x Compañía</p>
                 <p>-Reporte comportamiento acumulado anual</p>
                 <p>-Comisiones</p>
@@ -100,8 +96,8 @@
             <p>-Listado de Siniestros x Cliente Anual</p>
             <p>-Listado de Siniestros x Cliente y siniestralidad efectiva</p>
 
-            <span v-if="this.$page.props.user.all_teams[0]?.membership?.role === 'admin' &&
-                this.$page.props.user.all_teams[0]?.membership?.role !== 'comercial'">
+            <span v-if="this.$page.props.user.all_teams[1]?.membership?.role === 'admin' &&
+                this.$page.props.user.all_teams[1]?.membership?.role !== 'comercial'">
 
                 <p>-Asignación y Carga de Liquidaciones de Sueldo x Ejecutivo</p>
                 <p>-Asignación y Carga de Permisos x Ejecutivo</p>
@@ -118,7 +114,8 @@
             </template>
         </CreateUserModal>
 
-        <CreateCiaModal v-if="showCiaModal" :show="showCiaModal" :bancos="bancos" @close="close">
+        <CreateCiaModal v-if="showCiaModal" :show="showCiaModal" :bancos="bancos" @close="close" :comunas="comunas"
+            :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -138,6 +135,13 @@
                 <button @click="close">Cerrar</button>
             </template>
         </CreatePolizaModal>
+
+        <CreateUsuarioExternoModal v-if="showCreateUserExternoModal" :show="showCreateUserExternoModal" :bancos="bancos" @close="close" :comunas="comunas"
+            :regiones="regiones">
+            <template #footer>
+                <button @click="close">Cerrar</button>
+            </template>
+        </CreateUsuarioExternoModal>
 
 
 
@@ -160,6 +164,7 @@ import { DashboardIcon } from '@/Components/Icons/Outline'
 import CreateCiaModal from '@/Pages/CreateCiaModal.vue'
 import CreateEmpresaModal from '@/Pages/CreateEmpresaModal.vue'
 import CreatePolizaModal from '@/Pages/ClientesExternos/CreatePolizaModal.vue'
+import CreateUsuarioExternoModal from '@/Pages/ClientesExternos/CreateUsuarioExternoModal.vue'
 
 
 const page = usePage();
@@ -174,6 +179,7 @@ const showModal = ref(false);
 const showCiaModal = ref(false);
 const showEmpresaModal = ref(false);
 const showPolizaModal = ref(false);
+const showCreateUserExternoModal = ref(false);
 
 
 function toggleSubmenu(submenu) {
@@ -206,12 +212,18 @@ function openPolizaModal(event) {
     event.preventDefault();
 }
 
+function openCreateUserExternoModal(event) {
+    showCreateUserExternoModal.value = true
+    event.preventDefault();
+}
+
 
 function close() {
     showModal.value = false
     showCiaModal.value = false
     showEmpresaModal.value = false
     showPolizaModal.value = false
+    showCreateUserExternoModal.value = false
 
 }
 

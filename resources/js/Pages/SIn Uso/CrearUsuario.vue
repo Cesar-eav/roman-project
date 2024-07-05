@@ -3,7 +3,7 @@
         <template #header>
             <div class="flex flex-col  gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold text-center leading-tight bg-orange-500 uppercase">
-                    Crear Usuario Interno
+                    Crear Usuario Interno asd
                 </h2>
 
             </div>
@@ -72,9 +72,15 @@
                 </div>
 
                 <div class="flex">
-                    <label class="block w-1/4 text-sm font-medium  mt-4">Región:</label>
-                    <input type="text" v-model="form.region" 
-                        class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <div class="w-1/2 ">
+                            <select v-model="form.region" required
+                                class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Región</option>
+                                <template v-for="region in regiones" :key="region.id">
+                                    <option :value="region.region">{{ region.region }}</option>
+                                </template>
+                            </select>
+                        </div>
                 </div>
 
                 <div class="flex">
@@ -119,8 +125,14 @@ import Button from "@/Components/Button.vue"
 import { Link, useForm } from '@inertiajs/inertia-vue3'
 import ValidationErrors from '@/Components/ValidationErrors.vue'
 import { ref } from 'vue';
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/inertia-vue3';
 
 
+const page = usePage();
+const comunas = computed(() => page.props.value.comunas);
+const bancos = computed(() => page.props.value.bancos);
+const regiones = computed(() => page.props.value.regiones);
 
 const form = useForm({
     selectedCargo:'',

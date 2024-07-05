@@ -48,25 +48,25 @@
                     <div class="flex">
                         <input type="text" v-model="form.direccion" placeholder="Dirección"
                             class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <div class="w-1/2 ">
+                            <select v-model="form.region" required
+                                class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Región</option>
+                                <template v-for="region in regiones" :key="region.id">
+                                    <option :value="region.region">{{ region.region }}</option>
+                                </template>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="flex">
                         <div class="w-1/2">
                             <select v-model="form.comuna" required
                                 class="COMUNA block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Seleccionar Comuna</option>
                                 <template v-for="comuna in comunas" :key="comuna.id">
                                     <option :value="comuna.comuna">{{ comuna.comuna }}</option>
-                                </template>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="flex">
-                        
-                        <div class="w-1/2 ">
-                            <select v-model="form.region" required
-                                class="COMUNA block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Seleccionar Región</option>
-                                <template v-for="region in regiones" :key="region.id">
-                                    <option :value="region.region">{{ region.region }}</option>
                                 </template>
                             </select>
                         </div>

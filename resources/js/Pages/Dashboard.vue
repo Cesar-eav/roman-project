@@ -3,7 +3,6 @@
         <div class="flex justify-center text-4xl pb-4">Listado de Usuarios Internos</div>
         <div class="flex py-2 px-8 justify-between text-gray-900">
 
-
             <!-- Campo de búsqueda personalizado -->
             <input v-model="searchQuery" @input="searchTable" type="text" placeholder="Buscar..."
                 class="border rounded-lg" />
@@ -76,7 +75,7 @@
         </EditModal>
 
 
-        <CreateUserModal v-if="showModal" :show="showModal" @close="close">
+        <CreateUserModal v-if="showModal" :show="showModal" @close="close" :comunas="comunas" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -111,6 +110,14 @@ export default {
         clientes: {
             type: Array,
             required: true
+        },
+        comunas: {
+            type: Array,
+            required: true,
+        },
+        regiones: {
+            type: Array,
+            required: true,
         }
     },
     data() {

@@ -60,11 +60,22 @@
                     </div>
 
                     <div class="flex">
-                        <input type="text" v-model="form.comuna" placeholder="Comuna"
-                            class="mt-1 mr-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <select v-model="form.comuna" required
+                                class="block mt-1 mr-1  w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Comuna</option>
+                                <template v-for="comuna in comunas" :key="comuna.id">
+                                    <option :value="comuna.comuna">{{ comuna.comuna }}</option>
+                                </template>
+                            </select>
 
-                        <input type="text" v-model="form.region" placeholder="Región"
-                            class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <select v-model="form.region" required
+                                class="block mt-1 mr-1  w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Región</option>
+                                <template v-for="region in regiones" :key="region.id">
+                                    <option :value="region.region">{{ region.region }}</option>
+                                </template>
+                            </select>
+
                     </div>
 
                     <div class="flex">
@@ -114,6 +125,14 @@ export default {
             type: Boolean,
             default: true,
         },
+        comunas: {
+            type: Array,
+            required: true,
+        },
+        regiones: {
+            type: Array,
+            required: true,
+        }
     },
     data() {
         return {

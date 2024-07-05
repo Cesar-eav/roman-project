@@ -34,8 +34,7 @@
 
                                         <th class="flex justify-center">
                                             <button class="btn btn-ver" @click="verCia(cotizacion.id)">Ver</button>
-                                            <button class="btn btn-editar"
-                                                @click="editarCia(cotizacion.id)">Enviar</button>
+                                            <button class="btn btn-editar" @click="enviarCotizacion(cotizacion.id)">Enviar</button>
                                             <button @click="generatePDF(cotizacion.id)">PDF</button>
                                             <button class="btn btn-eliminar"
                                                 @click="confirmarEliminar(cotizacion.id)">Eliminar</button>
@@ -81,7 +80,7 @@ export default {
     methods: {
         generatePDF($id) {
             console.log($id);
-            axios.get('/generate-pdf/'+$id, { responseType: 'blob' })
+            axios.get('/generate-pdf/' + $id, { responseType: 'blob' })
                 .then(response => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
@@ -92,6 +91,17 @@ export default {
                 })
                 .catch(error => {
                     console.error("There was an error generating the PDF!", error);
+                });
+        },
+        enviarCotizacion($id) {
+            console.log($id);
+            axios.post('/send-cotizacion/' + $id)
+                .then(response => {
+                    console.log(response.data);
+                    alert('Correo de cotización enviado con éxito!');
+                })
+                .catch(error => {
+                    console.error("There was an error sending the email!", error);
                 });
         },
         searchTable() {

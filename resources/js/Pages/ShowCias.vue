@@ -57,13 +57,13 @@
 
 
 
-        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close" :bancos="bancos">
+        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close" :bancos="bancos" :comunas="comunas" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </CreateCiaModal>
 
-        <ShowCiaModal v-if="ShowCiaModal" :show="ShowCiaModal" @close="close" :companies="ciaIdSeleccionado" :ejecutivasData="ejecutivasData">
+        <ShowCiaModal v-if="ShowCiaModal" :show="ShowCiaModal" @close="close" :companies="ciaIdSeleccionado" :ejecutivasData="ejecutivasData" :comunas="comunas" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -116,6 +116,14 @@ export default {
         ejecutivasData: {
             type: Array,
             required: true
+        },
+        comunas: {
+            type: Array,
+            required: true,
+        },
+        regiones: {
+            type: Array,
+            required: true,
         }
         
     },
