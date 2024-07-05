@@ -159,6 +159,8 @@ export default {
         },
         cerrarModal() {
             this.createPolizaModal = false;
+            this.mostrarModal = false;
+
         },
         searchTable() {
             const table = $('#polizasTable').DataTable();
@@ -188,7 +190,6 @@ export default {
                 });
         },
         deletePoliza(id) {
-            alert("Delete");
             axios.delete("/crud/delete-poliza/" + id)
                 .then(response => {
                     console.log("Eliminado", response.data);
@@ -268,7 +269,7 @@ export default {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .modal-content {
@@ -279,6 +280,8 @@ export default {
     width: 80%;
     max-width: 400px;
     text-align: center;
+    color: black;
+
 }
 
 .close {
