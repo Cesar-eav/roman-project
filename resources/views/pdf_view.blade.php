@@ -6,9 +6,12 @@
 </head>
 
 <body>
-    <h1>{{ $title }}</h1>
-    <p>Este es un ejemplo de cotización</p>
 
+    {{-- <h1>{{ $title }}</h1> --}}
+    <h2><strong>Compañia Aseguradora:</strong> {{$cotizacion['cias'][0]->razon_social}}</h2>
+    <h3 class="my-4 "><strong></strong> COT-{{ $cotizacion->created_at->format('Y-m') }}-{{ $cotizacion->id }}</h2>
+
+    <p>Este es un ejemplo de cotización</p>
 
 
     <p><strong>Marca:</strong> {{$cotizacion->marca}}</p>
@@ -16,10 +19,11 @@
     <p><strong>Nº Chasis:</strong> {{$cotizacion->n_chasis}}</p>
     <p><strong>Nº Motor:</strong> {{$cotizacion->n_motor}}</p>
     <p><strong>Patente:</strong> {{$cotizacion->patente}}</p>
-    <p><strong>Comañia Aseguradora:</strong> {{$cotizacion['cias'][0]->razon_social}}</p>
 
-    <p class="font-bold text-2xl">Ejecutiva</p>
+    <h2 class="font-bold"><strong> Ejecutiva/o </strong></h2>
     <p><strong>Nombre:</strong> {{$cotizacion['ejecutivas'][0]->name}} {{$cotizacion['ejecutivas'][0]->last_name}}</p>
+    <p><strong>Correo:</strong> {{$cotizacion['ejecutivas'][0]->email}}</p>
+    
     {{-- @foreach ($cotizacion as $cotizacionData)
       
     {{ $cotizacionData }}

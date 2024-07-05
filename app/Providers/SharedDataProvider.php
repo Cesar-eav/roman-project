@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Banco;
 use App\Models\Comuna;
+use App\Models\Region;
 use Illuminate\Support\ServiceProvider;
 
 class SharedDataProvider extends ServiceProvider
@@ -42,7 +43,13 @@ class SharedDataProvider extends ServiceProvider
         Inertia::share([
             'comunas' => function () {
                 return Comuna::all();
-            },
+            },       
+        ]);
+
+        Inertia::share([
+            'regiones' => function () {
+                return Region::all();
+            },       
         ]);
     }
 }

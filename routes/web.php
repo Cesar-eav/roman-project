@@ -1,9 +1,11 @@
 <?php
 
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PolizaController;
 use App\Http\Controllers\UsoInternoController;
@@ -69,6 +71,9 @@ Route::middleware([
     Route::post('/form/cotizaciones-v1', [PolizaController::class, 'cotizacionesV1'])->name('cotizaciones-v1');
     Route::get('/form/companies', [PolizaController::class, 'getCompanies'])->name('get.companies');
     Route::get('/form/ejecutivas', [PolizaController::class, 'getEjecutivas'])->name('get.ejecutivas');
+    Route::get('/generate-pdf/{id?}', [PDFController::class, 'generatePDF']);
+    Route::post('/send-cotizacion/{id}', [MailController::class, 'sendCotizacion']);
+
 
     //CIAS SEGUROS
     Route::get('/show-cia/{id}', [UsoInternoController::class, 'showCia']);
@@ -94,14 +99,12 @@ Route::middleware([
 
 
     // CLIENTES EXTERNOS USUARIO
-
     Route::post('/crear-usuario-externo', [ClienteExternoController::class, 'guardarClienteExterno'])->name('crear-usuario-externo');
     Route::get('/show-cliente-externo', [ClienteExternoController::class, 'showClientesExternos'])->name('show-cliente-externo');
     Route::get('/show-cliente-externo/{id}', [ClienteExternoController::class, 'showClienteExterno']);
     Route::post('/crud/edit-usuario-externo', [ClienteExternoController::class, 'editUsuarioExterno']);
     Route::delete('/crud/delete-usuario-externo/{id}', [ClienteExternoController::class, 'deleteUsuarioExterno']);
     Route::get('/export-clientes-externos', [ClienteExternoController::class, 'exportClienteExterno']);
-
 
     #POLIZA
     Route::get('/view-add-poliza', [UsoInternoController::class, 'ViewAddPoliza'])->name('view-add-poliza');
@@ -111,13 +114,6 @@ Route::middleware([
     Route::post('/crud/edit-poliza', [UsoInternoController::class, 'editPoliza']);
     Route::delete('/crud/delete-poliza/{id}', [UsoInternoController::class, 'deletePoliza']);
     Route::get('/export-polizas', [UsoInternoController::class, 'exportPolizas']);
-
-
-
-
-    Route::get('/generate-pdf/{id?}', [PDFController::class, 'generatePDF']);
-
-
 
     // APIS
     Route::get('/api/clientes', [UsoInternoController::class, 'search']);
