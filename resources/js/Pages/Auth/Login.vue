@@ -9,7 +9,7 @@
         <form @submit.prevent="submit">
             <div class="grid gap-6">
                 <div class="space-y-2">
-                    <Label for="email" value="Rut (POR IMPLEMENTAR)" />
+                    <Label for="email" value="Email" />
                     <InputIconWrapper>
                         <template #icon>
                             <MailIcon aria-hidden="true" class="w-6 h-6" />
