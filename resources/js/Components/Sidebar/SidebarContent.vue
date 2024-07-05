@@ -51,6 +51,7 @@
 
         <SidebarCollapsible title="Polizas" class="text-xs" :active="route().current('crear-cotizacion') ||
             route().current('show-polizas')
+            || route().current('show-cotizaciones')
             ">
 
             <SidebarCollapsibleItem title="Crear Cotizacion" :href="route('crear-cotizacion')"
