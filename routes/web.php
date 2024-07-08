@@ -42,6 +42,7 @@ Route::middleware([
 
     Route::get('/dashboard', [UsoInternoController::class, 'listarUsuarios'])->name('dashboard');
     Route::post('/crear-usuario-interno', [UsoInternoController::class, 'usuarioCrear'])->name('crear-usuario-interno');
+    Route::get('/clientes', [UsoInternoController::class, 'actualizarClientes'])->name('actualizarClientes');
 
     Route::get('/registrarusuario', function () {
         return Inertia::render('CrearUsuario');

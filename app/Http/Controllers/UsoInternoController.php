@@ -30,6 +30,11 @@ class UsoInternoController extends Controller
         ]);
     }
 
+    public function actualizarClientes(){
+        $clientes = User::all();
+        return response()->json($clientes);
+    }
+
 
 
     public function export()
