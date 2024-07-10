@@ -10,7 +10,8 @@
             this.$page.props.user.all_teams[1]?.membership?.role !== 'comercial'">
 
             <!-- CONFIGURACION INTERNA -->
-            <SidebarCollapsible title="Configuración Interna" class="text-xs" :active="route().current('crearusuario') ||
+            <SidebarCollapsible title="Configuración Interna" class="text-xs" 
+                :active="route().current('crearusuario') ||
                 route().current('dashboard') ||
                 route().current('cliente') ||
                 route().current('show-cias') ||
@@ -54,7 +55,9 @@
             || route().current('show-cotizaciones')
             ">
 
-            <SidebarCollapsibleItem title="Crear Cotizacion" :href="route('crear-cotizacion')"
+            <SidebarCollapsibleItem 
+                title="Crear Cotizacion" 
+                :href="route('crear-cotizacion')"
                 :active="route().current('/crear-cotizacion')" />
 
             <SidebarCollapsibleItem title="Listado de Cotizaciones" :href="route('show-cotizaciones')"
@@ -79,7 +82,7 @@
             <li>-Listado de Siniestros</li>
             <li>-Estatus Gestión de Siniestros</li>
         </SidebarCollapsible>
-        <p class="text-white">{{ this.$page.props.user.all_teams[1]?.membership?.role }}</p>
+
         <SidebarCollapsible title="Reportes">
             <div v-if="this.$page.props.user.all_teams[1].membership.role === 'admin' &&
                 this.$page.props.user.all_teams[1].membership.role !== 'comercial'">
