@@ -197,6 +197,7 @@ export default {
                 fecha_nacimiento: '',
                 cia_id: this.companies.id
             });
+            
 
         },
         removeEjecutiva(index) {
@@ -210,7 +211,7 @@ export default {
             })
                 .then(response => {
                     console.log("RESPUESTA: ", response.data);
-                    this.close();
+                    this.$inertia.visit('/show-cias');
                 })
                 .catch(error => {
                     // manejar el error
