@@ -17,7 +17,7 @@
                         <table id="clientesTable" class="display">
                             <thead class="bg-gray-900">
                                 <tr>
-                                    <th >Id</th>
+                                    <th>Id</th>
                                     <th>Razón Social</th>
                                     <th>Rut</th>
                                     <th>Banco</th>
@@ -27,7 +27,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="company in companies" :key="company.id">
-                                    <td >{{ company.id }}</td>
+                                    <td>{{ company.id }}</td>
                                     <td>{{ company.razon_social }}</td>
                                     <td>{{ company.rut_empresa }}</td>
                                     <td>{{ company.banco.nombre }}</td>
@@ -57,19 +57,23 @@
 
 
 
-        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close" :bancos="bancos" :comunas="comunas" :regiones="regiones">
+        <CreateCiaModal v-if="CreateCiaModal" :show="CreateCiaModal" @close="close" :bancos="bancos" :comunas="comunas"
+            :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </CreateCiaModal>
 
-        <ShowCiaModal v-if="ShowCiaModal" :show="ShowCiaModal" @close="close" :companies="ciaIdSeleccionado" :ejecutivasData="ejecutivasData" :comunas="comunas" :regiones="regiones">
+        <ShowCiaModal v-if="ShowCiaModal" :ejecutivasData="localEjecutivasData"
+            @update-ejecutivas-data="updateEjecutivasData" :show="ShowCiaModal" @close="close"
+            :companies="ciaIdSeleccionado" :comunas="comunas" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </ShowCiaModal>
 
-        <EditCiaModal v-if="showModalEditCia" :show="showModalEditCia" :bancos="bancos" :companies="ciaIdSeleccionado" @close="close">
+        <EditCiaModal v-if="showModalEditCia" :show="showModalEditCia" :bancos="bancos" :companies="ciaIdSeleccionado"
+            @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -106,8 +110,8 @@ export default {
     },
     props: {
         companies: {
-            type: Array,
-            required: true
+            type: Object,
+            default: () => ({})
         },
         bancos: {
             type: Array,
@@ -115,7 +119,7 @@ export default {
         },
         ejecutivasData: {
             type: Array,
-            required: true
+            default: () => []
         },
         comunas: {
             type: Array,
@@ -125,7 +129,7 @@ export default {
             type: Array,
             required: true,
         }
-        
+
     },
     data() {
         return {
@@ -135,8 +139,19 @@ export default {
             ShowCiaModal: false,
             searchQuery: '',
             showModalEditCia: false,
-            CreateCiaModal: false
+            CreateCiaModal: false,
+            localEjecutivasData: [...this.ejecutivasData]
+
         };
+    },
+    watch: {
+        ejecutivasData: {
+            handler(newVal) {
+                console.log("Prop ejecutivasData cambiada:", newVal);
+                this.localEjecutivasData = [...newVal];
+            },
+            deep: true
+        }
     },
     methods: {
         exportData() {
@@ -195,6 +210,11 @@ export default {
                     console.log("Error Editar Cliente", error);
                 });
         },
+        updateEjecutivasData(updatedEjecutivas) {
+            console.log("Evento update-ejecutivas-data escuchado con datos:", updatedEjecutivas);
+            this.localEjecutivasData = updatedEjecutivas;
+            this.$emit('update:ejecutivasData', updatedEjecutivas);
+        },
         deleteCia(id) {
             axios.delete("/crud/delete-cia/" + id)
                 .then(response => {
@@ -213,10 +233,10 @@ export default {
     },
     mounted() {
         $('#clientesTable').DataTable({
-            dom: 'rtip', 
-            scrollX: true, 
-            autoWidth: false,  
-            order: [[0, 'desc']], 
+            dom: 'rtip',
+            scrollX: true,
+            autoWidth: false,
+            order: [[0, 'desc']],
 
         });
     }
