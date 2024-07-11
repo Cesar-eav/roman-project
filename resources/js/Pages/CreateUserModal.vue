@@ -187,7 +187,7 @@ export default {
                 'password_confirmation': 'qwedsar1ASD',
             }).then(response => {
                 console.log(response.data);
-                this.close()
+                this.$inertia.visit('/dashboard');
             });
         },
         close() {
