@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\FormV1Liviano;
 
 class PDFController extends Controller

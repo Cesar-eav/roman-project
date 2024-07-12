@@ -73,7 +73,7 @@ Route::middleware([
     Route::get('/form/companies', [PolizaController::class, 'getCompanies'])->name('get.companies');
     Route::get('/form/ejecutivas', [PolizaController::class, 'getEjecutivas'])->name('get.ejecutivas');
     Route::get('/generate-pdf/{id?}', [PDFController::class, 'generatePDF']);
-    Route::post('/send-cotizacion/{id}', [MailController::class, 'sendCotizacion']);
+    Route::post('/send-email-pdf/{id}', [MailController::class, 'sendCotizacion']);
 
 
     //CIAS SEGUROS

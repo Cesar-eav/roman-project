@@ -10,19 +10,23 @@ class SendCotizacion extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $pdfPath;
     public $data;
-    public $pdfContent;
+
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $pdfContent)
+    public function __construct($pdfPath, $data)
     {
+        $this->pdfPath = $pdfPath;
         $this->data = $data;
-        $this->pdfContent = $pdfContent;
+
+
     }
+    
 
     /**
      * Build the message.
@@ -31,11 +35,12 @@ class SendCotizacion extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->data['title'])
-                    ->view('pdf_view')
-                    ->attachData($this->pdfContent, 'cotizacion.pdf', [
-                        'mime' => 'application/pdf',
-                    ]);
+        return $this->subject('Cotización')
+            ->view('emails.pdf_view_send')
+            ->attach($this->pdfPath, [
+                'as' => 'invoice.pdf',
+                'mime' => 'application/pdf'
+            ])
+            ->with('data', $this->data);
     }
 }
-

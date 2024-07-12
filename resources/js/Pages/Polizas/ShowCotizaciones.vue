@@ -95,13 +95,13 @@ export default {
         },
         enviarCotizacion($id) {
             console.log($id);
-            axios.post('/send-cotizacion/' + $id)
+            axios.post('/send-email-pdf/' + $id)
                 .then(response => {
                     console.log(response.data);
                     alert('Correo de cotización enviado con éxito!');
                 })
                 .catch(error => {
-                    console.error("There was an error sending the email!", error);
+                    console.error("ERROR!!! -> ", error);
                 });
         },
         searchTable() {
