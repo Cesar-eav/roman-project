@@ -76,6 +76,7 @@
                             </h2>
                         </div>
 
+                        <!-- REPRESENTANTE LEGAL -->
                         <div class="flex">
 
                             <input type="text" v-model="form.representante_legal" placeholder="Nombre"
@@ -92,6 +93,7 @@
                                 class="block mt-1 border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
+                        <!-- GERENTE -->
                         <div class="mt-4">
                             <h2 class="text-lg font-semibold text-left leading-tight">
                                 Gerente:
@@ -108,10 +110,21 @@
 
                         <div class="flex">
 
-                            <input type="text" v-model="form.comuna_gerente" placeholder="Comuna Gerente" required
-                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <input type="text" v-model="form.region_gerente" placeholder="Región Gerente" required
-                                class="mt-1 mr-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <select v-model="form.comuna_gerente" required
+                                    class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Comuna</option>
+                                    <template v-for="comuna in comunas" :key="comuna.id">
+                                        <option :value="comuna.comuna">{{ comuna.comuna }}</option>
+                                    </template>
+                                </select>
+
+                                <select v-model="form.region_gerente" required
+                                    class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Región</option>
+                                    <template v-for="region in regiones" :key="region.id">
+                                        <option :value="region.region">{{ region.region }}</option>
+                                    </template>
+                                </select>
                         </div>
 
                         <div class="flex">
