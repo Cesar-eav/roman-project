@@ -43,6 +43,16 @@
         <p><strong>RUT Representante:</strong> {{ companies.rut_representante }}</p>
         <p><strong>Email Representante:</strong> {{ companies.mail_representante }}</p>
         <p><strong>Fono Representante:</strong> {{ companies.fono_representante }}</p>
+      </div>
+
+      <div class="mt-4 col-span-2">
+        <h2 class="text-lg font-semibold text-left leading-tight">
+          Gerente
+        </h2>
+      </div>
+  
+      <div class="section col-span-2">
+
         <p><strong>Nombre Gerente:</strong> {{ companies.nombre_gerente }}</p>
         <p><strong>Dirección Gerente:</strong> {{ companies.direccion_gerente }}</p>
         <p><strong>Comuna Gerente:</strong> {{ companies.comuna_gerente }}</p>

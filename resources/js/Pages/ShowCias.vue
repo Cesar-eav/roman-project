@@ -243,7 +243,20 @@ export default {
 };
 </script>
 
+
 <style>
+/* Estilo para los botones de paginación */
+.dt-container .dt-paging .dt-paging-button.disabled {
+    color: red;
+    /* Cambia 'red' al color que prefieras */
+}
+
+/* Estilo para el botón de la página actual */
+.dt-paging-button .dataTables_paginate .paginate_button.current {
+    color: blue;
+    /* Cambia 'blue' al color que prefieras */
+}
+
 .btn {
     padding: 0.5rem 0.5rem;
     margin: 0 0.2rem;
@@ -298,7 +311,6 @@ export default {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.1);
     color: black;
-
 }
 
 .modal-content {
@@ -309,7 +321,6 @@ export default {
     width: 80%;
     max-width: 400px;
     text-align: center;
-
 }
 
 .close {
@@ -344,9 +355,5 @@ export default {
 
 .btn-cancelar:hover {
     background-color: #d32f2f;
-}
-
-.hidden-cell {
-    display: none;
 }
 </style>
