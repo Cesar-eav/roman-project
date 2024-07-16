@@ -29,7 +29,7 @@ class MailController extends Controller
       
         unlink($pdfPath);
 
-        return 'Invoice sent!';
+        // return 'Invoice sent!';
 
 
 
