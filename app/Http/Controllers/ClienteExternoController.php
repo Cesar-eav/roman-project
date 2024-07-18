@@ -19,7 +19,8 @@ class ClienteExternoController extends Controller
 
     public function showEmpresas()
     {
-        $empresas = Empresa::all();
+        $empresas = Empresa::with('banco')->get();
+
         $comunas = Comuna::all();
         $regiones = Region::all();
         // Pasar los datos a la vista Dashboard usando Inertia
@@ -46,7 +47,9 @@ class ClienteExternoController extends Controller
 
     public function showEmpresa($id)
     {
-        $empresa = Empresa::where('id', $id)->first();
+        $empresa = Empresa::where('id', $id)
+        ->with('banco')
+        ->first();
         return $empresa;
     }
 
@@ -61,6 +64,7 @@ class ClienteExternoController extends Controller
     {
 
         $empresa = Empresa::find($request->id);
+        $empresa->pj = $request->pj;
         $empresa->id = $request->id;
         $empresa->razon_social = $request->razon_social;
         $empresa->nombre_fantasia = $request->nombre_fantasia;
@@ -73,13 +77,14 @@ class ClienteExternoController extends Controller
         $empresa->region = $request->region;
         $empresa->fono = $request->fono;
         $empresa->mail = $request->mail;
-        $empresa->nombre_banco = $request->nombre_banco;
+        $empresa->banco_id = $request->banco_id;
         $empresa->numero_cuenta = $request->numero_cuenta;
         $empresa->representante_legal = $request->representante_legal;
+        $empresa->apellido_representante =$request->apellido_representante;
         $empresa->rut_representante_legal = $request->rut_representante_legal;
         $empresa->mail_representante_legal = $request->mail_representante_legal;
         $empresa->fono_representante_legal = $request->fono_representante_legal;
-        $empresa->fecha_nacimiento = $request->fecha_nacimiento_gerente;
+        $empresa->fecha_nacimiento = $request->fecha_nacimiento;
 
         // Guardar la empresa en la base de datos
         $response = $empresa->save();
@@ -164,8 +169,6 @@ class ClienteExternoController extends Controller
 
     public function guardarEmpresa(Request $request)
     {
-
-
         $empresa = new Empresa();
 
         $empresa->razon_social = $request->razon_social;
@@ -179,14 +182,17 @@ class ClienteExternoController extends Controller
         $empresa->region = $request->region;
         $empresa->fono = $request->fono;
         $empresa->mail = $request->mail;
-        $empresa->nombre_banco = $request->nombre_banco;
+        $empresa->banco_id = $request->banco_id;
         $empresa->numero_cuenta = $request->numero_cuenta;
         $empresa->representante_legal = $request->representante_legal;
+        $empresa->mail_representante_legal =$request->mail_representante_legal;
         $empresa->rut_representante_legal = $request->rut_representante_legal;
         $empresa->mail_representante_legal = $request->mail_representante_legal;
         $empresa->fono_representante_legal = $request->fono_representante_legal;
         $empresa->fecha_nacimiento = $request->fecha_nacimiento;
         $empresa->banco_id = $request->banco_id;
+
+       
 
         return $empresa->save();
     }

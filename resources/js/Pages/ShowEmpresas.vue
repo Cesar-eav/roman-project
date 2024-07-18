@@ -22,7 +22,7 @@
                             <thead class="bg-gray-900">
                                 <tr>
                                     <th class="rounded-l-lg">ID</th>
-                                    <th>Razón Social</th>
+                                    <th>Razón Social / Nombre</th>
                                     <th>Nombre Fantasía</th>
                                     <th>Rut Empresa</th>
                                     <th class="rounded-r-lg">Acciones</th>
@@ -31,7 +31,7 @@
                             <tbody>
                                 <tr v-for="empresa in empresas" :key="empresa.id">
                                     <td>{{ empresa.id }}</td>
-                                    <td>{{ empresa.razon_social }}</td>
+                                    <td> {{ getNombre(empresa) }}</td>
                                     <td>{{ empresa.nombre_fantasia }}</td>
                                     <td>{{ empresa.rut_empresa_persona }}</td>
                                     <td class="flex">
@@ -71,7 +71,10 @@
             </template>
         </ShowEmpresaModal>
 
-        <EditEmpresaModal v-if="editEmpresaModal" :show="EditEmpresaModal" :empresa="empresaIdSeleccionado"
+        <EditEmpresaModal v-if="editEmpresaModal" 
+        :show="EditEmpresaModal" 
+        :empresa="empresaIdSeleccionado"
+        :bancos="bancos"
             @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
@@ -131,6 +134,10 @@ export default {
         };
     },
     methods: {
+        getNombre(empresa) {
+            return empresa.razon_social || `${empresa.nombres_persona_natural || ''} ${empresa.apellido_paterno_persona_natural || ''}`.trim();
+
+        },
 
         exportData() {
             axios.get('/export-empresas', { responseType: 'blob' })

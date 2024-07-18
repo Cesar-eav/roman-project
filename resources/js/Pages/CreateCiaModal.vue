@@ -117,7 +117,7 @@
                                         <option :value="comuna.comuna">{{ comuna.comuna }}</option>
                                     </template>
                                 </select>
-
+                                
                                 <select v-model="form.region_gerente" required
                                     class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     <option value="">Seleccionar Región</option>

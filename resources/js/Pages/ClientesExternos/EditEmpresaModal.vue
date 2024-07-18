@@ -2,7 +2,7 @@
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <div class="m-4 p-4 bg-orange-500">
             <h2 class="flex flex-col text-white text-2xl font-semibold text-center leading-tight">
-                <p>Editar Empresa </p>
+                <p> {{formCliente.razon_social }} </p>
             </h2>
         </div>
         <form @submit.prevent="submit">
@@ -49,8 +49,15 @@
                 </div>
                 <div>
                     <label for="nombre_banco">Nombre del Banco:</label>
-                    <input type="text" v-model="formCliente.nombre_banco" :placeholder="empresa.nombre_banco"
-                        class="custom-input" />
+                    <div>
+                                <select v-model="formCliente.banco_id" id="banco_id" name="banco_id" required
+                                    class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Banco</option>
+                                    <template v-for="banco in bancos" :key="banco.id">
+                                        <option :value="banco.id">{{ banco.nombre }}</option>
+                                    </template>
+                                </select>
+                            </div>
                 </div>
                 <div>
                     <label for="numero_cuenta">Número de Cuenta:</label>
@@ -123,11 +130,17 @@ export default {
             type: Boolean,
             default: true,
         },
+        bancos: {
+            type: Array,
+            default: true,
+        }
+ 
     },
 
     data() {
         return {
             formCliente: {
+                pj: this.empresa.pj,
                 id: this.empresa.id,
                 razon_social: this.empresa.razon_social,
                 nombre_fantasia: this.empresa.nombre_fantasia,
@@ -137,7 +150,7 @@ export default {
                 region: this.empresa.region,
                 fono: this.empresa.fono,
                 mail: this.empresa.mail,
-                nombre_banco: this.empresa.nombre_banco,
+                banco_id: this.empresa.banco.id,
                 numero_cuenta: this.empresa.numero_cuenta,
                 representante_legal: this.empresa.representante_legal,
                 rut_representante_legal: this.empresa.rut_representante_legal,
@@ -165,7 +178,7 @@ export default {
                     region: this.formCliente.region,
                     fono: this.formCliente.fono,
                     mail: this.formCliente.mail,
-                    nombre_banco: this.formCliente.nombre_banco,
+                    banco_id: this.formCliente.banco_id,
                     numero_cuenta: this.formCliente.numero_cuenta,
                     representante_legal: this.formCliente.representante_legal,
                     rut_representante_legal: this.formCliente.rut_representante_legal,
@@ -177,7 +190,7 @@ export default {
                     region_gerente: this.formCliente.region_gerente,
                     fono_gerente: this.formCliente.fono_gerente,
                     mail_gerente: this.formCliente.mail_gerente,
-                    fecha_nacimiento_gerente: this.formCliente.fecha_nacimiento_gerente, // Usar el formato de fecha que prefieras
+                    fecha_nacimiento: this.formCliente.fecha_nacimiento, // Usar el formato de fecha que prefieras
 
                 })
                 .then((response) => {

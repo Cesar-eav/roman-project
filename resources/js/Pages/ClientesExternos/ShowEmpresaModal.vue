@@ -3,7 +3,13 @@
         <div class="m-4 p-4 bg-orange-500">
             <!-- <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> -->
             <h2 class="text-white text-2xl font-semibold text-center leading-tight">
-                {{ empresas.razon_social }}
+
+                <span>{{ empresas.razon_social || empresas.nombres_persona_natural }} </span>
+                <span>&nbsp;</span>
+                <span v-if="empresas.nombres_persona_natural">{{ empresas.apellido_paterno_persona_natural }}
+                </span>
+
+
             </h2>
 
         </div>
@@ -29,20 +35,22 @@
                 <p><strong>Región:</strong> {{ empresas.region }}</p>
                 <p><strong>Fono:</strong> {{ empresas.fono }}</p>
                 <p><strong>Email:</strong> {{ empresas.mail }}</p>
-                <p><strong>Nombre Banco:</strong>{{ empresas.nombre_banco }}</p>
-                <p><strong>Número Cuenta:</strong> {{ empresas.numero_cuenta }}</p>
+                <p><strong>Nombre Banco:</strong>{{ empresas.banco.nombre }}</p>
+                <p><strong>Número Cuenta:</strong>{{ empresas.numero_cuenta }}</p>
             </div>
-            <div class="mt-4 col-span-2">
-                <h2 class="text-lg font-semibold text-left leading-tight">
-                    Representante Legal
-                </h2>
-            </div>
-            <div class="section col-span-2">
-                <p><strong>Representante Legal:</strong> {{ empresas.representante_legal }}</p>
-                <p><strong>RUT Representante:</strong> {{ empresas.rut_representante_legal }}</p>
-                <p><strong>Email Representante:</strong> {{ empresas.mail_representante_legal }}</p>
-                <p><strong>Fono Representante:</strong> {{ empresas.fono_representante_legal }}</p>
-                <p><strong>Fecha Nacimiento Gerente:</strong> {{ empresas.fecha_nacimiento }}</p>
+            <div v-if="empresas.pj == 'Juridica'" class="col-span-2">
+                <div class="mt-4 col-span-2">
+                    <h2 class="text-lg font-semibold text-left leading-tight">
+                        Representante Legal
+                    </h2>
+                </div>
+                <div class="section col-span-2">
+                    <p><strong>Representante Legal:</strong> {{ empresas.representante_legal }}</p>
+                    <p><strong>RUT Representante:</strong> {{ empresas.rut_representante_legal }}</p>
+                    <p><strong>Email Representante:</strong> {{ empresas.mail_representante_legal }}</p>
+                    <p><strong>Fono Representante:</strong> {{ empresas.fono_representante_legal }}</p>
+                    <p><strong>Fecha Nacimiento Gerente:</strong> {{ empresas.fecha_nacimiento }}</p>
+                </div>
             </div>
             <!-- Separador -->
         </div>
@@ -81,7 +89,11 @@ export default {
     methods: {
         close() {
             this.$emit('close');
-        }
+        },
+        getNombre(empresa) {
+            return empresa.razon_social || `${empresa.nombres_persona_natural || ''} ${empresa.apellido_paterno_persona_natural || ''}`.trim();
+
+        },
     }
 }
 </script>

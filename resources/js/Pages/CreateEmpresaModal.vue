@@ -13,116 +13,205 @@
                 </h2>
             </div>
 
-            <form @submit.prevent="submit">
-                <div class="p-4 text-gray-900 w-full justify-center">
+            <div class="flex w-full justify-center my-2 rounded-xl border-gray-300">
+                <select v-model="form.pj" class="w-3/4">
+                    <option disabled value="">Seleccione el tipo de empresa</option>
+                    <option value="Natural">Persona Natural</option>
+                    <option value="Juridica">Persona Jurídica</option>
+                </select>
 
-                    <div class="flex">
+            </div>
 
-                        <input type="text" v-model="form.razonSocial" placeholder="Razón Social"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div v-if="form.pj == 'Juridica'">
+                <form @submit.prevent="submit">
+                    <div class="p-4 text-gray-900 w-full justify-center">
 
-
-                        <input type="text" v-model="form.nombreFantasia" placeholder="Nombre de Fantasía"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    </div>
-
-                    <div class="flex">
-                        <input type="text" v-model="form.nombresPersonaNatural" placeholder="Nombres Persona Natural:"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-
-                        <input type="text" v-model="form.apellidoPaternoPersonaNatural"
-                            placeholder="Apellido Paterno Persona Natural"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    </div>
-
-                    <div class="flex">
-
-                        <input type="text" v-model="form.apellidoMaternoPersonaNatural"
-                            placeholder="Apellido Materno Persona Natural"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-
-                        <input type="text" v-model="form.rutEmpresaPersona" placeholder="RUT Empresa/Persona"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    </div>
-
-                    <div class="flex">
-                        <input type="text" v-model="form.direccion" placeholder="Dirección"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <div class="w-1/2 ">
-                            <select v-model="form.region" required
-                                class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Seleccionar Región</option>
-                                <template v-for="region in regiones" :key="region.id">
-                                    <option :value="region.region">{{ region.region }}</option>
-                                </template>
-                            </select>
+                        <div class="flex">
+                            <input type="text" v-model="form.razonSocial" placeholder="Razón Social"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="text" v-model="form.nombreFantasia" placeholder="Nombre de Fantasía"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
-                    </div>
-
-                    <div class="flex">
-                        <div class="w-1/2">
-                            <select v-model="form.comuna" required
-                                class="COMUNA block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Seleccionar Comuna</option>
-                                <template v-for="comuna in comunas" :key="comuna.id">
-                                    <option :value="comuna.comuna">{{ comuna.comuna }}</option>
-                                </template>
-                            </select>
+                        <div class="flex">
+                            <input type="text" v-model="form.rutEmpresaPersona" placeholder="RUT"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="text" v-model="form.direccion" placeholder="Dirección"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
 
-                        <input type="text" v-model="form.fono" placeholder="Fono"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    </div>
+                        <div class="flex">
+                            <div class="w-1/2 ">
+                                <select v-model="form.region" required
+                                    class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Región</option>
+                                    <template v-for="region in regiones" :key="region.id">
+                                        <option :value="region.region">{{ region.region }}</option>
+                                    </template>
+                                </select>
+                            </div>
 
-                    <div class="flex">
-                        <input type="email" v-model="form.mail" placeholder="Correo"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <div>
-                            <select v-model="form.banco_id" id="banco_id" name="banco_id" required
-                                class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Seleccionar Banco</option>
-                                <template v-for="banco in bancos" :key="banco.id">
-                                    <option :value="banco.id">{{ banco.nombre }}</option>
-                                </template>
-                            </select>
+                            <div class="w-1/2">
+                                <select v-model="form.comuna" required
+                                    class="COMUNA block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Comuna</option>
+                                    <template v-for="comuna in comunas" :key="comuna.id">
+                                        <option :value="comuna.comuna">{{ comuna.comuna }}</option>
+                                    </template>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="flex">
+                            <input type="text" v-model="form.fono" placeholder="Fono"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="email" v-model="form.mail" placeholder="Correo"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                        </div>
+
+                        <div class="flex">
+
+                            <div>
+                                <select v-model="form.banco_id" id="banco_id" name="banco_id" required
+                                    class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Banco</option>
+                                    <template v-for="banco in bancos" :key="banco.id">
+                                        <option :value="banco.id">{{ banco.nombre }}</option>
+                                    </template>
+                                </select>
+                            </div>
+
+                            <input type="text" v-model="form.numeroCuenta" placeholder="Número Cuenta"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                        </div>
+
+
+
+                        <div class="mt-4">
+                            <h2 class="text-lg font-semibold text-left leading-tight">
+                                Reprentante legal:
+                            </h2>
+                        </div>
+                        <div class="flex">
+                            <input type="text" v-model="form.representanteLegal" placeholder="Nombre"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                            <input type="text" v-model="form.apellido_representante" placeholder="Apellido"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div class="flex">
+                            <input type="text" v-model="form.rutRepresentanteLegal"
+                                placeholder="RUT Representante Legal"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                            <input type="email" v-model="form.mail_representante_legal"
+                                placeholder="Mail Representante Legal"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+
+                        <div class="flex">
+
+                            <input type="text" v-model="form.fonoRepresentanteLegal"
+                                placeholder="Fono Representante Legal"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+
+                            <input type="date" v-model="form.fechaNacimiento" placeholder="Fecha Nacimiento"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+
+                        <div class="py-4 w-60 justify-items-end">
+                            <Button type="submit" class="w-full justify-center gap-2">
+                                <span>Enviar</span>
+                            </Button>
                         </div>
                     </div>
+                </form>
+            </div>
 
-                    <div class="flex">
+            <div v-if="form.pj == 'Natural'">
+                <form @submit.prevent="submit">
+                    <div class="p-4 text-gray-900 w-full justify-center">
+                        <div class="flex">
+                            <input type="text" v-model="form.nombresPersonaNatural" placeholder="Nombre"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                        <input type="text" v-model="form.numeroCuenta" placeholder="Número Cuenta"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="text" v-model="form.apellidoPaternoPersonaNatural"
+                                placeholder="Apellido Paterno"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
 
-                        <input type="text" v-model="form.representanteLegal" placeholder="Representante Legal"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <div class="flex">
+                            <input type="text" v-model="form.apellidoMaternoPersonaNatural"
+                                placeholder="Apellido Materno"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                            <input type="text" v-model="form.rutEmpresaPersona" placeholder="RUT Persona"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+
+                        <div class="flex">
+                            <input type="text" v-model="form.direccion" placeholder="Dirección"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <div class="w-1/2 ">
+                                <select v-model="form.region" required
+                                    class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Región</option>
+                                    <template v-for="region in regiones" :key="region.id">
+                                        <option :value="region.region">{{ region.region }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="w-1/2">
+                                <select v-model="form.comuna" required
+                                    class="COMUNA block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Comuna</option>
+                                    <template v-for="comuna in comunas" :key="comuna.id">
+                                        <option :value="comuna.comuna">{{ comuna.comuna }}</option>
+                                    </template>
+                                </select>
+                            </div>
+
+                            <input type="text" v-model="form.fono" placeholder="Fono"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+
+                        <div class="flex">
+                            <input type="email" v-model="form.mail" placeholder="Correo"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <div>
+                                <select v-model="form.banco_id" id="banco_id" name="banco_id" required
+                                    class="block mt-1 mr-1 w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Seleccionar Banco</option>
+                                    <template v-for="banco in bancos" :key="banco.id">
+                                        <option :value="banco.id">{{ banco.nombre }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <input type="text" v-model="form.numeroCuenta" placeholder="Número Cuenta"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                            <input type="date" v-model="form.fechaNacimiento" placeholder="Fecha Nacimiento"
+                                class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div class="py-4 w-60 justify-items-end">
+                            <Button type="submit" class="w-full justify-center gap-2">
+                                <span>Enviar</span>
+                            </Button>
+                        </div>
                     </div>
+                </form>
+            </div>
 
-                    <div class="flex">
-                        <input type="text" v-model="form.rutRepresentanteLegal" placeholder="RUT Representante Legal"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-
-                        <input type="email" v-model="form.mailRepresentanteLegal" placeholder="Mail Representante Legal"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    </div>
-
-                    <div class="flex">
-
-                        <input type="text" v-model="form.fonoRepresentanteLegal" placeholder="Fono Representante Legal"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-
-
-                        <input type="date" v-model="form.fechaNacimiento" placeholder="Fecha Nacimiento"
-                            class="mt-1 block border-gray-300 w-1/2 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    </div>
-
-                    <div class="py-4 w-60 justify-items-end">
-                        <Button type="submit" class="w-full justify-center gap-2">
-                            <span>Enviar</span>
-                        </Button>
-                    </div>
-                </div>
-            </form>
 
 
         </div>
@@ -174,7 +263,9 @@ export default {
     },
     data() {
         return {
+            personalidadSelected: '',
             form: this.$inertia.form({
+                pj: '',
                 razonSocial: '',
                 nombreFantasia: '',
                 nombresPersonaNatural: '',
@@ -190,8 +281,9 @@ export default {
                 nombreBanco: '',
                 numeroCuenta: '',
                 representanteLegal: '',
+                apellido_representante: '',
                 rutRepresentanteLegal: '',
-                mailRepresentanteLegal: '',
+                mail_representante_legal: '',
                 fonoRepresentanteLegal: '',
                 fechaNacimiento: '',
             })
@@ -200,6 +292,7 @@ export default {
     methods: {
         submit() {
             axios.post('/guardar-empresa', {
+                'pj': this.form.pj,
                 'razon_social': this.form.razonSocial || '',
                 'nombre_fantasia': this.form.nombreFantasia || '',
                 'nombres_persona_natural': this.form.nombresPersonaNatural || '',
@@ -215,13 +308,15 @@ export default {
                 'nombre_banco': this.form.nombreBanco || '',
                 'numero_cuenta': this.form.numeroCuenta || '',
                 'representante_legal': this.form.representanteLegal || '',
+                'apellido_representante': this.form.apellido_representante || '',
                 'rut_representante_legal': this.form.rutRepresentanteLegal || '',
-                'mail_representante_regal': this.form.mailRepresentanteLegal || '',
+                'mail_representante_legal': this.form.mail_representante_legal || '',
                 'fono_representante_legal': this.form.fonoRepresentanteLegal || '',
                 'fecha_nacimiento': this.form.fechaNacimiento || ''
             }).then(response => {
                 console.log(response.data);
-                this.close()
+                this.$inertia.visit('/show-empresas');
+
             });
         },
         close() {
