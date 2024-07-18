@@ -38,7 +38,9 @@
                 <p><strong>Nombre Banco:</strong>{{ empresas.banco.nombre }}</p>
                 <p><strong>Número Cuenta:</strong>{{ empresas.numero_cuenta }}</p>
             </div>
-            <div v-if="empresas.pj == 'Juridica'" class="col-span-2">
+
+            
+            <div v-if="empresas.representante_legal" class="col-span-2">
                 <div class="mt-4 col-span-2">
                     <h2 class="text-lg font-semibold text-left leading-tight">
                         Representante Legal
