@@ -33,28 +33,26 @@
                                     <td>{{ cliente.rut }}</td>
                                     <td>{{ cliente.name }}</td>
                                     <td>{{ cliente.ciudad }}</td>
-                                    <!-- <td>{{ cliente.email }}</td>
-                                    <td>{{ cliente.telefono }}</td> -->
                                     <th class="flex justify-center">
                                         <button class="btn btn-ver" @click="verCliente(cliente.id)">Ver</button>
-                                        <button class="btn btn-editar"
-                                            @click="editarCliente(cliente.id)">Editar</button>
-                                        <button class="btn btn-eliminar" @click="mostrarModal = true">Eliminar</button>
+                                        <button class="btn btn-editar" @click="editarCliente(cliente.id)">Editar</button>
+                                        <button class="btn btn-eliminar" @click="confirmarEliminar(cliente)">Eliminar</button>
                                     </th>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                                    <div v-if="mostrarModal" class="modal">
+                                    <div v-show="mostrarModal" class="modal">
                                         <div class="modal-content">
                                             <span class="close" @click="mostrarModal = false">&times;</span>
-                                            <p>¿Estás seguro que deseas eliminar este cliente?</p>
+                                            <p>¿Estás seguro que deseas eliminar este a {{clienteSeleccionado.name}}?</p>
                                             <button class="btn btn-confirmar"
-                                                @click="deleteCliente(cliente.id)">Confirmar</button>
+                                                @click="deleteCliente(clienteSeleccionado.id)">Confirmar</button>
                                             <button class="btn btn-cancelar"
                                                 @click="mostrarModal = false">Cancelar</button>
                                         </div>
                                     </div>
-                                </tr>
-                            </tbody>
-                        </table>
+                   
 
                     </div>
                 </div>
@@ -127,9 +125,10 @@ export default {
             searchQuery: '',
             clienteIdSeleccionado: null,
             showVerClienteModal: false,
-            clienteSeleccionado: {},
             showModalClientModal: false,
-            showModalEditClient: false
+            showModalEditClient: false,
+            clienteSeleccionado: {},
+
 
         };
     },
@@ -158,9 +157,11 @@ export default {
             this.showModalClientModal = false;
             this.showModalEditClient = false;
         },
-        confirmarEliminar() {
+
+        confirmarEliminar(cliente) {
+            this.clienteSeleccionado = cliente;
             this.mostrarModal = true;
-        },
+     },
         cerrarModal() {
             this.mostrarModal = false;
         },
@@ -194,7 +195,9 @@ export default {
             axios.delete("/crud/delete-cliente/" + id).
                 then((response) => {
                     console.log("ELiminado", response.data);
+                    this.$inertia.visit('/dashboard');
                     this.mostrarModal = false;
+
                 })
         }
     },
