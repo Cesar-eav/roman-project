@@ -205,7 +205,7 @@
                         </div>
                         <div class="py-4 w-60 justify-items-end">
                             <Button type="submit" class="w-full justify-center gap-2">
-                                <span>Enviar</span>
+                                <span>Crear</span>
                             </Button>
                         </div>
                     </div>
