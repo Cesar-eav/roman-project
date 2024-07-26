@@ -36,14 +36,14 @@
                                         <button class="btn btn-ver" @click="verCia(company.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editarCia(company.id)">Editar</button>
                                         <button class="btn btn-eliminar"
-                                            @click="confirmarEliminar(company.id)">Eliminar</button>
+                                            @click="confirmarEliminar(company)">Eliminar</button>
                                     </th>
                                     <div v-if="mostrarModal" class="modal">
                                         <div class="modal-content">
                                             <span class="close" @click="cerrarModal">&times;</span>
-                                            <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                                            <p>¿Estás seguro que deseas eliminar a <strong>{{ciaSeleccionada.razon_social}}</strong> compañía?</p>
                                             <button class="btn btn-confirmar"
-                                                @click="deleteCia(company.id)">Confirmar</button>
+                                                @click="deleteCia(ciaSeleccionada.id)">Confirmar</button>
                                             <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
                                         </div>
                                     </div>
@@ -133,6 +133,7 @@ export default {
     },
     data() {
         return {
+            ciaSeleccionada: null,
             showModal: false,
             mostrarModal: false,
             ciaIdSeleccionado: {},
@@ -179,7 +180,8 @@ export default {
             this.CreateCiaModal = false;
 
         },
-        confirmarEliminar() {
+        confirmarEliminar(cia) {
+            this.ciaSeleccionada = cia,
             this.mostrarModal = true;
         },
         cerrarModal() {
@@ -220,6 +222,8 @@ export default {
                 .then(response => {
                     console.log("Eliminado", response.data);
                     this.mostrarModal = false;
+                    this.$inertia.visit('/show-cias');
+
                     // Aquí se puede actualizar la lista de compañías
                 })
                 .catch(error => {
