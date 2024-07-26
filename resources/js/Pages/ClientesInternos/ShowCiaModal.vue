@@ -103,11 +103,11 @@
             </div>
           </template>
           <template v-else>
-            <p>{{ ejecutiva.id }}</p>
-            <p><strong>{{ ejecutiva.name }} {{ ejecutiva.last_name }}</strong></p>
-            <p>{{ ejecutiva.email }}</p>
-            <p>{{ ejecutiva.telefono }}</p>
-            <p>{{ ejecutiva.fecha_nacimiento }}</p>
+            <p><strong>Nombre: </strong>{{ ejecutiva.name }} {{ ejecutiva.last_name }}</p>
+            <p><strong>Cargo: </strong>{{ ejecutiva.cargo }}</p>
+            <p><strong>Correo: </strong>{{ ejecutiva.email }}</p>
+            <p><strong>Teléfono: </strong>{{ ejecutiva.telefono }}</p>
+            <p><strong>Fecha de Nacimiento: </strong>{{ ejecutiva.fecha_nacimiento }}</p>
             <div>
               <button @click="editEjecutiva(ejecutiva)" class="btn-edit p-1 mr-2">Editar</button>
               <button @click="deleteEjecutiva(ejecutiva.id)" class="btn-delete p-1">Eliminar</button>
@@ -126,6 +126,7 @@
         <input type="text" v-model="ejecutiva.last_name" placeholder="Apellido">
         <input type="email" v-model="ejecutiva.email" placeholder="Correo">
         <input type="tel" v-model="ejecutiva.telefono" placeholder="Teléfono">
+        <input type="tel" v-model="ejecutiva.cargo" placeholder="Cargo">
         <input type="date" v-model="ejecutiva.fecha_nacimiento" placeholder="Fecha Nacimiento">
         <input type="hidden" v-model="ejecutiva.cia_id">
         <button @click="removeFieldEjecutiva(index)" class="bg-red-500 text-white px-2 py-1 rounded mt-2">Eliminar
@@ -188,6 +189,7 @@ export default {
       editableEjecutiva: {
         name: '',
         last_name: '',
+        cargo: '',
         email: '',
         telefono: '',
         fecha_nacimiento: ''
@@ -201,6 +203,7 @@ export default {
         last_name: '',
         email: '',
         telefono: '',
+        cargo: '',
         fecha_nacimiento: '',
         cia_id: this.companies.id
       });
@@ -233,6 +236,7 @@ export default {
           id: id,
           name: this.editableEjecutiva.name,
           last_name: this.editableEjecutiva.last_name,
+          cargo: this.editableEjecutiva.cargo,
           email: this.editableEjecutiva.email,
           telefono: this.editableEjecutiva.telefono,
           fecha_nacimiento: this.editableEjecutiva.fecha_nacimiento,
