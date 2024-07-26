@@ -6,17 +6,6 @@
         <form @submit.prevent="submit">
             <div class="grid gap-4">
 
-<!-- 
-                <div class="flex ">
-                    <label class="block text-sm font-medium w-1/4  mt-4">Tipo de Cliente:</label>
-                    <select v-model="selectedType"
-                        class="mt-1 block text-black border-gray-300 w-3/4 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <option value="externo">Cliente Externo</option>
-                        <option value="interno">Cliente Interno</option>
-                    </select>
-                </div> -->
-
-
                 <div v-if="selectedType === 'interno'">
                     <div class="flex text-gray-800">
                         <label for="cargo" class="block w-1/4 text-sm font-medium text-white">Cargo:</label>

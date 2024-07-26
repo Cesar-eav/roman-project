@@ -191,6 +191,7 @@ class UsoInternoController extends Controller
         $ejecutiva = Ejecutiva::find($request->id);
         $ejecutiva->name = $request->name;
         $ejecutiva->last_name = $request->last_name;
+        $ejecutiva->cargo = $request->cargo;
         $ejecutiva->email = $request->email;
         $ejecutiva->telefono = $request->telefono;
         $ejecutiva->fecha_nacimiento = $request->fecha_nacimiento;
@@ -210,30 +211,7 @@ class UsoInternoController extends Controller
     }
 
 
-    public function guardarEjecutiva(Request $request)
-    {
-    
-        $ejecutivasData = $request->input('ejecutivas', []);
-
-        // return $ejecutivasData;
-        $response = [];
-
-
-
-        foreach ($ejecutivasData as $data) {
-
-            $ejecutiva = new Ejecutiva();
-            $ejecutiva->name = $data['name'];
-            $ejecutiva->last_name = $data['last_name'];
-            $ejecutiva->email = $data['email'];
-            $ejecutiva->telefono = $data['telefono'];
-            $ejecutiva->fecha_nacimiento = $data['fecha_nacimiento'];
-            $ejecutiva->cia_id = $data['cia_id'];
-
-            $ejecutiva->save();
-            $response[] = $ejecutiva;
-        }
-    }
+  
 
     public function showCias()
     {
@@ -370,6 +348,7 @@ class UsoInternoController extends Controller
 
     public function ciaCrear(Request $request)
     {
+  
 
         $validate = $request->validate([
             'razon_social' => 'required|string|max:255',
@@ -425,7 +404,31 @@ class UsoInternoController extends Controller
 
         return Inertia::render('Dashboard');
     }
+    public function guardarEjecutiva(Request $request)
+    {
+    
+        $ejecutivasData = $request->input('ejecutivas', []);
 
+        // return $ejecutivasData;
+        $response = [];
+
+
+
+        foreach ($ejecutivasData as $data) {
+
+            $ejecutiva = new Ejecutiva();
+            $ejecutiva->name = $data['name'];
+            $ejecutiva->last_name = $data['last_name'];
+            $ejecutiva->cargo = $data['cargo'];
+            $ejecutiva->email = $data['email'];
+            $ejecutiva->telefono = $data['telefono'];
+            $ejecutiva->fecha_nacimiento = $data['fecha_nacimiento'];
+            $ejecutiva->cia_id = $data['cia_id'];
+
+            $ejecutiva->save();
+            $response[] = $ejecutiva;
+        }
+    }
 
 
     public function polizaCrear(Request $request)
