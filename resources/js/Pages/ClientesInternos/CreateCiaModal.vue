@@ -111,20 +111,20 @@
                         <div class="flex">
 
                             <select v-model="form.comuna_gerente" required
-                                    class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Seleccionar Comuna</option>
-                                    <template v-for="comuna in comunas" :key="comuna.id">
-                                        <option :value="comuna.comuna">{{ comuna.comuna }}</option>
-                                    </template>
-                                </select>
-                                
-                                <select v-model="form.region_gerente" required
-                                    class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Seleccionar Región</option>
-                                    <template v-for="region in regiones" :key="region.id">
-                                        <option :value="region.region">{{ region.region }}</option>
-                                    </template>
-                                </select>
+                                class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Comuna</option>
+                                <template v-for="comuna in comunas" :key="comuna.id">
+                                    <option :value="comuna.comuna">{{ comuna.comuna }}</option>
+                                </template>
+                            </select>
+
+                            <select v-model="form.region_gerente" required
+                                class="block mt-1 mr-1  w-full border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Seleccionar Región</option>
+                                <template v-for="region in regiones" :key="region.id">
+                                    <option :value="region.region">{{ region.region }}</option>
+                                </template>
+                            </select>
                         </div>
 
                         <div class="flex">
@@ -139,11 +139,9 @@
                     </div>
                 </div>
                 <div v-if="showModalEjecutiva1">
-                    <p class="flex text-xl justify-center">Ejecutiva 1</p>
                     <div class="p-2 border border-spacing-2">
                         <div class="flex">
-                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva
-                                :</label>
+                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutivo/a:</label>
                             <input type="text" v-model="form.ejecutiva_1"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
@@ -170,10 +168,9 @@
                 </div>
 
                 <div v-if="showModalEjecutiva2">
-                    <p class="flex text-xl justify-center">Ejecutiva 2</p>
                     <div class="p-2 border border-spacing-2">
                         <div class="flex">
-                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutiva:</label>
+                            <label class="block w-1/4 text-sm font-medium mt-4">Nombre Ejecutivo/a:</label>
                             <input type="text" v-model="form.ejecutiva_2"
                                 class="mt-1 block w-3/4 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
@@ -342,7 +339,7 @@ export default {
         },
 
         submit() {
-            axios.post('/crear-cia', {
+            const payload1 = {
                 'razon_social': this.form.razon_social || '',
                 'nombre_fantasia': this.form.nombre_fantasia || '',
                 'rut_empresa': this.form.rut_empresa || '',
@@ -364,29 +361,56 @@ export default {
                 'region_gerente': this.form.region_gerente || '',
                 'fono_gerente': this.form.fono_gerente || '',
                 'mail_gerente': this.form.mail_gerente || '',
-                'fecha_nacimiento_gerente': this.form.fecha_nacimiento_gerente || '',
-                'ejecutiva_1': this.form.ejecutiva_1 || '',
-                'fono_ejecutiva_1': this.form.fono_ejecutiva_1 || '',
-                'mail_ejecutiva_1': this.form.mail_ejecutiva_1 || '',
-                'fecha_nacimiento_ejecutiva_1': this.form.fecha_nacimiento_ejecutiva_1 || '',
-                'ejecutiva_2': this.form.ejecutiva_2 || '',
-                'fono_ejecutiva_2': this.form.fono_ejecutiva_2 || '',
-                'mail_ejecutiva_2': this.form.mail_ejecutiva_2 || '',
-                'fecha_nacimiento_ejecutiva_2': this.form.fecha_nacimiento_ejecutiva_2 || '',
-                'ejecutiva_3': this.form.ejecutiva_3 || '',
-                'fono_ejecutiva_3': this.form.fono_ejecutiva_3 || '',
-                'mail_ejecutiva_3': this.form.mail_ejecutiva_3 || '',
-                'fecha_nacimiento_ejecutiva_3': this.form.fecha_nacimiento_ejecutiva_3 || ''
-            }).then(response => {
-                console.log(response.data);
-                this.$inertia.visit('/show-cias');
+                'fecha_nacimiento_gerente': this.form.fecha_nacimiento_gerente || ''
+            };
 
-                this.close()
-            });
-        },
-        close() {
-            this.$emit('close');
+            const payload2 = {
+                'ejecutivas': [
+                    {
+                        'cia_id': this.form.ejecutiva_1 || '',
+                        'name': this.form.ejecutiva_1 || '',
+                        'last_name': this.form.ejecutiva_1 || '',
+                        'telefono': this.form.fono_ejecutiva_1 || '',
+                        'email': this.form.mail_ejecutiva_1 || '',
+                        'fecha_nacimiento': this.form.fecha_nacimiento_ejecutiva_1 || ''
+                    },
+                    {
+                        'ejecutiva': this.form.ejecutiva_2 || '',
+                        'fono': this.form.fono_ejecutiva_2 || '',
+                        'mail': this.form.mail_ejecutiva_2 || '',
+                        'fecha_nacimiento': this.form.fecha_nacimiento_ejecutiva_2 || ''
+                    },
+                    {
+                        'ejecutiva': this.form.ejecutiva_3 || '',
+                        'fono': this.form.fono_ejecutiva_3 || '',
+                        'mail': this.form.mail_ejecutiva_3 || '',
+                        'fecha_nacimiento': this.form.fecha_nacimiento_ejecutiva_3 || ''
+                    }
+                ]
+            };
+
+            // Primera solicitud
+            axios.post('/crear-cia', payload1)
+                .then(response1 => {
+                    console.log('Primera solicitud exitosa:', response1.data);
+
+                    // Segunda solicitud
+                    axios.post('/guardar-ejecutivas', payload2)
+                        .then(response2 => {
+                            console.log('Segunda solicitud exitosa:', response2.data);
+                            // this.$inertia.visit('/show-cias');
+                            // this.close();
+                        })
+                        .catch(error2 => {
+                            console.error('Error en la segunda solicitud:', error2);
+                        });
+                })
+                .catch(error1 => {
+                    console.error('Error en la primera solicitud:', error1);
+                });
         }
+
+
     }
 };
 </script>
