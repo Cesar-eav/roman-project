@@ -40,25 +40,26 @@
                                         <button class="btn btn-eliminar"
                                             @click="confirmarEliminar(empresa.id)">Eliminar</button>
                                     </td>
-                                    <div v-if="mostrarModal" class="modal">
-                                        <div class="modal-content">
-                                            <span class="close" @click="cerrarModal">&times;</span>
-                                            <p>¿Estás seguro que deseas eliminar esta compañía?</p>
-                                            <button class="btn btn-confirmar"
-                                                @click="deleteEmpresa(empresa.id)">Confirmar</button>
-                                            <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
-                                        </div>
-                                    </div>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <div v-show="mostrarModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" @click="cerrarModal">&times;</span>
+                                <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                                <button class="btn btn-confirmar" @click="deleteEmpresa(empresa.id)">Confirmar</button>
+                                <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
             </div>
         </div>
-        <CreateEmpresaModal v-if="CreateEmpresaModal" :show="CreateEmpresaModal" @close="close"
-        :comunas="comunas" :bancos="bancos" :regiones="regiones">
+        <CreateEmpresaModal v-if="CreateEmpresaModal" :show="CreateEmpresaModal" @close="close" :comunas="comunas"
+            :bancos="bancos" :regiones="regiones">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -71,11 +72,8 @@
             </template>
         </ShowEmpresaModal>
 
-        <EditEmpresaModal v-if="editEmpresaModal" 
-        :show="EditEmpresaModal" 
-        :empresa="empresaIdSeleccionado"
-        :bancos="bancos"
-            @close="close">
+        <EditEmpresaModal v-if="editEmpresaModal" :show="EditEmpresaModal" :empresa="empresaIdSeleccionado"
+            :bancos="bancos" @close="close">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -87,7 +85,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue'
 import DialogModal from '@/Components/DialogModal.vue'
 import Button1 from '@/Components/Button.vue'
-import CreateEmpresaModal from '@/Pages/CreateEmpresaModal.vue'
+import CreateEmpresaModal from '@/Pages/ClientesExternos/CreateEmpresaModal.vue'
 import ShowEmpresaModal from '@/Pages/ClientesExternos/ShowEmpresaModal.vue'
 import EditEmpresaModal from '@/Pages/ClientesExternos/EditEmpresaModal.vue'
 import $ from 'jquery'
