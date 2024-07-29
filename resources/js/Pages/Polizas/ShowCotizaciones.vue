@@ -23,8 +23,11 @@
                                 <tbody>
                                     <tr v-for="cotizacion in cotizaciones" :key="cotizacion.id">
                                         <td>{{ cotizacion.id }}</td>
-                                        <td>COT-{{ getYear(cotizacion.created_at) }}-{{ getMonth(cotizacion.created_at)
-                                            }}-{{ cotizacion.id }}</td>
+                                        <td>COT
+                                            -{{ getYear(cotizacion.created_at)}}
+                                            -{{ getMonth(cotizacion.created_at) }}
+                                            -{{getDay(cotizacion.created_at)}}-N{{cotizacion.n_cotizacion}}
+                                        </td>
                                         <td>{{ cotizacion.marca }}</td>
                                         <td v-for="ejecutiva in cotizacion.ejecutivas" :key="ejecutiva.id">
                                             {{ ejecutiva.name }}</td>
@@ -34,23 +37,28 @@
 
                                         <th class="flex justify-center">
                                             <button class="btn btn-ver" @click="verCia(cotizacion.id)">Ver</button>
-                                            <button class="btn btn-editar" @click="enviarCotizacion(cotizacion.id)">Enviar</button>
+                                            <button class="btn btn-editar"
+                                                @click="enviarCotizacion(cotizacion.id)">Enviar</button>
                                             <button @click="generatePDF(cotizacion.id)">PDF</button>
                                             <button class="btn btn-eliminar"
-                                                @click="confirmarEliminar(cotizacion.id)">Eliminar</button>
+                                                @click="confirmarEliminar(cotizacion)">Eliminar</button>
                                         </th>
-                                        <div v-if="mostrarModal" class="modal">
-                                            <div class="modal-content">
-                                                <span class="close" @click="cerrarModal">&times;</span>
-                                                <p>¿Estás seguro que deseas eliminar esta compañía?</p>
-                                                <button class="btn btn-confirmar"
-                                                    @click="deleteCia(cotizacion.id)">Confirmar</button>
-                                                <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
-                                            </div>
-                                        </div>
+
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <div v-if="mostrarModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" @click="cerrarModal">&times;</span>
+                                    <p class="text-black">¿Estás seguro que deseas eliminar la cotización {{cotizacionSeleccionada.id}}
+                                    </p>
+                                    <button class="btn btn-confirmar"
+                                        @click="deleteCotizacion(cotizacionSeleccionada)">Confirmar</button>
+                                    <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -76,6 +84,14 @@ export default {
             type: Array,
             required: true
         },
+    },
+    data() {
+
+        return {
+            cotizacionSeleccionada: null,
+            mostrarModal: false
+        }
+
     },
     methods: {
         generatePDF($id) {
@@ -104,6 +120,26 @@ export default {
                     console.error("ERROR!!! -> ", error);
                 });
         },
+        confirmarEliminar(cotizacion) {
+            console.log("cotizacion", cotizacion);
+            this.cotizacionSeleccionada = cotizacion;
+            console.log("cotizacionSeleccionada", this.cotizacionSeleccionada);
+            this.mostrarModal = true;
+        },
+
+        deleteCotizacion(id) {
+            axios.delete("/crud/delete-cliente/" + id).
+                then((response) => {
+                    console.log("ELiminado", response.data);
+                    this.$inertia.visit('/dashboard');
+                    this.mostrarModal = false;
+
+                })
+        },
+
+        cerrarModal() {
+            this.mostrarModal = false;
+        },
         searchTable() {
             const table = $('#clientesTable').DataTable();
             table.search(this.searchQuery).draw();
@@ -115,6 +151,26 @@ export default {
         getMonth(dateString) {
             const date = new Date(dateString)
             return date.toLocaleString('default', { month: 'short' }).toUpperCase()
+        },
+        getMonthNumber(dateString) {
+            const date = new Date(dateString)
+            return ('0' + (new Date(date).getMonth() + 1)).slice(-2);
+        },
+        getDay(dateString) {
+            const date = new Date(dateString);
+            return date.getDate()
+        },
+        getHours(dateString) {
+            const date = new Date(dateString);
+            return date.getHours();
+        },
+        getMinutes(dateString) {
+            const date = new Date(dateString);
+            return date.getMinutes();
+        },
+        getSeconds(dateString) {
+            const date = new Date(dateString);
+            return date.getSeconds();
         }
     },
     mounted() {

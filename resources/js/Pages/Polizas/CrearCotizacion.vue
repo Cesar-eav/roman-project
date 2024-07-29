@@ -47,28 +47,33 @@
             <!-- Campos del formulario para cada vehículo -->
             <div v-if="shouldShowForm" class="flex justify-end mt-2">
                 <div>
-                    <button class="btn-add-vehicle" @click="addVehicle">Agregar (+) L</button>
+                    <button class="btn-add-vehicle" @click="addVehicle">Agregar Vehículo Liviano</button>
                 </div>
             </div>
 
             <div v-if="shouldShowVehiculoPesado" class="flex justify-end">
                 <div>
-                    <button class="btn-add-vehicle" @click="addVehicle">Agregar (+) P</button>
+                    <button class="btn-add-vehicle" @click="addVehicle">Agregar Vehículo Liviano</button>
                 </div>
             </div>
 
-            <!-- Campos del formulario para cada vehículo -->
-            <div v-if="shouldShowForm" v-for="(vehicle, vehicleIndex) in vehicles" :key="vehicleIndex"
-                class="vehicle-form flex flex-wrap bg-slate-200 rounded-lg p-4 mb-4">
-                <div v-for="(campo, index) in vehicle.campos" :key="index" >
-                    <label :for="campo.id" class="block">{{ campo.label }}:</label>
-                    <input :type="campo.type" :id="campo.id" v-model="campo.value" class="w-full" />
-                </div>
-                <div class="w-full flex justify-end">
-                    <button class="btn-remove" @click="removeVehicle(vehicleIndex)">(-)</button>
-                </div>
-            </div>
 
+<div v-if="shouldShowForm" v-for="(vehicle, vehicleIndex) in vehicles" :key="vehicleIndex"
+    class="bg-slate-200 rounded-lg p-4 mb-4">
+    <div class="flex flex-nowrap w-full space-x-4">
+        <div v-for="(campo, index) in vehicle.campos" :key="index" class="flex flex-col flex-grow min-w-0">
+            <label :for="campo.id" class="mb-1">{{ campo.label }}:</label>
+            <input :type="campo.type" :id="campo.id" v-model="campo.value" class="border rounded px-2 py-1 w-full" />
+        </div>
+        <div class="flex flex-col justify-end">
+
+        <button class="btn-remove bg-red-500 text-white px-4 py-2 max-h-8 rounded flex items-center justify-center" @click="removeVehicle(vehicleIndex)">(-)</button>
+        </div>
+
+    </div>
+
+</div>
+          
 
             <!-- Botón de envío -->
             <button @click="submitForm" class="btn-generar text-xl">Generar</button>
@@ -133,6 +138,7 @@ export default {
     methods: {
         isSelected(compania) {
             return this.selectedCompanias.includes(compania);
+            
         },
         updateSelectedEjecutivos(compania) {
             if (!this.isSelected(compania)) {

@@ -38,7 +38,7 @@
                                         <button class="btn btn-ver" @click="verEmpresa(empresa.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editar(empresa.id)">Editar</button>
                                         <button class="btn btn-eliminar"
-                                            @click="confirmarEliminar(empresa.id)">Eliminar</button>
+                                            @click="confirmarEliminar(empresa)">Eliminar</button>
                                     </td>
                                 </tr>
                             </tbody>

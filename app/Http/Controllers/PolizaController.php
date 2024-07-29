@@ -29,14 +29,14 @@ class PolizaController extends Controller
 
     public function showCotizaciones()
     {
-        $cotizaciones = FormV1Liviano::with(['ejecutivas','cias'])
-        ->orderBy('id', 'desc')
-        ->get();
-    
+        $cotizaciones = FormV1Liviano::with(['ejecutivas', 'cias'])
+            ->orderBy('id', 'desc')
+            ->get();
 
-        return Inertia::render('Polizas/ShowCotizaciones',[
+
+        return Inertia::render('Polizas/ShowCotizaciones', [
             'cotizaciones' => $cotizaciones
-            
+
         ]);
     }
 
@@ -56,11 +56,16 @@ class PolizaController extends Controller
 
     public function cotizacionesV1(Request $request)
     {
+        $uniqueIdentifier = $this->generateUniqueIdentifier();
+        $lastCotizacionId = FormV1Liviano::max('n_cotizacion') ?? 0;
+        $lastCotizacionId = $lastCotizacionId+1;
+
 
         foreach ($request->vehicles as $vehicle) {
-            foreach ($request->companias as $compania) {
+
+            if (count($request->companias) === 1) {
+                $compania = $request->companias[0];
                 $formulario = new FormV1Liviano();
-    
                 $formulario->marca = $vehicle['campos']['marca'];
                 $formulario->modelo = $vehicle['campos']['modelo'];
                 $formulario->patente = $vehicle['campos']['patente'];
@@ -70,9 +75,41 @@ class PolizaController extends Controller
                 $formulario->color = $vehicle['campos']['color'];
                 $formulario->compania_id = $compania['ejecutivo']['cia_id'];
                 $formulario->ejecutivo_id = $compania['ejecutivo']['id'];
-    
+                $formulario->unique_identifier = $uniqueIdentifier;
+                $formulario->n_cotizacion = $lastCotizacionId; // Incrementar manualmente el cotizacion_id
                 $formulario->save();
+            } else {
+                // Si hay múltiples compañías, guarda una vez por cada compañía
+                foreach ($request->companias as $compania) {
+                    $formulario = new FormV1Liviano();
+                    $formulario->marca = $vehicle['campos']['marca'];
+                    $formulario->modelo = $vehicle['campos']['modelo'];
+                    $formulario->patente = $vehicle['campos']['patente'];
+                    $formulario->agnio = $vehicle['campos']['agnio'];
+                    $formulario->n_chasis = $vehicle['campos']['n_chasis'];
+                    $formulario->n_motor = $vehicle['campos']['n_motor'];
+                    $formulario->color = $vehicle['campos']['color'];
+                    $formulario->compania_id = $compania['ejecutivo']['cia_id'];
+                    $formulario->ejecutivo_id = $compania['ejecutivo']['id'];
+                    $formulario->unique_identifier = $uniqueIdentifier;
+                    $formulario->n_cotizacion = $lastCotizacionId; // Incrementar manualmente el cotizacion_id
+                    $formulario->save();
+                }
             }
         }
+         // Retornar la respuesta con el identificador único
+    return response()->json(['unique_identifier' => $uniqueIdentifier]);
     }
+
+    private function generateUniqueIdentifier()
+{
+    $year = now()->year;
+    $month = str_pad(now()->month, 2, '0', STR_PAD_LEFT);
+    $day = str_pad(now()->day, 2, '0', STR_PAD_LEFT);
+    $hour = str_pad(now()->hour, 2, '0', STR_PAD_LEFT);
+
+    $uuid = (string) \Illuminate\Support\Str::uuid();
+
+    return "COT-{$year}-{$month}-{$day}-{$hour}-{$uuid}";
+}
 }
