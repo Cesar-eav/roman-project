@@ -29,8 +29,15 @@
                         <Input  id="name" type="text" class="block w-full" placeholder="Nombre" v-model="form.name" required autofocus autocomplete="name" />
                     </InputIconWrapper>
                 </div>
-
-
+                <div class="space-y-2">
+                    <Label for="apellido" value="Apellido" />
+                    <InputIconWrapper>
+                        <!-- <template #icon>
+                            <UserIcon aria-hidden="true" class="w-6 h-6" />
+                        </template> -->
+                        <Input  id="apellido" type="text" class="block w-full" placeholder="Apellido" v-model="form.apellido" required autofocus autocomplete="apellido" />
+                    </InputIconWrapper>
+                </div>
                 
                 <div class="space-y-2">
                     <Label for="email" value="Email" />
@@ -165,6 +172,7 @@ const selectedType = ref('externo');
 const form = useForm({
     cargo: '',
     name: '',
+    apellido: '',
     email: '',
     rut: '',
     telefono: '',
