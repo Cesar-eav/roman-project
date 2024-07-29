@@ -33,13 +33,10 @@
                                             {{ ejecutiva.name }}</td>
                                         <td v-for="cia in cotizacion.cias" :key="cia.id">
                                             {{ cia.razon_social }}</td>
-
-
                                         <th class="flex justify-center">
-                                            <button class="btn btn-ver" @click="verCia(cotizacion.id)">Ver</button>
                                             <button class="btn btn-editar"
                                                 @click="enviarCotizacion(cotizacion.id)">Enviar</button>
-                                            <button @click="generatePDF(cotizacion.id)">PDF</button>
+                                            <button class="btn btn-editar" @click="generatePDF(cotizacion.id)">PDF</button>
                                             <button class="btn btn-eliminar"
                                                 @click="confirmarEliminar(cotizacion)">Eliminar</button>
                                         </th>

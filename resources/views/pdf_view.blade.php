@@ -7,9 +7,10 @@
 
 <body>
 
-    {{-- <h1>{{ $title }}</h1> --}}
+
     <h2><strong>Compañia Aseguradora:</strong> {{$cotizacion['cias'][0]->razon_social}}</h2>
-    <h3 class="my-4 "><strong></strong> COT-{{ $cotizacion->created_at->format('Y-m') }}-{{ $cotizacion->id }}</h2>
+    <h3 class="my-4 "><strong></strong> COT-{{ strtoupper($cotizacion->created_at->format('Y-M'))}}-N{{$cotizacion->n_cotizacion}}</h3>
+
 
     <p>Este es un ejemplo de cotización</p>
 
