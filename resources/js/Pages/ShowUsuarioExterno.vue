@@ -37,13 +37,13 @@
                                     <th class="flex justify-start">
                                         <button class="btn btn-ver" @click="verUsuario(cliente.id)">Ver</button>
                                         <button class="btn btn-editar" @click="editarUsuario(cliente.id)">Editar</button>
-                                        <button class="btn btn-eliminar" @click="mostrarModal = true">Eliminar</button>
+                                        <button class="btn btn-eliminar" @click="confirmarEliminar(cliente)">Eliminar</button>
                                     </th>
 
                                     <div v-if="mostrarModal" class="modal">
                                         <div class="modal-content">
                                             <span class="close" @click="cerrarModal">&times;</span>
-                                            <p>¿Estás seguro que deseas eliminar esta compañía?</p>
+                                            <p>¿Estás seguro que deseas eliminar a <strong>{{usuarioIdSeleccionado.nombres}} {{usuarioIdSeleccionado.apellido_paterno}} </strong></p>
                                             <button class="btn btn-confirmar"
                                                 @click="deleteUsuario(cliente.id)">Confirmar</button>
                                             <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
@@ -152,7 +152,8 @@ export default {
             this.showModalUsuarioExterno = false;
             this.showUsuarioExternoEditModal = false;
         },
-        confirmarEliminar() {
+        confirmarEliminar(cliente) {
+            this.usuarioIdSeleccionado = cliente;
             this.mostrarModal = true;
         },
         cerrarModal() {
@@ -189,7 +190,9 @@ export default {
                 .then(response => {
                     console.log("Eliminado", response.data);
                     this.mostrarModal = false;
-                    // Aquí se puede actualizar la lista de compañías
+                    this.$inertia.visit('/show-cliente-externo');
+
+                    
                 })
                 .catch(error => {
                     console.log("Error Eliminar Cliente", error);
