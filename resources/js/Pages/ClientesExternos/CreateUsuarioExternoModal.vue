@@ -40,6 +40,14 @@
                             <option value="cobranza">Cobranza</option>
                             <option value="gestor_siniestro">Gestor de Siniestros</option>
                         </select>
+
+                        <select v-model="form.empresa_id" 
+                            class="block mt-1 mr-1  w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option value="">Seleccionar Empresa</option>
+                            <template v-for="empresa in empresas" :key="empresa.id">
+                                <option :value="empresa.id">{{ empresa.razon_social ? empresa.razon_social  : empresa.nombres_persona_natural+ ' '+empresa.apellido_paterno_persona_natural  }}  </option>
+                            </template>
+                        </select>
                     </div>
 
                     <label class="block text-sm font-medium mt-4">Fecha Nacimiento:</label>
@@ -61,20 +69,20 @@
 
                     <div class="flex">
                         <select v-model="form.comuna" required
-                                class="block mt-1 mr-1  w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Seleccionar Comuna</option>
-                                <template v-for="comuna in comunas" :key="comuna.id">
-                                    <option :value="comuna.comuna">{{ comuna.comuna }}</option>
-                                </template>
-                            </select>
+                            class="block mt-1 mr-1  w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option value="">Seleccionar Comuna</option>
+                            <template v-for="comuna in comunas" :key="comuna.id">
+                                <option :value="comuna.comuna">{{ comuna.comuna }}</option>
+                            </template>
+                        </select>
 
-                            <select v-model="form.region" required
-                                class="block mt-1 mr-1  w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Seleccionar Región</option>
-                                <template v-for="region in regiones" :key="region.id">
-                                    <option :value="region.region">{{ region.region }}</option>
-                                </template>
-                            </select>
+                        <select v-model="form.region" required
+                            class="block mt-1 mr-1  w-1/2 border-gray-300 rounded-md shadow-sm focus:border-orange-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option value="">Seleccionar Región</option>
+                            <template v-for="region in regiones" :key="region.id">
+                                <option :value="region.region">{{ region.region }}</option>
+                            </template>
+                        </select>
 
                     </div>
 
@@ -132,6 +140,10 @@ export default {
         regiones: {
             type: Array,
             required: true,
+        },
+        empresas: {
+            type: Array,
+            required: true
         }
     },
     data() {
@@ -149,7 +161,8 @@ export default {
                 comuna: '',
                 region: '',
                 isapre: '',
-                afp: ''
+                afp: '',
+                empresa_id: ''
             })
         };
     },
@@ -168,9 +181,10 @@ export default {
                 'comuna': this.form.comuna || '',
                 'region': this.form.region || '',
                 'isapre': this.form.isapre || '',
-                'afp': this.form.afp || ''
+                'afp': this.form.afp || '',
+                'empresa_id': this.form.empresa_id || ''
             }).then(response => {
-                console.log(response.data);
+                console.log("Enviado",response.data);
                 this.close()
                 if (response.data === 1) {
                     location.reload();

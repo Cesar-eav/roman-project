@@ -141,7 +141,7 @@
         </CreatePolizaModal>
 
         <CreateUsuarioExternoModal v-if="showCreateUserExternoModal" :show="showCreateUserExternoModal" :bancos="bancos" @close="close" :comunas="comunas"
-            :regiones="regiones">
+            :regiones="regiones" :empresas="empresas">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -175,6 +175,7 @@ const page = usePage();
 const comunas = computed(() => page.props.value.comunas);
 const bancos = computed(() => page.props.value.bancos);
 const regiones = computed(() => page.props.value.regiones);
+const empresas = computed(() => page.props.value.empresas);
 const openSubmenu = ref(null);
 
 

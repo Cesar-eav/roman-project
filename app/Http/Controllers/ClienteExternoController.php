@@ -139,10 +139,12 @@ class ClienteExternoController extends Controller
 
     public function showClientesExternos()
     {
+        $empresas = Empresa::with('banco')->get();
         $usuarios_externos = UsuarioExterno::all();
         // Pasar los datos a la vista Dashboard usando Inertia
         return Inertia::render('ShowUsuarioExterno', [
             'usuarios_externos' => $usuarios_externos,
+            'empresas' => $empresas
 
         ]);
     }
@@ -234,6 +236,8 @@ class ClienteExternoController extends Controller
         $usuarioExterno->region = $request->region;
         $usuarioExterno->isapre = $request->isapre;
         $usuarioExterno->afp = $request->afp;
+        $usuarioExterno->empresa_id = $request->empresa_id;
+
 
 
         // Guardar la empresa en la base de datos

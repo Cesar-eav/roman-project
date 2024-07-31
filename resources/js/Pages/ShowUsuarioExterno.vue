@@ -59,13 +59,13 @@
         </div>
 
 
-        <CreateUsuarioExternoModal v-if="showModalUsuarioExterno" :show="showModalUsuarioExterno" @close="close" :comunas="comunas" :regiones="regiones">
+        <CreateUsuarioExternoModal v-if="showModalUsuarioExterno" :show="showModalUsuarioExterno" @close="close" :comunas="comunas" :regiones="regiones" :empresas="empresas">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
         </CreateUsuarioExternoModal>
 
-        <ShowUsuarioExternoModal v-if="showUsuarioExternoModal" :show="showUsuarioExternoModal" @close="close" :usuario_externo="usuarioIdSeleccionado">
+        <ShowUsuarioExternoModal v-if="showUsuarioExternoModal" :show="showUsuarioExternoModal" @close="close" :usuario_externo="usuarioIdSeleccionado" :empresas="empresas">
             <template #footer>
                 <button @click="close">Cerrar</button>
             </template>
@@ -103,6 +103,10 @@ export default {
             type: Array,
             required: true
         },
+        empresas: {
+            type: Array,
+            required: true
+        },
         comunas: {
             type: Array,
             required: true,
@@ -121,7 +125,6 @@ export default {
             searchQuery: '',
             usuarioIdSeleccionado: {},
             showEmpresaModal: false
-
         };
     },
     methods: {
