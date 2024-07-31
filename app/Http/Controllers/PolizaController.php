@@ -54,6 +54,13 @@ class PolizaController extends Controller
         return response()->json($ejecutivas);
     }
 
+    public function deleteCotizacion($id)
+    {
+        $cotizacion = FormV1Liviano::find($id);
+        $response = $cotizacion->delete();
+        return $response;
+    }
+
     public function cotizacionesV1(Request $request)
     {
         $uniqueIdentifier = $this->generateUniqueIdentifier();

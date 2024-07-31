@@ -51,7 +51,7 @@
                                     <p class="text-black">¿Estás seguro que deseas eliminar la cotización {{cotizacionSeleccionada.id}}
                                     </p>
                                     <button class="btn btn-confirmar"
-                                        @click="deleteCotizacion(cotizacionSeleccionada)">Confirmar</button>
+                                        @click="deleteCotizacion(cotizacionSeleccionada.id)">Confirmar</button>
                                     <button class="btn btn-cancelar" @click="cerrarModal">Cancelar</button>
                                 </div>
                             </div>
@@ -125,10 +125,11 @@ export default {
         },
 
         deleteCotizacion(id) {
-            axios.delete("/crud/delete-cliente/" + id).
+            console.log(id);
+            axios.delete("/delete-cotizacion/" + id).
                 then((response) => {
                     console.log("ELiminado", response.data);
-                    this.$inertia.visit('/dashboard');
+                    this.$inertia.visit('/show-cotizaciones');
                     this.mostrarModal = false;
 
                 })

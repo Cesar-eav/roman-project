@@ -74,6 +74,8 @@ Route::middleware([
     Route::get('/form/ejecutivas', [PolizaController::class, 'getEjecutivas'])->name('get.ejecutivas');
     Route::get('/generate-pdf/{id?}', [PDFController::class, 'generatePDF']);
     Route::post('/send-email-pdf/{id}', [MailController::class, 'sendCotizacion']);
+    ROute::delete('/delete-cotizacion/{id}', [PolizaController::class, 'deleteCotizacion']);
+
 
 
     //CIAS SEGUROS
