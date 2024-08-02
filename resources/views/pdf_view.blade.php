@@ -2,11 +2,13 @@
 <html>
 
 <head>
-    <title>Laravel 8 PDF Example</title>
+    <title>EJEMPLO DE PDF A ENVIAR</title>
 </head>
 
 <body>
 
+
+<pre>{{$cotizacion}}</pre>
 
     <h2><strong>Compañia Aseguradora:</strong> {{$cotizacion['cias'][0]->razon_social}}</h2>
     <h3 class="my-4 "><strong></strong> COT-{{ strtoupper($cotizacion->created_at->format('Y-M'))}}-N{{$cotizacion->n_cotizacion}}</h3>
