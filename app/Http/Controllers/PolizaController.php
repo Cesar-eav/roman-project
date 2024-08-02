@@ -63,9 +63,12 @@ class PolizaController extends Controller
 
     public function cotizacionesV1(Request $request)
     {
+
+        // return $request;
         $uniqueIdentifier = $this->generateUniqueIdentifier();
         $lastCotizacionId = FormV1Liviano::max('n_cotizacion') ?? 0;
         $lastCotizacionId = $lastCotizacionId+1;
+        $tipo_cotizacion = $request->tipo_cotizacion;
 
 
         foreach ($request->vehicles as $vehicle) {
@@ -89,6 +92,7 @@ class PolizaController extends Controller
                 $formulario->tipo_de_carga = $vehicle['campos']['tipo_de_carga']?? '';
                 $formulario->unique_identifier = $uniqueIdentifier;
                 $formulario->n_cotizacion = $lastCotizacionId; // Incrementar manualmente el cotizacion_id
+                $formulario->tipo_cotizacion = $tipo_cotizacion;
                 $formulario->save();
             } else {
                 // Si hay múltiples compañías, guarda una vez por cada compañía
@@ -117,7 +121,7 @@ class PolizaController extends Controller
             }
         }
          // Retornar la respuesta con el identificador único
-    return response()->json(['unique_identifier' => $uniqueIdentifier]);
+    return response()->json(['FORMULARIO' => $formulario]);
     }
 
     private function generateUniqueIdentifier()

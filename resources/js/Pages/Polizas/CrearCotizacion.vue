@@ -1,7 +1,7 @@
 <template>
     <AppLayout title="Dashboard">
         <div>
-            <h1 class="text-2xl">Crear Cotización</h1>
+            <h1 class="text-2xl ">Crear Cotización</h1>
 
             <!-- Selección del formulario -->
             <select v-model="selectedFormulario" id="formulario-select">
@@ -14,17 +14,17 @@
             <div class="flex mt-5 bg-slate-200 p-10">
                 <!-- Columna de Compañías -->
                 <div class="w-1/2 pr-2">
-                    <h2 class="font-bold">Seleccione las Compañías de Seguro:</h2>
+                    <h2 class="font-bold	">Seleccione las Compañías de Seguro:</h2>
                     <div v-for="compania in companias" :key="compania.id" class="mb-2">
                         <input type="checkbox" :id="'compania-' + compania.id" :value="compania"
                             v-model="selectedCompanias" @change="updateSelectedEjecutivos(compania)" />
-                        <label :for="'compania-' + compania.id" class="text-sm">{{ compania.razon_social }}</label>
+                        <label :for="'compania-' + compania.id" class="text-sm"> {{ compania.razon_social }}</label>
                     </div>
                 </div>
 
                 <!-- Columna de Ejecutivos -->
                 <div class="w-1/2 pl-2">
-                    <h2 class="font-bold">Seleccione un Ejecutivo:</h2>
+                    <h2 class="font-bold	">Seleccione un Ejecutivo:</h2>
                     <div v-for="compania in selectedCompanias" :key="compania.id" class="mb-2">
                         <div>
                             <h3>Ejecutivos de <span class="font-bold">{{ compania.razon_social }}:</span></h3>
@@ -33,7 +33,7 @@
                                     <input type="radio" :name="'ejecutivo-' + compania.id"
                                         :id="'ejecutivo-' + ejecutivo.id" :value="ejecutivo"
                                         v-model="selectedEjecutivos[compania.id]" />
-                                    <label :for="'ejecutivo-' + ejecutivo.id">{{ ejecutivo.name }}</label>
+                                    <label :for="'ejecutivo-' + ejecutivo.id"> {{ ejecutivo.name }}</label>
                                 </div>
                             </div>
                         </div>
@@ -41,34 +41,33 @@
                 </div>
             </div>
 
+
             <!-- Botón para agregar un nuevo vehículo -->
+
+            <!-- Campos del formulario para cada vehículo -->
             <div v-if="shouldShowForm" class="flex justify-end mt-2 mb-0">
                 <div>
-                    <button class="btn-add-vehicle" @click="addVehicle">(+) Vehículo Liviano</button>
+                    <button class="btn-add-vehicle" @click="addVehicle">Agregar Vehículo Liviano</button>
                 </div>
             </div>
 
             <div v-if="shouldShowForm2" class="flex justify-end mt-2 mb-0">
                 <div>
-                    <button class="btn-add-vehicle" @click="addVehiculoPesado">(+) Vehículo Pesado</button>
+                    <button class="btn-add-vehicle" @click="addVehiculoPesado">Agregar Vehículo Pesado</button>
                 </div>
             </div>
 
-            <div v-if="shouldShowForm3" class="flex justify-end mt-2 mb-0">
-                <div>
-                    <button class="btn-add-vehicle" @click="addVehiculoAsientoDePasajeros">(+) Vehículo Pesado</button>
-                </div>
-            </div>
 
             <div v-if="shouldShowForm" v-for="(vehicle, vehicleIndex) in vehicles" :key="vehicleIndex"
                 class="bg-slate-200 rounded-lg p-4 mb-1">
                 <div class="flex flex-nowrap w-full space-x-4">
                     <div v-for="(campo, index) in vehicle.campos" :key="index" class="flex flex-col flex-grow min-w-0">
-                        <label :for="'campo-' + vehicleIndex + '-' + index" class="mb-1">{{ campo.label }}:</label>
-                        <input :type="campo.type" :id="'campo-' + vehicleIndex + '-' + index" v-model="campo.value"
+                        <label :for="campo.id" class="mb-1">{{ campo.label }}:</label>
+                        <input :type="campo.type" :id="campo.id" v-model="campo.value"
                             class="border rounded px-2 py-1 w-full" />
                     </div>
                     <div class="flex flex-col justify-end">
+
                         <button
                             class="btn-remove bg-red-500 text-white px-4 py-2 max-h-8 rounded flex items-center justify-center"
                             @click="removeVehicle(vehicleIndex)">(-)</button>
@@ -76,34 +75,17 @@
                 </div>
             </div>
 
+
             <div v-if="shouldShowForm2" v-for="(vehicle, vehicleIndex) in vehiculoPesado" :key="vehicleIndex"
                 class="bg-slate-200 rounded-lg p-4 mb-4">
                 <div class="flex flex-nowrap w-full space-x-4">
                     <div v-for="(campo, index) in vehicle.campos" :key="index" class="flex flex-col flex-grow min-w-0">
-                        <label :for="'campo-pesado-' + vehicleIndex + '-' + index" class="mb-1">{{ campo.label
-                            }}:</label>
-                        <input :type="campo.type" :id="'campo-pesado-' + vehicleIndex + '-' + index"
-                            v-model="campo.value" class="border rounded px-2 py-1 w-full" />
+                        <label :for="campo.id" class="mb-1">{{ campo.label }}:</label>
+                        <input :type="campo.type" :id="campo.id" v-model="campo.value"
+                            class="border rounded px-2 py-1 w-full" />
                     </div>
                     <div class="flex flex-col justify-end">
-                        <button
-                            class="btn-remove bg-red-500 text-white px-4 py-2 max-h-8 rounded flex items-center justify-center"
-                            @click="removeVehiculoAsientoDePasajeros(vehicleIndex)">(-)</button>
-                    </div>
-                </div>
-            </div>
 
-
-            <div v-if="shouldShowForm3" v-for="(vehicle, vehicleIndex) in vehiculoAsientoDePasajeros"
-                :key="vehicleIndex" class="bg-slate-200 rounded-lg p-4 mb-4">
-                <div class="flex flex-nowrap w-full space-x-4">
-                    <div v-for="(campo, index) in vehicle.campos" :key="index" class="flex flex-col flex-grow min-w-0">
-                        <label :for="'campo-pesado-' + vehicleIndex + '-' + index" class="mb-1">{{ campo.label
-                            }}:</label>
-                        <input :type="campo.type" :id="'campo-pesado-' + vehicleIndex + '-' + index"
-                            v-model="campo.value" class="border rounded px-2 py-1 w-full" />
-                    </div>
-                    <div class="flex flex-col justify-end">
                         <button
                             class="btn-remove bg-red-500 text-white px-4 py-2 max-h-8 rounded flex items-center justify-center"
                             @click="removeVehiculoPesado(vehicleIndex)">(-)</button>
@@ -111,22 +93,6 @@
                 </div>
             </div>
 
-            <div v-if="shouldShowForm4" v-for="(vehicle, vehicleIndex) in transporteDeCarga"
-                :key="vehicleIndex" class="bg-slate-200 rounded-lg p-4 mb-4">
-                <div class="flex flex-nowrap w-full space-x-4">
-                    <div v-for="(campo, index) in vehicle.campos" :key="index" class="flex flex-col flex-grow min-w-0">
-                        <label :for="'campo-pesado-' + vehicleIndex + '-' + index" class="mb-1">{{ campo.label
-                            }}:</label>
-                        <input :type="campo.type" :id="'campo-pesado-' + vehicleIndex + '-' + index"
-                            v-model="campo.value" class="border rounded px-2 py-1 w-full" />
-                    </div>
-                    <div class="flex flex-col justify-end">
-                        <button
-                            class="btn-remove bg-red-500 text-white px-4 py-2 max-h-8 rounded flex items-center justify-center"
-                            @click="removeVehiculoPesado(vehicleIndex)">(-)</button>
-                    </div>
-                </div>
-            </div>
 
             <!-- Botón de envío -->
             <button @click="submitForm" class="btn-generar text-xl">Generar</button>
@@ -164,6 +130,7 @@ export default {
                         { id: 'color', label: 'Color', type: 'text', value: '' },
                     ]
                 }
+
             ],
             vehiculoPesado: [
                 {
@@ -172,7 +139,8 @@ export default {
                         { id: 'modelo', label: 'Modelo', type: 'text', value: '' },
                         { id: 'agnio', label: 'Año', type: 'text', value: '' },
                         { id: 'patente', label: 'Patente', type: 'text', value: '' },
-                        { id: 'monto_asegurado', label: 'Monto Asegurado', type: 'text', value: '' }
+                        { id: 'monto_asegurado', label: 'Monto Ahasis', type: 'text', value: '' }
+
                     ]
                 }
             ],
@@ -211,12 +179,6 @@ export default {
         shouldShowForm2() {
             return this.selectedFormulario.id == 2 && this.selectedCompanias.length > 0 && this.allExecutivesSelected;
         },
-        shouldShowForm3() {
-            return this.selectedFormulario.id == 5 && this.selectedCompanias.length > 0 && this.allExecutivesSelected;
-        },
-        shouldShowForm4() {
-            return this.selectedFormulario.id == 14 && this.selectedCompanias.length > 0 && this.allExecutivesSelected;
-        },
         allExecutivesSelected() {
             return this.selectedCompanias.every(compania => this.selectedEjecutivos[compania.id]);
         }
@@ -224,6 +186,7 @@ export default {
     methods: {
         isSelected(compania) {
             return this.selectedCompanias.includes(compania);
+
         },
         updateSelectedEjecutivos(compania) {
             if (!this.isSelected(compania)) {
@@ -240,6 +203,7 @@ export default {
                     { id: 'n_chasis', label: 'Nº Chasis', type: 'text', value: '' },
                     { id: 'n_motor', label: 'Nº Motor', type: 'text', value: '' },
                     { id: 'color', label: 'Color', type: 'text', value: '' },
+
                 ]
             };
             this.vehicles.push(newVehicle);
@@ -247,104 +211,87 @@ export default {
         addVehiculoPesado() {
             const newVehicle = {
                 campos: [
-                    { id: 'marca', label: 'Marca', type: 'text', value: '' },
-                    { id: 'modelo', label: 'Modelo', type: 'text', value: '' },
-                    { id: 'agnio', label: 'Año', type: 'text', value: '' },
-                    { id: 'patente', label: 'Patente', type: 'text', value: '' },
-                    { id: 'monto_asegurado', label: 'Monto Asegurado', type: 'text', value: '' }
-                ]
-            };
-            this.vehiculoPesado.push(newVehicle);
-        },
 
-        addVehiculoAsientoDePasajeros() {
-            const newVehicle = {
-                campos: [
                     { id: 'marca', label: 'Marca', type: 'text', value: '' },
                     { id: 'modelo', label: 'Modelo', type: 'text', value: '' },
                     { id: 'agnio', label: 'Año', type: 'text', value: '' },
                     { id: 'patente', label: 'Patente', type: 'text', value: '' },
-                    { id: 'monto_asegurado', label: 'Monto Asegurado', type: 'text', value: '' },
-                    { id: 'cantidad_de_asientos', label: 'Cantidad de Asientos', type: 'text', value: '' }
                 ]
             };
-            this.vehiculoAsientoDePasajeros.push(newVehicle);
+            this.vehicles.push(newVehicle);
         },
-        addTransporteDeCarga() {
-            const newVehicle = {
-                campos: [
-                    { id: 'marca', label: 'Marca', type: 'text', value: '' },
-                    { id: 'modelo', label: 'Modelo', type: 'text', value: '' },
-                    { id: 'agnio', label: 'Año', type: 'text', value: '' },
-                    { id: 'patente', label: 'Patente', type: 'text', value: '' },
-                    { id: 'monto_asegurado', label: 'Monto Asegurado', type: 'text', value: '' },
-                    { id: 'origen', label: 'Origen', type: 'text', value: '' },
-                    { id: 'destino', label: 'Destino', type: 'text', value: '' },
-                    { id: 'tipo_de_carga', label: 'Tipo de Carga', type: 'text', value: '' }
-                ]
-            };
-            this.transporteDeCarga.push(newVehicle);
-        },
-
         removeVehicle(index) {
             this.vehicles.splice(index, 1);
         },
         removeVehiculoPesado(index) {
             this.vehiculoPesado.splice(index, 1);
         },
-        removeVehiculoAsientoDePasajeros(index) {
-            this.vehiculoAsientoDePasajeros.splice(index, 1);
-        },
-        removeTransporteDeCarga(index) {
-            this.transporteDeCarga.splice(index, 1);
-        },
-
         submitForm() {
-            console.log("Enviando Formulario");
-            const formData = {
-                formulario: this.selectedFormulario,
-                companias: this.selectedCompanias.map(compania => ({
-                    id: compania.id,
-                    ejecutivo: this.selectedEjecutivos[compania.id] || null,
-                })),
-                vehicles: this.vehicles.map(vehicle => ({
-                    campos: vehicle.campos.reduce((acc, campo) => {
-                        acc[campo.id] = campo.value;
-                        return acc;
-                    }, {})
-                })),
-                vehicles: this.vehiculoPesado.map(vehiculoPesado => ({
-                    campos: vehiculoPesado.campos.reduce((acc, campo) => {
-                        acc[campo.id] = campo.value;
-                        return acc;
-                    }, {})
-                })),
-                vehicles: this.vehiculoAsientoDePasajeros.map(vehiculoAsientoDePasajeros => ({
-                    campos: vehiculoAsientoDePasajeros.campos.reduce((acc, campo) => {
-                        acc[campo.id] = campo.value;
-                        return acc;
-                    }, {})
-                })),
+    console.log("Enviando Formulario");
 
-                vehicles: this.transporteDeCarga.map(transporteDeCarga => ({
-                    campos: transporteDeCarga.campos.reduce((acc, campo) => {
-                        acc[campo.id] = campo.value;
-                        return acc;
-                    }, {})
-                })),
+    // Función para verificar si al menos un campo de un vehículo tiene un valor diferente al inicial
+    const isVehicleUsed = (vehicleList) => {
+        return vehicleList.some(vehicle => 
+            vehicle.campos.some(campo => campo.value !== '')
+        );
+    };
 
+    // Determina cuál de las listas de vehículos tiene campos completados por el usuario
+    let vehiclesToSend = null;
+    if (isVehicleUsed(this.vehicles)) {
+        vehiclesToSend = this.vehicles.map(vehicle => ({
+            campos: vehicle.campos.reduce((acc, campo) => {
+                acc[campo.id] = campo.value;
+                return acc;
+            }, {})
+        }));
+    } else if (isVehicleUsed(this.vehiculoPesado)) {
+        vehiclesToSend = this.vehiculoPesado.map(vehicle => ({
+            campos: vehicle.campos.reduce((acc, campo) => {
+                acc[campo.id] = campo.value;
+                return acc;
+            }, {})
+        }));
+    } else if (isVehicleUsed(this.transporteDeCarga)) {
+        vehiclesToSend = this.transporteDeCarga.map(vehicle => ({
+            campos: vehicle.campos.reduce((acc, campo) => {
+                acc[campo.id] = campo.value;
+                return acc;
+            }, {})
+        }));
+    } else if (isVehicleUsed(this.vehiculoAsientoDePasajeros)) {
+        vehiclesToSend = this.vehiculoAsientoDePasajeros.map(vehicle => ({
+            campos: vehicle.campos.reduce((acc, campo) => {
+                acc[campo.id] = campo.value;
+                return acc;
+            }, {})
+        }));
+    }
 
-                
-            };
-            axios.post('/form/cotizaciones-v1', formData)
-                .then(response => {
-                    console.log('Formulario enviado con éxito:', response.data);
-                    this.$inertia.visit('/show-cotizaciones');
-                })
-                .catch(error => {
-                    console.error('Error al enviar el formulario:', error);
-                });
-        },
+    if (vehiclesToSend === null) {
+        console.log("No se han agregado vehículos con campos completados para enviar.");
+        return;
+    }
+
+    const formData = {
+        formulario: this.selectedFormulario,
+        companias: this.selectedCompanias.map(compania => ({
+            id: compania.id,
+            ejecutivo: this.selectedEjecutivos[compania.id] || null,
+        })),
+        vehicles: vehiclesToSend
+    };
+
+    axios.post('/form/cotizaciones-v1', formData)
+        .then(response => {
+            console.log('Formulario enviado con éxito:', response.data);
+            // this.$inertia.visit('/show-cotizaciones');
+        })
+        .catch(error => {
+            console.error('Error al enviar el formulario:', error);
+        });
+}
+
     },
 };
 </script>
@@ -397,5 +344,6 @@ export default {
     border: none;
     cursor: pointer;
     border-radius: 4px;
+
 }
 </style>

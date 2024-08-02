@@ -36,7 +36,8 @@
                                         <th class="flex justify-center">
                                             <button class="btn btn-editar"
                                                 @click="enviarCotizacion(cotizacion.id)">Enviar</button>
-                                            <button class="btn btn-editar" @click="generatePDF(cotizacion.id)">PDF</button>
+                                                <a :href="'/view-pdf/' + cotizacion.id" target="_blank">Ver PDF</a>
+                                                <button class="btn btn-editar" @click="generatePDF(cotizacion.id)">PDF</button>
                                             <button class="btn btn-eliminar"
                                                 @click="confirmarEliminar(cotizacion)">Eliminar</button>
                                         </th>
